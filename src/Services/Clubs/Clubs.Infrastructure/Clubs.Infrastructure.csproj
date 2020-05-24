@@ -10,6 +10,6 @@
 
   <ItemGroup>
     <PackageReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
-  </ItemGroup
+  </ItemGroup>
 
 </Project>
