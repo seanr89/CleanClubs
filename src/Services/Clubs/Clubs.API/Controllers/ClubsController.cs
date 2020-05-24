@@ -10,5 +10,15 @@ namespace Clubs.API.Controllers
         {
             
         }
+
+        public IActionResult Get()
+        {
+
+        }
+
+        public IActionResult GetById()
+        {
+            
+        }
     }
 }
