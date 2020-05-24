@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>Clubs.API</AssemblyName>
+    <PackageId>Clubs.API</PackageId>
   </PropertyGroup>
 
 
