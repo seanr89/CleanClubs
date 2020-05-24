@@ -6,6 +6,7 @@
     <PreserveCompilationContext>true</PreserveCompilationContext>
     <AssemblyName>Clubs.API</AssemblyName>
     <PackageId>Clubs.API</PackageId>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
 

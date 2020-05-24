@@ -2,7 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    ]<OutputType>Library</OutputType>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Utilities</AssemblyName>
+    <PackageId>Utilities</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
