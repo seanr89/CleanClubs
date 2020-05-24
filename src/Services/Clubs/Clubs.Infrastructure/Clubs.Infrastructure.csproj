@@ -4,4 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-preview.4.20220.10"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
+  </ItemGroup
+
 </Project>
