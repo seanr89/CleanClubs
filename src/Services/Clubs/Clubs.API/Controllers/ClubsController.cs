@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clubs.API.Controllers
@@ -11,14 +12,16 @@ namespace Clubs.API.Controllers
             
         }
 
+        [HttpGet]
         public IActionResult Get()
         {
-
+            throw new NotImplementedException();
         }
 
-        public IActionResult GetById()
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
