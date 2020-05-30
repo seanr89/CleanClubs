@@ -1,6 +1,7 @@
 
 
 using System;
+using Clubs.Domain.Enums;
 
 namespace Clubs.Domain.Entities
 {
@@ -11,5 +12,7 @@ namespace Clubs.Domain.Entities
         public Club Club { get; set; }
 
         public DateTime Date { get; set; }
+
+        public MatchStatus Status { get; set; }
     }
 }
