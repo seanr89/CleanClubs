@@ -1,4 +1,5 @@
 using AutoMapper;
+using Clubs.Domain.Entities;
 
 namespace Clubs.API.Managers.Profiles
 {
@@ -7,7 +8,7 @@ namespace Clubs.API.Managers.Profiles
         public ClubProfile()
         {
             // Default mapping when property names are same
-            //CreateMap<Analysers.Domain.Entities.Analyser, AnalyserDto>();
+            CreateMap<Club, ClubDto>();
 
             // Mapping when property names are different
             //CreateMap<User, UserViewModel>()

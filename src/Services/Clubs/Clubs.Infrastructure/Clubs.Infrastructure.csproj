@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
+    <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
   </ItemGroup>
 
 </Project>

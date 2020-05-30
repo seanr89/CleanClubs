@@ -1,3 +1,6 @@
+using System;
+using System.Runtime.CompilerServices;
+
 namespace Utilities
 {
     public static class HelperMethods
