@@ -1,8 +1,8 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Clubs.Domain{
-
+namespace Clubs.Domain.Entities
+{
     public class Player
     {
         [Key]

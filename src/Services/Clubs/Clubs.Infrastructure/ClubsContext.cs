@@ -1,8 +1,23 @@
-using System;
+using Microsoft.EntityFrameworkCore;
+using Clubs.Domain.Entities;
 
 namespace Clubs.Infrastructure
 {
-    public class ClubsContext
+    public class ClubsContext : DbContext
     {
+        public DbSet<Club> Clubs { get; set; }
+        public DbSet<Player> Players { get; set; }
+
+
+        public ClubsContext(DbContextOptions<ClubsContext> options) : base(options)
+        { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }
