@@ -14,5 +14,6 @@ namespace Clubs.Domain.Entities
         [Required]
         public string Email { get; set; }
         public bool Active { get; set; } = true;
+        public Club Club { get; set; }
     }
 }

@@ -18,6 +18,9 @@ namespace Clubs.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Club>()
+                .HasMany(c => c.Players)
+                .WithOne(e => e.Club);
         }
     }
 }
