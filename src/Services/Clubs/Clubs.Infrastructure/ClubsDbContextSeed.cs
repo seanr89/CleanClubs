@@ -12,7 +12,7 @@ namespace Clubs.Infrastructure.Persistence
     public static class ApplicationDbContextSeed
     {
 
-        public static async Task SeedSampleDataAsync(ClubsContext context)
+        public static async Task SeedAsync(ClubsContext context)
         {
             
             if(!context.Clubs.Any())
