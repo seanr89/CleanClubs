@@ -71,7 +71,7 @@ namespace Clubs.Infrastructure
             return randomBool;
         }
 
-        string getRandomFirstName()
+        public string getRandomFirstName()
         {
             // Create a Random object  
             Random rand = new Random();
@@ -81,7 +81,7 @@ namespace Clubs.Infrastructure
             return _firstnames[index];
         }
 
-        string getRandomLastName()
+        public string getRandomLastName()
         {
             // Create a Random object  
             Random rand = new Random();
@@ -89,6 +89,11 @@ namespace Clubs.Infrastructure
             int index = rand.Next(_lastName.Length);
 
             return _lastName[index];
+        }
+
+        public int GenerateRandomNumber(int min = 1, int max = 100)
+        {
+            Random random = new Random(); return random.Next(min, max);
         }
     }
 }
