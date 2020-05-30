@@ -1,6 +1,7 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
@@ -31,5 +32,15 @@ namespace Clubs.Infrastructure.Persistence
 
             }
         }
+
+        #region Players
+
+        private List<Player> CreatePlayerList()
+        {
+            throw new NotImplementedException();
+            
+        }
+
+        #endregion
     }
 }
