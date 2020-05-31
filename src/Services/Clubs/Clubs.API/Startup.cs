@@ -22,11 +22,14 @@ namespace Clubs.API
             Configuration = configuration;
         }
 
+        private string MyAllowSpecificOrigins = "CorsPolicy";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            MyAllowSpecificOrigins = _Configuration.GetValue<string>("Cors:PolicyName");
+            services.ConfigureCors(Configuration);
             services.ConfigureDependencies();
             services.AddControllers();
             services.ConfigureDbContext(Configuration);
@@ -48,6 +51,8 @@ namespace Clubs.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
