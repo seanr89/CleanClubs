@@ -19,18 +19,22 @@ namespace Clubs.Infrastructure.Persistence
             {
                 var RandoxIT = new Club() {Name = "Randox IT"};
                 var Players = new List<Player>();
-                var Sean = new Player() {FirstName = "Sean", LastName = "Rafferty", Club = RandoxIT, Rating = 50};
+                var Sean = new Player() {FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50};
                 Players.Add(Sean);
-                var Francy = new Player() {FirstName = "Francy", LastName = "Donald", Club = RandoxIT, Rating = 85};
+                var Francy = new Player() {FirstName = "Francy", LastName = "Donald", Email = "francy.donald@randox.com", Club = RandoxIT, Rating = 85};
                 Players.Add(Francy);
-                var Andy = new Player() {FirstName = "Andy", LastName = "Williamson", Club = RandoxIT, Rating = 72};
+                var Andy = new Player() {FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72};
                 Players.Add(Andy);
-                var Ross = new Player() {FirstName = "Ross", LastName = "Bratton", Club = RandoxIT, Rating = 65};
+                var Ross = new Player() {FirstName = "Ross", LastName = "Bratton", Email = "ross@randox.com", Club = RandoxIT, Rating = 65};
                 Players.Add(Ross);
-                var Conor = new Player() {FirstName = "Conor", LastName = "Devlin", Club = RandoxIT, Rating = 65};
+                var Conor = new Player() {FirstName = "Conor", LastName = "Devlin", Email = "conor@randox.com", Club = RandoxIT, Rating = 65};
                 Players.Add(Conor);
-                var David = new Player() {FirstName = "David", LastName = "McCrory", Club = RandoxIT, Rating = 70};
+                var David = new Player() {FirstName = "David", LastName = "McCrory", Email = "david@randox.com", Club = RandoxIT, Rating = 70};
                 Players.Add(David);
+                var Steve = new Player() {FirstName = "Steve", LastName = "Kennedy", Email = "steve@randox.com", Club = RandoxIT, Rating = 70};
+                Players.Add(Steve);
+                var Mike = new Player() {FirstName = "Mike", LastName = "Hayes", Email = "mike@randox.com", Club = RandoxIT, Rating = 78};
+                Players.Add(Mike);
                 RandoxIT.Players = Players;
                 context.Clubs.Add(RandoxIT);
 
@@ -78,9 +82,11 @@ namespace Clubs.Infrastructure.Persistence
             
             int randomNumber = gen.GenerateRandomNumber(1, 25);
 
+            club.Players = new List<Player>();
+
             for (int i = 0; i < randomNumber; ++i)
             {
-                club.Players.Add(new Player{FirstName = gen.getRandomFirstName(), LastName = gen.getRandomLastName(), Rating = gen.GenerateRandomNumber(), Club = club});
+                club.Players.Add(new Player{FirstName = gen.getRandomFirstName(), LastName = gen.getRandomLastName(), Rating = gen.GenerateRandomNumber(), Club = club, Email = "Unknown"});
             }
         }
 

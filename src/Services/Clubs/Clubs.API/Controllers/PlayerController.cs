@@ -16,7 +16,8 @@ namespace Clubs.API.Controllers
         }
 
 
-        public async Task<IActionResult> GetTask()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
             throw new NotImplementedException();
         }

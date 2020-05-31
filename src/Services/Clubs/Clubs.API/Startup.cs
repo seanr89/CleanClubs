@@ -28,7 +28,7 @@ namespace Clubs.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            MyAllowSpecificOrigins = _Configuration.GetValue<string>("Cors:PolicyName");
+            MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
             services.ConfigureDependencies();
             services.AddControllers();
