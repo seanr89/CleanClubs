@@ -48,7 +48,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var result = await Mediator.Send(new GetClubQuery() { Id = id});
+            var result = await Mediator.Send(new GetClubQuery() {Id = id});
 
             if (result != null)
                 return Ok(result);

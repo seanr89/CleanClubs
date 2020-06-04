@@ -1,8 +1,11 @@
 
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Club.Queries;
+using Clubs.API.Managers.Profiles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Clubs.API.Controllers
@@ -17,9 +20,9 @@ namespace Clubs.API.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IEnumerable<PlayerDto>> Get()
         {
-            throw new NotImplementedException();
+            return await Mediator.Send(new GetPlayersQuery());
         }
     }
 }
