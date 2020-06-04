@@ -5,6 +5,7 @@ using Club.API.Controllers;
 using Clubs.API.Club.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 //https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio-code
 //https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b
@@ -13,12 +14,12 @@ namespace Clubs.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public abstract class ClubsController : ApiController
+    public class ClubsController : ApiController
     {
-        public ClubsController()
+        private readonly ILogger<ClubsController> _logger;
+        public ClubsController(ILogger<ClubsController> logger)
         {
-            if (Mediator == null)
-                throw new ArgumentNullException(nameof(Mediator));
+            _logger = logger;
         }
 
         /// <summary>

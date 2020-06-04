@@ -12,10 +12,12 @@ namespace Clubs.API.Controllers
 {
     public class PlayerController : ApiController
     {
-        public PlayerController()
+        private readonly ILogger<PlayerController> _logger;
+        public PlayerController(ILogger<PlayerController> logger)
         {
-            if (Mediator == null)
-                throw new ArgumentNullException(nameof(Mediator));
+            // if (Mediator == null)
+            //     throw new ArgumentNullException(nameof(Mediator));
+            _logger = logger;
         }
 
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using AutoMapper;
 using MediatR;
+using System;
 
 namespace Clubs.API.Extensions
 {
@@ -16,6 +17,7 @@ namespace Clubs.API.Extensions
         /// <returns>services returned with injected dependencies</returns>
         public static void ConfigureDependencies(this IServiceCollection services)
         {
+            Console.WriteLine("ConfigureDependencies");
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
         }

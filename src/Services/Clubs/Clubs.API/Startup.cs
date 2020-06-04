@@ -32,11 +32,11 @@ namespace Clubs.API
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
             services.ConfigureDependencies();
+            services.ConfigureDbContext(Configuration);
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-            services.ConfigureDbContext(Configuration);
 
             services.AddHealthChecks().AddDbContextCheck<ClubsContext>();
 

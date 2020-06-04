@@ -13,6 +13,6 @@ namespace Clubs.API.Managers.Profiles
 
         public bool Active { get; set; } = true;
 
-        public List<PlayerDto> Players { get; set; }
+        public List<PlayerDto> Players { get; set; } = new List<PlayerDto>();
     }
 }
