@@ -15,6 +15,8 @@ namespace Clubs.Domain.Entities
         public string Email { get; set; }
         public bool Active { get; set; } = true;
         public double Rating { get; set; }
+        public Member Member { get; set; }
         public Club Club { get; set; }
+        public Team Team { get; set; }
     }
 }
