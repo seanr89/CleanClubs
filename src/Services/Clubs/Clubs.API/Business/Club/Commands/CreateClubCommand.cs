@@ -17,7 +17,7 @@ namespace Clubs.API.Club.Commands
 
     public class CreateClubCommand : IRequest<int>
     {
-        //public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class CreateClubCommandHandler : IRequestHandler<CreateClubCommand, int>

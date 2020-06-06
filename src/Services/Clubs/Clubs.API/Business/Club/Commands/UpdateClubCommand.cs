@@ -25,7 +25,7 @@ namespace Clubs.API.Club.Commands
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
 
-        public CreateClubCommandHandler(ClubsContext context, IMapper mapper)
+        public UpdateClubCommandHandler(ClubsContext context, IMapper mapper)
         {
             _Context = context;
             _Mapper = mapper;
