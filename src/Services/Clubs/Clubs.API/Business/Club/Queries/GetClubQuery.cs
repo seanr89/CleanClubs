@@ -34,7 +34,7 @@ namespace Clubs.API.Club.Queries
         public async Task<ClubDto> Handle(GetClubQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Clubs
-                .Include(c => c.Players)
+                .Include(c => c.Members)
                 .ProjectTo<ClubDto>(_Mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(c => c.Id == request.Id);
         }

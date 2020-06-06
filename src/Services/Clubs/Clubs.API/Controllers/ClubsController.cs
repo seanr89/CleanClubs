@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.API.Club.Queries;
+using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -40,7 +41,7 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Query a single Club and its details
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -55,6 +56,13 @@ namespace Clubs.API.Controllers
                 return Ok(result);
 
             return StatusCode(204, "No Club Found");
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
+        {
+            throw new NotImplementedException();
         }
     }
 }

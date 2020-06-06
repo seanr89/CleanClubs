@@ -10,6 +10,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
+using Clubs.API.ViewModels;
 
 namespace Clubs.API.Club.Commands
 {
@@ -17,7 +18,7 @@ namespace Clubs.API.Club.Commands
 
     public class CreateClubCommand : IRequest<int>
     {
-        public string Name { get; set; }
+        public CreateClubViewModel Club { get; set; }
     }
 
     public class CreateClubCommandHandler : IRequestHandler<CreateClubCommand, int>

@@ -6,9 +6,10 @@ namespace Clubs.Infrastructure
     public class ClubsContext : DbContext
     {
         public DbSet<Club> Clubs { get; set; }
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Member> Members { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Player> Players { get; set; }
 
 
         public ClubsContext(DbContextOptions<ClubsContext> options) : base(options)
@@ -21,7 +22,7 @@ namespace Clubs.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Club>()
-                .HasMany(c => c.Players)
+                .HasMany(c => c.Members)
                 .WithOne(e => e.Club);
         }
     }

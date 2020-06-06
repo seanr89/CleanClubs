@@ -18,43 +18,43 @@ namespace Clubs.Infrastructure.Persistence
             if(!context.Clubs.Any())
             {
                 var RandoxIT = new Club() {Name = "Randox IT"};
-                var Players = new List<Player>();
-                var Sean = new Player() {FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50};
-                Players.Add(Sean);
-                var Francy = new Player() {FirstName = "Francy", LastName = "Donald", Email = "francy.donald@randox.com", Club = RandoxIT, Rating = 85};
-                Players.Add(Francy);
-                var Andy = new Player() {FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72};
-                Players.Add(Andy);
-                var Ross = new Player() {FirstName = "Ross", LastName = "Bratton", Email = "ross@randox.com", Club = RandoxIT, Rating = 65};
-                Players.Add(Ross);
-                var Conor = new Player() {FirstName = "Conor", LastName = "Devlin", Email = "conor@randox.com", Club = RandoxIT, Rating = 65};
-                Players.Add(Conor);
-                var David = new Player() {FirstName = "David", LastName = "McCrory", Email = "david@randox.com", Club = RandoxIT, Rating = 70};
-                Players.Add(David);
-                var Steve = new Player() {FirstName = "Steve", LastName = "Kennedy", Email = "steve@randox.com", Club = RandoxIT, Rating = 70};
-                Players.Add(Steve);
-                var Mike = new Player() {FirstName = "Mike", LastName = "Hayes", Email = "mike@randox.com", Club = RandoxIT, Rating = 78};
-                Players.Add(Mike);
-                var Oran = new Player() {FirstName = "Oran", LastName = "McMenamin", Email = "Oran@randox.com", Club = RandoxIT, Rating = 70};
-                Players.Add(Oran);
-                var Darren = new Player() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 68};
-                Players.Add(Darren);
-                var Mark = new Player() {FirstName = "Mark", LastName = "Latten", Email = "mar@randox.com", Club = RandoxIT, Rating = 68};
-                Players.Add(Mark);
-                RandoxIT.Players = Players;
+                var Members = new List<Member>();
+                var Sean = new Member() {FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50};
+                Members.Add(Sean);
+                var Francy = new Member() {FirstName = "Francy", LastName = "Donald", Email = "francy.donald@randox.com", Club = RandoxIT, Rating = 85};
+                Members.Add(Francy);
+                var Andy = new Member() {FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72};
+                Members.Add(Andy);
+                var Ross = new Member() {FirstName = "Ross", LastName = "Bratton", Email = "ross@randox.com", Club = RandoxIT, Rating = 65};
+                Members.Add(Ross);
+                var Conor = new Member() {FirstName = "Conor", LastName = "Devlin", Email = "conor@randox.com", Club = RandoxIT, Rating = 65};
+                Members.Add(Conor);
+                var David = new Member() {FirstName = "David", LastName = "McCrory", Email = "david@randox.com", Club = RandoxIT, Rating = 70};
+                Members.Add(David);
+                var Steve = new Member() {FirstName = "Steve", LastName = "Kennedy", Email = "steve@randox.com", Club = RandoxIT, Rating = 70};
+                Members.Add(Steve);
+                var Mike = new Member() {FirstName = "Mike", LastName = "Hayes", Email = "mike@randox.com", Club = RandoxIT, Rating = 78};
+                Members.Add(Mike);
+                var Oran = new Member() {FirstName = "Oran", LastName = "McMenamin", Email = "Oran@randox.com", Club = RandoxIT, Rating = 70};
+                Members.Add(Oran);
+                var Darren = new Member() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 68};
+                Members.Add(Darren);
+                var Mark = new Member() {FirstName = "Mark", LastName = "Latten", Email = "mar@randox.com", Club = RandoxIT, Rating = 68};
+                Members.Add(Mark);
+                RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
 
 
                 var RandoxEng = new Club() {Name = "Randox Engineering"};
-                CreatePlayerList(RandoxEng);
+                CreateMemberList(RandoxEng);
                 context.Clubs.Add(RandoxEng);
 
                 var Club2 = new Club() {Name = "Club 2"};
-                CreatePlayerList(Club2);
+                CreateMemberList(Club2);
                 context.Clubs.Add(Club2);
 
                 var Club3 = new Club() {Name = "Club 3"};
-                CreatePlayerList(Club3);
+                CreateMemberList(Club3);
                 context.Clubs.Add(Club3);
 
                 await context.SaveChangesAsync
@@ -80,19 +80,19 @@ namespace Clubs.Infrastructure.Persistence
             }
         }
 
-        #region Players
+        #region Members
 
-        private static void CreatePlayerList(Club club)
+        private static void CreateMemberList(Club club)
         {
             RandomNameGenerator gen = new RandomNameGenerator();
             
             int randomNumber = gen.GenerateRandomNumber(1, 25);
 
-            club.Players = new List<Player>();
+            club.Members = new List<Member>();
 
             for (int i = 0; i < randomNumber; ++i)
             {
-                club.Players.Add(new Player{FirstName = gen.getRandomFirstName(), LastName = gen.getRandomLastName(), Rating = gen.GenerateRandomNumber(), Club = club, Email = "Unknown"});
+                club.Members.Add(new Member{FirstName = gen.getRandomFirstName(), LastName = gen.getRandomLastName(), Rating = gen.GenerateRandomNumber(), Club = club, Email = "Unknown"});
             }
         }
 
