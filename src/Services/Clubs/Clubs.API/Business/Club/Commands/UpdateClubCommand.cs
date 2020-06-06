@@ -34,6 +34,7 @@ namespace Clubs.API.Club.Commands
         public async Task<int> Handle(UpdateClubCommand request, CancellationToken cancellationToken)
         {
             //TODO
+            throw new NotImplementedException();
         }
     }
 }
