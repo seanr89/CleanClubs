@@ -39,6 +39,8 @@ namespace Clubs.Infrastructure.Persistence
                 Players.Add(Oran);
                 var Darren = new Player() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 68};
                 Players.Add(Darren);
+                var Mark = new Player() {FirstName = "Mark", LastName = "Latten", Email = "mar@randox.com", Club = RandoxIT, Rating = 68};
+                Players.Add(Mark);
                 RandoxIT.Players = Players;
                 context.Clubs.Add(RandoxIT);
 

@@ -19,5 +19,11 @@ namespace Clubs.Domain.Entities
         public bool Active { get; set; } = true;
 
         public ICollection<Player> Players { get; set; }
+
+        /// <summary>
+        /// Record of matches played by a club
+        /// </summary>
+        /// <value></value>
+        public ICollection<Match> Matches { get; set; }
     }
 }
