@@ -64,7 +64,8 @@ namespace Clubs.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ClubDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateClubCommand), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
