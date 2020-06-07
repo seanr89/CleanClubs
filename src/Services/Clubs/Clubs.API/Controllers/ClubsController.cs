@@ -79,5 +79,21 @@ namespace Clubs.API.Controllers
 
             return BadRequest("Save failed");
         }
+
+        [HttpPut("{id}")]  
+        public async Task<IActionResult> Update(Guid id, [FromBody]ClubUpdateDto club)
+        {
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var record = await Mediator.Send(new UpdateClubCommand() {Club = club});
+            if(record)
+                return Ok("Club Updated!");
+
+            return BadRequest("Save failed");
+        }
     }
 }

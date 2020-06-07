@@ -11,15 +11,7 @@ namespace Clubs.API.Managers.Profiles
             CreateMap<Clubs.Domain.Entities.Club, ClubDto>();
             CreateMap<Clubs.Domain.Entities.Club, ClubListDto>();
             CreateMap<CreateClubViewModel, Clubs.Domain.Entities.Club>();
-
-            // Mapping when property names are different
-            //CreateMap<User, UserViewModel>()
-            //    .ForMember(dest =>
-            //    dest.FName,
-            //    opt => opt.MapFrom(src => src.FirstName))
-            //    .ForMember(dest =>
-            //    dest.LName,
-            //    opt => opt.MapFrom(src => src.LastName));
+            CreateMap<ClubUpdateDto, Clubs.Domain.Entities.Club>();
         }
     }
 }
