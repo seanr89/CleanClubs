@@ -11,7 +11,5 @@ namespace Clubs.API.ViewModels
         public string Creator { get; set; }
 
         public bool Private { get; set; }
-
-        public MemberDto Member { get; set; }
     }
 }

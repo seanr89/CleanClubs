@@ -18,7 +18,7 @@ namespace Clubs.Domain.Entities
         [DefaultValue(true)]
         public bool Active { get; set; } = true;
         
-        public string Creator { get; set; }
+        public string Creator { get; set; } = "Not Available";
 
         public ICollection<Member> Members { get; set; }
 

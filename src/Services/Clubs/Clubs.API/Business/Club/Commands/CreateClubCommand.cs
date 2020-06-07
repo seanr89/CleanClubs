@@ -16,12 +16,12 @@ namespace Clubs.API.Club.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class CreateClubCommand : IRequest<int>
+    public class CreateClubCommand : IRequest<Guid>
     {
         public CreateClubViewModel Club { get; set; }
     }
 
-    public class CreateClubCommandHandler : IRequestHandler<CreateClubCommand, int>
+    public class CreateClubCommandHandler : IRequestHandler<CreateClubCommand, Guid>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
@@ -32,10 +32,13 @@ namespace Clubs.API.Club.Commands
             _Mapper = mapper;
         }
 
-        public async Task<int> Handle(CreateClubCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateClubCommand request, CancellationToken cancellationToken)
         {
-            //TODO
-            throw new NotImplementedException();
+            var mappedRecord = _Mapper.Map<Clubs.Domain.Entities.Club>(request.Club);
+            _Context.Clubs.Add(mappedRecord);
+            await _Context.SaveChangesAsync();
+
+            return mappedRecord.Id;
         }
     }
 }

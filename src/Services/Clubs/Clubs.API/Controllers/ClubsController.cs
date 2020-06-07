@@ -1,12 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
+using Clubs.API.Managers.Profiles;
 using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Utilities;
 
 //https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio-code
 //https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b
@@ -17,10 +21,10 @@ namespace Clubs.API.Controllers
     [Route("api/[controller]")]
     public class ClubsController : ApiController
     {
-        private readonly ILogger<ClubsController> _logger;
+        private readonly ILogger<ClubsController> _Logger;
         public ClubsController(ILogger<ClubsController> logger)
         {
-            _logger = logger;
+            _Logger = logger;
         }
 
         /// <summary>
@@ -28,7 +32,7 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ClubListDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
@@ -45,11 +49,12 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetById(Guid id)
         {
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubQuery() {Id = id});
 
             if (result != null)
@@ -59,10 +64,19 @@ namespace Clubs.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ClubDto), StatusCodes.Status201Created)]
         public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
         {
-            throw new NotImplementedException();
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var record = await Mediator.Send(new CreateClubCommand() {Club = club});
+            if(record != null)
+                return CreatedAtRoute("GetById", new{ id = record}, club);
+
+            return BadRequest("Save failed");
         }
     }
 }
