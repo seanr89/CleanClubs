@@ -10,12 +10,9 @@ namespace Clubs.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
-
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
-
         public bool Accepted { get; set; }
-
         public DateTime? Date { get; set; }
     }
 }

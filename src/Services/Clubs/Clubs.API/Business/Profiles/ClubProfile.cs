@@ -9,6 +9,7 @@ namespace Clubs.API.Managers.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Clubs.Domain.Entities.Club, ClubDto>();
+            CreateMap<Clubs.Domain.Entities.Club, ClubListDto>();
             CreateMap<CreateClubViewModel, Clubs.Domain.Entities.Club>();
 
             // Mapping when property names are different

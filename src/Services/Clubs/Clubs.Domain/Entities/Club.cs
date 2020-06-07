@@ -27,5 +27,11 @@ namespace Clubs.Domain.Entities
         /// </summary>
         /// <value></value>
         public ICollection<Match> Matches { get; set; }
+
+        /// <summary>
+        /// Identifies in future if the club is private
+        /// </summary>
+        /// <value></value>
+        public bool Private { get; set; } = false;
     }
 }

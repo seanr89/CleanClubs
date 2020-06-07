@@ -15,11 +15,11 @@ namespace Clubs.API.Club.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class GetClubsQuery : IRequest<IEnumerable<ClubDto>>
+    public class GetClubsQuery : IRequest<IEnumerable<ClubListDto>>
     {
     }
 
-    public class GetClubsQueryHandler : IRequestHandler<GetClubsQuery, IEnumerable<ClubDto>>
+    public class GetClubsQueryHandler : IRequestHandler<GetClubsQuery, IEnumerable<ClubListDto>>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
@@ -30,10 +30,10 @@ namespace Clubs.API.Club.Queries
             _Mapper = mapper;
         }
 
-        public async Task<IEnumerable<ClubDto>> Handle(GetClubsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ClubListDto>> Handle(GetClubsQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Clubs
-                .ProjectTo<ClubDto>(_Mapper.ConfigurationProvider)
+                .ProjectTo<ClubListDto>(_Mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
         }
     }

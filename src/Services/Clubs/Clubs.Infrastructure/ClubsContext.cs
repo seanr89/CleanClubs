@@ -11,6 +11,11 @@ namespace Clubs.Infrastructure
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
 
+        public ClubsContext()
+        {   
+            this.ChangeTracker.LazyLoadingEnabled = false;
+        }
+
 
         public ClubsContext(DbContextOptions<ClubsContext> options) : base(options)
         { }
