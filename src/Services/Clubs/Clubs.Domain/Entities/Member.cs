@@ -16,5 +16,6 @@ namespace Clubs.Domain.Entities
         public bool Active { get; set; } = true;
         public double Rating { get; set; }
         public Club Club { get; set; }
+        public Guid ClubId { get; set; }
     }
 }

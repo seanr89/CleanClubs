@@ -10,6 +10,7 @@ namespace Clubs.Infrastructure
         public DbSet<Match> Matches { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
+        private DbSet<Invite> Invites {get; set;}
 
         public ClubsContext()
         {   
@@ -34,6 +35,9 @@ namespace Clubs.Infrastructure
                 .WithOne(e => e.Club);
             modelBuilder.Entity<Match>()
                 .HasMany(c => c.Teams)
+                .WithOne(e => e.Match);
+            modelBuilder.Entity<Match>()
+                .HasMany(c => c.Invites)
                 .WithOne(e => e.Match);
             modelBuilder.Entity<Team>()
                 .HasMany(c => c.Players)

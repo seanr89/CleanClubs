@@ -14,5 +14,7 @@ namespace Clubs.Domain.Entities
         public Member Member { get; set; }
         public bool Accepted { get; set; }
         public DateTime? Date { get; set; }
+        public Match Match {get; set; }
+        public Guid MatchId { get; set; }
     }
 }
