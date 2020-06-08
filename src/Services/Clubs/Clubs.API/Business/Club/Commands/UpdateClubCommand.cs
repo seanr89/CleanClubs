@@ -33,18 +33,11 @@ namespace Clubs.API.Club.Commands
 
         public async Task<bool> Handle(UpdateClubCommand request, CancellationToken cancellationToken)
         {
-            //TODO
-            var mappedClub = _Mapper.Map<Clubs.Domain.Entities.Club>(request.Club);
-
-            var existingBlog = _Context.Clubs.Find(mappedClub.Id);
-
+            var existingBlog = _Context.Clubs.Find(request.Club.Id);
             if(existingBlog != null)
             {
-                mappedClub.Members = existingBlog.Members;
-                mappedClub.Matches = existingBlog.Matches;
-               _Context.Entry(existingBlog).CurrentValues.SetValues(mappedClub);
+                _Context.Entry(existingBlog).CurrentValues.SetValues(request.Club);
             }
-
             try
             {
                 return (await _Context.SaveChangesAsync()) > 0;
