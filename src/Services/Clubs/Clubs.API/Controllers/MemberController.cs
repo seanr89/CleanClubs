@@ -21,6 +21,7 @@ namespace Clubs.API.Controllers
             _Logger = logger;
         }
 
+        #region GET
 
         [HttpGet]
         public async Task<IEnumerable<MemberDto>> Get()
@@ -40,7 +41,10 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
 
-            var result = Mediator.Send(new GetMemberQuery(){ Id = id});
+            var result = await Mediator.Send(new GetMemberQuery(){ Id = id});
+
+            if (result != null)
+                return Ok(result);
 
             return StatusCode(204, "No Record Found");
         }
@@ -64,5 +68,15 @@ namespace Clubs.API.Controllers
 
             return StatusCode(204, "No Record Found");
         }
+
+        #endregion
+
+        #region POST
+
+        #endregion
+
+        #region PUT/UPDATE
+
+        #endregion
     }
 }

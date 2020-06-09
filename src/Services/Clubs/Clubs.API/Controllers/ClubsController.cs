@@ -27,8 +27,10 @@ namespace Clubs.API.Controllers
             _Logger = logger;
         }
 
+        #region GET
+
         /// <summary>
-        /// 
+        /// Query all clubs
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -45,7 +47,7 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// Query a single Club and its details
+        /// Query a single Club by its Unique ID
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -62,6 +64,10 @@ namespace Clubs.API.Controllers
 
             return StatusCode(204, "No Club Found");
         }
+
+        #endregion
+
+        #region POST
 
         [HttpPost]
         [ProducesResponseType(typeof(CreateClubCommand), StatusCodes.Status201Created)]
@@ -80,6 +86,11 @@ namespace Clubs.API.Controllers
             return BadRequest("Save failed");
         }
 
+
+        #endregion
+
+        #region PUT/UPDATE
+
         [HttpPut("{id}")]  
         public async Task<IActionResult> Update(Guid id, [FromBody]ClubUpdateDto club)
         {
@@ -95,5 +106,7 @@ namespace Clubs.API.Controllers
 
             return BadRequest("Save failed");
         }
+
+        #endregion
     }
 }
