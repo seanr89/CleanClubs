@@ -36,5 +36,17 @@ namespace Clubs.API.Controllers
 
             return StatusCode(204, "No Matches Found");
         }
+
+        [HttpGet("{id}", Name="GetById")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("{id}", Name="GetByClubId")]
+        public async Task<IActionResult> GetByClubId(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

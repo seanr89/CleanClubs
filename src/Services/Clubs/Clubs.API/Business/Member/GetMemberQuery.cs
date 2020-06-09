@@ -17,6 +17,7 @@ namespace Clubs.API.Club.Queries
 
     public class GetMemberQuery : IRequest<MemberDto>
     {
+        public Guid Id { get; set; }
     }
 
     public class GetMemberQueryHandler : IRequestHandler<GetMemberQuery, MemberDto>
@@ -32,10 +33,10 @@ namespace Clubs.API.Club.Queries
 
         public async Task<MemberDto> Handle(GetMemberQuery request, CancellationToken cancellationToken)
         {
-            // return await _Context.Members
-            //     .ProjectTo<MemberDto>(_Mapper.ConfigurationProvider)
-            //     .AsNoTracking()
-            //     .ToListAsync(cancellationToken);
+            return await _Context.Members
+                .AsNoTracking()
+                .ProjectTo<MemberDto>(_Mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(m => m.Id == request.Id);
         }
     }
 }

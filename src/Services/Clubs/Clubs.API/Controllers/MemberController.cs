@@ -39,10 +39,8 @@ namespace Clubs.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
-            // var result = await Mediator.Send(new GetClubQuery() {Id = id});
 
-            // if (result != null)
-            //     return Ok(result);
+            var result = Mediator.Send(new GetMemberQuery(){ Id = id});
 
             return StatusCode(204, "No Record Found");
         }
@@ -58,10 +56,11 @@ namespace Clubs.API.Controllers
         public async Task<IActionResult> GetByClubId(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
-            // var result = await Mediator.Send(new GetClubQuery() {Id = id});
 
-            // if (result != null)
-            //     return Ok(result);
+            var result = await Mediator.Send(new GetClubMembersQuery() {ClubId = id});
+
+            if (result != null)
+                return Ok(result);
 
             return StatusCode(204, "No Record Found");
         }
