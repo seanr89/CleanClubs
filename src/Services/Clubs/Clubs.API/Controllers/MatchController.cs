@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
 using Clubs.API.ViewModels;
@@ -63,16 +64,16 @@ namespace Clubs.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchViewModel), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]CreateMatchViewModel club)
+        public async Task<IActionResult> Post([FromBody]CreateMatchViewModel match)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var record = await Mediator.Send(new CreateClubCommand() {Club = club});
+            var record = await Mediator.Send(new CreateMatchCommand() {Club = match});
             if(record != null)
-                return CreatedAtRoute("GetClubById", new{ id = record}, club);
+                return CreatedAtRoute("GetMatchById", new{ id = record}, match);
 
             return BadRequest("Save failed");
         }
