@@ -10,6 +10,7 @@ using Clubs.API.Managers.Profiles;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Utilities;
 
 namespace Clubs.API.Controllers
 {
@@ -40,7 +41,14 @@ namespace Clubs.API.Controllers
         [HttpGet("{id}", Name="GetMatchById")]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
-            throw new NotImplementedException();
+                _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            var result = await Mediator.Send(new GetMatchQuery() {MatchId = id});
+
+            if (result != null)
+                return Ok(result);
+
+            return StatusCode(204, "No Record Found");
+
         }
 
         [HttpGet("{id}", Name="GetByClubId")]
