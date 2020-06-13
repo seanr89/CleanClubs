@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Club.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public abstract class ApiController : ControllerBase
     {
         private IMediator _mediator;

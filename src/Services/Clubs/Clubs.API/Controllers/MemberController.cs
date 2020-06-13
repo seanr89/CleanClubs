@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
+using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -30,14 +32,14 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// Query All Members
+        /// Query A single member
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}", Name="GetById")]
+        [HttpGet("{id}", Name="GetMemberById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetMemberById(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
 
@@ -72,6 +74,23 @@ namespace Clubs.API.Controllers
         #endregion
 
         #region POST
+
+        [HttpPost]
+        [ProducesResponseType(typeof(CreateMemberViewModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Post([FromBody]CreateMemberViewModel member)
+        {
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+             if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var record = await Mediator.Send(new CreateMemberCommand() {Member = member});
+            if(record != null)
+                return CreatedAtRoute("GetMemberById", new{ id = record}, member);
+
+            return BadRequest("Save failed");
+        }
 
         #endregion
 

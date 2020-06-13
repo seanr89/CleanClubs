@@ -10,31 +10,35 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
+using Clubs.API.ViewModels;
 
-namespace Clubs.API.Club.Queries
+namespace Clubs.API.Club.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class GetPlayersQuery : IRequest<IEnumerable<PlayerDto>>
+    public class CreateMemberCommand : IRequest<Guid>
     {
+        public CreateMemberViewModel Member { get; set; }
     }
 
-    public class GetPlayersQueryHandler : IRequestHandler<GetPlayersQuery, IEnumerable<PlayerDto>>
+    public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, Guid>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
 
-        public GetPlayersQueryHandler(ClubsContext context, IMapper mapper)
+        public CreateMemberCommandHandler(ClubsContext context, IMapper mapper)
         {
             _Context = context;
             _Mapper = mapper;
         }
 
-        public async Task<IEnumerable<PlayerDto>> Handle(GetPlayersQuery request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
         {
-            return await _Context.Players
-                .ProjectTo<PlayerDto>(_Mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var mappedRecord = _Mapper.Map<Clubs.Domain.Entities.Member>(request.Member);
+            _Context.Members.Add(mappedRecord);
+            await _Context.SaveChangesAsync();
+
+            return mappedRecord.Id;
         }
     }
 }

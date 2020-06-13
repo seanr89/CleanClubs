@@ -1,20 +1,15 @@
+
 using System;
 
-//https://exceptionnotfound.net/entity-framework-and-wcf-mapping-entities-to-dtos-with-automapper/
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.API.ViewModels
 {
-    public class MemberDto
+    public class CreateMemberViewModel
     {
-        public Guid Id { get; set; }
-
         public string FirstName { get; set; }
-
         public string LastName { get; set; }
-
         public string Email { get; set; }
-
         public bool Active { get; set; } = true;
-
         public double Rating { get; set; }
+        public Guid ClubId { get; set; }
     }
 }

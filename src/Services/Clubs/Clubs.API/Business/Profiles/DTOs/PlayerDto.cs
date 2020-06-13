@@ -14,8 +14,5 @@ namespace Clubs.API.Managers.Profiles
         public string Email { get; set; }
 
         public bool Active { get; set; }
-
-        //public ClubDto Club { get; set; }
-        //public string ClubName { get; set; } = "Unknown";
     }
 }

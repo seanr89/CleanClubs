@@ -37,8 +37,8 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Matches Found");
         }
 
-        [HttpGet("{id}", Name="GetById")]
-        public async Task<IActionResult> GetById(Guid id)
+        [HttpGet("{id}", Name="GetMatchById")]
+        public async Task<IActionResult> GetMatchById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -48,5 +48,18 @@ namespace Clubs.API.Controllers
         {
             throw new NotImplementedException();
         }
+
+        #region POST
+
+        #endregion
+
+
+        #region PUT/Update
+
+        #endregion
+
+        #region Delete
+
+        #endregion
     }
 }

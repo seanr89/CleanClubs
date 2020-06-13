@@ -51,10 +51,10 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}", Name="GetById")]
+        [HttpGet("{id}", Name="GetClubById")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetClubById(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubQuery() {Id = id});
@@ -70,7 +70,7 @@ namespace Clubs.API.Controllers
         #region POST
 
         [HttpPost]
-        [ProducesResponseType(typeof(CreateClubCommand), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateClubViewModel), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
         {
@@ -81,11 +81,10 @@ namespace Clubs.API.Controllers
             }
             var record = await Mediator.Send(new CreateClubCommand() {Club = club});
             if(record != null)
-                return CreatedAtRoute("GetById", new{ id = record}, club);
+                return CreatedAtRoute("GetClubById", new{ id = record}, club);
 
             return BadRequest("Save failed");
         }
-
 
         #endregion
 
