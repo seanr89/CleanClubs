@@ -40,7 +40,7 @@ namespace Clubs.API.Controllers
             if (result.Any())
                 return Ok(result);
 
-            return StatusCode(204, "No Matches Found");
+            return StatusCode(204);
         }
 
         [HttpGet("{id}", Name="GetMatchById")]
