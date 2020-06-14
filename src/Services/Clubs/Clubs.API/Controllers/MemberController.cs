@@ -56,10 +56,10 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <param name="id">Club ID</param>
         /// <returns></returns>
-        [HttpGet("{id}", Name="GetByClubId")]
+        [HttpGet("{id}", Name="GetMembersByClubId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetByClubId(Guid id)
+        public async Task<IActionResult> GetMembersByClubId(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
 

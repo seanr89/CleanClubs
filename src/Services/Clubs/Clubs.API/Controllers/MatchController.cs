@@ -56,8 +56,8 @@ namespace Clubs.API.Controllers
 
         }
 
-        [HttpGet("{id}", Name="GetByClubId")]
-        public async Task<IActionResult> GetByClubId(Guid id)
+        [HttpGet("{id}", Name="GetMatchesByClubId")]
+        public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubMatchesQuery() {ClubId = id});
