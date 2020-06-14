@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Business.Managers;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
@@ -19,9 +20,11 @@ namespace Clubs.API.Controllers
     public class MatchController : ApiController
     {
         private readonly ILogger<MatchController> _Logger;
-        public MatchController(ILogger<MatchController> logger)
+        private readonly MatchManager _MatchManager;
+        public MatchController(ILogger<MatchController> logger, MatchManager manager)
         {
             _Logger = logger;
+            _MatchManager = manager;
         }
 
         /// <summary>
@@ -43,7 +46,7 @@ namespace Clubs.API.Controllers
         [HttpGet("{id}", Name="GetMatchById")]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
-                _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetMatchQuery() {MatchId = id});
 
             if (result != null)
@@ -56,7 +59,13 @@ namespace Clubs.API.Controllers
         [HttpGet("{id}", Name="GetByClubId")]
         public async Task<IActionResult> GetByClubId(Guid id)
         {
-            throw new NotImplementedException();
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            var result = await Mediator.Send(new GetClubMatchesQuery() {ClubId = id});
+
+            if (result.Any())
+                return Ok(result);
+
+            return StatusCode(204, "No Records Found");
         }
 
         #region POST
@@ -71,7 +80,8 @@ namespace Clubs.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var record = await Mediator.Send(new CreateMatchCommand() {Club = match});
+            var record = await _MatchManager.CreateMatch(match);
+            // var record = await Mediator.Send(new CreateMatchCommand() {Match = match});
             if(record != null)
                 return CreatedAtRoute("GetMatchById", new{ id = record}, match);
 

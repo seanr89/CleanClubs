@@ -4,6 +4,7 @@ using System.Reflection;
 using AutoMapper;
 using MediatR;
 using System;
+using Clubs.API.Business.Managers;
 
 namespace Clubs.API.Extensions
 {
@@ -20,6 +21,8 @@ namespace Clubs.API.Extensions
             Console.WriteLine("ConfigureDependencies");
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddTransient<MatchManager>();
         }
     }
 }

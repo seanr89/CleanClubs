@@ -10,34 +10,34 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
-using Clubs.API.ViewModels;
 
-namespace Clubs.API.Club.Commands
+namespace Clubs.API.Club.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class CreateMatchCommand : IRequest<Guid>
+    public class GetClubMatchesQuery : IRequest<IEnumerable<MatchDto>>
     {
-        public Match Match { get; set; }
+        public Guid ClubId { get; set; }
     }
 
-    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, Guid>
+    public class GetClubMatchesQueryHandler : IRequestHandler<GetClubMatchesQuery, IEnumerable<MatchDto>>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
 
-        public CreateMatchCommandHandler(ClubsContext context, IMapper mapper)
+        public GetClubMatchesQueryHandler(ClubsContext context, IMapper mapper)
         {
             _Context = context;
             _Mapper = mapper;
         }
 
-        public async Task<Guid> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MatchDto>> Handle(GetClubMatchesQuery request, CancellationToken cancellationToken)
         {
-            _Context.Matches.Add(request.Match);
-            await _Context.SaveChangesAsync();
-
-            return request.Match.Id;
+            return await _Context.Matches
+                .ProjectTo<MatchDto>(_Mapper.ConfigurationProvider)
+                .AsNoTracking()
+                .Where(c => c.Id == request.ClubId)
+                .ToListAsync();
         }
     }
 }
