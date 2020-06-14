@@ -26,6 +26,8 @@ namespace Clubs.API.Controllers
         #region GET
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IEnumerable<MemberDto>> Get()
         {
             return await Mediator.Send(new GetAllMembersQuery());
@@ -37,7 +39,7 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name="GetMemberById")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MemberDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMemberById(Guid id)
         {
@@ -57,7 +59,7 @@ namespace Clubs.API.Controllers
         /// <param name="id">Club ID</param>
         /// <returns></returns>
         [HttpGet("{id}", Name="GetMembersByClubId")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMembersByClubId(Guid id)
         {
