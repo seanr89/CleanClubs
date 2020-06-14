@@ -92,7 +92,7 @@ namespace Clubs.Infrastructure.Migrations
                 column: "MatchId",
                 principalTable: "Matches",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Invites_Members_MemberId",
@@ -100,7 +100,7 @@ namespace Clubs.Infrastructure.Migrations
                 column: "MemberId",
                 principalTable: "Members",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Matches_Clubs_ClubId",
@@ -108,7 +108,7 @@ namespace Clubs.Infrastructure.Migrations
                 column: "ClubId",
                 principalTable: "Clubs",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Members_Clubs_ClubId",
@@ -116,7 +116,7 @@ namespace Clubs.Infrastructure.Migrations
                 column: "ClubId",
                 principalTable: "Clubs",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

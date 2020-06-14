@@ -43,7 +43,7 @@ namespace Clubs.API.Business.Managers
             //Step1. Check if invites are needed to be added/created
             if(matchView.InviteActiveMembers)
             {
-                var members = await _Mediator.Send(new GetClubMembersQuery() {ClubId = match.ClubId}); 
+                var members = await _Mediator.Send(new GetClubMembersQuery() {ClubId = (Guid)match.ClubId}); 
 
                 //TODO: get only active members!
                 var activeMembers = members.Where(m => m.Active == true).ToList();

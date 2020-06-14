@@ -10,6 +10,7 @@ namespace Clubs.API.Managers.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Match, MatchDto>();
+            CreateMap<CreateMatchViewModel, Match>();
 
             // Mapping when property names are different
             //CreateMap<User, UserViewModel>()
