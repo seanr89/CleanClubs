@@ -32,7 +32,7 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
@@ -44,6 +44,8 @@ namespace Clubs.API.Controllers
         }
 
         [HttpGet("{id}", Name="GetMatchById")]
+        [ProducesResponseType(typeof(MatchDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
@@ -57,6 +59,8 @@ namespace Clubs.API.Controllers
         }
 
         [HttpGet("{id}", Name="GetMatchesByClubId")]
+        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");

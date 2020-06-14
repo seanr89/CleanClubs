@@ -96,10 +96,10 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <param name="club"></param>
         /// <returns></returns>
-        [HttpPut("{id}", Name="UpdateClubDetails")]  
+        [HttpPut("{id}")]  
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update(Guid id, [FromBody]ClubUpdateDto club)
+        public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody]ClubUpdateDto club)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
