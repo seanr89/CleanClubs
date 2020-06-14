@@ -11,11 +11,18 @@ namespace Clubs.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        
+        public Guid MatchId { get; set; }
         public Match Match { get; set; }
-
+        
+        /// <summary>
+        /// Defines if this is the first or second team
+        /// </summary>
+        /// <value></value>
         public TeamNumber Number { get; set; }
-
+        /// <summary>
+        /// The players that have been assigned to the team
+        /// </summary>
+        /// <value></value>
         public ICollection<Player> Players { get; set; }
     }
 }
