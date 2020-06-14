@@ -11,9 +11,12 @@ using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
 using Clubs.API.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace Clubs.API.Club.Commands
 {
+    //https://dotnetcoretutorials.com/2019/04/30/the-mediator-pattern-part-3-mediatr-library/
+    //https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b
     public class UpdateMemberCommand : IRequest<bool>
     {
         public MemberDto Member { get; set; }
@@ -23,11 +26,13 @@ namespace Clubs.API.Club.Commands
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
+        private readonly ILogger _Logger;
 
-        public UpdateMemberCommandHandler(ClubsContext context, IMapper mapper)
+        public UpdateMemberCommandHandler(ClubsContext context, IMapper mapper, ILogger logger)
         {
             _Context = context;
             _Mapper = mapper;
+            _Logger = logger;
         }
 
         public async Task<bool> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
@@ -41,9 +46,10 @@ namespace Clubs.API.Club.Commands
             {
                 return (await _Context.SaveChangesAsync()) > 0;
             }
-            catch (DbUpdateException /* ex */)
+            catch (DbUpdateException ex)
             {
                 //Log the error (uncomment ex variable name and write a log.)
+                _Logger.LogError($"SqlError - Unable to save changes: {ex.Message}");
                 // ModelState.AddModelError("", "Unable to save changes. " +
                 //     "Try again, and if the problem persists, " +
                 //     "see your system administrator.");
