@@ -12,15 +12,6 @@ namespace Clubs.API.Managers.Profiles
             CreateMap<MemberDto, Invite>()
                 .ForMember(dest =>
                 dest.MemberId, opt => opt.MapFrom(src => src.Id));
-
-            // Mapping when property names are different
-            //CreateMap<User, UserViewModel>()
-            //    .ForMember(dest =>
-            //    dest.FName,
-            //    opt => opt.MapFrom(src => src.FirstName))
-            //    .ForMember(dest =>
-            //    dest.LName,
-            //    opt => opt.MapFrom(src => src.LastName));
         }
     }
 }

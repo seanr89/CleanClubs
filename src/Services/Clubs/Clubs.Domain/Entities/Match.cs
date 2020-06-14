@@ -18,6 +18,8 @@ namespace Clubs.Domain.Entities
         public MatchStatus Status { get; set; }
         public ICollection<Team> Teams { get; set; }
         public ICollection<Invite> Invites { get; set; }
-        //public bool InvitesSent { get; set; } = false;
+        public bool InvitesSent { get; set; } = false;
+        public GeneratorType Generator { get; set; } = GeneratorType.None;
+        
     }
 }
