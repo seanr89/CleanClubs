@@ -18,7 +18,7 @@ using Utilities;
 namespace Clubs.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    //[Route("api/[controller]/[action]")]
     public class ClubsController : ApiController
     {
         private readonly ILogger<ClubsController> _Logger;
@@ -90,7 +90,15 @@ namespace Clubs.API.Controllers
 
         #region PUT/UPDATE
 
-        [HttpPut("{id}")]  
+        /// <summary>
+        /// Support the updating of club details
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="club"></param>
+        /// <returns></returns>
+        [HttpPut("{id}", Name="UpdateClubDetails")]  
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Update(Guid id, [FromBody]ClubUpdateDto club)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
