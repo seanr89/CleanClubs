@@ -98,6 +98,25 @@ namespace Clubs.API.Controllers
 
         #region PUT/UPDATE
 
+        [HttpPut("{id}")]  
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateMemeber(Guid id, [FromBody]MemberDto update)
+        {
+            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var record = await Mediator.Send(new UpdateMemberCommand() {Member = update});
+            if(record)
+                return Ok("Member Updated!");
+
+            return BadRequest("Update failed");
+        }
+
+
         #endregion
     }
 }

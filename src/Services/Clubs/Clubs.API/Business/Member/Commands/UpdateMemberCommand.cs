@@ -32,7 +32,7 @@ namespace Clubs.API.Club.Commands
 
         public async Task<bool> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
         {
-             var existingRecord = _Context.Members.Find(request.Member.Id);
+            var existingRecord = _Context.Members.Find(request.Member.Id);
             if(existingRecord != null)
             {
                 _Context.Entry(existingRecord).CurrentValues.SetValues(request.Member);
