@@ -8,5 +8,10 @@ namespace Clubs.Generator
         {
             
         }
+
+        public void Generate()
+        {
+            
+        }
     }
 }

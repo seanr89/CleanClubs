@@ -38,6 +38,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
+            _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubsQuery());
 
             if (result.Any())
@@ -56,7 +57,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetClubById(Guid id)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubQuery() {Id = id});
 
             if (result != null)
@@ -74,7 +75,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -101,7 +102,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody]ClubUpdateDto club)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

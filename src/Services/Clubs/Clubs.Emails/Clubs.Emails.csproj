@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+    <ItemGroup>
+    <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
+    <ProjectReference Include="../../Utilities/Utilities.csproj"/>
+  </ItemGroup>
+
 </Project>
