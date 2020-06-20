@@ -45,16 +45,16 @@ namespace Clubs.API.Business.Managers
             {
                 var members = await _Mediator.Send(new GetClubMembersQuery() {ClubId = (Guid)match.ClubId}); 
 
-                //TODO: get only active members!
+                //Get only active members!
                 var activeMembers = members.Where(m => m.Active == true).ToList();
 
-                //TODO: convert members to invites!
+                //Convert members to invites!
                 List<Invite> invites = new List<Invite>();
                 foreach(var a in activeMembers)
                 {
                     invites.Add(_Mapper.Map<Invite>(a));
                 }
-                //TODO: add invites to the object! (N.B. we may need to convert the object before here with the mapping!)
+                //Add invites to the match
                 match.Invites = invites;
             }
 
