@@ -101,7 +101,7 @@ namespace Clubs.API.Controllers
         [HttpPut("{id}")]  
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateMemeber(Guid id, [FromBody]MemberDto update)
+        public async Task<IActionResult> UpdateMember(Guid id, [FromBody]MemberDto update)
         {
             _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
