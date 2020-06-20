@@ -7,11 +7,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Clubs.API.Behaviours
 {
-        public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
+        public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
     {
         private readonly ILogger _logger;
 
-        public RequestLogger(ILogger<TRequest> logger)
+        public LoggingBehaviour(ILogger<TRequest> logger)
         {
             _logger = logger;
         }
@@ -20,7 +20,7 @@ namespace Clubs.API.Behaviours
         {
             var requestName = typeof(TRequest).Name;
 
-            _logger.LogInformation("CleanArchitecture Request: {Name} {@Request}",
+            _logger.LogInformation("Clubs API Request: {Name} {@Request}",
                 requestName, request);
         }
     }
