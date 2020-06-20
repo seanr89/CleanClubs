@@ -8,5 +8,10 @@ namespace Clubs.Emails
         {
             
         }
+
+        public async Task<bool> SendEmail(string email, string messageContent, string subject)
+        {
+            
+        }
     }
 }
