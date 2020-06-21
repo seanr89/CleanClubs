@@ -1,4 +1,5 @@
 using System;
+using Clubs.Domain.Entities;
 
 namespace Clubs.Generator
 {
@@ -9,7 +10,7 @@ namespace Clubs.Generator
             
         }
 
-        public void Generate()
+        public void Generate(GenerationInfo info)
         {
             
         }

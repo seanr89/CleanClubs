@@ -6,6 +6,7 @@ using MediatR;
 using System;
 using Clubs.API.Business.Managers;
 using Clubs.API.Behaviours;
+using Clubs.Generator;
 
 namespace Clubs.API.Extensions
 {
@@ -27,6 +28,7 @@ namespace Clubs.API.Extensions
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 
             services.AddTransient<MatchManager>();
+            services.AddScoped<TeamGenerator>();
         }
     }
 }

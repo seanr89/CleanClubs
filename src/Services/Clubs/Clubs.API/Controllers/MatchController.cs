@@ -85,7 +85,7 @@ namespace Clubs.API.Controllers
                 return BadRequest(ModelState);
             }
             var record = await _MatchManager.CreateMatch(match);
-            // var record = await Mediator.Send(new CreateMatchCommand() {Match = match});
+            
             if(record != null)
                 return CreatedAtRoute("GetMatchById", new{ id = record}, match);
 

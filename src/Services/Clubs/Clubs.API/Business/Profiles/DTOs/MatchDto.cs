@@ -12,6 +12,7 @@ namespace Clubs.API.Managers.Profiles.Dto
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; }
         public List<Invite> Invites { get; set; }
+        public List<Team> Teams { get; set; } = new List<Team>();
         public string Location { get; set; }
     }
 }

@@ -66,6 +66,12 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Club Found");
         }
 
+        [HttpGet("{id}", Name="GetNextMatchForClub")]
+        public async Task<IActionResult> GetNextMatchForClub(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region POST
@@ -114,7 +120,6 @@ namespace Clubs.API.Controllers
 
             return BadRequest("Update failed");
         }
-
         #endregion
     }
 }
