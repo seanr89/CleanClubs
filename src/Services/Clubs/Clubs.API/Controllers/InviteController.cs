@@ -1,9 +1,13 @@
 
 
 using System;
+using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Club.Commands;
+using Clubs.API.Managers.Profiles;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Utilities;
 
 namespace Clubs.API.Controllers
 {
@@ -15,18 +19,31 @@ namespace Clubs.API.Controllers
         {
             _Logger = logger;
         }
-        
 
         [HttpGet("{id}", Name="AcceptInvite")]
-        public IActionResult AcceptInvite(Guid id)
+        public async Task<IActionResult> AcceptInvite(Guid id)
         {
-            throw new NotImplementedException();
+            _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");
+
+            var invite = new InviteDto(){Id = id, Accepted = true};
+            var record = await Mediator.Send(new UpdateInviteCommand() {Invite = invite});
+            if(record)
+                return Ok("Record Updated!");
+
+            return BadRequest();
         }
 
         [HttpGet("{id}", Name="DeclineInvite")]
-        public IActionResult DeclineInvite(Guid id)
+        public async Task<IActionResult> DeclineInvite(Guid id)
         {
-            throw new NotImplementedException();
+            _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");
+
+            var invite = new InviteDto(){Id = id, Accepted = false};
+            var record = await Mediator.Send(new UpdateInviteCommand() {Invite = invite});
+            if(record)
+                return Ok("Record Updated!");
+
+            return BadRequest();
         }
     }
 }

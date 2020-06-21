@@ -10,7 +10,7 @@ namespace Clubs.Infrastructure
         public DbSet<Match> Matches { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
-        private DbSet<Invite> Invites {get; set;}
+        public DbSet<Invite> Invites {get; set;}
 
         public ClubsContext()
         {   

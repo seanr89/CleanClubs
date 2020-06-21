@@ -12,6 +12,8 @@ namespace Clubs.API.Managers.Profiles
             CreateMap<MemberDto, Invite>()
                 .ForMember(dest =>
                 dest.MemberId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<InviteDto, Invite>();
         }
     }
 }
