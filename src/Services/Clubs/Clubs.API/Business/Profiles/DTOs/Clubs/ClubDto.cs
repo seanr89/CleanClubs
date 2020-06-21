@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using Clubs.API.Managers.Profiles.Dto;
 
 namespace Clubs.API.Managers.Profiles
 {

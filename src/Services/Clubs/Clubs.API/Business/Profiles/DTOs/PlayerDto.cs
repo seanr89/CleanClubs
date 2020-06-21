@@ -1,7 +1,7 @@
 using System;
 
 //https://exceptionnotfound.net/entity-framework-and-wcf-mapping-entities-to-dtos-with-automapper/
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.API.Managers.Profiles.Dto
 {
     public class PlayerDto
     {

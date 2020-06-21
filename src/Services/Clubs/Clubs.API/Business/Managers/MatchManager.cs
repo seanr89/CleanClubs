@@ -36,7 +36,7 @@ namespace Clubs.API.Business.Managers
         /// <param name="matchView"></param>
         public async Task<Guid> CreateMatch(CreateMatchViewModel matchView)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
             var match = _Mapper.Map<Match>(matchView);
 
@@ -62,10 +62,10 @@ namespace Clubs.API.Business.Managers
             var matchId = await _Mediator.Send(new CreateMatchCommand() {Match = match});
 
             //StepX. Check if we need to email!
-            if(matchView.SendInvites)
-            {
-                //TODO: we need to send the invites then!
-            }
+            // if(matchView.SendInvites)
+            // {
+            //     //TODO: we need to send the invites then!
+            // }
             
             return matchId;
         }

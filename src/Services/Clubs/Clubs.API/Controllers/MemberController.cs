@@ -7,6 +7,7 @@ using Club.API.Controllers;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
+using Clubs.API.Managers.Profiles.Dto;
 using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

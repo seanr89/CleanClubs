@@ -1,4 +1,5 @@
 using AutoMapper;
+using Clubs.API.Managers.Profiles.Dto;
 using Clubs.API.ViewModels;
 using Clubs.Domain.Entities;
 

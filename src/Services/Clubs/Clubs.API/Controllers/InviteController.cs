@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.API.Club.Commands;
 using Clubs.API.Managers.Profiles;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Utilities;
@@ -21,6 +22,8 @@ namespace Clubs.API.Controllers
         }
 
         [HttpGet("{id}", Name="AcceptInvite")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AcceptInvite(Guid id)
         {
             _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");
@@ -34,6 +37,8 @@ namespace Clubs.API.Controllers
         }
 
         [HttpGet("{id}", Name="DeclineInvite")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeclineInvite(Guid id)
         {
             _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");

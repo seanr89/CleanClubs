@@ -112,7 +112,7 @@ namespace Clubs.API.Controllers
             if(record)
                 return Ok("Club Updated!");
 
-            return BadRequest("Save failed");
+            return BadRequest("Update failed");
         }
 
         #endregion

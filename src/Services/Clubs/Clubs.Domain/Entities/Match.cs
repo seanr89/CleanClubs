@@ -20,6 +20,7 @@ namespace Clubs.Domain.Entities
         public ICollection<Invite> Invites { get; set; }
         public bool InvitesSent { get; set; } = false;
         public GeneratorType Generator { get; set; } = GeneratorType.None;
+        public string Location {get; set;}
         
     }
 }

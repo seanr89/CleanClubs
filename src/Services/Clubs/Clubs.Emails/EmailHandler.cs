@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Clubs.Emails
 {
@@ -11,7 +13,7 @@ namespace Clubs.Emails
 
         public async Task<bool> SendEmail(string email, string messageContent, string subject)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

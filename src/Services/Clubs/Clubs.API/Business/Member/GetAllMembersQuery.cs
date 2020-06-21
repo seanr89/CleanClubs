@@ -10,6 +10,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
+using Clubs.API.Managers.Profiles.Dto;
 
 namespace Clubs.API.Club.Queries
 {

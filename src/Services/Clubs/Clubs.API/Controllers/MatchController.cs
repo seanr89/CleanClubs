@@ -9,6 +9,7 @@ using Clubs.API.Business.Managers;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
+using Clubs.API.Managers.Profiles.Dto;
 using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,6 @@ namespace Clubs.API.Controllers
                 return Ok(result);
 
             return StatusCode(204, "No Record Found");
-
         }
 
         [HttpGet("{id}", Name="GetMatchesByClubId")]
@@ -97,9 +97,21 @@ namespace Clubs.API.Controllers
 
         #region PUT/Update
 
+        [HttpPut]
+        public IActionResult Update(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Delete
+
+        [HttpDelete]
+        public IActionResult Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
 
         #endregion
     }
