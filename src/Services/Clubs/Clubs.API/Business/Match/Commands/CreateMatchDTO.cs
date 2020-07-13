@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
-namespace Clubs.API.ViewModels
+namespace Clubs.API.Business.Match.Commands
 {
-    public class CreateMatchViewModel
+    public class CreateMatchDTO
     {
         public Guid ClubId { get; set; }
         public DateTime Date { get; set; }

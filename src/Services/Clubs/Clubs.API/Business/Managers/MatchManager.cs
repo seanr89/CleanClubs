@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Clubs.API.Business.Match.Commands;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.ViewModels;
@@ -34,7 +35,7 @@ namespace Clubs.API.Business.Managers
         /// Support the creation of a Match Record and trigger the invitation for all club members
         /// </summary>
         /// <param name="matchView"></param>
-        public async Task<Guid> CreateMatch(CreateMatchViewModel matchView)
+        public async Task<Guid> CreateMatch(CreateMatchDTO matchView)
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 

@@ -1,6 +1,6 @@
 using AutoMapper;
+using Clubs.API.Business.Match.Commands;
 using Clubs.API.Managers.Profiles.Dto;
-using Clubs.API.ViewModels;
 using Clubs.Domain.Entities;
 
 namespace Clubs.API.Managers.Profiles
@@ -11,7 +11,7 @@ namespace Clubs.API.Managers.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Match, MatchDto>();
-            CreateMap<CreateMatchViewModel, Match>();
+            CreateMap<CreateMatchDTO, Match>();
 
             // Mapping when property names are different
             //CreateMap<User, UserViewModel>()

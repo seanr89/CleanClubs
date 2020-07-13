@@ -11,6 +11,7 @@ using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
 using Clubs.API.ViewModels;
+using Clubs.API.Business.Member.Commands;
 
 namespace Clubs.API.Club.Commands
 {
@@ -18,7 +19,7 @@ namespace Clubs.API.Club.Commands
 
     public class CreateMemberCommand : IRequest<Guid>
     {
-        public CreateMemberViewModel Member { get; set; }
+        public CreateMemberDTO Member { get; set; }
     }
 
     public class CreateMemberCommandHandler : IRequestHandler<CreateMemberCommand, Guid>

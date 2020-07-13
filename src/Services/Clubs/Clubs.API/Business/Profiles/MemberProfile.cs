@@ -1,4 +1,5 @@
 using AutoMapper;
+using Clubs.API.Business.Member.Commands;
 using Clubs.API.Managers.Profiles.Dto;
 using Clubs.API.ViewModels;
 using Clubs.Domain.Entities;
@@ -11,7 +12,7 @@ namespace Clubs.API.Managers.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Member, MemberDto>();
-            CreateMap<CreateMemberViewModel, Member>();
+            CreateMap<CreateMemberDTO, Member>();
         }
     }
 }

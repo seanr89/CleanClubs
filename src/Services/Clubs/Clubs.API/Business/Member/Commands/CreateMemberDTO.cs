@@ -1,9 +1,9 @@
 
 using System;
 
-namespace Clubs.API.ViewModels
+namespace Clubs.API.Business.Member.Commands
 {
-    public class CreateMemberViewModel
+    public class CreateMemberDTO
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
