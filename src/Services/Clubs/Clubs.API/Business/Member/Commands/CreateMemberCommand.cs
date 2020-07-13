@@ -10,7 +10,6 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
-using Clubs.API.ViewModels;
 using Clubs.API.Business.Member.Commands;
 
 namespace Clubs.API.Club.Commands

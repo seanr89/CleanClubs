@@ -2,9 +2,9 @@
 
 using Clubs.API.Managers.Profiles;
 
-namespace Clubs.API.ViewModels
+namespace Clubs.API.Business.Clubs.Commands
 {
-    public class CreateClubViewModel
+    public class CreateClubDTO
     {
         public string Name { get; set; }
 

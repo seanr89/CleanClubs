@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Business.Clubs.Commands;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;
-using Clubs.API.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -77,9 +77,9 @@ namespace Clubs.API.Controllers
         #region POST
 
         [HttpPost]
-        [ProducesResponseType(typeof(CreateClubViewModel), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateClubDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]CreateClubViewModel club)
+        public async Task<IActionResult> Post([FromBody]CreateClubDTO club)
         {
             _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)

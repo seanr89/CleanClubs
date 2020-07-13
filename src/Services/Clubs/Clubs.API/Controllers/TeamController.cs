@@ -3,6 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.API.Business.Matches.Queries;
 using Clubs.API.Club.Commands;
 using Clubs.API.Club.Queries;
 using Clubs.API.Managers.Profiles;

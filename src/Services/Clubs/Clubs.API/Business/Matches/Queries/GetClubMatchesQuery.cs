@@ -12,7 +12,7 @@ using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
 using Clubs.API.Managers.Profiles.Dto;
 
-namespace Clubs.API.Club.Queries
+namespace Clubs.API.Business.Matches.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 

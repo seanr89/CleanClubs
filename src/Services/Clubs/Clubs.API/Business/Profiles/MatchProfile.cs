@@ -1,5 +1,5 @@
 using AutoMapper;
-using Clubs.API.Business.Match.Commands;
+using Clubs.API.Business.Matches.Commands;
 using Clubs.API.Managers.Profiles.Dto;
 using Clubs.Domain.Entities;
 
