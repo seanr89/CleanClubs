@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace Clubs.API.Behaviours
+namespace Clubs.Application.Behaviours
 {
         public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
     {
