@@ -4,7 +4,6 @@ using System.Reflection;
 using AutoMapper;
 using MediatR;
 using System;
-using Clubs.API.Business.Managers;
 using Clubs.Generator;
 
 namespace Clubs.API.Extensions
@@ -20,8 +19,6 @@ namespace Clubs.API.Extensions
         public static void ConfigureDependencies(this IServiceCollection services)
         {
             Console.WriteLine("ConfigureDependencies");
-
-            services.AddTransient<MatchManager>();
             services.AddScoped<TeamGenerator>();
         }
     }

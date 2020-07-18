@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Utilities;
 
-namespace Clubs.API.Business.Managers
+namespace Clubs.Application
 {
     public class MatchManager
     {
