@@ -3,8 +3,8 @@
 using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
-using Clubs.API.Club.Commands;
-using Clubs.API.Managers.Profiles;
+using Clubs.Application.Profiles;
+using Clubs.Application.Requests.Invite.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
