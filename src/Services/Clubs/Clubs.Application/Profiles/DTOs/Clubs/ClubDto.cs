@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Clubs.Application.Profiles.Dto;
 
-namespace Clubs.Application.Profiles
+namespace Clubs.Application.Profiles.DTOs.Clubs
 {
     public class ClubDto
     {

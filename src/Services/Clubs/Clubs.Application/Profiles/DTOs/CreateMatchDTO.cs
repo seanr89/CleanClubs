@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
-namespace Clubs.API.Business.Matches.Commands
+namespace Clubs.Application.DTOs
 {
     public class CreateMatchDTO
     {

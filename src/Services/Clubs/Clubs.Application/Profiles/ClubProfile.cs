@@ -1,4 +1,5 @@
 using AutoMapper;
+using Clubs.Application.Profiles.DTOs.Clubs;
 
 namespace Clubs.Application.Profiles
 {

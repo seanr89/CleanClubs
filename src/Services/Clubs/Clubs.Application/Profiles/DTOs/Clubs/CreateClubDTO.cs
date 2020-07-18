@@ -1,8 +1,5 @@
 
-
-using Clubs.API.Managers.Profiles;
-
-namespace Clubs.API.Business.Clubs.Commands
+namespace Clubs.Application.Profiles.DTOs.Clubs
 {
     public class CreateClubDTO
     {

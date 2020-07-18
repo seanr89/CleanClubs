@@ -1,5 +1,6 @@
 using AutoMapper;
 using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTOs;
 using Clubs.Domain.Entities;
 
 namespace Clubs.Application.Profiles

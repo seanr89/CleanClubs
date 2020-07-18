@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Clubs.Application.Profiles
+namespace Clubs.Application.Profiles.DTOs.Clubs
 {
     public class ClubListDto
     {
