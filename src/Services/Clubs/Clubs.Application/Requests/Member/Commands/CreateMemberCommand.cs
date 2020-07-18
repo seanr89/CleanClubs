@@ -8,11 +8,10 @@ using MediatR;
 using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
-using Clubs.API.Business.Member.Commands;
+using Clubs.Application.Profiles.DTOs;
 
-namespace Clubs.API.Club.Commands
+namespace Clubs.Application.Requests.Member.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 

@@ -8,12 +8,11 @@ using MediatR;
 using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Clubs.API.Managers.Profiles;
 using Clubs.Infrastructure;
 using Microsoft.Extensions.Logging;
-using Clubs.API.Managers.Profiles.Dto;
+using Clubs.Application.Profiles.Dto;
 
-namespace Clubs.API.Club.Commands
+namespace Clubs.Application.Requests.Member.Commands
 {
     //https://dotnetcoretutorials.com/2019/04/30/the-mediator-pattern-part-3-mediatr-library/
     //https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b
