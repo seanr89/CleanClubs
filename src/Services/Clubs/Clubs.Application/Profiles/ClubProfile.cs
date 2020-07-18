@@ -1,7 +1,6 @@
 using AutoMapper;
-using Clubs.API.Business.Clubs.Commands;
 
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.Application.Profiles
 {
     public class ClubProfile : Profile
     {

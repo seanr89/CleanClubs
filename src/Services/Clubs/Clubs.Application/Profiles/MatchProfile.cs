@@ -1,9 +1,8 @@
 using AutoMapper;
-using Clubs.API.Business.Matches.Commands;
-using Clubs.API.Managers.Profiles.Dto;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.Application.Profiles
 {
     public class MatchProfile : Profile
     {

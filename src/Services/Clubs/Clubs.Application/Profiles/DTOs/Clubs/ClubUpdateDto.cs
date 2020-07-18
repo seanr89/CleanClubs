@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.Application.Profiles
 {
     public class ClubUpdateDto
     {

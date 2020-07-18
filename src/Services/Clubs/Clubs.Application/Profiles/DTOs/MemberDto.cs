@@ -1,9 +1,9 @@
 using System;
 
 //https://exceptionnotfound.net/entity-framework-and-wcf-mapping-entities-to-dtos-with-automapper/
-namespace Clubs.API.Managers.Profiles.Dto
+namespace Clubs.Application.Profiles.Dto
 {
-    public class PlayerDto
+    public class MemberDto
     {
         public Guid Id { get; set; }
 
@@ -13,6 +13,8 @@ namespace Clubs.API.Managers.Profiles.Dto
 
         public string Email { get; set; }
 
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;
+
+        public double Rating { get; set; }
     }
 }

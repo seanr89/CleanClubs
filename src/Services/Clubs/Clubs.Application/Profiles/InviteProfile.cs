@@ -1,8 +1,8 @@
 using AutoMapper;
-using Clubs.API.Managers.Profiles.Dto;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.Application.Profiles
 {
     public class InviteProfile : Profile
     {

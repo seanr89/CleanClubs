@@ -2,9 +2,9 @@
 
 using System;
 using System.Collections.Generic;
-using Clubs.API.Managers.Profiles.Dto;
+using Clubs.Application.Profiles.Dto;
 
-namespace Clubs.API.Managers.Profiles
+namespace Clubs.Application.Profiles
 {
     public class ClubDto
     {
