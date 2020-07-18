@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Clubs.Domain.Entities;
+using System.Threading;
+using Clubs.Domain.Common;
+using System;
+using System.Threading.Tasks;
 
 namespace Clubs.Infrastructure
 {
@@ -12,18 +16,14 @@ namespace Clubs.Infrastructure
         public DbSet<Player> Players { get; set; }
         public DbSet<Invite> Invites { get; set; }
 
-        private readonly IDateTime _dateTime;
-
         public ClubsContext()
         {
             this.ChangeTracker.LazyLoadingEnabled = false;
         }
 
 
-        public ClubsContext(DbContextOptions<ClubsContext> options,
-        IDateTime dateTime) : base(options)
+        public ClubsContext(DbContextOptions<ClubsContext> options) : base(options)
         {
-            _dateTime = dateTime;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -56,12 +56,10 @@ namespace Clubs.Infrastructure
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = _currentUserService.UserId;
-                        entry.Entity.Created = _dateTime.Now;
+                        //entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
-                        entry.Entity.LastModified = _dateTime.Now;
+                        //entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }
             }

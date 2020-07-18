@@ -5,7 +5,6 @@ using AutoMapper;
 using MediatR;
 using System;
 using Clubs.API.Business.Managers;
-using Clubs.API.Behaviours;
 using Clubs.Generator;
 
 namespace Clubs.API.Extensions
@@ -21,11 +20,6 @@ namespace Clubs.API.Extensions
         public static void ConfigureDependencies(this IServiceCollection services)
         {
             Console.WriteLine("ConfigureDependencies");
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
-
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
 
             services.AddTransient<MatchManager>();
             services.AddScoped<TeamGenerator>();

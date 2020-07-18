@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Clubs.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Clubs.Application;
 
 namespace Clubs.API
 {
@@ -32,6 +33,9 @@ namespace Clubs.API
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
             services.ConfigureDependencies();
+
+            services.AddApplication();
+
             services.ConfigureDbContext(Configuration);
             services.AddControllers().AddNewtonsoftJson(options =>
             {
