@@ -28,7 +28,6 @@
     <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
     <ProjectReference Include="../Clubs.Infrastructure/Clubs.Infrastructure.csproj"/>
     <ProjectReference Include="../Clubs.Emails/Clubs.Emails.csproj"/>
-    <ProjectReference Include="../Clubs.Generator/Clubs.Generator.csproj"/>
     <ProjectReference Include="../../Utilities/Utilities.csproj"/>
   </ItemGroup>
 
