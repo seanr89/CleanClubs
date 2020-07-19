@@ -39,8 +39,12 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Oran);
                 var Darren = new Member() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 68};
                 Members.Add(Darren);
-                var Mark = new Member() {FirstName = "Mark", LastName = "Latten", Email = "mar@randox.com", Club = RandoxIT, Rating = 68};
+                var Mark = new Member() {FirstName = "Mark", LastName = "Latten", Email = "mark@randox.com", Club = RandoxIT, Rating = 68};
                 Members.Add(Mark);
+                var Ivan = new Member() {FirstName = "Ivan", LastName = "Mc", Email = "ivan@randox.com", Club = RandoxIT, Rating = 68};
+                Members.Add(Ivan);
+                var Kelso = new Member() {FirstName = "Steven", LastName = "Kelso", Email = "kelso@randox.com", Club = RandoxIT, Rating = 71};
+                Members.Add(Kelso);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
 
@@ -56,6 +60,18 @@ namespace Clubs.Infrastructure.Persistence
                 var Club3 = new Club() {Name = "Club 3"};
                 CreateMemberList(Club3);
                 context.Clubs.Add(Club3);
+
+                var Club4 = new Club() {Name = "Club 4"};
+                CreateMemberList(Club4);
+                context.Clubs.Add(Club4);
+
+                var Club5 = new Club() {Name = "Club 5"};
+                CreateMemberList(Club5);
+                context.Clubs.Add(Club5);
+
+                var Club6 = new Club() {Name = "Club 6"};
+                CreateMemberList(Club6);
+                context.Clubs.Add(Club6);
 
                 await context.SaveChangesAsync
                 ();
@@ -92,7 +108,11 @@ namespace Clubs.Infrastructure.Persistence
 
             for (int i = 0; i < randomNumber; ++i)
             {
-                club.Members.Add(new Member{FirstName = gen.getRandomFirstName(), LastName = gen.getRandomLastName(), Rating = gen.GenerateRandomNumber(), Club = club, Email = "Unknown"});
+                club.Members.Add(new Member{FirstName = gen.getRandomFirstName(), 
+                LastName = gen.getRandomLastName(), 
+                Rating = gen.GenerateRandomNumber(), 
+                Club = club, 
+                Email = "Unknown"});
             }
         }
 
