@@ -37,14 +37,16 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Mike);
                 var Oran = new Member() {FirstName = "Oran", LastName = "McMenamin", Email = "Oran@randox.com", Club = RandoxIT, Rating = 70};
                 Members.Add(Oran);
-                var Darren = new Member() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 68};
+                var Darren = new Member() {FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 63};
                 Members.Add(Darren);
-                var Mark = new Member() {FirstName = "Mark", LastName = "Latten", Email = "mark@randox.com", Club = RandoxIT, Rating = 68};
+                var Mark = new Member() {FirstName = "Mark", LastName = "Latten", Email = "mark@randox.com", Club = RandoxIT, Rating = 64};
                 Members.Add(Mark);
                 var Ivan = new Member() {FirstName = "Ivan", LastName = "Mc", Email = "ivan@randox.com", Club = RandoxIT, Rating = 68};
                 Members.Add(Ivan);
                 var Kelso = new Member() {FirstName = "Steven", LastName = "Kelso", Email = "kelso@randox.com", Club = RandoxIT, Rating = 71};
                 Members.Add(Kelso);
+                var Frazer = new Member() {FirstName = "Andrew", LastName = "Frazer", Email = "Frazer@randox.com", Club = RandoxIT, Rating = 72};
+                Members.Add(Frazer);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
 
