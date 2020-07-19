@@ -35,6 +35,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetMatchesQuery());
             if (result.Any())
                 return Ok(result);
@@ -47,7 +48,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetMatchQuery() {MatchId = id});
 
             if (result != null)
@@ -61,7 +62,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             var result = await Mediator.Send(new GetClubMatchesQuery() {ClubId = id});
 
             if (result.Any())
@@ -77,7 +78,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody]CreateMatchDTO match)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

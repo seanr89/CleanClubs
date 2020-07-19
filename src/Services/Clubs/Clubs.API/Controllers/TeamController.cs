@@ -30,7 +30,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateTeamsForMatch(Guid id)
         {
-            _Logger.LogInformation($"Team: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Teams: {HelperMethods.GetCallerMemberName()}");
 
             var match = await Mediator.Send(new GetMatchQuery() {MatchId = id});
 

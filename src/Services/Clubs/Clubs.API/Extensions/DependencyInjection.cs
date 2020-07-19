@@ -12,7 +12,7 @@ namespace Clubs.API.Extensions
     public static class DependencyInjection
     {
         /// <summary>
-        /// Handle the management for API Dependency Injection
+        /// TODO: remove this - Handle the management for API Dependency Injection
         /// </summary>
         /// <param name="services">startup service collection</param>
         /// <returns>services returned with injected dependencies</returns>

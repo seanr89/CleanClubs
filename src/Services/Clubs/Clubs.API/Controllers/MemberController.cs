@@ -30,6 +30,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IEnumerable<MemberDto>> Get()
         {
+            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
             return await Mediator.Send(new GetAllMembersQuery());
         }
 
@@ -43,7 +44,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMemberById(Guid id)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
 
             var result = await Mediator.Send(new GetMemberQuery(){ Id = id});
 
@@ -63,7 +64,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMembersByClubId(Guid id)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
 
             var result = await Mediator.Send(new GetClubMembersQuery() {ClubId = id});
 
@@ -82,7 +83,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Post([FromBody]CreateMemberDTO member)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
              if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -103,7 +104,7 @@ namespace Clubs.API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateMember(Guid id, [FromBody]MemberDto update)
         {
-            _Logger.LogInformation($"method: {HelperMethods.GetCallerMemberName()}");
+            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

@@ -32,7 +32,7 @@ namespace Clubs.API
         {
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
-            services.ConfigureDependencies();
+            //services.ConfigureDependencies();
 
             services.AddApplication();
 
