@@ -95,21 +95,21 @@ namespace Clubs.API.Controllers
 
         #region PUT/Update
 
-        [HttpPut]
-        public IActionResult Update(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        // [HttpPut]
+        // public IActionResult Update(Guid id)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         #endregion
 
         #region Delete
 
-        [HttpDelete]
-        public IActionResult Delete(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        // [HttpDelete]
+        // public IActionResult Delete(Guid id)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         #endregion
     }

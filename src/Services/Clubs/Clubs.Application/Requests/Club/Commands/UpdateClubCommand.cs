@@ -34,10 +34,10 @@ namespace Clubs.Application.Requests.Club.Commands
         public async Task<bool> Handle(UpdateClubCommand request, CancellationToken cancellationToken)
         {
             var existingBlog = _Context.Clubs.Find(request.Club.Id);
-            if(existingBlog != null)
-            {
+            if(existingBlog != null){
                 _Context.Entry(existingBlog).CurrentValues.SetValues(request.Club);
             }
+            
             try
             {
                 return (await _Context.SaveChangesAsync()) > 0;

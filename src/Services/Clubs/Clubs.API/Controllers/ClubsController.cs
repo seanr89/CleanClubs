@@ -31,7 +31,7 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// Query all clubs
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Collection of ClubDTO records</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ClubListDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -65,11 +65,11 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Club Found");
         }
 
-        [HttpGet("{id}", Name="GetNextMatchForClub")]
-        public async Task<IActionResult> GetNextMatchForClub(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        // [HttpGet("{id}", Name="GetNextMatchForClub")]
+        // public async Task<IActionResult> GetNextMatchForClub(Guid id)
+        // {
+        //     throw new NotImplementedException();
+        // }
 
         #endregion
 
@@ -82,9 +82,8 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
+
             var record = await Mediator.Send(new CreateClubCommand() {Club = club});
             if(record != null)
                 return CreatedAtRoute("GetClubById", new{ id = record}, club);
@@ -109,13 +108,11 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             var record = await Mediator.Send(new UpdateClubCommand() {Club = club});
             if(record)
-                return Ok("Club Updated!");
+                return Ok("Club Updated");
 
             return BadRequest("Update failed");
         }

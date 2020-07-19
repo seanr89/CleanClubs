@@ -40,8 +40,6 @@ namespace Clubs.API.Controllers
             }
 
             return Ok(match);
-
-            return BadRequest();
         }
     }
 }

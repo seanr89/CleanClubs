@@ -116,7 +116,6 @@ namespace Clubs.API.Controllers
             return BadRequest("Update failed");
         }
 
-
         #endregion
     }
 }

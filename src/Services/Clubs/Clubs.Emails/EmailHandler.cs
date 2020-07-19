@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Logging;
+using System.Net;
+using Utilities;
 
 namespace Clubs.Emails
 {
@@ -17,7 +19,7 @@ namespace Clubs.Emails
 
         public async Task<bool> SendEmail(string email, string messageContent, string subject)
         {
-             {
+            try{
                 //Send email with report to users.
                 var client = new SendGridClient("apiKey");
                 var from = new EmailAddress("srafferty89@gmail.com", "Sean");
@@ -30,7 +32,7 @@ namespace Clubs.Emails
                 var response = await client.SendEmailAsync(msg);
 
                 if(response.StatusCode == HttpStatusCode.BadRequest)
-                    _Logger.LogError($"Email Manager error triggered in the method: {HelperMethods.GetCallerMemberName()} while sending an email to {testData.Email} with exception: {response}");
+                    _Logger.LogError($"Email Manager error in: {HelperMethods.GetCallerMemberName()} to email {email} with exception: {response}");
 
                 return (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted); ;
             }
