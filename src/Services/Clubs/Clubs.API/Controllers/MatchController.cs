@@ -43,13 +43,13 @@ namespace Clubs.API.Controllers
             return StatusCode(204);
         }
 
-        [HttpGet("{id}", Name="GetMatchById")]
+        [HttpGet("{id}", Name = "GetMatchById")]
         [ProducesResponseType(typeof(MatchDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
-            var result = await Mediator.Send(new GetMatchQuery() {MatchId = id});
+            var result = await Mediator.Send(new GetMatchQuery() { MatchId = id });
 
             if (result != null)
                 return Ok(result);
@@ -57,13 +57,13 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Record Found");
         }
 
-        [HttpGet("{id}", Name="GetMatchesByClubId")]
+        [HttpGet("{id}", Name = "GetMatchesByClubId")]
         [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
-            var result = await Mediator.Send(new GetClubMatchesQuery() {ClubId = id});
+            var result = await Mediator.Send(new GetClubMatchesQuery() { ClubId = id });
 
             if (result.Any())
                 return Ok(result);
@@ -76,7 +76,7 @@ namespace Clubs.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]CreateMatchDTO match)
+        public async Task<IActionResult> CreateMatch([FromBody] CreateMatchDTO match)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
@@ -84,9 +84,9 @@ namespace Clubs.API.Controllers
                 return BadRequest(ModelState);
             }
             var record = await _MatchManager.CreateMatch(match);
-            
-            if(record != null)
-                return CreatedAtRoute("GetMatchById", new{ id = record}, match);
+
+            if (record != null)
+                return CreatedAtRoute("GetMatchById", new { id = record }, match);
 
             return BadRequest("Save failed");
         }
