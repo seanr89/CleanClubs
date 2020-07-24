@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Clubs.API.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,12 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Clubs.Infrastructure;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
-using Clubs.Application;
 
-namespace Clubs.API
+namespace Emails.Api
 {
     public class Startup
     {
@@ -24,27 +21,34 @@ namespace Clubs.API
             Configuration = configuration;
         }
 
-        private string MyAllowSpecificOrigins = "CorsPolicy";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
-            services.ConfigureCors(Configuration);
-            //services.ConfigureDependencies();
+            services.AddControllers();
 
-            services.AddApplication();
-
-            services.ConfigureDbContext(Configuration);
-            services.AddControllers().AddNewtonsoftJson(options =>
+            services.AddSwaggerGen(c =>
             {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Emails Api",
+                    Description = "A simple API to handle emails",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Sean Rafferty",
+                        Email = "",
+                        Url = new Uri("")
+                    }
+                });
+
+                // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                // c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddHealthChecks().AddDbContextCheck<ClubsContext>();
-
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
+            services.AddHealthChecks();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,26 +57,18 @@ namespace Clubs.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                 app.UseDatabaseErrorPage();
             }
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseCors(MyAllowSpecificOrigins);
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-            // specifying the Swagger JSON endpoint.
-            //To serve the Swagger UI at the app's root (http://localhost:<port>/), set the RoutePrefix property to an empty string:
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clubs API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emails API V1");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
