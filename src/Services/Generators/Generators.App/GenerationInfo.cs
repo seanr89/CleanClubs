@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
-namespace Clubs.Application.Generators
+namespace Generators
 {
     public struct GenerationInfo
     {
