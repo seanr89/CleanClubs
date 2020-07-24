@@ -17,7 +17,6 @@ using Utilities;
 namespace Clubs.API.Controllers
 {
     [ApiController]
-    //[Route("api/[controller]/[action]")]
     public class ClubsController : ApiController
     {
         private readonly ILogger<ClubsController> _Logger;

@@ -2,6 +2,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp5.0</TargetFramework>
   </PropertyGroup>
+    <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0"/>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../Clubs/Clubs.Domain/Clubs.Domain.csproj"/>
   </ItemGroup>
@@ -9,9 +14,5 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1"/>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0"/>
   </ItemGroup>
 </Project>
