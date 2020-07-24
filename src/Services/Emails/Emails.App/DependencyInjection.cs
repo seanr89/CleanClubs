@@ -10,7 +10,7 @@ namespace Emails.App
     {
         public static IServiceCollection AddEmailApplication(this IServiceCollection services)
         {
-
+            return services;
         }
     }
 }
