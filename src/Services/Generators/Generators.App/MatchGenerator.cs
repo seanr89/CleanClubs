@@ -6,7 +6,11 @@ namespace Generators.App
     {
         public MatchGenerator()
         {
-            
+        }
+
+        public void Generate()
+        {
+
         }
     }
 }

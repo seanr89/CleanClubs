@@ -3,7 +3,6 @@
 using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
-using Clubs.Application.Generators;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
 using Microsoft.AspNetCore.Http;
@@ -17,12 +16,12 @@ namespace Clubs.API.Controllers
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;
-        private readonly TeamGenerator _TeamGenerator;
+        //private readonly TeamGenerator _TeamGenerator;
 
-        public TeamController(ILogger<TeamController> logger, TeamGenerator teamGenerator)
+        public TeamController(ILogger<TeamController> logger)
         {
             _Logger = logger;
-            _TeamGenerator = teamGenerator;
+            //_TeamGenerator = teamGenerator;
         }
 
         [HttpGet("{id}", Name = "CreateTeamsForMatch")]
@@ -34,10 +33,10 @@ namespace Clubs.API.Controllers
 
             var match = await Mediator.Send(new GetMatchQuery() { MatchId = id });
 
-            if (match != null)
-            {
-                _TeamGenerator.Generate(new GenerationInfo() { Invites = match.Invites, GeneratorOption = GeneratorType.Random });
-            }
+            // if (match != null)
+            // {
+            //     _TeamGenerator.Generate(new GenerationInfo() { Invites = match.Invites, GeneratorOption = GeneratorType.Random });
+            // }
 
             return Ok(match);
         }

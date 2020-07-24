@@ -4,7 +4,6 @@ using System.Reflection;
 using AutoMapper;
 using MediatR;
 using System;
-using Clubs.Generator;
 
 namespace Clubs.API.Extensions
 {
@@ -19,7 +18,6 @@ namespace Clubs.API.Extensions
         public static void ConfigureDependencies(this IServiceCollection services)
         {
             Console.WriteLine("ConfigureDependencies");
-            services.AddScoped<TeamGenerator>();
         }
     }
 }

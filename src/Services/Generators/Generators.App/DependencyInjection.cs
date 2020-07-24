@@ -4,13 +4,12 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 
-namespace Emails.App
+namespace Generators.App
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddEmailApplication(this IServiceCollection services)
+        public static IServiceCollection AddGeneratorApplication(this IServiceCollection services)
         {
-
         }
     }
 }

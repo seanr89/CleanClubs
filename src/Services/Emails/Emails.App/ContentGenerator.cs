@@ -6,7 +6,12 @@ namespace Emails.App
     {
         public ContentGenerator()
         {
-            
+
+        }
+
+        public void generateInviteEmailContent()
+        {
+
         }
     }
 }
