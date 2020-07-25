@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Clubs.Application.Business;
 using Clubs.Application.DTOs;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
@@ -21,15 +22,18 @@ namespace Clubs.Application
         private readonly ILogger<MatchManager> _Logger;
         protected IMediator _Mediator;
         private readonly IMapper _Mapper;
+        private readonly SimpleEmailHandler _EmailHandler;
 
-        public MatchManager(ILogger<MatchManager> logger, IMediator mediator, IMapper mapper)
+        public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
+            IMapper mapper, SimpleEmailHandler simpleEmailHandler)
         {
             _Logger = logger;
             _Mediator = mediator;
             _Mapper = mapper;
+            _EmailHandler = simpleEmailHandler;
         }
 
-        
+
         /// <summary>
         /// Support the creation of a Match Record and trigger the invitation for all club members
         /// </summary>
@@ -41,16 +45,16 @@ namespace Clubs.Application
             var match = _Mapper.Map<Match>(matchView);
 
             //Step1. Check if invites are needed to be added/created
-            if(matchView.InviteActiveMembers)
+            if (matchView.InviteActiveMembers)
             {
-                var members = await _Mediator.Send(new GetClubMembersQuery() {ClubId = (Guid)match.ClubId}); 
+                var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
 
                 //Get only active members!
                 var activeMembers = members.Where(m => m.Active == true).ToList();
 
                 //Convert members to invites!
                 List<Invite> invites = new List<Invite>();
-                foreach(var a in activeMembers)
+                foreach (var a in activeMembers)
                 {
                     invites.Add(_Mapper.Map<Invite>(a));
                 }
@@ -59,14 +63,15 @@ namespace Clubs.Application
             }
 
             //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() {Match = match});
+            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
 
             //StepX. Check if we need to email!
-            // if(matchView.SendInvites)
-            // {
-            //     //TODO: we need to send the invites then!
-            // }
-            
+            if (matchView.SendInvites)
+            {
+                //TODO: we need to send the invites then!
+                await _EmailHandler.generateAndSendInviteEmails(match.Invites);
+            }
+
             return matchId;
         }
     }
