@@ -14,6 +14,7 @@ using Clubs.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Clubs.Application;
+using Emails.App;
 
 namespace Clubs.API
 {
@@ -36,7 +37,7 @@ namespace Clubs.API
 
             services.AddApplication();
 
-            services.Add
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.ConfigureDbContext(Configuration);
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -55,7 +56,7 @@ namespace Clubs.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                 app.UseDatabaseErrorPage();
+                app.UseDatabaseErrorPage();
             }
 
             app.UseHttpsRedirection();
