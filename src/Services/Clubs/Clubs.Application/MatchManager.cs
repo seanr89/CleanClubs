@@ -69,7 +69,7 @@ namespace Clubs.Application
             if (matchView.SendInvites)
             {
                 //TODO: we need to send the invites then!
-                await _EmailHandler.generateAndSendInviteEmails(match.Invites);
+                await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
             }
 
             return matchId;

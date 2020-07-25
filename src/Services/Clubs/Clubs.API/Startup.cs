@@ -36,6 +36,8 @@ namespace Clubs.API
 
             services.AddApplication();
 
+            services.Add
+
             services.ConfigureDbContext(Configuration);
             services.AddControllers().AddNewtonsoftJson(options =>
             {
