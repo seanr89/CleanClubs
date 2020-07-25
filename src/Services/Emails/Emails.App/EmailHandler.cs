@@ -1,8 +1,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 using Microsoft.Extensions.Logging;
 using System.Net;
 using Utilities;
@@ -27,9 +25,9 @@ namespace Emails.App
             //     var to = new EmailAddress(email);
             //     var subject = "Match Invitation";
             //     var plainTextContent = $@"Message:";
-                
+
             //     var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, messageContent);
-                
+
             //     var response = await client.SendEmailAsync(msg);
 
             //     if(response.StatusCode == HttpStatusCode.BadRequest)

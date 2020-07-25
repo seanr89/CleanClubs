@@ -22,11 +22,17 @@ namespace Emails.Api
         }
 
         public IConfiguration Configuration { get; }
+        private string MyAllowSpecificOrigins = "CorsPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+            MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
+            services.ConfigureCors(Configuration);
 
             services.AddSwaggerGen(c =>
             {
@@ -60,6 +66,8 @@ namespace Emails.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
