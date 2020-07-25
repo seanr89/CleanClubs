@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using AutoMapper;
 using MediatR;
+using Clubs.Application.Business;
 
 namespace Clubs.Application
 {
@@ -17,6 +18,8 @@ namespace Clubs.Application
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
+
+            services.AddTransient<SimpleEmailHandler>();
 
             services.AddTransient<MatchManager>();
 
