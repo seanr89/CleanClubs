@@ -17,7 +17,7 @@ namespace Clubs.Infrastructure.Persistence
             
             if(!context.Clubs.Any())
             {
-                var RandoxIT = new Club() {Name = "Randox IT"};
+                var RandoxIT = new Club() {Name = "Rdox IT"};
                 var Members = new List<Member>();
                 var Sean = new Member() {FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50};
                 Members.Add(Sean);
@@ -47,11 +47,15 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Kelso);
                 var Frazer = new Member() {FirstName = "Andrew", LastName = "Frazer", Email = "Frazer@randox.com", Club = RandoxIT, Rating = 72};
                 Members.Add(Frazer);
+                var Cormac = new Member() {FirstName = "Cormac", LastName = "Byrne", Email = "Cormac@randox.com", Club = RandoxIT, Rating = 66};
+                Members.Add(Frazer);
+                var JJ = new Member() {FirstName = "JJ", LastName = "Eng", Email = "JJ@randox.com", Club = RandoxIT, Rating = 61};
+                Members.Add(Frazer);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
 
 
-                var RandoxEng = new Club() {Name = "Randox Engineering"};
+                var RandoxEng = new Club() {Name = "Rdox Engineering"};
                 CreateMemberList(RandoxEng);
                 context.Clubs.Add(RandoxEng);
 
@@ -74,6 +78,14 @@ namespace Clubs.Infrastructure.Persistence
                 var Club6 = new Club() {Name = "Club 6"};
                 CreateMemberList(Club6);
                 context.Clubs.Add(Club6);
+                
+                var Club7 = new Club() {Name = "Club 7"};
+                CreateMemberList(Club7);
+                context.Clubs.Add(Club7);
+
+                var Club8 = new Club() {Name = "Club 8"};
+                CreateMemberList(Club8);
+                context.Clubs.Add(Club8);
 
                 await context.SaveChangesAsync
                 ();
