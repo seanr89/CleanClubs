@@ -1,6 +1,10 @@
-name: Manual Deploy
+name: Azure API Deploy
 
-# on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -8,21 +12,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.0.100
+        dotnet-version: 5.0.100-preview.7
     
     # dotnet build and publish
     - name: Build with dotnet
+      working-directory: ./src/Services/Clubs/Clubs.API
       run: dotnet build --configuration Release
     - name: dotnet publish
+      working-directory: ./src/Services/Clubs/Clubs.API
       run: |
         dotnet publish -c Release -o dotnetcorewebapp 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v1
+      uses: azure/webapps-deploy@v2
       with: 
-        app-name: dotnetcorewebapp19 # Replace with your app name
-        publish-profile: $publish_profile
-        package: './dotnetcorewebapp' 
+        app-name: DevClubsAPI # Replace with your app name
+        publish-profile: ${{secrets.publish_profile}}
+        package: './src/Services/Clubs/Clubs.API/dotnetcorewebapp' 
