@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -10,16 +11,25 @@ namespace Clubs.API.Controllers
     {
         private readonly IConfiguration _Configuration;
         private readonly ILogger<HomeController> _Logger;
-        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
+        private readonly IHostingEnvironment _HostingEnv;
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration,
+            IHostingEnvironment hostingEnvironment)
         {
             _Logger = logger;
             _Configuration = configuration;
+            _HostingEnv = hostingEnvironment;
         }
 
         [HttpGet]
         public IActionResult GetDBCon()
         {
             return Ok(_Configuration.GetValue<string>("ConnectionSettings:Default"));
+        }
+
+        [HttpGet]
+        public IActionResult GetEnv()
+        {
+            return Ok(_HostingEnv.EnvironmentName);
         }
     }
 }
