@@ -27,9 +27,8 @@ jobs:
       run: |
         dotnet publish -c Release -o dotnetcorewebapp 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
-      working-directory: ./src/Services/Clubs/Clubs.API
-      uses: azure/webapps-deploy@v1
+      uses: azure/webapps-deploy@v2
       with: 
         app-name: DevClubsAPI # Replace with your app name
         publish-profile: $publish_profile
-        package: './dotnetcorewebapp' 
+        package: './src/Services/Clubs/Clubs.API/dotnetcorewebapp' 
