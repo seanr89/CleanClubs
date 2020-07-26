@@ -16,15 +16,18 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.0.100
+        dotnet-version: 5.0.100-preview.7
     
     # dotnet build and publish
     - name: Build with dotnet
+      working-directory: ./src/Services/Clubs/Clubs.API
       run: dotnet build --configuration Release
     - name: dotnet publish
+      working-directory: ./src/Services/Clubs/Clubs.API
       run: |
         dotnet publish -c Release -o dotnetcorewebapp 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
+      working-directory: ./src/Services/Clubs/Clubs.API
       uses: azure/webapps-deploy@v1
       with: 
         app-name: dotnetcorewebapp19 # Replace with your app name
