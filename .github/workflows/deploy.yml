@@ -20,11 +20,11 @@ jobs:
       # dotnet build and publish
       - name: Build with dotnet
         working-directory: ./src/Services/Clubs/Clubs.API
-        run: dotnet build --configuration Release
+        run: dotnet build
       - name: dotnet publish
         working-directory: ./src/Services/Clubs/Clubs.API
         run: |
-          dotnet publish -c Release -o dotnetcorewebapp
+          dotnet publish -o dotnetcorewebapp
       - name: "Run Azure webapp deploy action using publish profile credentials"
         uses: azure/webapps-deploy@v2
         with:
