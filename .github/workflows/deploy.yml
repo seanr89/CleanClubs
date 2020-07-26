@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -27,9 +27,8 @@ jobs:
       run: |
         dotnet publish -c Release -o dotnetcorewebapp 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
-      working-directory: ./src/Services/Clubs/Clubs.API
       uses: azure/webapps-deploy@v1
       with: 
-        app-name: dotnetcorewebapp19 # Replace with your app name
+        app-name: DevClubsAPI # Replace with your app name
         publish-profile: $publish_profile
         package: './dotnetcorewebapp' 
