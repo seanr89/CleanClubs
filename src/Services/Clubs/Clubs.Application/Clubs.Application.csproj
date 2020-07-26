@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1.5</TargetFramework>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
 
@@ -9,7 +9,7 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-preview.4.20220.10"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5"/>
     <PackageReference Include="SendGrid" Version="9.19.0"/>
   </ItemGroup>
 
