@@ -14,7 +14,6 @@ namespace Clubs.Infrastructure.Persistence
 
         public static async Task SeedAsync(ClubsContext context)
         {
-
             if (!context.Clubs.Any())
             {
                 var RandoxIT = new Club() { Name = "Rdox IT" };
@@ -87,8 +86,7 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(Club8);
                 context.Clubs.Add(Club8);
 
-                await context.SaveChangesAsync
-                ();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -98,17 +96,17 @@ namespace Clubs.Infrastructure.Persistence
         /// <param name="context"></param>
         /// <param name="env"></param>
         /// <returns></returns>
-        public async static Task SeedAsyncFromFile(ClubsContext context, IWebHostEnvironment env)
-        {
-            try
-            {
+        // public async static Task SeedAsyncFromFile(ClubsContext context, IWebHostEnvironment env)
+        // {
+        //     try
+        //     {
 
-            }
-            catch (Exception ex)
-            {
+        //     }
+        //     catch (Exception ex)
+        //     {
 
-            }
-        }
+        //     }
+        // }
 
         #region Members
 
