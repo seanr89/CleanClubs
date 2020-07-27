@@ -57,8 +57,8 @@ namespace Clubs.Application.Business
 
         private async Task<bool> SendEmail(Invite invite, string message)
         {
-            throw new NotImplementedException();
-            try{
+            try
+            {
                 var client = new SendGridClient(_EmailSettings.AccessKey);
                 var from = new EmailAddress(_EmailSettings.SenderEmail, "Clubs App");
                 var to = new EmailAddress(invite.Email);

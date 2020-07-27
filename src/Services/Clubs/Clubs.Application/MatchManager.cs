@@ -68,7 +68,7 @@ namespace Clubs.Application
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
             {
-                //TODO: we need to send the invites then!
+                //Now we need to send the invites then!
                 await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
             }
 
