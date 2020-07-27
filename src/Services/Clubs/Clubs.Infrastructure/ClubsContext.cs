@@ -35,9 +35,9 @@ namespace Clubs.Infrastructure
             modelBuilder.Entity<Club>()
                 .HasMany(c => c.Members)
                 .WithOne(e => e.Club);
-            modelBuilder.Entity<Club>()
-                .HasMany(c => c.Matches)
-                .WithOne(e => e.Club);
+            // modelBuilder.Entity<Club>()
+            //     .HasMany(c => c.Matches)
+            //     .WithOne(e => e.Club);
             modelBuilder.Entity<Match>()
                 .HasMany(c => c.Teams)
                 .WithOne(e => e.Match);

@@ -32,10 +32,16 @@ namespace Clubs.Application.Requests.Matches.Commands
 
         public async Task<Guid> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
         {
-            _Context.Matches.Add(request.Match);
-            await _Context.SaveChangesAsync();
-
-            return request.Match.Id;
+            try
+            {
+                _Context.Matches.Add(request.Match);
+                await _Context.SaveChangesAsync();
+                return request.Match.Id;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }
