@@ -6,24 +6,24 @@ namespace Clubs.Infrastructure.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateCheckConstraint(
-                name: "CK_Matches_Generator_Enum_Constraint",
-                table: "Matches",
-                sql: "[Generator] IN(0, 1, 2, 3)");
-
             migrationBuilder.AddColumn<int>(
                 name: "Generator",
                 table: "Matches",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);
+
+            // migrationBuilder.CreateCheckConstraint(
+            //     name: "CK_Matches_Generator_Enum_Constraint",
+            //     table: "Matches",
+            //     sql: "[Generator] IN(0, 1, 2, 3)");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropCheckConstraint(
-                name: "CK_Matches_Generator_Enum_Constraint",
-                table: "Matches");
+            // migrationBuilder.DropCheckConstraint(
+            //     name: "CK_Matches_Generator_Enum_Constraint",
+            //     table: "Matches");
 
             migrationBuilder.DropColumn(
                 name: "Generator",

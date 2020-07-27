@@ -127,7 +127,7 @@ namespace Clubs.Infrastructure.Migrations
 
                     b.ToTable("Matches");
 
-                    b.HasCheckConstraint("CK_Matches_Generator_Enum_Constraint", "[Generator] IN(0, 1, 2, 3)");
+                    //b.HasCheckConstraint("CK_Matches_Generator_Enum_Constraint", "[Generator] IN(0, 1, 2, 3)");
 
                     b.HasCheckConstraint("CK_Matches_Status_Enum_Constraint", "[Status] IN(0, 1, 2, 3, 4)");
                 });
