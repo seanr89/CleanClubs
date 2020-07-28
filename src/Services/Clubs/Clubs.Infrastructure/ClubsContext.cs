@@ -35,9 +35,9 @@ namespace Clubs.Infrastructure
             modelBuilder.Entity<Club>()
                 .HasMany(c => c.Members)
                 .WithOne(e => e.Club);
-            // modelBuilder.Entity<Club>()
-            //     .HasMany(c => c.Matches)
-            //     .WithOne(e => e.Club);
+            modelBuilder.Entity<Club>()
+                .HasMany(c => c.Matches)
+                .WithOne(e => e.Club);
             modelBuilder.Entity<Match>()
                 .HasMany(c => c.Teams)
                 .WithOne(e => e.Match);
@@ -49,22 +49,22 @@ namespace Clubs.Infrastructure
                 .WithOne(e => e.Team);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-            {
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        //entry.Entity.Created = _dateTime.Now;
-                        break;
-                    case EntityState.Modified:
-                        //entry.Entity.LastModified = _dateTime.Now;
-                        break;
-                }
-            }
+        // public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        // {
+        //     foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+        //     {
+        //         switch (entry.State)
+        //         {
+        //             case EntityState.Added:
+        //                 //entry.Entity.Created = _dateTime.Now;
+        //                 break;
+        //             case EntityState.Modified:
+        //                 //entry.Entity.LastModified = _dateTime.Now;
+        //                 break;
+        //         }
+        //     }
 
-            return base.SaveChangesAsync(cancellationToken);
-        }
+        //     return base.SaveChangesAsync(cancellationToken);
+        // }
     }
 }
