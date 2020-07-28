@@ -11,7 +11,7 @@ The Domain project represents the Domain layer and contains enterprise or domain
 
 The Infrastructure project represents the Infrastructure layer and contains classes for accessing external resources such as file systems, web services, SMTP, and so on. These classes should be based on interfaces defined within the Application layer.
 
-### SendGrid Users
+### SendGrid Dets
 
-Username: clubemailercl
-Password: 3fH@M\$ICNI8K
+U: clubemailercl
+P: 3fH@M\$ICNI8K

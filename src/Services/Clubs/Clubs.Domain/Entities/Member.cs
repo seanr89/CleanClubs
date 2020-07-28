@@ -1,9 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Clubs.Domain.Common;
 
 namespace Clubs.Domain.Entities
 {
-    public class Member
+    public class Member : AuditableEntity
     {
         [Key]
         public Guid Id { get; set; }

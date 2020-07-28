@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using Clubs.Domain.Common;
 
 namespace Clubs.Domain.Entities
-{    
-    public class Invite
+{
+    public class Invite : AuditableEntity
     {
         [Key]
         public Guid Id { get; set; }
@@ -15,7 +15,7 @@ namespace Clubs.Domain.Entities
         public string Email { get; set; }
         public bool Accepted { get; set; } = false;
         public DateTime? Date { get; set; }
-        public Match Match {get; set; }
+        public Match Match { get; set; }
         public Guid MatchId { get; set; }
     }
 }
