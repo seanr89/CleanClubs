@@ -12,7 +12,7 @@ namespace Clubs.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
-        //public Guid ClubId { get; set; }
+        public Guid ClubId { get; set; }
         public Club Club { get; set; }
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; }
