@@ -47,7 +47,7 @@ namespace Clubs.Application
             //Step1. Check if invites are needed to be added/created
             if (matchView.InviteActiveMembers)
             {
-                var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.Club.Id });
+                var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
 
                 //Get only active members!
                 var activeMembers = members.Where(m => m.Active == true).ToList();
@@ -62,16 +62,16 @@ namespace Clubs.Application
                 match.Invites = invites;
             }
 
+            //StepX. Save the object! (N.B. here we might want to return the object!)
+            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
             {
                 //Now we need to send the invites then!
                 await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
-                match.InvitesSent = true;
+                //match.InvitesSent = true;
             }
-
-            //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
             return matchId;
         }
     }
