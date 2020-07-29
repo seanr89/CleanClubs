@@ -1,9 +1,10 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Clubs.Domain.Common;
 
 namespace Clubs.Domain.Entities
 {
-    public class Player
+    public class Player : AuditableEntity
     {
         [Key]
         public Guid Id { get; set; }
@@ -26,7 +27,7 @@ namespace Clubs.Domain.Entities
         /// <value></value>
         public Guid MemberId { get; set; }
         public Member Member { get; set; }
-        
+
         /// <summary>
         /// Links back to support navigation to the respective Team information
         /// </summary>

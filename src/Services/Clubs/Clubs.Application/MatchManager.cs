@@ -62,16 +62,16 @@ namespace Clubs.Application
                 match.Invites = invites;
             }
 
-            //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
-
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
             {
                 //Now we need to send the invites then!
                 await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
+                match.InvitesSent = true;
             }
 
+            //StepX. Save the object! (N.B. here we might want to return the object!)
+            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
             return matchId;
         }
     }

@@ -70,7 +70,12 @@ namespace Clubs.Application.Business
 
                 var response = await client.SendEmailAsync(msg);
 
-                return (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted); ;
+                if (response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Accepted)
+                {
+                    return true;
+                }
+                _Logger.LogError($"{HelperMethods.GetCallerMemberName()} - Failed to send email {invite.Email}");
+                return false;
             }
             catch (Exception e)
             {
