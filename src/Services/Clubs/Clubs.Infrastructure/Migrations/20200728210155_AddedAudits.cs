@@ -11,9 +11,9 @@ namespace Clubs.Infrastructure.Migrations
                 name: "CK_Teams_Number_Enum_Constraint",
                 table: "Teams");
 
-            migrationBuilder.DropCheckConstraint(
-                name: "CK_Matches_Generator_Enum_Constraint",
-                table: "Matches");
+            // migrationBuilder.DropCheckConstraint(
+            //     name: "CK_Matches_Generator_Enum_Constraint",
+            //     table: "Matches");
 
             migrationBuilder.DropCheckConstraint(
                 name: "CK_Matches_Status_Enum_Constraint",
