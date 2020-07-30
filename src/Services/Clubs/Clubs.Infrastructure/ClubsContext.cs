@@ -49,22 +49,22 @@ namespace Clubs.Infrastructure
                 .WithOne(e => e.Team);
         }
 
-        // public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        // {
-        //     foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-        //     {
-        //         switch (entry.State)
-        //         {
-        //             case EntityState.Added:
-        //                 //entry.Entity.Created = _dateTime.Now;
-        //                 break;
-        //             case EntityState.Modified:
-        //                 //entry.Entity.LastModified = _dateTime.Now;
-        //                 break;
-        //         }
-        //     }
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        //entry.Entity.Created = _dateTime.Now;
+                        break;
+                    case EntityState.Modified:
+                        //entry.Entity.LastModified = _dateTime.Now;
+                        break;
+                }
+            }
 
-        //     return base.SaveChangesAsync(cancellationToken);
-        // }
+            return base.SaveChangesAsync(cancellationToken);
+        }
     }
 }

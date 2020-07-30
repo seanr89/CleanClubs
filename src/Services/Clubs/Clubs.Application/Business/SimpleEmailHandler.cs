@@ -42,10 +42,14 @@ namespace Clubs.Application.Business
             
                     <p>Please select one of the below options</p>
                     
-                    <span>
-                    <a href=""{_EmailSettings.APIURL}/AcceptInvite/{inv.Id}"" target=""_blank""><button>Accept</button></a>
-                    <a href=""{_EmailSettings.APIURL}/DeclineInvite/{inv.Id}"" target=""_blank""><button>Decline</button></a>
-                    </span>
+                    <table cellspacing=""0"" cellpadding=""0"">
+                        <tr>
+                            <td style=""border-radius: 2px;"" bgcolor=""#ED2939"">
+                                <a href=""{_EmailSettings.APIURL}/AcceptInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Accept</button></a>
+                                <a href=""{_EmailSettings.APIURL}/DeclineInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Decline</button></a>
+                            </td>
+                        </tr>
+                    </table>
                     
                     <p>Please do not reply to this email</p>
                     <p>Kind regards,</p>
