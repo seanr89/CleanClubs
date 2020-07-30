@@ -54,9 +54,6 @@ namespace Clubs.Application.Business
                     <p>Please do not reply to this email</p>
                     <p>Kind regards,</p>
                     <p><strong>Clubs Api</strong></p>";
-
-
-
             return message;
         }
 
