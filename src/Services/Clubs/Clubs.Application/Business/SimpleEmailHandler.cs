@@ -57,6 +57,12 @@ namespace Clubs.Application.Business
             return message;
         }
 
+        /// <summary>
+        /// Supports the send of an email
+        /// </summary>
+        /// <param name="invite"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
         private async Task<bool> SendEmail(Invite invite, string message)
         {
             try
