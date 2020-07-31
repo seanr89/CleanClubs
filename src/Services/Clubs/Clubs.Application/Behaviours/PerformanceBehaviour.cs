@@ -15,7 +15,6 @@ namespace Clubs.Application.Behaviours
             ILogger<TRequest> logger)
         {
             _timer = new Stopwatch();
-
             _logger = logger;
         }
 

@@ -56,10 +56,10 @@ namespace Clubs.Infrastructure
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        //entry.Entity.Created = _dateTime.Now;
+                        entry.Entity.Created = DateTime.UtcNow;
                         break;
                     case EntityState.Modified:
-                        //entry.Entity.LastModified = _dateTime.Now;
+                        entry.Entity.LastModified = DateTime.UtcNow;
                         break;
                 }
             }
