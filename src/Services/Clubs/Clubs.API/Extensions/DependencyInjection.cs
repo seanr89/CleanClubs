@@ -17,7 +17,7 @@ namespace Clubs.API.Extensions
         /// <returns>services returned with injected dependencies</returns>
         public static void ConfigureDependencies(this IServiceCollection services)
         {
-            Console.WriteLine("ConfigureDependencies");
+            Console.WriteLine("ConfigureDependencies for API");
         }
     }
 }

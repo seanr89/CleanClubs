@@ -28,7 +28,7 @@ namespace Clubs.Application.Behaviours
 
             var elapsedMilliseconds = _timer.ElapsedMilliseconds;
 
-            if (elapsedMilliseconds > 500)
+            if (elapsedMilliseconds > 750)
             {
                 var requestName = typeof(TRequest).Name;
 

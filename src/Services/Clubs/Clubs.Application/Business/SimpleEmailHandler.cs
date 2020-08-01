@@ -62,7 +62,7 @@ namespace Clubs.Application.Business
         /// </summary>
         /// <param name="invite"></param>
         /// <param name="message"></param>
-        /// <returns></returns>
+        /// <returns>returns true/false depending on if the email was sent or not!</returns>
         private async Task<bool> SendEmail(Invite invite, string message)
         {
             try

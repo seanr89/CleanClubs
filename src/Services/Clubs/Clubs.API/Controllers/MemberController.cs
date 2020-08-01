@@ -25,6 +25,10 @@ namespace Clubs.API.Controllers
 
         #region GET
 
+        /// <summary>
+        /// Support the querying of all members across the platform
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -35,18 +39,18 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// Query A single member
+        /// Query A single member record
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet("{id}", Name="GetMemberById")]
+        [HttpGet("{id}", Name = "GetMemberById")]
         [ProducesResponseType(typeof(MemberDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMemberById(Guid id)
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
 
-            var result = await Mediator.Send(new GetMemberQuery(){ Id = id});
+            var result = await Mediator.Send(new GetMemberQuery() { Id = id });
 
             if (result != null)
                 return Ok(result);
@@ -59,14 +63,14 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <param name="id">Club ID</param>
         /// <returns></returns>
-        [HttpGet("{id}", Name="GetMembersByClubId")]
+        [HttpGet("{id}", Name = "GetMembersByClubId")]
         [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMembersByClubId(Guid id)
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
 
-            var result = await Mediator.Send(new GetClubMembersQuery() {ClubId = id});
+            var result = await Mediator.Send(new GetClubMembersQuery() { ClubId = id });
 
             if (result != null)
                 return Ok(result);
@@ -78,19 +82,24 @@ namespace Clubs.API.Controllers
 
         #region POST
 
+        /// <summary>
+        /// Create a new member - for a respective club
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(CreateMemberDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody]CreateMemberDTO member)
+        public async Task<IActionResult> Post([FromBody] CreateMemberDTO member)
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
-             if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var record = await Mediator.Send(new CreateMemberCommand() {Member = member});
-            if(record != null)
-                return CreatedAtRoute("GetMemberById", new{ id = record}, member);
+            var record = await Mediator.Send(new CreateMemberCommand() { Member = member });
+            if (record != null)
+                return CreatedAtRoute("GetMemberById", new { id = record }, member);
 
             return BadRequest("Save failed");
         }
@@ -99,10 +108,10 @@ namespace Clubs.API.Controllers
 
         #region PUT/UPDATE
 
-        [HttpPut("{id}")]  
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateMember(Guid id, [FromBody]MemberDto update)
+        public async Task<IActionResult> UpdateMember(Guid id, [FromBody] MemberDto update)
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
@@ -110,8 +119,8 @@ namespace Clubs.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var record = await Mediator.Send(new UpdateMemberCommand() {Member = update});
-            if(record)
+            var record = await Mediator.Send(new UpdateMemberCommand() { Member = update });
+            if (record)
                 return Ok("Member Updated!");
 
             return BadRequest("Update failed");

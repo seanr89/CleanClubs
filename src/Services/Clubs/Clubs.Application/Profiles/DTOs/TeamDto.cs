@@ -9,8 +9,8 @@ namespace Clubs.Application.Profiles.Dto
     public class TeamDto
     {
         public Guid Id { get; set; }
-        public Match Match { get; set; }
-        
+        //public MatchDto Match { get; set; }
+
         /// <summary>
         /// Defines if this is the first or second team
         /// </summary>
@@ -20,7 +20,7 @@ namespace Clubs.Application.Profiles.Dto
         /// The players that have been assigned to the team
         /// </summary>
         /// <value></value>
-        public List<Player> Players { get; set; }
+        public List<PlayerDto> Players { get; set; }
 
     }
 }
