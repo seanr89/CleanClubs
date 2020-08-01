@@ -20,7 +20,7 @@ namespace Clubs.Domain.Entities
         /// </summary>
         /// <value></value>
         public bool Active { get; set; } = true;
-        public double Rating { get; set; } = 0.0;
+        public double Rating { get; set; } = 50.0;
         /// <summary>
         /// Member - perhaps can be nullable to support temporary players in a club!
         /// </summary>
