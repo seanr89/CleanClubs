@@ -6,6 +6,7 @@ using System.Reflection;
 using AutoMapper;
 using MediatR;
 using Clubs.Application.Business;
+using FluentValidation;
 
 namespace Clubs.Application
 {
@@ -20,6 +21,8 @@ namespace Clubs.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient<SimpleEmailHandler>();
 
