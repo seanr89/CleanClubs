@@ -56,7 +56,8 @@ namespace Clubs.Application.Business
                 List<Invite> invites = new List<Invite>();
                 foreach (var a in activeMembers)
                 {
-                    var invite = new Invite(){Email = a.Email, MemberId = a.Id, MatchId = match.Id};
+                    //create a new object for each invite
+                    var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
                     invites.Add(invite);
                 }
                 //Add invites to the match

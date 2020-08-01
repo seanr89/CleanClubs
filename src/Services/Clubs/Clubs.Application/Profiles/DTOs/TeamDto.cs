@@ -9,8 +9,6 @@ namespace Clubs.Application.Profiles.Dto
     public class TeamDto
     {
         public Guid Id { get; set; }
-        //public MatchDto Match { get; set; }
-
         /// <summary>
         /// Defines if this is the first or second team
         /// </summary>
