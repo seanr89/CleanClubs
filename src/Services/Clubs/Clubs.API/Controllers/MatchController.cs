@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application;
+using Clubs.Application.Business;
 using Clubs.Application.DTOs;
 using Clubs.Application.Profiles.Dto;
 using Clubs.Application.Requests.Matches.Queries;

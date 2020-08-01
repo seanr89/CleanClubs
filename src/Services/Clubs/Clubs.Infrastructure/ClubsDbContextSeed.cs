@@ -18,8 +18,12 @@ namespace Clubs.Infrastructure.Persistence
             {
                 var RandoxIT = new Club() { Name = "Rdox IT" };
                 var Members = new List<Member>();
-                var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50 };
+                var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50.2 };
                 Members.Add(Sean);
+                var Sean2 = new Member() { FirstName = "Sean", LastName = "Personal", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 45.1 };
+                Members.Add(Sean2);
+                var SeanWork = new Member() { FirstName = "Sean", LastName = "Rdx", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 99.9 };
+                Members.Add(SeanWork);
                 var Francy = new Member() { FirstName = "Francy", LastName = "Donald", Email = "francy.donald@randox.com", Club = RandoxIT, Rating = 85 };
                 Members.Add(Francy);
                 var Andy = new Member() { FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72 };
@@ -50,9 +54,10 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Cormac);
                 var JJ = new Member() { FirstName = "JJ", LastName = "Eng", Email = "JJ@randox.com", Club = RandoxIT, Rating = 61 };
                 Members.Add(JJ);
+                var Dean = new Member() { FirstName = "Dean", LastName = "Mc", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 99.9, Active = false };
+                Members.Add(Dean);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
-
 
                 var RandoxEng = new Club() { Name = "Rdox Engineering" };
                 CreateMemberList(RandoxEng);
