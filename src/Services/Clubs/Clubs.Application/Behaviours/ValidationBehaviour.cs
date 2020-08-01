@@ -29,7 +29,7 @@ namespace Clubs.Application.Behaviours
                 .Where(e => e != null)
                 .ToList();
 
-            if(false.Any())
+            if(failures.Any())
             {
                 throw new ValidationException(failures);
             }
