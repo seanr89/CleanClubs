@@ -13,6 +13,7 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Clubs.Application;
 using Emails.App;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Clubs.API
 {
@@ -58,13 +59,17 @@ namespace Clubs.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TelemetryConfiguration configuration)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
             }
+
+            #if DEBUG
+                configuration.DisableTelemetry = true;
+            #endif
 
             app.UseHttpsRedirection();
 

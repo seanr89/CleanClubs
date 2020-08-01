@@ -56,7 +56,8 @@ namespace Clubs.Application.Business
                 List<Invite> invites = new List<Invite>();
                 foreach (var a in activeMembers)
                 {
-                    invites.Add(_Mapper.Map<Invite>(a));
+                    var invite = new Invite(){Email = a.Email, MemberId = a.Id, MatchId = match.Id};
+                    invites.Add(invite);
                 }
                 //Add invites to the match
                 match.Invites = invites;
