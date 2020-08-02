@@ -14,6 +14,7 @@ namespace Clubs.Application.Profiles
                 dest.MemberId, opt => opt.MapFrom(src => src.Id));
 
             CreateMap<InviteDto, Invite>();
+            CreateMap<Invite, InviteDto>();
         }
     }
 }
