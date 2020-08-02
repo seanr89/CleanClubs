@@ -30,7 +30,7 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MatchListDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {

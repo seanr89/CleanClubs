@@ -15,11 +15,11 @@ namespace Clubs.Application.Requests.Matches.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class GetMatchesQuery : IRequest<IEnumerable<MatchDto>>
+    public class GetMatchesQuery : IRequest<IEnumerable<MatchListDto>>
     {
     }
 
-    public class GetMatchesQueryHandler : IRequestHandler<GetMatchesQuery, IEnumerable<MatchDto>>
+    public class GetMatchesQueryHandler : IRequestHandler<GetMatchesQuery, IEnumerable<MatchListDto>>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
@@ -30,10 +30,10 @@ namespace Clubs.Application.Requests.Matches.Queries
             _Mapper = mapper;
         }
 
-        public async Task<IEnumerable<MatchDto>> Handle(GetMatchesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MatchListDto>> Handle(GetMatchesQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Matches
-                .ProjectTo<MatchDto>(_Mapper.ConfigurationProvider)
+                .ProjectTo<MatchListDto>(_Mapper.ConfigurationProvider)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }

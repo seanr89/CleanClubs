@@ -7,8 +7,6 @@ using Clubs.Application.Business;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
-using Generators;
-using Generators.App;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
