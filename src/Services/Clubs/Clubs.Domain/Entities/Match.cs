@@ -12,15 +12,17 @@ namespace Clubs.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public Guid ClubId { get; set; }
         public Club Club { get; set; }
+        [Required]
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; }
         public ICollection<Team> Teams { get; set; }
         public ICollection<Invite> Invites { get; set; }
         public bool InvitesSent { get; set; } = false;
         public GeneratorType Generator { get; set; } = GeneratorType.None;
-        public string Location { get; set; }
+        public string Location { get; set; } = "Unknown";
 
     }
 }

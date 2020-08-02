@@ -11,9 +11,10 @@ namespace Clubs.Domain.Entities
     {
         [Key]
         public Guid Id { get; set; }
+        [Required]
         public Guid MatchId { get; set; }
         public Match Match { get; set; }
-        
+
         /// <summary>
         /// Defines if this is the first or second team
         /// </summary>
