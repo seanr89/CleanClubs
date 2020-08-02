@@ -19,7 +19,7 @@ namespace Clubs.Application.Business
             _Logger = logger;
         }
 
-        public async Task Generate(GenerationInfo info)
+        public async Task<MatchDto> Generate(GenerationInfo info)
         {
             if (info.Match.Invites.Any())
             {
@@ -60,9 +60,10 @@ namespace Clubs.Application.Business
                     teamList[1].Players.Add(player);
                     continue;
                 }
-
+                info.Match.Teams = teamList;
                 //complete - need to save these details now!
             }
+            return info.Match;
         }
 
         protected List<Team> InitialiseTeams(MatchDto match)

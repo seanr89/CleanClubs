@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application.Business;
+using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
 using Microsoft.AspNetCore.Http;
@@ -36,9 +37,10 @@ namespace Clubs.API.Controllers
 
             if (match != null)
             {
-                _TeamGenerator.Generate(new GenerationInfo() { Match = match, GeneratorOption = GeneratorType.Random });
-            }
+                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo() { Match = match, GeneratorOption = GeneratorType.Random });
 
+                var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
+            }
             return Ok(match);
         }
     }
