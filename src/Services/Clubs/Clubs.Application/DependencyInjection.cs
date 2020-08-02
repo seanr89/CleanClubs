@@ -24,6 +24,7 @@ namespace Clubs.Application
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
+            services.AddTransient<ITeamGenerator, TeamGenerator>();
             services.AddTransient<SimpleEmailHandler>();
 
             services.AddTransient<MatchManager>();

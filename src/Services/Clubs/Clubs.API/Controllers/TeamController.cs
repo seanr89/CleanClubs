@@ -3,6 +3,8 @@
 using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
+using Clubs.Application.Business;
+using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
 using Generators;
@@ -18,9 +20,9 @@ namespace Clubs.API.Controllers
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;
-        private readonly TeamGenerator _TeamGenerator;
+        private readonly ITeamGenerator _TeamGenerator;
 
-        public TeamController(ILogger<TeamController> logger, TeamGenerator teamGenerator)
+        public TeamController(ILogger<TeamController> logger, ITeamGenerator teamGenerator)
         {
             _Logger = logger;
             _TeamGenerator = teamGenerator;
@@ -35,11 +37,15 @@ namespace Clubs.API.Controllers
 
             var match = await Mediator.Send(new GetMatchQuery() { MatchId = id });
 
-            // if (match != null)
-            // {
-            //     _TeamGenerator.Generate(new GenerationInfo() { Match = match, GeneratorOption = GeneratorType.Random });
-            // }
+            if (match != null)
+            {
+                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo() { Match = match, GeneratorOption = GeneratorType.Random });
 
+                var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
+                if (update)
+                    return Ok();
+                return BadRequest();
+            }
             return Ok(match);
         }
     }

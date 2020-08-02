@@ -19,7 +19,7 @@ namespace Clubs.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             //Configuration = configuration;
             var builder = new ConfigurationBuilder()
@@ -67,9 +67,9 @@ namespace Clubs.API
                 app.UseDatabaseErrorPage();
             }
 
-            #if DEBUG
-                configuration.DisableTelemetry = true;
-            #endif
+#if DEBUG
+            configuration.DisableTelemetry = true;
+#endif
 
             app.UseHttpsRedirection();
 

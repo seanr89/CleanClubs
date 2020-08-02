@@ -11,9 +11,9 @@ namespace Clubs.API.Controllers
     {
         private readonly IConfiguration _Configuration;
         private readonly ILogger<HomeController> _Logger;
-        private readonly IHostingEnvironment _HostingEnv;
+        private readonly IWebHostEnvironment _HostingEnv;
         public HomeController(ILogger<HomeController> logger, IConfiguration configuration,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             _Logger = logger;
             _Configuration = configuration;

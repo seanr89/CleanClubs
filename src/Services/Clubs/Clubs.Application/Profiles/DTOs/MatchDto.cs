@@ -11,8 +11,8 @@ namespace Clubs.Application.Profiles.Dto
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; }
-        public List<Invite> Invites { get; set; }
-        public List<Team> Teams { get; set; } = new List<Team>();
+        public List<InviteDto> Invites { get; set; }
+        public List<TeamDto> Teams { get; set; } = new List<TeamDto>();
         public string Location { get; set; }
     }
 }

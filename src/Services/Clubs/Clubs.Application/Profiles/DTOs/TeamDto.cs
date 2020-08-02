@@ -20,5 +20,6 @@ namespace Clubs.Application.Profiles.Dto
         /// <value></value>
         public List<PlayerDto> Players { get; set; }
 
+        public Guid MatchId { get; set; }
     }
 }

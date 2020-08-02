@@ -1,6 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 using Clubs.Infrastructure;
 using MediatR;
@@ -13,7 +14,7 @@ namespace Clubs.Application.Requests.Matches.Commands
 
     public class UpdateMatchCommand : IRequest<bool>
     {
-        public Match Match { get; set; }
+        public MatchDto Match { get; set; }
     }
 
     public class UpdateMatchCommandHandler : IRequestHandler<UpdateMatchCommand, bool>

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
@@ -15,5 +16,6 @@ namespace Clubs.Application.Profiles
         /// <value></value>
         public bool Accepted { get; set; }
         //TODO: add the email/contact info probs!
+        public MemberDto Member { get; set; }
     }
 }
