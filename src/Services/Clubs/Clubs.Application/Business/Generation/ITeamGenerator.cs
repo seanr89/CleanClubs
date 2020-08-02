@@ -6,6 +6,6 @@ namespace Clubs.Application.Business
 {
     public interface ITeamGenerator
     {
-        Task Generator(GenerationInfo info);
+        Task Generate(GenerationInfo info);
     }
 }

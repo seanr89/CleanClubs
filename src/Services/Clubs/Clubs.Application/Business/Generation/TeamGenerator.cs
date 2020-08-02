@@ -19,7 +19,7 @@ namespace Clubs.Application.Business
             _Logger = logger;
         }
 
-        public async Task Generator(GenerationInfo info)
+        public async Task Generate(GenerationInfo info)
         {
             if (info.Match.Invites.Any())
             {
