@@ -10,6 +10,7 @@ namespace Generators.App
     {
         public static IServiceCollection AddGeneratorApplication(this IServiceCollection services)
         {
+            services.AddTransient<TeamGenerator>();
             return services;
         }
     }

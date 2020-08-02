@@ -15,5 +15,6 @@ namespace Clubs.Application.DTOs
         public bool InviteActiveMembers { get; set; } = true;
         public List<MemberDto> SelectedMembers { get; set; } = new List<MemberDto>();
         public bool SendInvites { get; set; } = false;
+        public string Location { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Generators
 {
     public struct GenerationInfo
     {
-        public List<Invite> Invites { get; set; }
+        public Match Match { get; set; }
         public GeneratorType GeneratorOption { get; set; }
     }
 }

@@ -18,20 +18,20 @@ namespace Generators.App
             _Logger = logger;
         }
 
-        public void Generate(Match match)
+        public void Generate(GenerationInfo info)
         {
             _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()}");
 
-            if (match.Invites.Any())
+            if (info.Match.Invites.Any())
             {
-                var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
+                var acceptedInvites = info.Match.Invites.Where(i => i.Accepted == true).ToList();
                 //Check if the player count is even
                 if (HelperMethods.IsEven(acceptedInvites.Count) == false)
                 {
                     _Logger.LogInformation($"Uneven Invite count");
                 }
 
-                var teamList = InitialiseTeams(match);
+                var teamList = InitialiseTeams(info.Match);
 
                 //Ok shuffle the players with a utility call
                 HelperMethods.Shuffle<Invite>(acceptedInvites.ToList());
