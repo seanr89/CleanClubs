@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Clubs.Application.Profiles;
 using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
@@ -33,20 +34,20 @@ namespace Clubs.Application.Business
                 var teamList = InitialiseTeams(info.Match);
 
                 //Ok shuffle the players with a utility call
-                HelperMethods.Shuffle<Invite>(acceptedInvites.ToList());
+                HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
 
                 //Use boolean variable to highlight if the previous player was added to team one
                 bool AddedToTeamOne = false;
 
-                Player player = null;
+                PlayerDto player = null;
                 foreach (var inv in acceptedInvites)
                 {
-                    player = new Player()
+                    player = new PlayerDto()
                     {
                         Email = inv.Member.Email,
                         FirstName = inv.Member.FirstName,
                         LastName = inv.Member.LastName,
-                        Rating = inv.Member.Rating
+                        //Rating = inv.Member.Rating
                     };
 
                     if (!AddedToTeamOne)
@@ -66,11 +67,11 @@ namespace Clubs.Application.Business
             return info.Match;
         }
 
-        protected List<Team> InitialiseTeams(MatchDto match)
+        protected List<TeamDto> InitialiseTeams(MatchDto match)
         {
-            List<Team> modelList = new List<Team>();
-            modelList.Add(new Team() { Number = TeamNumber.ONE, MatchId = match.Id });
-            modelList.Add(new Team() { Number = TeamNumber.TWO, MatchId = match.Id });
+            var modelList = new List<TeamDto>();
+            modelList.Add(new TeamDto() { Number = TeamNumber.ONE, MatchId = match.Id });
+            modelList.Add(new TeamDto() { Number = TeamNumber.TWO, MatchId = match.Id });
 
             return modelList;
         }

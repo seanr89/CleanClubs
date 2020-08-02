@@ -15,12 +15,12 @@ namespace Clubs.Application.Requests.Matches.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class CreateMatchCommand : IRequest<Guid>
+    public class CreateMatchCommand : IRequest<Guid?>
     {
         public Match Match { get; set; }
     }
 
-    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, Guid>
+    public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, Guid?>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;

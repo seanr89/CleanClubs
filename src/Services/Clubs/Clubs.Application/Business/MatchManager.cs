@@ -38,7 +38,7 @@ namespace Clubs.Application.Business
         /// Support the creation of a Match Record and trigger the invitation for all club members
         /// </summary>
         /// <param name="matchView"></param>
-        public async Task<Guid> CreateMatch(CreateMatchDTO matchView)
+        public async Task<Guid?> CreateMatch(CreateMatchDTO matchView)
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
