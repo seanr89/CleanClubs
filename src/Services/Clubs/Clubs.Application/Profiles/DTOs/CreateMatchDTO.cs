@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
@@ -12,6 +13,7 @@ namespace Clubs.Application.DTOs
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; } = MatchStatus.Created;
         public bool InviteActiveMembers { get; set; } = true;
+        public List<MemberDto> SelectedMembers { get; set; } = new List<MemberDto>();
         public bool SendInvites { get; set; } = false;
     }
 }

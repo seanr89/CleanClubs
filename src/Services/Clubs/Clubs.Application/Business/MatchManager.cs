@@ -49,7 +49,7 @@ namespace Clubs.Application.Business
             {
                 var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
 
-                //Get only active members!
+                //Get only active members as no point sending to others
                 var activeMembers = members.Where(m => m.Active == true).ToList();
 
                 //Convert members to invites!
@@ -63,18 +63,32 @@ namespace Clubs.Application.Business
                 //Add invites to the match
                 match.Invites = invites;
             }
-
-            //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+            else if (matchView.SelectedMembers.Any())
+            {
+            }
 
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
             {
                 //Now we need to send the invites then!
                 await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
-                //match.InvitesSent = true;
+                match.InvitesSent = true;
             }
+
+            //StepX. Save the object! (N.B. here we might want to return the object!)
+            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+
             return matchId;
+        }
+
+        /// <summary>
+        /// test process to handle creation of invite process
+        /// </summary>
+        /// <param name="match"></param>
+        /// <param name="matchDto"></param>
+        private void createInvitesForMatch(Match match, CreateMatchDTO matchDto)
+        {
+            //TODO : move some of the logic down in here!
         }
     }
 }
