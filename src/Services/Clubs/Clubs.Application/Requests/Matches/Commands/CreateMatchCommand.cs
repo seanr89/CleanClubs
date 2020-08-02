@@ -9,6 +9,7 @@ using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Clubs.Application.Requests.Matches.Commands
 {
@@ -23,14 +24,18 @@ namespace Clubs.Application.Requests.Matches.Commands
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
+        private readonly ILogger<CreateMatchCommandHandler> _Logger;
 
-        public CreateMatchCommandHandler(ClubsContext context, IMapper mapper)
+        public CreateMatchCommandHandler(ClubsContext context, IMapper mapper,
+            ILogger<CreateMatchCommandHandler> logger)
         {
             _Context = context;
             _Mapper = mapper;
+            _Logger = logger;
+
         }
 
-        public async Task<Guid> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
+        public async Task<Guid?> Handle(CreateMatchCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -38,9 +43,10 @@ namespace Clubs.Application.Requests.Matches.Commands
                 await _Context.SaveChangesAsync();
                 return request.Match.Id;
             }
-            catch (Exception e)
+            catch (DbUpdateException e)
             {
-                throw;
+                _Logger.LogError($"SqlError - Unable to save changes: {e.Message}");
+                return null;
             }
         }
     }
