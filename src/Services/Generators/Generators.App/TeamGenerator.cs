@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Clubs.Domain.Entities;
+using Clubs.Domain.Enums;
 using Microsoft.Extensions.Logging;
 using Utilities;
 
@@ -30,16 +31,48 @@ namespace Generators.App
                     _Logger.LogInformation($"Uneven Invite count");
                 }
 
-                var teamList = InitialiseTeams();
+                var teamList = InitialiseTeams(match);
+
+                //Ok shuffle the players with a utility call
+                HelperMethods.Shuffle<Invite>(acceptedInvites.ToList());
+
+                //Use boolean variable to highlight if the previous player was added to team one
+                bool AddedToTeamOne = false;
+
+                Player player = null;
+                foreach (var inv in acceptedInvites)
+                {
+                    player = new Player()
+                    {
+                        Email = inv.Member.Email,
+                        FirstName = inv.Member.FirstName,
+                        LastName = inv.Member.LastName,
+                        Rating = inv.Member.Rating
+                    };
+
+                    if (!AddedToTeamOne)
+                    {
+                        AddedToTeamOne = true;
+                        teamList[0].Players.Add(player);
+                        continue;
+                    }
+
+                    AddedToTeamOne = false;
+                    teamList[1].Players.Add(player);
+                    continue;
+                }
+
+                //complete - need to save these details now!
             }
         }
 
-        protected List<Team> InitialiseTeams()
+        protected List<Team> InitialiseTeams(Match match)
         {
-            throw new NotImplementedException();
-            List<Team> ModelList = null;
-            Team TeamOne = null;
-            Team TeamTwo = null;
+            List<Team> modelList = new List<Team>();
+            modelList.Add(new Team() { Number = TeamNumber.ONE, Match = match });
+            modelList.Add(new Team() { Number = TeamNumber.TWO, Match = match });
+
+            return modelList;
         }
     }
 }

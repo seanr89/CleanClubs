@@ -25,17 +25,20 @@ namespace Clubs.Application.Requests.Member.Commands
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
+        private readonly ILogger<UpdateMemberCommandHandler> _Logger;
 
-        public UpdateMemberCommandHandler(ClubsContext context, IMapper mapper)
+        public UpdateMemberCommandHandler(ClubsContext context, IMapper mapper
+            , ILogger<UpdateMemberCommandHandler> logger)
         {
             _Context = context;
             _Mapper = mapper;
+            _Logger = logger;
         }
 
         public async Task<bool> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
         {
             var existingRecord = _Context.Members.Find(request.Member.Id);
-            if(existingRecord != null)
+            if (existingRecord != null)
             {
                 _Context.Entry(existingRecord).CurrentValues.SetValues(request.Member);
             }
@@ -46,7 +49,7 @@ namespace Clubs.Application.Requests.Member.Commands
             catch (DbUpdateException ex)
             {
                 //Log the error (uncomment ex variable name and write a log.)
-                //_Logger.LogError($"SqlError - Unable to save changes: {ex.Message}");
+                _Logger.LogError($"SqlError - Unable to save changes: {ex.Message}");
                 // ModelState.AddModelError("", "Unable to save changes. " +
                 //     "Try again, and if the problem persists, " +
                 //     "see your system administrator.");
