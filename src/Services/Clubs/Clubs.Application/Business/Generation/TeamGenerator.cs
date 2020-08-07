@@ -36,35 +36,38 @@ namespace Clubs.Application.Business
                 //Ok shuffle the players with a utility call
                 HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
 
-                //Use boolean variable to highlight if the previous player was added to team one
-                bool AddedToTeamOne = false;
-
-                PlayerDto player = null;
-                foreach (var inv in acceptedInvites)
-                {
-                    player = new PlayerDto()
-                    {
-                        Email = inv.Member.Email,
-                        FirstName = inv.Member.FirstName,
-                        LastName = inv.Member.LastName,
-                        //Rating = inv.Member.Rating
-                    };
-
-                    if (!AddedToTeamOne)
-                    {
-                        AddedToTeamOne = true;
-                        teamList[0].Players.Add(player);
-                        continue;
-                    }
-
-                    AddedToTeamOne = false;
-                    teamList[1].Players.Add(player);
-                    continue;
-                }
-                info.Match.Teams = teamList;
+                ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
                 //complete - need to save these details now!
             }
             return info.Match;
+        }
+
+        void ShufflePlayersIntoTeams(List<TeamDto> teams, MatchDto match, List<InviteDto> invites)
+        {
+            PlayerDto player = null;
+            bool AddedToTeamOne = false;
+            foreach (var inv in invites)
+            {
+                player = new PlayerDto()
+                {
+                    Email = inv.Member.Email,
+                    FirstName = inv.Member.FirstName,
+                    LastName = inv.Member.LastName,
+                    //Rating = inv.Member.Rating
+                };
+
+                if (!AddedToTeamOne)
+                {
+                    AddedToTeamOne = true;
+                    teams[0].Players.Add(player);
+                    continue;
+                }
+
+                AddedToTeamOne = false;
+                teams[1].Players.Add(player);
+                continue;
+            }
+            match.Teams = teams;
         }
 
         protected List<TeamDto> InitialiseTeams(MatchDto match)
