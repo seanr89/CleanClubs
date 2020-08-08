@@ -20,6 +20,11 @@ namespace Clubs.Application.Business
             _Logger = logger;
         }
 
+        /// <summary>
+        /// Supports the default random shuffle fo players into teams
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
         public async Task<MatchDto> Generate(GenerationInfo info)
         {
             if (info.Match.Invites.Any())
@@ -53,7 +58,6 @@ namespace Clubs.Application.Business
                     Email = inv.Member.Email,
                     FirstName = inv.Member.FirstName,
                     LastName = inv.Member.LastName,
-                    //Rating = inv.Member.Rating
                 };
 
                 if (!AddedToTeamOne)
