@@ -24,6 +24,12 @@ namespace Clubs.Application.Business
             _EmailSettings = settings.Value;
         }
 
+        /// <summary>
+        /// Handle the generation of an invite email!
+        /// </summary>
+        /// <param name="invites">the collection of invitations to be emailed</param>
+        /// <param name="match">The corresponding match!</param>
+        /// <returns></returns>
         public async Task GenerateAndSendInviteEmails(IEnumerable<Invite> invites, Match match)
         {
             foreach (var invite in invites)

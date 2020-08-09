@@ -48,7 +48,6 @@ namespace Clubs.Application.Business
             if (matchView.InviteActiveMembers)
             {
                 var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
-
                 //Get only active members as no point sending to others
                 var activeMembers = members.Where(m => m.Active == true).ToList();
 
@@ -63,9 +62,9 @@ namespace Clubs.Application.Business
                 //Add invites to the match
                 match.Invites = invites;
             }
-            else if (matchView.SelectedMembers.Any())
-            {
-            }
+            // else if (matchView.SelectedMembers.Any())
+            // {
+            // }
 
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
@@ -79,16 +78,6 @@ namespace Clubs.Application.Business
             var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
 
             return matchId;
-        }
-
-        /// <summary>
-        /// test process to handle creation of invite process
-        /// </summary>
-        /// <param name="match"></param>
-        /// <param name="matchDto"></param>
-        private void createInvitesForMatch(Match match, CreateMatchDTO matchDto)
-        {
-            //TODO : move some of the logic down in here!
         }
     }
 }

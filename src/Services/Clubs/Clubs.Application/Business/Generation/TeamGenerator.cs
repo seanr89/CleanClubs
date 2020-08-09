@@ -24,7 +24,7 @@ namespace Clubs.Application.Business
         /// Supports the default random shuffle fo players into teams
         /// </summary>
         /// <param name="info"></param>
-        /// <returns></returns>
+        /// <returns>Returns the matchDTO with teams!</returns>
         public async Task<MatchDto> Generate(GenerationInfo info)
         {
             if (info.Match.Invites.Any())

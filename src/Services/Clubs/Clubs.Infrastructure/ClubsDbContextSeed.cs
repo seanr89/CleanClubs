@@ -91,6 +91,14 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(Club8);
                 context.Clubs.Add(Club8);
 
+                var Club9 = new Club() { Name = "Club 9" };
+                CreateMemberList(Club9);
+                context.Clubs.Add(Club9);
+
+                var Club10 = new Club() { Name = "Club 10" };
+                CreateMemberList(Club10);
+                context.Clubs.Add(Club10);
+
                 await context.SaveChangesAsync();
             }
         }
