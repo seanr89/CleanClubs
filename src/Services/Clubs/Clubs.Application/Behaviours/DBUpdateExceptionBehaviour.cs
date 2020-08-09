@@ -25,7 +25,7 @@ namespace Clubs.Application.Behaviours
             catch (DbUpdateException ex)
             {
                 var requestName = typeof(TRequest).Name;
-                _logger.LogError(ex, "Clubs API Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "Clubs API: DbUpdate Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }

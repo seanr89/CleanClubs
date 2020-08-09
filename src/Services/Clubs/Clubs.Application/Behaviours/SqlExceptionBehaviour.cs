@@ -26,7 +26,7 @@ namespace Clubs.Application.Behaviours
             catch (SqlException ex)
             {
                 var requestName = typeof(TRequest).Name;
-                _logger.LogError(ex, "Clubs API Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
+                _logger.LogError(ex, "Clubs API: Sql Exception for Request {Name} {@Request}", requestName, request);
 
                 throw;
             }
