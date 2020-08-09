@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Clubs.Application.Behaviours
 {
-    public class DBUpdateExceptionBehavious<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    public class DBUpdateExceptionBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
         private readonly ILogger<TRequest> _logger;
 
-        public DBUpdateExceptionBehavious(ILogger<TRequest> logger)
+        public DBUpdateExceptionBehaviour(ILogger<TRequest> logger)
         {
             _logger = logger;
         }
