@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using Clubs.Application.Business;
 using FluentValidation;
+using Microsoft.Azure.ServiceBus;
 
 namespace Clubs.Application
 {
@@ -28,6 +29,8 @@ namespace Clubs.Application
             services.AddTransient<SimpleEmailHandler>();
 
             services.AddTransient<MatchManager>();
+
+            services.AddSingleton<IQueueClient>(x => new QueueClient("", ""));
 
             return services;
         }

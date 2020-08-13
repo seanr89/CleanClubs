@@ -9,10 +9,11 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5"/>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="4.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5" />
     <PackageReference Include="FluentValidation" Version="8.6.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.0" />
-    <PackageReference Include="SendGrid" Version="9.19.0"/>
+    <PackageReference Include="SendGrid" Version="9.19.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +21,7 @@
     <ProjectReference Include="../Clubs.Infrastructure/Clubs.Infrastructure.csproj" />
     <ProjectReference Include="../../Utilities/Utilities.csproj" />
     <ProjectReference Include="../../Generators/Generators.App/Generators.App.csproj" />
-
+    <ProjectReference Include="../Clubs.Messages/Clubs.Messages.csproj" />
     <ProjectReference Include="../../Emails/Emails.App/Emails.App.csproj" />
   </ItemGroup>
 
