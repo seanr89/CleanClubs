@@ -8,6 +8,7 @@ using MediatR;
 using Clubs.Application.Business;
 using FluentValidation;
 using Microsoft.Azure.ServiceBus;
+using Clubs.Messages;
 
 namespace Clubs.Application
 {
@@ -32,7 +33,8 @@ namespace Clubs.Application
 
             services.AddSingleton<IQueueClient>(x => new QueueClient("Endpoint=sb://clubservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=I5e1gccbgKAOsIn6m1L30NYpEcZx0KC++eWsll0z4+o="
             , "invitationqueue"));
-
+            services.AddSingleton<IMessagePublisher, InvitationPublisher>();
+            
             return services;
         }
     }

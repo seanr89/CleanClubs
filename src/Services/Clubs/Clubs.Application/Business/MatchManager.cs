@@ -10,6 +10,7 @@ using Clubs.Application.DTOs;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
 using Clubs.Domain.Entities;
+using Clubs.Messages;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -23,14 +24,17 @@ namespace Clubs.Application.Business
         protected IMediator _Mediator;
         private readonly IMapper _Mapper;
         private readonly SimpleEmailHandler _EmailHandler;
+        private readonly IMessagePublisher _MessagePublisher;
 
         public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
-            IMapper mapper, SimpleEmailHandler simpleEmailHandler)
+            IMapper mapper, SimpleEmailHandler simpleEmailHandler,
+            IMessagePublisher messagePublisher)
         {
             _Logger = logger;
             _Mediator = mediator;
             _Mapper = mapper;
             _EmailHandler = simpleEmailHandler;
+            _MessagePublisher = messagePublisher;
         }
 
 
@@ -66,16 +70,16 @@ namespace Clubs.Application.Business
             // {
             // }
 
+            //StepX. Save the object! (N.B. here we might want to return the object!)
+            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+
             //StepX. Check if we need to email!
             if (matchView.SendInvites)
             {
                 //Now we need to send the invites then!
-                await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
-                match.InvitesSent = true;
+                //await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
+                //match.InvitesSent = true;
             }
-
-            //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
 
             return matchId;
         }
