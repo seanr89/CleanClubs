@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
+using Utilities;
 
 namespace Clubs.Messages
 {
@@ -11,17 +13,33 @@ namespace Clubs.Messages
     public class InvitationPublisher : IMessagePublisher
     {
         private readonly IQueueClient _queueClient;
+        private readonly ILogger<InvitationPublisher> _logger;
 
-        public InvitationPublisher(IQueueClient queueClient)
+        public InvitationPublisher(IQueueClient queueClient, ILogger<InvitationPublisher> logger)
         {
             _queueClient = queueClient;
+            _logger = logger;
         }
 
         public Task Publish<T>(T obj)
         {
-            var objAsText = JsonConvert.SerializeObject(obj);
-            var message = new Message(Encoding.UTF8.GetBytes(objAsText));
-            return _queueClient.SendAsync(message);
+            _logger.LogInformation($"InvitePublisher: {HelperMethods.GetCallerMemberName()}");
+
+            try
+            {
+                var objAsText = JsonConvert.SerializeObject(obj, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
+                var message = new Message(Encoding.UTF8.GetBytes(objAsText));
+                return _queueClient.SendAsync(message);
+            }
+            catch (JsonSerializationException e)
+            {
+                _logger.LogError($"publish exception: {e.Message}");
+                return null;
+            }
         }
 
         public Task Publish(string raw)

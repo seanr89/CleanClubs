@@ -79,8 +79,11 @@ namespace Clubs.Application.Business
                 //Now we need to send the invites then!
                 //await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
                 //match.InvitesSent = true;
+                foreach (var inv in match.Invites)
+                {
+                    await _MessagePublisher.Publish<Invite>(inv);
+                }
             }
-
             return matchId;
         }
     }

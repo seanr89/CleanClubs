@@ -47,7 +47,6 @@ namespace Clubs.API.Controllers
             var record = await Mediator.Send(new UpdateInviteCommand() { Invite = invite });
             if (record)
                 return Ok("Record Updated!");
-
             return BadRequest();
         }
     }
