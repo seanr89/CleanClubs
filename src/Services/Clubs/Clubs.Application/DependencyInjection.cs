@@ -30,7 +30,8 @@ namespace Clubs.Application
 
             services.AddTransient<MatchManager>();
 
-            services.AddSingleton<IQueueClient>(x => new QueueClient("", ""));
+            services.AddSingleton<IQueueClient>(x => new QueueClient("Endpoint=sb://clubservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=I5e1gccbgKAOsIn6m1L30NYpEcZx0KC++eWsll0z4+o="
+            , "invitationqueue"));
 
             return services;
         }
