@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace APIGenerator.Utilities
+namespace Utilities
 {
     /// <summary>
     /// Class to provide controls for event execution performance and time

@@ -46,43 +46,42 @@ namespace Clubs.Application.Business
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
-            var match = _Mapper.Map<Match>(matchView);
+            Guid? matchId = null;
 
-            //Step1. Check if invites are needed to be added/created
-            if (matchView.InviteActiveMembers)
+            using(ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
             {
-                var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
-                //Get only active members as no point sending to others
-                var activeMembers = members.Where(m => m.Active == true).ToList();
+                var match = _Mapper.Map<Match>(matchView);
 
-                //Convert members to invites!
-                List<Invite> invites = new List<Invite>();
-                foreach (var a in activeMembers)
+                //Step1. Check if invites are needed to be added/created
+                if (matchView.InviteActiveMembers)
                 {
-                    //create a new object for each invite
-                    var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
-                    invites.Add(invite);
+                    var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
+                    //Get only active members as no point sending to others
+                    var activeMembers = members.Where(m => m.Active == true).ToList();
+
+                    //Convert members to invites!
+                    foreach (var a in activeMembers)
+                    {
+                        //create a new object for each invite
+                        var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
+                        match.Invites.Add(invite);
+                    }
                 }
-                //Add invites to the match
-                match.Invites = invites;
-            }
-            // else if (matchView.SelectedMembers.Any())
-            // {
-            // }
-
-            //StepX. Save the object! (N.B. here we might want to return the object!)
-            var matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
-
-            //StepX. Check if we need to email!
-            if (matchView.SendInvites)
-            {
-                //Now we need to send the invites then!
-                //await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
-                //match.InvitesSent = true;
-                foreach (var inv in match.Invites)
+                //StepX. Check if we need to email and then message it!
+                if (matchView.SendInvites)
                 {
-                    await _MessagePublisher.Publish<Invite>(inv);
+                    //Now we need to send the invites then!
+                    //await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
+                    //match.InvitesSent = true;
+                    foreach (var inv in match.Invites)
+                    {
+                        await _MessagePublisher.Publish<Invite>(inv);
+                    }
+                    match.InvitesSent = true;
                 }
+                //StepX. Save the match! (N.B. here we might want to return the object!)
+                matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+                monitor.CreatePerformanceMetricAndLogEvent("CreateMatch");
             }
             return matchId;
         }
