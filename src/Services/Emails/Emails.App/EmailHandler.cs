@@ -68,6 +68,11 @@ namespace Emails.App
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inv"></param>
+        /// <returns></returns>
         private string generateEmailContent(Invite inv)
         {
             string message = "";

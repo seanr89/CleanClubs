@@ -21,6 +21,12 @@ namespace Clubs.Messages
             _logger = logger;
         }
 
+        /// <summary>
+        /// Support the publishing of a invite confirmation
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public Task Publish<T>(T obj)
         {
             _logger.LogInformation($"InvitePublisher: {HelperMethods.GetCallerMemberName()}");
