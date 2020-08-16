@@ -57,6 +57,8 @@ namespace Emails.Api
                 // c.IncludeXmlComments(xmlPath);
             });
 
+            services.AddEmailApplication(Configuration);
+
             services.AddHealthChecks();
         }
 

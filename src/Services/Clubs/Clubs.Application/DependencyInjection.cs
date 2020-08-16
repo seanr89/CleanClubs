@@ -9,12 +9,13 @@ using Clubs.Application.Business;
 using FluentValidation;
 using Microsoft.Azure.ServiceBus;
 using Clubs.Messages;
+using Microsoft.Extensions.Configuration;
 
 namespace Clubs.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services)
+        public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());

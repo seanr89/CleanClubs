@@ -43,7 +43,7 @@ namespace Clubs.API
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
 
-            services.AddApplication();
+            services.AddApplication(Configuration);
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
