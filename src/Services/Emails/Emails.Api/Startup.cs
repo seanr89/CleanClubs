@@ -32,6 +32,9 @@ namespace Emails.Api
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
+
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+
             services.ConfigureCors(Configuration);
 
             services.AddSwaggerGen(c =>
