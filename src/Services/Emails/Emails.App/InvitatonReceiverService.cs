@@ -24,19 +24,22 @@ namespace Emails.App
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _SubscriptionClient.RegisterMessageHandler((message, token) => 
+            _SubscriptionClient.RegisterMessageHandler((message, token) =>
             {
                 var invite = JsonConvert.DeserializeObject<Invite>(Encoding.UTF8.GetString(message.Body));
 
+                _EmailHandler.GenerateAndSendInviteEmail(invite);
+
+                //Stops potential duplicate processing
                 return _SubscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
-            }, 
-            new MessageHandlerOptions(args => Task.CompletedTask){
+            },
+            new MessageHandlerOptions(args => Task.CompletedTask)
+            {
                 //exception handling
                 AutoComplete = false,
                 MaxConcurrentCalls = 1
             });
             return Task.CompletedTask;
-            throw new System.NotImplementedException();
         }
     }
 }

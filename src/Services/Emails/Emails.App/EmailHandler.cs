@@ -7,6 +7,7 @@ using Utilities;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Clubs.Domain.Entities;
 
 namespace Emails.App
 {
@@ -20,6 +21,25 @@ namespace Emails.App
             _EmailSettings = settings.Value;
         }
 
+        /// <summary>
+        /// Handle the generation of an invite email!
+        /// </summary>
+        /// <param name="invites">the collection of invitations to be emailed</param>
+        /// <param name="match">The corresponding match!</param>
+        /// <returns></returns>
+        public async Task GenerateAndSendInviteEmail(Invite invite)
+        {
+            var content = generateEmailContent(invite);
+            await SendEmail(invite.Email, content, "Match Invitation");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="messageContent"></param>
+        /// <param name="subject"></param>
+        /// <returns></returns>
         public async Task<bool> SendEmail(string email, string messageContent, string subject)
         {
             try
@@ -48,7 +68,7 @@ namespace Emails.App
             }
         }
 
-        private string generateEmailContent(Invite inv, Match match)
+        private string generateEmailContent(Invite inv)
         {
             string message = "";
 
