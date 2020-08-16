@@ -1,4 +1,4 @@
-name: .NET Core
+name: Emails Build
 
 on:
   push:
@@ -15,12 +15,12 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 5.0.100-preview.7
+          dotnet-version: 3.1.x
       - name: Install dependencies
-        working-directory: ./src/Services/Emails/Emails.API
+        working-directory: ./src/Services/Emails/Emails.Api
         run: dotnet restore
       - name: Build
-        working-directory: ./src/Services/Emails/Emails.API
+        working-directory: ./src/Services/Emails/Emails.Api
         run: dotnet build --configuration Release --no-restore
 #     - name: Test
 #       run: dotnet test --no-restore --verbosity normal
