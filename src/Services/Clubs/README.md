@@ -15,3 +15,8 @@ The Infrastructure project represents the Infrastructure layer and contains clas
 
 U: clubemailercl
 P: 3fH@M\$ICNI8K
+
+### TODO
+
+- models and schema to be detailed
+- need to document the flow

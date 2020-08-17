@@ -9,7 +9,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../../Clubs/Clubs.Domain/Clubs.Domain.csproj"/>
-    <ProjectReference Include"../Emails.App/Emails.App.csproj" />
+    <ProjectReference Include="../Emails.App/Emails.App.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.json">

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Clubs.Domain.Entities;
-using Emails.App;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SendGrid;
@@ -17,12 +16,12 @@ namespace Clubs.Application.Business
     public class SimpleEmailHandler
     {
         private readonly ILogger<SimpleEmailHandler> _Logger;
-        private readonly EmailSettings _EmailSettings;
-        public SimpleEmailHandler(ILogger<SimpleEmailHandler> logger, IOptions<EmailSettings> settings)
-        {
-            _Logger = logger;
-            _EmailSettings = settings.Value;
-        }
+        //private readonly EmailSettings _EmailSettings;
+        // public SimpleEmailHandler(ILogger<SimpleEmailHandler> logger, IOptions<EmailSettings> settings)
+        // {
+        //     _Logger = logger;
+        //     _EmailSettings = settings.Value;
+        // }
 
         /// <summary>
         /// Handle the generation of an invite email!
@@ -32,36 +31,38 @@ namespace Clubs.Application.Business
         /// <returns></returns>
         public async Task GenerateAndSendInviteEmails(IEnumerable<Invite> invites, Match match)
         {
+            /*
             foreach (var invite in invites)
             {
                 var content = generateEmailContent(invite, match);
 
                 await SendEmail(invite, content);
             }
+            */
         }
 
-        private string generateEmailContent(Invite inv, Match match)
-        {
-            string message = "";
+        // private string generateEmailContent(Invite inv, Match match)
+        // {
+        //     string message = "";
 
-            message = $@"<p>A match has been scheduled</p>
-            
-                    <p>Please select one of the below options</p>
-                    
-                    <table cellspacing=""0"" cellpadding=""0"">
-                        <tr>
-                            <td style=""border-radius: 2px;"" bgcolor=""#ED2939"">
-                                <a href=""{_EmailSettings.APIURL}/AcceptInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Accept</button></a>
-                                <a href=""{_EmailSettings.APIURL}/DeclineInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Decline</button></a>
-                            </td>
-                        </tr>
-                    </table>
-                    
-                    <p>Please do not reply to this email</p>
-                    <p>Kind regards,</p>
-                    <p><strong>Clubs Api</strong></p>";
-            return message;
-        }
+        //     message = $@"<p>A match has been scheduled</p>
+
+        //             <p>Please select one of the below options</p>
+
+        //             <table cellspacing=""0"" cellpadding=""0"">
+        //                 <tr>
+        //                     <td style=""border-radius: 2px;"" bgcolor=""#ED2939"">
+        //                         <a href=""{_EmailSettings.APIURL}/AcceptInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Accept</button></a>
+        //                         <a href=""{_EmailSettings.APIURL}/DeclineInvite/{inv.Id}"" target=""_blank""><button style=""padding: 8px 12px; border: 1px solid #ED2939;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 14px; color: #ffffff;text-decoration: none;font-weight:bold"">Decline</button></a>
+        //                     </td>
+        //                 </tr>
+        //             </table>
+
+        //             <p>Please do not reply to this email</p>
+        //             <p>Kind regards,</p>
+        //             <p><strong>Clubs Api</strong></p>";
+        //     return message;
+        // }
 
         /// <summary>
         /// Supports the send of an email
@@ -69,6 +70,7 @@ namespace Clubs.Application.Business
         /// <param name="invite"></param>
         /// <param name="message"></param>
         /// <returns>returns true/false depending on if the email was sent or not!</returns>
+        /*
         private async Task<bool> SendEmail(Invite invite, string message)
         {
             try
@@ -97,5 +99,6 @@ namespace Clubs.Application.Business
                 return false;
             }
         }
+        */
     }
 }

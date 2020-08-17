@@ -5,6 +5,8 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+    paths:
+      - "src/Services/Emails/**"
 
 jobs:
   build:
@@ -22,5 +24,8 @@ jobs:
       - name: Build
         working-directory: ./src/Services/Emails/Emails.Api
         run: dotnet build --configuration Release --no-restore
-#     - name: Test
-#       run: dotnet test --no-restore --verbosity normal
+      #     - name: Test
+      #       run: dotnet test --no-restore --verbosity normal
+      - name: ACR Build
+        id: acr
+        uses: ams0/acr-task-github-action@v1

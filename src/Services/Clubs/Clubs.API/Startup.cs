@@ -12,7 +12,6 @@ using Clubs.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Clubs.Application;
-using Emails.App;
 using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Clubs.API
@@ -45,7 +44,7 @@ namespace Clubs.API
 
             services.AddApplication(Configuration);
 
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            //services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.ConfigureDbContext(Configuration);
             services.AddControllers().AddNewtonsoftJson(options =>

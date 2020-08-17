@@ -22,7 +22,7 @@
     <ProjectReference Include="../../Utilities/Utilities.csproj" />
     <ProjectReference Include="../../Generators/Generators.App/Generators.App.csproj" />
     <ProjectReference Include="../Clubs.Messages/Clubs.Messages.csproj" />
-    <ProjectReference Include="../../Emails/Emails.App/Emails.App.csproj" />
+    <!-- <ProjectReference Include="../../Emails/Emails.App/Emails.App.csproj" /> -->
   </ItemGroup>
 
 </Project>

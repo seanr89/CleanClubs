@@ -1,4 +1,7 @@
-
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using System.Reflection;
+using System;
 
 namespace Emails.Api.Extensions
 {

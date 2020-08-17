@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Emails.Api.Extensions;
+using Emails.App;
 
 namespace Emails.Api
 {
@@ -27,35 +29,35 @@ namespace Emails.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
+            // services.AddControllers().AddNewtonsoftJson(options =>
+            // {
+            //     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            // });
 
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Emails Api",
-                    Description = "A simple API to handle emails",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Sean Rafferty",
-                        Email = "",
-                        Url = new Uri("")
-                    }
-                });
+            // services.AddSwaggerGen(c =>
+            // {
+            //     c.SwaggerDoc("v1", new OpenApiInfo
+            //     {
+            //         Version = "v1",
+            //         Title = "Emails Api",
+            //         Description = "A simple API to handle emails",
+            //         Contact = new OpenApiContact
+            //         {
+            //             Name = "Sean Rafferty",
+            //             Email = "",
+            //             Url = new Uri("")
+            //         }
+            //     });
 
-                // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                // c.IncludeXmlComments(xmlPath);
-            });
+            //     // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            //     // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            //     // c.IncludeXmlComments(xmlPath);
+            // });
 
             services.AddEmailApplication(Configuration);
 
@@ -74,18 +76,18 @@ namespace Emails.Api
 
             app.UseCors(MyAllowSpecificOrigins);
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emails API V1");
-                c.RoutePrefix = string.Empty;
-            });
+            // app.UseSwagger();
+            // app.UseSwaggerUI(c =>
+            // {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emails API V1");
+            //     c.RoutePrefix = string.Empty;
+            // });
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                //endpoints.MapControllers();
                 endpoints.MapHealthChecks("/health");
             });
         }
