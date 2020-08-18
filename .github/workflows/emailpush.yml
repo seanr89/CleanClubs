@@ -1,4 +1,4 @@
-name: build_emails
+name: Email_Build_And_Register
 on:
   push:
     # paths:
@@ -17,4 +17,5 @@ jobs:
           registry: ${{ secrets.registry }}
           repository: ${{ secrets.REGISTRY_REPOSITORY }}
           folder: ./src/Services/Emails/Emails.api
+          image: emailsapi
           dockerfile: Dockerfile

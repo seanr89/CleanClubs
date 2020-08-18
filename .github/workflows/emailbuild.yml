@@ -1,14 +1,14 @@
 name: Emails Build
 
-on:
-  push:
-    branches: [master]
-    paths:
-      - "src/Services/Emails/**"
-  pull_request:
-    branches: [master]
-    paths:
-      - "src/Services/Emails/**"
+# on:
+#   push:
+#     branches: [master]
+#     paths:
+#       - "src/Services/Emails/**"
+#   pull_request:
+#     branches: [master]
+#     paths:
+#       - "src/Services/Emails/**"
 
 jobs:
   build:
