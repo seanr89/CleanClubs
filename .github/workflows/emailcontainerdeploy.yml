@@ -3,14 +3,10 @@ name: EmailAPI_Linux_Container_Workflow
 on:
   push:
     branches: [master]
-    paths:
-      - "src/Services/Emails/**"
-  pull_request:
-    branches: [master]
-    paths:
-      - "src/Services/Emails/**"
-
-
+ 
+#
+#paths:
+#  - "src/Services/Emails/**"
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
