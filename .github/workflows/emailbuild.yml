@@ -28,6 +28,3 @@ jobs:
         run: dotnet build --configuration Release --no-restore
       #     - name: Test
       #       run: dotnet test --no-restore --verbosity normal
-      - name: ACR Build
-        id: acr
-        uses: ams0/acr-task-github-action@v1

@@ -1,4 +1,4 @@
-name: Eamils_Linux_Container_Workflow
+name: EmailAPI_Linux_Container_Workflow
 
 on:
   push:
