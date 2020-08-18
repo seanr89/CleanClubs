@@ -16,6 +16,5 @@ jobs:
           tenant: ${{ secrets.TENANT }}
           registry: ${{ secrets.registry }}
           repository: ${{ secrets.REGISTRY_REPOSITORY }}
-          image: emailsapi
           folder: ./src/Services/Emails/Emails.api
           dockerfile: Dockerfile
