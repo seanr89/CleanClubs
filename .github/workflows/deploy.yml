@@ -3,10 +3,13 @@ name: Azure API Deploy
 on:
   push:
     branches: [master]
+    paths:
+      - "src/Services/Clubs/**"
   pull_request:
     branches: [master]
-  paths:
-    - "src/Services/Clubs/**"
+    paths:
+      - "src/Services/Clubs/**"
+    
 
 jobs:
   build:
