@@ -1,5 +1,13 @@
-on: [push]
-name: Linux_Container_Workflow
+name: Eamils_Linux_Container_Workflow
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  paths:
+    - "src/Services/Emails/**"
+
 
 jobs:
   build-and-deploy:
@@ -15,6 +23,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: "Build and push image"
+        working-directory: ./src/Services/Emails/Emails.Api
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
