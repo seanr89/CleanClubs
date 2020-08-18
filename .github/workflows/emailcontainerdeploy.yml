@@ -26,7 +26,6 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-        working-directory: ./src/Services/Emails/Emails.Api
       - run: |
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/emails.api:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/emails.api:${{ github.sha }}
