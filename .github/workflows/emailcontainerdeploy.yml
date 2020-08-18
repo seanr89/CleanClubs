@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - "src/Services/Clubs/**"
+      - "src/Services/Emails/**"
   pull_request:
     branches: [master]
     paths:

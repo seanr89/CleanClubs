@@ -38,26 +38,6 @@ namespace Emails.Api
 
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
-            // services.AddSwaggerGen(c =>
-            // {
-            //     c.SwaggerDoc("v1", new OpenApiInfo
-            //     {
-            //         Version = "v1",
-            //         Title = "Emails Api",
-            //         Description = "A simple API to handle emails",
-            //         Contact = new OpenApiContact
-            //         {
-            //             Name = "Sean Rafferty",
-            //             Email = "",
-            //             Url = new Uri("")
-            //         }
-            //     });
-
-            //     // var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //     // var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            //     // c.IncludeXmlComments(xmlPath);
-            // });
-
             services.AddEmailApplication(Configuration);
 
             services.AddHealthChecks();
@@ -74,13 +54,6 @@ namespace Emails.Api
             app.UseHttpsRedirection();
 
             app.UseCors(MyAllowSpecificOrigins);
-
-            // app.UseSwagger();
-            // app.UseSwaggerUI(c =>
-            // {
-            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Emails API V1");
-            //     c.RoutePrefix = string.Empty;
-            // });
 
             app.UseRouting();
 
