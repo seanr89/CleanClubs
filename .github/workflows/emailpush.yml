@@ -13,7 +13,7 @@ jobs:
         with:
           service_principal: acr-service-principal
           service_principal_password: a5hik7pT2-~Trn6y-Mb~ajZIr1Fr.0bGO1
-          tenant: ${{ secrets.TENANT }}
+          tenant: 3f321186-0143-459b-80c3-0a3a0ab984f6
           registry: clubsregistry
           repository: clubsrepo
           folder: ./src/Services/Emails/Emails.api
