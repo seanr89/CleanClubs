@@ -1,14 +1,14 @@
-on: [push]
+# on: [push]
 
 name: Linux_Container_Node_Workflow
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-        # checkout the repo
-        - name: 'Checkout GitHub Action' 
-        uses: actions/checkout@master
+    - name: 'Checkout GitHub Action' 
+    uses: actions/checkout@master
         
         - name: 'Login via Azure CLI'
         uses: azure/login@v1
