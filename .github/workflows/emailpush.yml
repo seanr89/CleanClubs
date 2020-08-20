@@ -11,10 +11,10 @@ jobs:
         id: acr
         uses: ams0/acr-task-github-action@v1
         with:
-          service_principal: ${{ secrets.REGISTRY_USERNAME }}
-          service_principal_password: ${{ secrets.REGISTRY_PASSWORD }}
+          service_principal: ${{ secrets.SERVICE_PRINCIPAL }}
+          service_principal_password: ${{ secrets.SERVICE_PRINCIPAL_PASSWORD }}
           tenant: ${{ secrets.TENANT }}
-          registry: ${{ secrets.registry }}
+          registry: ${{ secrets.REGISTRY }}
           repository: ${{ secrets.REGISTRY_REPOSITORY }}
           folder: ./src/Services/Emails/Emails.api
           dockerfile: Dockerfile
