@@ -15,8 +15,10 @@ namespace Emails.App
         private readonly ILogger<InvitationReceieverService> _Logger;
         private readonly EmailHandler _EmailHandler;
 
-        public InvitationReceieverService(ISubscriptionClient subscriptionClient, ILogger<InvitationReceieverService> logger)
+        public InvitationReceieverService(ISubscriptionClient subscriptionClient, ILogger<InvitationReceieverService> logger,
+            EmailHandler emailHandler)
         {
+            _EmailHandler = emailHandler;
             _SubscriptionClient = subscriptionClient;
             _Logger = logger;
         }
