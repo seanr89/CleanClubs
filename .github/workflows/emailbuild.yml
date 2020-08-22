@@ -34,8 +34,8 @@ jobs:
         uses: azure/docker-login@v1
         with:
           login-server: clubsregistry.azurecr.io
-          username: clubsregistry
-          password: HY3xm=g2bxhR29Qj2D8AsINE0XTRj701
+          username: ${{secrets.REGISTRY_USERNAME}}
+          password: ${{secrets.REGISTRY_PASSSWORD}}
       - name: Docker
         working-directory: ./src/Services/Emails/
         run: |
