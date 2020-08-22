@@ -3,8 +3,8 @@ name: Email Build and Docker
 on:
   push:
     branches: [master]
-#     paths:
-#       - "src/Services/Emails/**"
+    paths:
+      - "src/Services/Emails/**"
 #   pull_request:
 #     branches: [master]
 #     paths:

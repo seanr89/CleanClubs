@@ -22,6 +22,7 @@ namespace Emails.Api
                 {
                     webBuilder.UseHealthEndpoints();
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseKestrel(options => options.AllowSynchronousIO = true);
                 });
     }
 }
