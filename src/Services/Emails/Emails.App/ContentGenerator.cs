@@ -1,7 +1,7 @@
 
 
 using System;
-using Clubs.Domain.Entities;
+using Emails.Domain;
 
 namespace Emails.App
 {
@@ -12,7 +12,7 @@ namespace Emails.App
 
         }
 
-        public string generateInviteEmailContent(Invite inv)
+        public string generateInviteEmailContent(Invitation inv)
         {
             throw new NotImplementedException();
         }

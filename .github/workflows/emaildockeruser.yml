@@ -22,7 +22,7 @@ jobs:
             password: HY3xm=g2bxhR29Qj2D8AsINE0XTRj701
             
         - name: Docker
-          working-directory: ./src/Services/Emails/Emails.Api
+          working-directory: ./src/Services/Emails/
           run: |
-            docker build . -t clubsregistry.azurecr.io/emailsapp
-            docker push clubsregistry.azurecr.io/emailsapp
+            docker build . -t clubsregistry.azurecr.io/emailsapp:latest
+            docker push clubsregistry.azurecr.io/emailsapp:latest

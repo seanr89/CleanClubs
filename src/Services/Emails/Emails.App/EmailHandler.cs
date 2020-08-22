@@ -3,12 +3,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Net;
-using Utilities;
 using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using Clubs.Domain.Entities;
-
+using Emails.Domain;
 namespace Emails.App
 {
     public class EmailHandler
@@ -27,7 +25,7 @@ namespace Emails.App
         /// <param name="invites">the collection of invitations to be emailed</param>
         /// <param name="match">The corresponding match!</param>
         /// <returns></returns>
-        public async Task GenerateAndSendInviteEmail(Invite invite)
+        public async Task GenerateAndSendInviteEmail(Invitation invite)
         {
             var content = generateEmailContent(invite);
             await SendEmail(invite.Email, content, "Match Invitation");
@@ -58,7 +56,7 @@ namespace Emails.App
                 {
                     return true;
                 }
-                _Logger.LogError($"{HelperMethods.GetCallerMemberName()} - Failed to send email {email}");
+                _Logger.LogError($"Failed to send invitation to: {email}");
                 return false;
             }
             catch (Exception e)
@@ -73,7 +71,7 @@ namespace Emails.App
         /// </summary>
         /// <param name="inv"></param>
         /// <returns></returns>
-        private string generateEmailContent(Invite inv)
+        private string generateEmailContent(Invitation inv)
         {
             string message = "";
 

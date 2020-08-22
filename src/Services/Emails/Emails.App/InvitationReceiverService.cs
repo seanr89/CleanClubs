@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
-using Utilities;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
-using Clubs.Domain.Entities;
+using Emails.Domain;
 
 namespace Emails.App
 {
@@ -26,7 +25,7 @@ namespace Emails.App
         {
             _SubscriptionClient.RegisterMessageHandler((message, token) =>
             {
-                var invite = JsonConvert.DeserializeObject<Invite>(Encoding.UTF8.GetString(message.Body));
+                var invite = JsonConvert.DeserializeObject<Invitation>(Encoding.UTF8.GetString(message.Body));
 
                 _EmailHandler.GenerateAndSendInviteEmail(invite);
 
