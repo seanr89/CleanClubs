@@ -7,22 +7,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 'Checkout GitHub Action' 
-    uses: actions/checkout@master
-        
-    - name: 'Login via Azure CLI'
-    uses: azure/login@v1
-    with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-    
-    - uses: azure/docker-login@v1
-    with:
-        login-server: clubsregistry.azurecr.io
-        username: clubsregistry
-        password: HY3xm=g2bxhR29Qj2D8AsINE0XTRj701
-        
-    - name: Docker
-      working-directory: ./src/Services/Emails/
-      run: |
-        docker build . -t clubsregistry.azurecr.io/emailsapp:latest
-        docker push clubsregistry.azurecr.io/emailsapp:latest
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@master
+
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: clubsregistry.azurecr.io
+          username: clubsregistry
+          password: HY3xm=g2bxhR29Qj2D8AsINE0XTRj701
+
+      - name: Docker
+        working-directory: ./src/Services/Emails/
+        run: |
+          docker build . -t clubsregistry.azurecr.io/emailsapp:latest
+          docker push clubsregistry.azurecr.io/emailsapp:latest
