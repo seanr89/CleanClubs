@@ -31,7 +31,7 @@ namespace Emails.Api
 
             services.AddEmailApplication(Configuration);
 
-            services.AddHealthChecks();
+            //services.AddHealthChecks();
 
             services.AddHealthEndpoints();
         }
@@ -40,11 +40,11 @@ namespace Emails.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHealthEndpoint();
-            app.UseEndpoints(endpoints =>
-            {
-                //endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
-            });
+            // app.UseEndpoints(endpoints =>
+            // {
+            //     //endpoints.MapControllers();
+            //     endpoints.MapHealthChecks("/health");
+            // });
         }
     }
 }
