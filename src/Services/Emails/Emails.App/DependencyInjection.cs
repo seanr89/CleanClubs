@@ -16,6 +16,8 @@ namespace Emails.App
             services.AddSingleton<ISubscriptionClient>(x =>
                 new SubscriptionClient(new ServiceBusConnectionStringBuilder(configuration.GetValue<string>("ServiceBus:ConnectionString"))
                 , configuration.GetValue<string>("ServiceBus:ConnectionString")));
+
+            services.AddHostedService<InvitationReceieverService>();
             return services;
         }
     }
