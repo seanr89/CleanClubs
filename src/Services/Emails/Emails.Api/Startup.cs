@@ -23,40 +23,23 @@ namespace Emails.Api
         }
 
         public IConfiguration Configuration { get; }
-        private string MyAllowSpecificOrigins = "CorsPolicy";
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // services.AddControllers().AddNewtonsoftJson(options =>
-            // {
-            //     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            // });
-
-            MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
-            services.ConfigureCors(Configuration);
-
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.AddEmailApplication(Configuration);
 
             services.AddHealthChecks();
+
+            services.AddHealthEndpoints();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseCors(MyAllowSpecificOrigins);
-
-            app.UseRouting();
-
+            app.UseHealthEndpoint();
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllers();

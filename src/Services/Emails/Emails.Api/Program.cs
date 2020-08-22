@@ -20,6 +20,7 @@ namespace Emails.Api
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseHealthEndpoints();
                     webBuilder.UseStartup<Startup>();
                 });
     }

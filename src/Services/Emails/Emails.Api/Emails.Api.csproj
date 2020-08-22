@@ -2,14 +2,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-    <ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1"/>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0"/>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
+    <PackageReference Include="App.Metrics.AspNetCore.Health.Endpoints" Version="3.2.0"/>
   </ItemGroup>
   <ItemGroup>
-    <!-- <ProjectReference Include="../../Clubs/Clubs.Domain/Clubs.Domain.csproj"/> -->
-    <ProjectReference Include="../Emails.App/Emails.App.csproj" />
+    <ProjectReference Include="../Emails.App/Emails.App.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings.json">
