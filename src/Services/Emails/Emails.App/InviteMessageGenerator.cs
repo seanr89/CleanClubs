@@ -6,10 +6,10 @@ using Microsoft.Extensions.Options;
 
 namespace Emails.App
 {
-    public class ContentGenerator
+    public class InviteMessageGenerator : AbstractMessageGenerator
     {
         private readonly EmailSettings _EmailSettings;
-        public ContentGenerator(IOptions<EmailSettings> settings)
+        public InviteMessageGenerator(IOptions<EmailSettings> settings)
         {
             _EmailSettings = settings.Value;
         }
@@ -35,6 +35,11 @@ namespace Emails.App
                     <p>Kind regards,</p>
                     <p><strong>Clubs Api</strong></p>";
             return message;
+        }
+
+        public override string GenerateMessage()
+        {
+            throw new NotImplementedException();
         }
     }
 }
