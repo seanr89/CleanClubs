@@ -27,6 +27,7 @@ namespace Emails.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.AddEmailApplication(Configuration);
@@ -39,12 +40,13 @@ namespace Emails.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseRouting();
             app.UseHealthEndpoint();
-            // app.UseEndpoints(endpoints =>
-            // {
-            //     //endpoints.MapControllers();
-            //     endpoints.MapHealthChecks("/health");
-            // });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                //endpoints.MapHealthChecks("/health");
+            });
         }
     }
 }
