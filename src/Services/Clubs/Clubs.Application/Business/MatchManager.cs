@@ -76,8 +76,8 @@ namespace Clubs.Application.Business
                     //match.InvitesSent = true;
                     foreach (var inv in match.Invites)
                     {
-                        var contract = new InvitationCreated() { Id = inv.Id, Email = inv.Email, Date = inv.Match.Date };
-                        await _MessagePublisher.Publish<InvitationCreated>(contract);
+                        var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = inv.Match.Date };
+                        await _MessagePublisher.Publish<InvitationRequest>(contract);
                     }
                     match.InvitesSent = true;
                 }

@@ -3,7 +3,7 @@ using System;
 
 namespace Clubs.Messages.Contracts
 {
-    public class InvitationCreated
+    public class InvitationRequest
     {
         public Guid Id { get; set; }
 
