@@ -15,32 +15,32 @@ namespace Emails.App
         private readonly ILogger<InvitationReceieverService> _Logger;
         private readonly EmailHandler _EmailHandler;
 
-        public InvitationReceieverService(ISubscriptionClient subscriptionClient, ILogger<InvitationReceieverService> logger,
-            EmailHandler emailHandler)
+        public InvitationReceieverService(ISubscriptionClient subscriptionClient)
         {
-            _EmailHandler = emailHandler;
-            _SubscriptionClient = subscriptionClient;
-            _Logger = logger;
+            //_EmailHandler = emailHandler;
+            //_SubscriptionClient = subscriptionClient;
+            //_Logger = logger;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _SubscriptionClient.RegisterMessageHandler((message, token) =>
-            {
-                var invite = JsonConvert.DeserializeObject<Invitation>(Encoding.UTF8.GetString(message.Body));
-
-                _EmailHandler.GenerateAndSendInviteEmail(invite);
-
-                //Stops potential duplicate processing
-                return _SubscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
-            },
-            new MessageHandlerOptions(args => Task.CompletedTask)
-            {
-                //exception handling
-                AutoComplete = false,
-                MaxConcurrentCalls = 1
-            });
             return Task.CompletedTask;
+            // _SubscriptionClient.RegisterMessageHandler((message, token) =>
+            // {
+            //     var invite = JsonConvert.DeserializeObject<Invitation>(Encoding.UTF8.GetString(message.Body));
+
+            //     //_EmailHandler.GenerateAndSendInviteEmail(invite);
+
+            //     //Stops potential duplicate processing
+            //     return _SubscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+            // },
+            // new MessageHandlerOptions(args => Task.CompletedTask)
+            // {
+            //     //exception handling
+            //     AutoComplete = false,
+            //     MaxConcurrentCalls = 1
+            // });
+            // return Task.CompletedTask;
         }
     }
 }

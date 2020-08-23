@@ -12,12 +12,12 @@ namespace Clubs.Messages
     //Following: https://www.youtube.com/watch?v=gQ5P8WVpj30&t=1241s
     public class InvitationPublisher : IMessagePublisher
     {
-        private readonly IQueueClient _queueClient;
+        private readonly ITopicClient _topicClient;
         private readonly ILogger<InvitationPublisher> _logger;
 
-        public InvitationPublisher(IQueueClient queueClient, ILogger<InvitationPublisher> logger)
+        public InvitationPublisher(ITopicClient topicClient, ILogger<InvitationPublisher> logger)
         {
-            _queueClient = queueClient;
+            _topicClient = topicClient;
             _logger = logger;
         }
 
@@ -39,7 +39,8 @@ namespace Clubs.Messages
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         });
                 var message = new Message(Encoding.UTF8.GetBytes(objAsText));
-                return _queueClient.SendAsync(message);
+                message.UserProperties["MessageType"] = typeof(T).Name;
+                return _topicClient.SendAsync(message);
             }
             catch (JsonSerializationException e)
             {
@@ -51,7 +52,7 @@ namespace Clubs.Messages
         public Task Publish(string raw)
         {
             var message = new Message(Encoding.UTF8.GetBytes(raw));
-            return _queueClient.SendAsync(message);
+            return _topicClient.SendAsync(message);
         }
     }
 }

@@ -14,8 +14,9 @@ namespace Emails.App
         {
             services.AddTransient<EmailHandler>();
             services.AddSingleton<ISubscriptionClient>(x =>
-                new SubscriptionClient(new ServiceBusConnectionStringBuilder(configuration.GetValue<string>("ServiceBus:ConnectionString"))
-                , configuration.GetValue<string>("ServiceBus:ConnectionString")));
+                new SubscriptionClient(configuration.GetValue<string>("ServiceBus:ConnectionString")
+                , configuration.GetValue<string>("ServiceBus:TopicName")
+                , configuration.GetValue<string>("ServiceBus:Subscription")));
 
             services.AddHostedService<InvitationReceieverService>();
             return services;

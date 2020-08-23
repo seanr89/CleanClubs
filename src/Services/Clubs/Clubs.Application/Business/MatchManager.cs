@@ -11,6 +11,7 @@ using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
 using Clubs.Domain.Entities;
 using Clubs.Messages;
+using Clubs.Messages.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -48,7 +49,7 @@ namespace Clubs.Application.Business
 
             Guid? matchId = null;
 
-            using(ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
+            using (ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
             {
                 var match = _Mapper.Map<Match>(matchView);
 
@@ -75,7 +76,8 @@ namespace Clubs.Application.Business
                     //match.InvitesSent = true;
                     foreach (var inv in match.Invites)
                     {
-                        await _MessagePublisher.Publish<Invite>(inv);
+                        var contract = new InvitationCreated() { Id = inv.Id, Email = inv.Email, Date = inv.Match.Date };
+                        await _MessagePublisher.Publish<InvitationCreated>(contract);
                     }
                     match.InvitesSent = true;
                 }

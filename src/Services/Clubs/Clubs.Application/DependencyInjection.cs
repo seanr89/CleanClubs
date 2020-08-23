@@ -32,8 +32,8 @@ namespace Clubs.Application
 
             services.AddTransient<MatchManager>();
 
-            services.AddSingleton<IQueueClient>(x => new QueueClient("Endpoint=sb://clubservicebus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=I5e1gccbgKAOsIn6m1L30NYpEcZx0KC++eWsll0z4+o="
-            , "invitationqueue"));
+            services.AddSingleton<ITopicClient>(x => new TopicClient(configuration.GetValue<string>("ServiceBus:ConnectionString")
+            , configuration.GetValue<string>("ServiceBus:TopicName")));
             services.AddSingleton<IMessagePublisher, InvitationPublisher>();
 
             // services.AddNewtonsoftJson(options =>
