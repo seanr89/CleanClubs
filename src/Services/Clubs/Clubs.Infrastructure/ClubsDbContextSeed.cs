@@ -127,7 +127,7 @@ namespace Clubs.Infrastructure.Persistence
         {
             RandomNameGenerator gen = new RandomNameGenerator();
 
-            int randomNumber = gen.GenerateRandomNumber(1, 25);
+            int randomNumber = gen.GenerateRandomNumber(11, 35);
 
             club.Members = new List<Member>();
 
