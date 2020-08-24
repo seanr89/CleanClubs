@@ -1,0 +1,39 @@
+name: Clubs Build and Docker
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "src/Services/Clubs/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+      - name: Install dependencies
+        working-directory: ./src/Services/Clubs/Clubs.API
+        run: dotnet restore
+      - name: Build
+        working-directory: ./src/Services/Clubs/Clubs.API
+        run: dotnet build --configuration Release --no-restore
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: "Docker Login"
+        uses: azure/docker-login@v1
+        with:
+          login-server: clubsregistry.azurecr.io
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - name: Docker
+        working-directory: ./src/Services/
+        run: |
+          docker build . -t clubsregistry.azurecr.io/clubs-image -f Dockerfile.Clubs
+          docker push clubsregistry.azurecr.io/clubs-image

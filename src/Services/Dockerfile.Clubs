@@ -4,7 +4,18 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
 
 WORKDIR /app
 COPY /Clubs/Clubs.API/Clubs.API.csproj Clubs/Clubs.API/
-
+COPY /Clubs/Clubs.Domain/Clubs.Domain.csproj Clubs/Clubs.Domain/
+COPY /Clubs/Clubs.Infrastructure/Clubs.Infrastructure.csproj Clubs/Clubs.Infrastructure/
+COPY /Clubs/Clubs.Messages/Clubs.Messages.csproj Clubs/Clubs.Messages/
 COPY /Utilities/Utilities.csproj Utilities/
 
 RUN dotnet restore Clubs/Clubs.API/Clubs.API.csproj
+
+COPY . .
+RUN dotnet publish Clubs/Clubs.API/Clubs.API.csproj -c Release -o out
+
+# final stage/image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "Clubs.API.dll"]

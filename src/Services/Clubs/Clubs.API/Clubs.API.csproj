@@ -31,6 +31,16 @@
     <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
     <ProjectReference Include="../Clubs.Infrastructure/Clubs.Infrastructure.csproj"/>
     <ProjectReference Include="../../Utilities/Utilities.csproj"/>
-    <!-- <ProjectReference Include="../../Emails/Emails.App/Emails.App.csproj"/> -->
+  </ItemGroup>
+    <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+        <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+        <Content Update="appsettings.Staging.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
