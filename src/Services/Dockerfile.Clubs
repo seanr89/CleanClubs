@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+# EXPOSE 80
+# EXPOSE 443
+
+WORKDIR /app
+COPY /Clubs/Clubs.API/Clubs.API.csproj Clubs/Clubs.API/
+
+COPY /Utilities/Utilities.csproj Utilities/
+
+RUN dotnet restore Clubs/Clubs.API/Clubs.API.csproj
