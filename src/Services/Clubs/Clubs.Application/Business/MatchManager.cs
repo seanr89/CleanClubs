@@ -24,17 +24,17 @@ namespace Clubs.Application.Business
         private readonly ILogger<MatchManager> _Logger;
         protected IMediator _Mediator;
         private readonly IMapper _Mapper;
-        private readonly SimpleEmailHandler _EmailHandler;
+        //private readonly SimpleEmailHandler _EmailHandler;
         private readonly IMessagePublisher _MessagePublisher;
 
         public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
-            IMapper mapper, SimpleEmailHandler simpleEmailHandler,
+            IMapper mapper,
             IMessagePublisher messagePublisher)
         {
             _Logger = logger;
             _Mediator = mediator;
             _Mapper = mapper;
-            _EmailHandler = simpleEmailHandler;
+            //_EmailHandler = simpleEmailHandler;
             _MessagePublisher = messagePublisher;
         }
 
@@ -76,7 +76,7 @@ namespace Clubs.Application.Business
                     //match.InvitesSent = true;
                     foreach (var inv in match.Invites)
                     {
-                        var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = inv.Match.Date };
+                        var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = matchView.Date };
                         await _MessagePublisher.Publish<InvitationRequest>(contract);
                     }
                     match.InvitesSent = true;
