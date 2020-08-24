@@ -99,6 +99,13 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(Club10);
                 context.Clubs.Add(Club10);
 
+                for(int i = 11; i <= 25; i++)
+                {
+                    var club = new Club() { Name = $"Club {i}" };
+                    CreateMemberList(club);
+                    context.Clubs.Add(club);
+                }
+
                 await context.SaveChangesAsync();
             }
         }
