@@ -27,6 +27,7 @@ namespace Clubs.Application.Business
         /// <returns>Returns the matchDTO with teams!</returns>
         public async Task<MatchDto> Generate(GenerationInfo info)
         {
+            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
             if (info.Match.Invites.Any())
             {
                 var acceptedInvites = info.Match.Invites.Where(i => i.Accepted == true).ToList();
@@ -41,37 +42,40 @@ namespace Clubs.Application.Business
                 //Ok shuffle the players with a utility call
                 HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
 
-                ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
+                await ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
                 //complete - need to save these details now!
             }
             return info.Match;
         }
 
-        void ShufflePlayersIntoTeams(List<TeamDto> teams, MatchDto match, List<InviteDto> invites)
+        async Task ShufflePlayersIntoTeams(List<TeamDto> teams, MatchDto match, List<InviteDto> invites)
         {
-            PlayerDto player = null;
-            bool AddedToTeamOne = false;
-            foreach (var inv in invites)
+            await Task.Run(() =>
             {
-                player = new PlayerDto()
+                PlayerDto player = null;
+                bool AddedToTeamOne = false;
+                foreach (var inv in invites)
                 {
-                    Email = inv.Member.Email,
-                    FirstName = inv.Member.FirstName,
-                    LastName = inv.Member.LastName,
-                };
+                    player = new PlayerDto()
+                    {
+                        Email = inv.Member.Email,
+                        FirstName = inv.Member.FirstName,
+                        LastName = inv.Member.LastName,
+                    };
 
-                if (!AddedToTeamOne)
-                {
-                    AddedToTeamOne = true;
-                    teams[0].Players.Add(player);
+                    if (!AddedToTeamOne)
+                    {
+                        AddedToTeamOne = true;
+                        teams[0].Players.Add(player);
+                        continue;
+                    }
+
+                    AddedToTeamOne = false;
+                    teams[1].Players.Add(player);
                     continue;
                 }
-
-                AddedToTeamOne = false;
-                teams[1].Players.Add(player);
-                continue;
-            }
-            match.Teams = teams;
+                match.Teams = teams;
+            });
         }
 
         protected List<TeamDto> InitialiseTeams(MatchDto match)
