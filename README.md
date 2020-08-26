@@ -12,3 +12,6 @@ go to directory /src/Services/Emails/Emails.Api/
 run command `docker build -t email-image -f Dockerfile .`
 
 ### Clubs
+
+go to directory /src
+run command `docker build -t clubs-image -f Dockerfile.Clubs .`

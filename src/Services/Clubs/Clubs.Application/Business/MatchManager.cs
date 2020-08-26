@@ -38,6 +38,23 @@ namespace Clubs.Application.Business
             _MessagePublisher = messagePublisher;
         }
 
+        /// <summary>
+        /// TODO: lightweight process to handle the creation of a match and sending of invites out at a later date!
+        /// </summary>
+        /// <param name="match">MatchDTO: a partial match!</param>
+        /// <returns>the unique of the match : or null!</returns>
+        public async Task<Guid> CreateEmptyMatch(CreateMatchDTO match)
+        {
+            _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
+            throw new NotImplementedException();
+
+            Guid matchId;
+
+
+
+            return matchId;
+        }
+
 
         /// <summary>
         /// Support the creation of a Match Record and trigger the invitation for all club members
@@ -56,17 +73,7 @@ namespace Clubs.Application.Business
                 //Step1. Check if invites are needed to be added/created
                 if (matchView.InviteActiveMembers)
                 {
-                    var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
-                    //Get only active members as no point sending to others
-                    var activeMembers = members.Where(m => m.Active == true).ToList();
-
-                    //Convert members to invites!
-                    foreach (var a in activeMembers)
-                    {
-                        //create a new object for each invite
-                        var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
-                        match.Invites.Add(invite);
-                    }
+                    await GetAllMembersAndAddToInvites(match);
                 }
                 //StepX. Check if we need to email and then message it!
                 if (matchView.SendInvites)
@@ -83,9 +90,26 @@ namespace Clubs.Application.Business
                 }
                 //StepX. Save the match! (N.B. here we might want to return the object!)
                 matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+
+                //Not awaited to speed up performance!
                 monitor.CreatePerformanceMetricAndLogEvent("CreateMatch");
             }
             return matchId;
+        }
+
+        private async Task GetAllMembersAndAddToInvites(Match match)
+        {
+            var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
+            //Get only active members as no point sending to others
+            var activeMembers = members.Where(m => m.Active == true).ToList();
+
+            //Convert members to invites!
+            foreach (var a in activeMembers)
+            {
+                //create a new object for each invite
+                var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
+                match.Invites.Add(invite);
+            }
         }
     }
 }

@@ -26,7 +26,6 @@ namespace Clubs.Application.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
                 _logger.LogError(ex, "Clubs API: DbUpdate Exception for Request {Name} {@Request}", requestName, request);
-
                 throw;
             }
         }

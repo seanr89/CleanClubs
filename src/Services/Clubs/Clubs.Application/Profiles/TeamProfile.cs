@@ -10,6 +10,7 @@ namespace Clubs.Application.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Team, TeamDto>();
+            CreateMap<TeamDto, Team>();
         }
     }
 }

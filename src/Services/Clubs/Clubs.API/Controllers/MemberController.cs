@@ -87,44 +87,44 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <param name="member"></param>
         /// <returns></returns>
-        [HttpPost]
-        [ProducesResponseType(typeof(CreateMemberDTO), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody] CreateMemberDTO member)
-        {
-            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var record = await Mediator.Send(new CreateMemberCommand() { Member = member });
-            if (record != null)
-                return CreatedAtRoute("GetMemberById", new { id = record }, member);
+        // [HttpPost]
+        // [ProducesResponseType(typeof(CreateMemberDTO), StatusCodes.Status201Created)]
+        // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // public async Task<IActionResult> Post([FromBody] CreateMemberDTO member)
+        // {
+        //     _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
+        //     var record = await Mediator.Send(new CreateMemberCommand() { Member = member });
+        //     if (record != null)
+        //         return CreatedAtRoute("GetMemberById", new { id = record }, member);
 
-            return BadRequest("Save failed");
-        }
+        //     return BadRequest("Save failed");
+        // }
 
         #endregion
 
         #region PUT/UPDATE
 
-        [HttpPut("{id}")]
-        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateMember(Guid id, [FromBody] MemberDto update)
-        {
-            _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        // [HttpPut("{id}")]
+        // [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // public async Task<IActionResult> UpdateMember(Guid id, [FromBody] MemberDto update)
+        // {
+        //     _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return BadRequest(ModelState);
+        //     }
 
-            var record = await Mediator.Send(new UpdateMemberCommand() { Member = update });
-            if (record)
-                return Ok("Member Updated!");
+        //     var record = await Mediator.Send(new UpdateMemberCommand() { Member = update });
+        //     if (record)
+        //         return Ok("Member Updated!");
 
-            return BadRequest("Update failed");
-        }
+        //     return BadRequest("Update failed");
+        // }
 
         #endregion
     }

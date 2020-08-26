@@ -37,11 +37,13 @@ namespace Clubs.API.Controllers
 
             if (match != null)
             {
-                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo() { Match = match, GeneratorOption = GeneratorType.Random });
+                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo()
+                { Match = match, GeneratorOption = GeneratorType.Random });
 
                 var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
                 if (update)
                     return Ok();
+
                 return BadRequest();
             }
             return Ok(match);

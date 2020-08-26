@@ -33,10 +33,11 @@ namespace Clubs.Application.Requests.Matches.Commands
 
         public async Task<bool> Handle(UpdateMatchCommand request, CancellationToken cancellationToken)
         {
-            var existingRecord = _Context.Matches.Find(request.Match.Id);
+            var convertedMatch = _Mapper.Map<Match>(request.Match);
+            var existingRecord = _Context.Matches.Find(convertedMatch.Id);
             if (existingRecord != null)
             {
-                _Context.Entry(existingRecord).CurrentValues.SetValues(request.Match);
+                _Context.Entry(existingRecord).CurrentValues.SetValues(convertedMatch);
             }
             try
             {
@@ -45,7 +46,7 @@ namespace Clubs.Application.Requests.Matches.Commands
             catch (DbUpdateException ex)
             {
                 //Log the error (uncomment ex variable name and write a log.)
-                _Logger.LogError($"SqlError - Unable to save changes: {ex.Message}");
+                _Logger.LogError($"Match Update SqlError - Unable to save changes: {ex.Message}");
                 //  ModelState.AddModelError("", "Unable to save changes. " +
                 //      "Try again, and if the problem persists, " +
                 //      "see your system administrator.");

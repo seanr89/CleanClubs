@@ -64,11 +64,10 @@ namespace Clubs.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-            }
-
 #if DEBUG
-            configuration.DisableTelemetry = true;
+                configuration.DisableTelemetry = true;
 #endif
+            }
 
             app.UseHttpsRedirection();
 

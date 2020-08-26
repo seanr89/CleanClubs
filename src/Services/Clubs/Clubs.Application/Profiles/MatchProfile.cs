@@ -11,6 +11,7 @@ namespace Clubs.Application.Profiles
         {
             // Default mapping when property names are same
             CreateMap<Match, MatchDto>();
+            CreateMap<MatchDto, Match>();
             CreateMap<Match, MatchListDto>();
             CreateMap<CreateMatchDTO, Match>();
 

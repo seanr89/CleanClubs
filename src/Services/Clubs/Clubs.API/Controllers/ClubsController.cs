@@ -99,21 +99,21 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <param name="club"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
-        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody] ClubUpdateDto club)
-        {
-            _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+        // [HttpPut("{id}")]
+        // [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        // [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        // public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody] ClubUpdateDto club)
+        // {
+        //     _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
+        //     if (!ModelState.IsValid)
+        //         return BadRequest(ModelState);
 
-            var record = await Mediator.Send(new UpdateClubCommand() { Club = club });
-            if (record)
-                return Ok("Club Updated");
+        //     var record = await Mediator.Send(new UpdateClubCommand() { Club = club });
+        //     if (record)
+        //         return Ok("Club Updated");
 
-            return BadRequest("Update failed");
-        }
+        //     return BadRequest("Update failed");
+        // }
         #endregion
     }
 }
