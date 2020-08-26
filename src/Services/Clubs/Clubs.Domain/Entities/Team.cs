@@ -3,11 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Clubs.Domain.Common;
 using Clubs.Domain.Enums;
 
 namespace Clubs.Domain.Entities
 {
-    public class Team
+    public class Team : AuditableEntity
     {
         [Key]
         public Guid Id { get; set; }

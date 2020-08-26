@@ -61,6 +61,7 @@ namespace Clubs.Application.Business
                         Email = inv.Member.Email,
                         FirstName = inv.Member.FirstName,
                         LastName = inv.Member.LastName,
+                        MemberId = inv.Member.Id
                     };
 
                     if (!AddedToTeamOne)

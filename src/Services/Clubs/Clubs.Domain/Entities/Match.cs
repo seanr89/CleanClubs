@@ -18,7 +18,7 @@ namespace Clubs.Domain.Entities
         [Required]
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; }
-        public ICollection<Team> Teams { get; set; }
+        public List<Team> Teams { get; set; } = new List<Team>();
         public ICollection<Invite> Invites { get; set; } = new List<Invite>();
         public bool InvitesSent { get; set; } = false;
         public GeneratorType Generator { get; set; } = GeneratorType.None;

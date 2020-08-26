@@ -79,8 +79,6 @@ namespace Clubs.Application.Business
                 if (matchView.SendInvites)
                 {
                     //Now we need to send the invites then!
-                    //await _EmailHandler.GenerateAndSendInviteEmails(match.Invites, match);
-                    //match.InvitesSent = true;
                     foreach (var inv in match.Invites)
                     {
                         var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = matchView.Date };
