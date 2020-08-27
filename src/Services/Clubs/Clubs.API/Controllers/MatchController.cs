@@ -92,13 +92,18 @@ namespace Clubs.API.Controllers
 
         #endregion
 
-
         #region PUT/Update
 
         // [HttpPut]
         // public IActionResult Update(Guid id)
         // {
         //     throw new NotImplementedException();
+        // }
+
+        //[HttpPut]
+        // public IActionResult UpdateMatchCancelled()
+        // {
+
         // }
 
         #endregion

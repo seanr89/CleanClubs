@@ -10,5 +10,7 @@ namespace Clubs.Messages.Contracts
         public string Email { get; set; }
 
         public DateTime Date { get; set; }
+
+        public string Location { get; set; }
     }
 }

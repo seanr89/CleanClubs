@@ -41,7 +41,6 @@ namespace Clubs.API
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-
             await host.RunAsync();
         }
 

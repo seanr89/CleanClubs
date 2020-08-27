@@ -29,8 +29,7 @@ namespace Clubs.Application
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
             services.AddTransient<ITeamGenerator, TeamGenerator>();
-            services.AddTransient<SimpleEmailHandler>();
-
+            services.AddTransient<GenerationService>();
             services.AddTransient<MatchManager>();
 
             services.AddSingleton<ITopicClient>(x => new TopicClient(configuration.GetValue<string>("ServiceBus:ConnectionString")

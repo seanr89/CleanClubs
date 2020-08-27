@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application.Business;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
@@ -18,35 +19,33 @@ namespace Clubs.API.Controllers
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;
-        private readonly ITeamGenerator _TeamGenerator;
+        private readonly GenerationService _generationService;
 
-        public TeamController(ILogger<TeamController> logger, ITeamGenerator teamGenerator)
+        public TeamController(ILogger<TeamController> logger, GenerationService generationService)
         {
             _Logger = logger;
-            _TeamGenerator = teamGenerator;
+            _generationService = generationService;
         }
 
-        [HttpGet("{id}", Name = "CreateTeamsForMatch")]
+        [HttpGet("{id}", Name = "CreateRandomTeamsForMatch")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateTeamsForMatch(Guid id)
+        public async Task<IActionResult> CreateRandomTeamsForMatch(Guid id)
         {
             _Logger.LogInformation($"Teams: {HelperMethods.GetCallerMemberName()}");
 
-            var match = await Mediator.Send(new GetMatchQuery() { MatchId = id });
+            var update = await _generationService.ExecuteTeamGenerationForMatchAndUpdate(id, GeneratorType.Random);
+            if (update)
+                return Ok();
+            return BadRequest("Team Generation Failed");
+        }
 
-            if (match != null)
-            {
-                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo()
-                { Match = match, GeneratorOption = GeneratorType.Random });
-
-                var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
-                if (update)
-                    return Ok();
-
-                return BadRequest();
-            }
-            return Ok(match);
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateMatchTeamsManual(MatchDto match)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -34,10 +34,16 @@ namespace Clubs.Application.Requests.Matches.Commands
         public async Task<bool> Handle(UpdateMatchCommand request, CancellationToken cancellationToken)
         {
             var convertedMatch = _Mapper.Map<Match>(request.Match);
-            var existingRecord = _Context.Matches.Find(convertedMatch.Id);
+            var existingRecord = await _Context.Matches
+                .Include(m => m.Teams)
+                .FirstOrDefaultAsync(m => m.Id == convertedMatch.Id);
             if (existingRecord != null)
-            {
+            {;
                 _Context.Entry(existingRecord).CurrentValues.SetValues(convertedMatch);
+                existingRecord.Teams = convertedMatch.Teams;
+                _Context.Update(existingRecord);
+
+                _Context.Teams.AddRange(existingRecord.Teams);
             }
             try
             {

@@ -14,5 +14,6 @@ namespace Clubs.Application.Profiles.Dto
         public string Email { get; set; }
 
         public bool Active { get; set; }
+        public Guid MemberId { get; set; }
     }
 }

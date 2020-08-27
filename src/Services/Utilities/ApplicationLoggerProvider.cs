@@ -18,7 +18,7 @@ namespace Utilities
         /// </summary>
         /// <typeparam name="T"> generic type parameter allows arbitrary type T to a method at compile-time, without specifying a concrete type in the method or class declaration.</typeparam>
         /// <returns>And object of the ILogger</returns>
-        public static ILogger CreateLogger<T>() =>
+        public static ILogger<T> CreateLogger<T>() =>
           LoggerFactory.CreateLogger<T>();
 
         /// <summary>
