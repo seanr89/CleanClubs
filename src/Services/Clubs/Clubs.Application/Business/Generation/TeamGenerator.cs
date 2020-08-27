@@ -15,9 +15,12 @@ namespace Clubs.Application.Business
     public class TeamGenerator : ITeamGenerator
     {
         private readonly ILogger<TeamGenerator> _Logger;
-        public TeamGenerator(ILogger<TeamGenerator> logger)
+        public TeamGenerator(ILogger<TeamGenerator> logger = null)
         {
-            _Logger = logger;
+            if(logger == null)
+                _Logger = ApplicationLoggerProvider.CreateLogger<TeamGenerator>();
+            else
+                _Logger = logger;
         }
 
         /// <summary>
@@ -44,6 +47,7 @@ namespace Clubs.Application.Business
 
                 await ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
                 //complete - need to save these details now!
+                info.Match.Status = MatchStatus.Scheduled;
             }
             return info.Match;
         }

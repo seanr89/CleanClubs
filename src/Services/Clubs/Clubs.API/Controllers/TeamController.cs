@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application.Business;
+using Clubs.Application.Profiles.Dto;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
@@ -26,10 +27,10 @@ namespace Clubs.API.Controllers
             _TeamGenerator = teamGenerator;
         }
 
-        [HttpGet("{id}", Name = "CreateTeamsForMatch")]
+        [HttpGet("{id}", Name = "CreateRandomTeamsForMatch")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateTeamsForMatch(Guid id)
+        public async Task<IActionResult> CreateRandomTeamsForMatch(Guid id)
         {
             _Logger.LogInformation($"Teams: {HelperMethods.GetCallerMemberName()}");
 
@@ -37,6 +38,9 @@ namespace Clubs.API.Controllers
 
             if (match != null)
             {
+                if(match.Teams.Count > 0)
+                    return StatusCode(220, "Match already has teams!");
+                    
                 var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo()
                 { Match = match, GeneratorOption = GeneratorType.Random });
 
@@ -44,9 +48,17 @@ namespace Clubs.API.Controllers
                 if (update)
                     return Ok();
 
-                return BadRequest();
+                return BadRequest("Team Generation Failed");
             }
             return Ok(match);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateMatchTeamsManual(MatchDto match)
+        {
+            throw new NotImplementedException();
         }
     }
 }
