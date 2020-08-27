@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;
 using MediatR;
@@ -18,19 +19,25 @@ namespace Clubs.Application.Business
             _mediator = mediator;
         }
 
-        public async Task ExecuteTeamGenerationForMatch(Guid matchId, GeneratorType option)
+        public async Task<bool> ExecuteTeamGenerationForMatchAndUpdate(Guid matchId, GeneratorType option)
         {
             _logger.LogInformation($"GenerationService: {HelperMethods.GetCallerMemberName()}");
 
+            bool result = false;
+
             var match = await _mediator.Send(new GetMatchQuery() { MatchId = matchId });
 
-            if(match == null){}
+            if(match == null){return result;}
                 //TODO: add error here!
 
-            if(match.Status != MatchStatus.Created){}
+            if(match.Status != MatchStatus.Created){return result;}
                 //TODO: error has we are in the wrong state!
 
             var generator = SelectGeneratorByGeneratorType(option);
+            var generatedMatch = await generator.Generate(match);
+
+            result =  await _mediator.Send(new UpdateMatchCommand() { Match = generatedMatch });
+            return result;
         }
 
         private ITeamGenerator SelectGeneratorByGeneratorType(GeneratorType type)
@@ -44,6 +51,7 @@ namespace Clubs.Application.Business
                     break;
                 case GeneratorType.Manual:
                 case GeneratorType.None:
+                    break;
 
             }
             return generator;

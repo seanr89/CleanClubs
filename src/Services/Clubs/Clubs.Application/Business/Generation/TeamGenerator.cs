@@ -28,6 +28,7 @@ namespace Clubs.Application.Business
         /// </summary>
         /// <param name="info"></param>
         /// <returns>Returns the matchDTO with teams!</returns>
+        /*
         public async Task<MatchDto> Generate(GenerationInfo info)
         {
             _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
@@ -50,7 +51,7 @@ namespace Clubs.Application.Business
                 info.Match.Status = MatchStatus.Scheduled;
             }
             return info.Match;
-        }
+        }*/
 
         async Task ShufflePlayersIntoTeams(List<TeamDto> teams, MatchDto match, List<InviteDto> invites)
         {
@@ -88,8 +89,31 @@ namespace Clubs.Application.Business
             var modelList = new List<TeamDto>();
             modelList.Add(new TeamDto() { Number = TeamNumber.ONE, MatchId = match.Id });
             modelList.Add(new TeamDto() { Number = TeamNumber.TWO, MatchId = match.Id });
-
             return modelList;
+        }
+
+        public async Task<MatchDto> Generate(MatchDto match)
+        {
+            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
+            if (match.Invites.Any())
+            {
+                var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
+                //Check if the player count is even
+                if (HelperMethods.IsEven(acceptedInvites.Count) == false)
+                {
+                    _Logger.LogInformation($"Uneven Invite count");
+                }
+
+                var teamList = InitialiseTeams(match);
+
+                //Ok shuffle the players with a utility call
+                HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
+
+                await ShufflePlayersIntoTeams(teamList, match, acceptedInvites);
+                //complete - need to save these details now!
+                match.Status = MatchStatus.Scheduled;
+            }
+            return match;
         }
     }
 }

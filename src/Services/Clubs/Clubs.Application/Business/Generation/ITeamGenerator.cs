@@ -7,6 +7,8 @@ namespace Clubs.Application.Business
 {
     public interface ITeamGenerator
     {
-        Task<MatchDto> Generate(GenerationInfo info);
+        //Task<MatchDto> Generate(GenerationInfo info);
+
+        Task<MatchDto> Generate(MatchDto match);
     }
 }

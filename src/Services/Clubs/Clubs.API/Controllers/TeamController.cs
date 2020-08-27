@@ -19,12 +19,12 @@ namespace Clubs.API.Controllers
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;
-        private readonly ITeamGenerator _TeamGenerator;
+        private readonly GenerationService _generationService;
 
-        public TeamController(ILogger<TeamController> logger, ITeamGenerator teamGenerator)
+        public TeamController(ILogger<TeamController> logger, GenerationService generationService)
         {
             _Logger = logger;
-            _TeamGenerator = teamGenerator;
+            _generationService = generationService;
         }
 
         [HttpGet("{id}", Name = "CreateRandomTeamsForMatch")]
@@ -34,23 +34,10 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Teams: {HelperMethods.GetCallerMemberName()}");
 
-            var match = await Mediator.Send(new GetMatchQuery() { MatchId = id });
-
-            if (match != null)
-            {
-                if(match.Teams.Count > 0)
-                    return StatusCode(220, "Match already has teams!");
-                    
-                var updatedMatch = await _TeamGenerator.Generate(new GenerationInfo()
-                { Match = match, GeneratorOption = GeneratorType.Random });
-
-                var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
-                if (update)
-                    return Ok();
-
-                return BadRequest("Team Generation Failed");
-            }
-            return BadRequest("Unable to find match!");
+            var update = await _generationService.ExecuteTeamGenerationForMatchAndUpdate(id, GeneratorType.Random);
+            if (update)
+                return Ok();
+            return BadRequest("Team Generation Failed");
         }
 
         [HttpPost]
