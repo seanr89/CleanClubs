@@ -43,10 +43,9 @@ namespace Clubs.API.Controllers
                 var update = await Mediator.Send(new UpdateMatchCommand() { Match = updatedMatch });
                 if (update)
                     return Ok();
-
                 return BadRequest();
             }
-            return Ok(match);
+            return BadRequest("Unable to find match!");
         }
     }
 }
