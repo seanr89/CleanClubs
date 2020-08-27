@@ -94,7 +94,7 @@ namespace Clubs.Application.Business
 
         public async Task<MatchDto> Generate(MatchDto match)
         {
-            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
+            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {match.Id}");
             if (match.Invites.Any())
             {
                 var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
