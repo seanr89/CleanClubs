@@ -34,6 +34,7 @@ namespace Clubs.Application.Requests.Matches.Queries
         public async Task<MatchDto> Handle(GetMatchQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Matches
+                .Include(m => m.Teams)
                 .ProjectTo<MatchDto>(_Mapper.ConfigurationProvider)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.MatchId);

@@ -50,7 +50,7 @@ namespace Clubs.API.Controllers
 
                 return BadRequest("Team Generation Failed");
             }
-            return Ok(match);
+            return BadRequest("Unable to find match!");
         }
 
         [HttpPost]
