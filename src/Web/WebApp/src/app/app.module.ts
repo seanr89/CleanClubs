@@ -11,11 +11,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { DefaultCompComponent } from './Components/default-comp/default-comp.component';
+import { PageLinkComponent } from './Core/page-link/page-link.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavmenuComponent
+    NavmenuComponent,
+    DefaultCompComponent,
+    PageLinkComponent
   ],
   imports: [
     BrowserModule,
