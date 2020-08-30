@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
     userData: any;
+    public signedIn: Observable<any>;
 
     constructor(
         private router: Router,
@@ -22,6 +24,10 @@ export class AuthService {
                 localStorage.setItem('user', null);
                 JSON.parse(localStorage.getItem('user'));
             }
+        });
+
+        this.signedIn = new Observable((subscriber) => {
+            this.afAuth.onAuthStateChanged(subscriber);
         });
     }
 

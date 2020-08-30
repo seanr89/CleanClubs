@@ -1,19 +1,18 @@
 <p>Sign In</p>
 <!-- Calling GoogleAuth() Api from AuthService -->
-<div class="formGroup">
-  <h3>Howdy, GUEST</h3>
-  <p>Login to get started...</p>
-  <button type="button" (click)="authService.GoogleAuth()">
-    Log in with Google
-  </button>
+<div class="formGroup" *ngIf="!isAuthenticated">
+    <h3>Howdy, GUEST</h3>
+    <p>Login to get started...</p>
+    <button type="button" (click)="authService.GoogleAuth()">
+        Log in with Google
+    </button>
 </div>
 
 <!-- User logged in -->
-<!-- <ng-template #authenticated>
-  <div *ngIf="auth.user$ | async as user">
-    <h3>Howdy, {{ user.displayName }}</h3>
+<div *ngIf="isAuthenticated">
+    <h3>Howdy, User</h3>
+    <!-- <h3>Howdy, {{ user.displayName }}</h3>
     <img [src]="user.photoURL" />
     <p>UID: {{ user.uid }}</p>
-    <button (click)="auth.signOut()">Logout</button>
-  </div>
-</ng-template> -->
+    <button (click)="auth.signOut()">Logout</button> -->
+</div>
