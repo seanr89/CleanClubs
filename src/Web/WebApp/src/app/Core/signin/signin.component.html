@@ -1,0 +1,18 @@
+<p>Sign In</p>
+<!-- Calling GoogleAuth() Api from AuthService -->
+<div class="formGroup" *ngIf="!isAuthenticated">
+    <h3>Howdy, GUEST</h3>
+    <p>Login to get started...</p>
+    <button type="button" (click)="authService.GoogleAuth()">
+        Log in with Google
+    </button>
+</div>
+
+<!-- User logged in -->
+<div *ngIf="isAuthenticated">
+    <h3>Howdy, User</h3>
+    <!-- <h3>Howdy, {{ user.displayName }}</h3>
+    <img [src]="user.photoURL" />
+    <p>UID: {{ user.uid }}</p>
+    <button (click)="auth.signOut()">Logout</button> -->
+</div>
