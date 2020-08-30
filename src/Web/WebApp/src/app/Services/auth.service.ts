@@ -3,13 +3,14 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { User } from '../Models/user';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    userData: any;
-    public signedIn: Observable<any>;
+    userData: User;
+    public signedIn: Observable<User>;
 
     constructor(
         private router: Router,

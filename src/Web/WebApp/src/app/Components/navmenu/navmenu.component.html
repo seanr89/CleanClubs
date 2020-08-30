@@ -9,15 +9,20 @@
     >
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item routerLink="/default" routerLinkActive="active"
-                >Default</a
-            >
-            <a mat-list-item routerLink="/sign-in" routerLinkActive="active"
-                >Sign In</a
-            >
-            <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()"
-                >Sign Out</a
-            >
+            <a mat-list-item routerLink="/sign-in" routerLinkActive="active">
+                Sign In
+            </a>
+            <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
+                Sign Out
+            </a>
+            <app-page-link
+                *ngIf="isAuthenticated"
+                id="clubsNavLink"
+                class="sidenav-option"
+                pageName="Clubs"
+                pageLink="/clubs"
+                pageIcon="done_outline"
+            ></app-page-link>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
