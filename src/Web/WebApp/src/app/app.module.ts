@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from './../environments/environment';
 import { AuthGuard } from './Services/Guards/authguard';
 import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
+import { ClubListComponent } from './Components/Clubs/club-list/club-list.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
         DefaultCompComponent,
         PageLinkComponent,
         SigninComponent,
+        ClubListComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),
