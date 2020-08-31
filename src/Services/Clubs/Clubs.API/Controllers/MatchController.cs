@@ -56,19 +56,19 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Record Found");
         }
 
-        [HttpGet("{id}", Name = "GetMatchesByClubId")]
-        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetMatchesByClubId(Guid id)
-        {
-            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
-            var result = await Mediator.Send(new GetClubMatchesQuery() { ClubId = id });
+        // [HttpGet("{id}", Name = "GetMatchesByClubId")]
+        // [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
+        // [ProducesResponseType(StatusCodes.Status204NoContent)]
+        // public async Task<IActionResult> GetMatchesByClubId(Guid id)
+        // {
+        //     _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
+        //     var result = await Mediator.Send(new GetClubMatchesQuery() { ClubId = id });
 
-            if (result.Any())
-                return Ok(result);
+        //     if (result.Any())
+        //         return Ok(result);
 
-            return StatusCode(204, "No Records Found");
-        }
+        //     return StatusCode(204, "No Records Found");
+        // }
 
         #region POST
 

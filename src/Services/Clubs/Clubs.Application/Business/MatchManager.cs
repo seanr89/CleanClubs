@@ -79,11 +79,7 @@ namespace Clubs.Application.Business
                 if (matchView.SendInvites)
                 {
                     //Now we need to send the invites then!
-                    foreach (var inv in match.Invites)
-                    {
-                        var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = matchView.Date };
-                        await _MessagePublisher.Publish<InvitationRequest>(contract);
-                    }
+                    await CreateInvitationRequestAndPublish(match.Invites.ToList(), matchView.Date);
                     match.InvitesSent = true;
                 }
                 //StepX. Save the match! (N.B. here we might want to return the object!)
@@ -95,6 +91,20 @@ namespace Clubs.Application.Business
             return matchId;
         }
 
+        private async Task CreateInvitationRequestAndPublish(List<Invite> invites, DateTime date)
+        {
+            foreach (var inv in invites)
+            {
+                var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = date };
+                await _MessagePublisher.Publish<InvitationRequest>(contract);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         private async Task GetAllMembersAndAddToInvites(Match match)
         {
             var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
