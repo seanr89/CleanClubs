@@ -17,7 +17,7 @@ namespace Clubs.Application.Business
         private readonly ILogger<TeamGenerator> _Logger;
         public TeamGenerator(ILogger<TeamGenerator> logger = null)
         {
-            if(logger == null)
+            if (logger == null)
                 _Logger = ApplicationLoggerProvider.CreateLogger<TeamGenerator>();
             else
                 _Logger = logger;
@@ -84,6 +84,11 @@ namespace Clubs.Application.Business
             });
         }
 
+        /// <summary>
+        /// Support the default initialisation of two teams
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         protected List<TeamDto> InitialiseTeams(MatchDto match)
         {
             var modelList = new List<TeamDto>();
@@ -92,6 +97,11 @@ namespace Clubs.Application.Business
             return modelList;
         }
 
+        /// <summary>
+        /// Process accepted invites and create teams and attach to a match
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         public async Task<MatchDto> Generate(MatchDto match)
         {
             _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {match.Id}");
@@ -112,6 +122,10 @@ namespace Clubs.Application.Business
                 await ShufflePlayersIntoTeams(teamList, match, acceptedInvites);
                 //complete - need to save these details now!
                 match.Status = MatchStatus.Scheduled;
+            }
+            else
+            {
+                //No invitations - we may need to alert this!
             }
             return match;
         }

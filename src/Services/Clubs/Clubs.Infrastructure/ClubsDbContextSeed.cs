@@ -16,7 +16,7 @@ namespace Clubs.Infrastructure.Persistence
         {
             if (!context.Clubs.Any())
             {
-                var RandoxIT = new Club() { Name = "Rdox IT" };
+                var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };
                 var Members = new List<Member>();
                 var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50.2 };
                 Members.Add(Sean);
@@ -99,7 +99,7 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(Club10);
                 context.Clubs.Add(Club10);
 
-                for(int i = 11; i <= 25; i++)
+                for (int i = 11; i <= 25; i++)
                 {
                     var club = new Club() { Name = $"Club {i}" };
                     CreateMemberList(club);
