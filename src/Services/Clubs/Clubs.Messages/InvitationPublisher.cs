@@ -22,7 +22,7 @@ namespace Clubs.Messages
         }
 
         /// <summary>
-        /// Support the publishing of a invite confirmation
+        /// Support the publishing of a invite confirmation message
         /// </summary>
         /// <param name="obj"></param>
         /// <typeparam name="T"></typeparam>
@@ -39,6 +39,7 @@ namespace Clubs.Messages
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         });
                 var message = new Message(Encoding.UTF8.GetBytes(objAsText));
+                //Append message type for topic and subscription handling
                 message.UserProperties["MessageType"] = typeof(T).Name;
                 return _topicClient.SendAsync(message);
             }
@@ -49,6 +50,11 @@ namespace Clubs.Messages
             }
         }
 
+        /// <summary>
+        /// Secondary raw string publish so that perhaps non-object based messages/events
+        /// </summary>
+        /// <param name="raw">raw string message</param>
+        /// <returns></returns>
         public Task Publish(string raw)
         {
             var message = new Message(Encoding.UTF8.GetBytes(raw));

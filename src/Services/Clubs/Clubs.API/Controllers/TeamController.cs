@@ -39,13 +39,5 @@ namespace Clubs.API.Controllers
                 return Ok();
             return BadRequest("Team Generation Failed");
         }
-
-        // [HttpPost]
-        // [ProducesResponseType(StatusCodes.Status200OK)]
-        // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // public async Task<IActionResult> UpdateMatchTeamsManual(MatchDto match)
-        // {
-        //     throw new NotImplementedException();
-        // }
     }
 }

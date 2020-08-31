@@ -75,6 +75,23 @@ namespace Clubs.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> CreateMatchWithInvites([FromBody] CreateMatchDTO match)
+        {
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var record = await _MatchManager.CreateMatchWithInvites(match);
+
+            if (record != null)
+                return CreatedAtRoute("GetMatchById", new { id = record }, match);
+            return BadRequest("Save failed");
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateMatch([FromBody] CreateMatchDTO match)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
@@ -86,7 +103,6 @@ namespace Clubs.API.Controllers
 
             if (record != null)
                 return CreatedAtRoute("GetMatchById", new { id = record }, match);
-
             return BadRequest("Save failed");
         }
 

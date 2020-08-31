@@ -37,27 +37,18 @@ namespace Clubs.Application.Requests.Matches.Commands
             var existingRecord = await _Context.Matches
                 .Include(m => m.Teams)
                 .FirstOrDefaultAsync(m => m.Id == convertedMatch.Id);
+            // if found we need to update then save changes!
             if (existingRecord != null)
-            {;
+            {
                 _Context.Entry(existingRecord).CurrentValues.SetValues(convertedMatch);
                 existingRecord.Teams = convertedMatch.Teams;
                 _Context.Update(existingRecord);
 
                 _Context.Teams.AddRange(existingRecord.Teams);
-            }
-            try
-            {
+
                 return (await _Context.SaveChangesAsync()) > 0;
             }
-            catch (DbUpdateException ex)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                _Logger.LogError($"Match Update SqlError - Unable to save changes: {ex.Message}");
-                //  ModelState.AddModelError("", "Unable to save changes. " +
-                //      "Try again, and if the problem persists, " +
-                //      "see your system administrator.");
-                return false;
-            }
+            return false;
         }
     }
 }

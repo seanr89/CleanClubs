@@ -24,7 +24,6 @@ namespace Clubs.Application.Business
         private readonly ILogger<MatchManager> _Logger;
         protected IMediator _Mediator;
         private readonly IMapper _Mapper;
-        //private readonly SimpleEmailHandler _EmailHandler;
         private readonly IMessagePublisher _MessagePublisher;
 
         public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
@@ -34,7 +33,6 @@ namespace Clubs.Application.Business
             _Logger = logger;
             _Mediator = mediator;
             _Mapper = mapper;
-            //_EmailHandler = simpleEmailHandler;
             _MessagePublisher = messagePublisher;
         }
 
@@ -43,14 +41,14 @@ namespace Clubs.Application.Business
         /// </summary>
         /// <param name="match">MatchDTO: a partial match!</param>
         /// <returns>the unique of the match : or null!</returns>
-        public async Task<Guid> CreateEmptyMatch(CreateMatchDTO match)
+        public async Task<Guid?> CreateMatch(CreateMatchDTO match)
         {
             _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
-            throw new NotImplementedException();
 
-            Guid matchId;
-
-
+            Guid? matchId;
+            var mappedMatch = _Mapper.Map<Match>(match);
+            //Save the match!
+            matchId = await _Mediator.Send(new CreateMatchCommand() { Match = mappedMatch });
 
             return matchId;
         }
@@ -60,16 +58,14 @@ namespace Clubs.Application.Business
         /// Support the creation of a Match Record and trigger the invitation for all club members
         /// </summary>
         /// <param name="matchView"></param>
-        public async Task<Guid?> CreateMatch(CreateMatchDTO matchView)
+        public async Task<Guid?> CreateMatchWithInvites(CreateMatchDTO matchView)
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
             Guid? matchId = null;
-
             using (ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
             {
                 var match = _Mapper.Map<Match>(matchView);
-
                 //Step1. Check if invites are needed to be added/created
                 if (matchView.InviteActiveMembers)
                 {
@@ -90,6 +86,8 @@ namespace Clubs.Application.Business
             }
             return matchId;
         }
+
+        #region private
 
         private async Task CreateInvitationRequestAndPublish(List<Invite> invites, DateTime date)
         {
@@ -119,5 +117,7 @@ namespace Clubs.Application.Business
                 match.Invites.Add(invite);
             }
         }
+
+        #endregion
     }
 }
