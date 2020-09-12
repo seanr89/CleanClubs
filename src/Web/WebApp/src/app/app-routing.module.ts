@@ -16,6 +16,10 @@ const routes: Routes = [
         component: DefaultCompComponent,
         canActivate: [AuthGuard],
     },
+    {
+        path: 'clubs',
+        loadChildren: './Components/Clubs/clubs.module#ClubsModule',
+    },
 ];
 
 @NgModule({

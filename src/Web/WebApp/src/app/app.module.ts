@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 import { DefaultCompComponent } from './Components/default-comp/default-comp.component';
 import { PageLinkComponent } from './Core/page-link/page-link.component';
 import { SigninComponent } from './Core/signin/signin.component';
@@ -19,7 +19,9 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from './../environments/environment';
 import { AuthGuard } from './Services/Guards/authguard';
 import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
-import { ClubListComponent } from './Components/Clubs/club-list/club-list.component';
+import { LoadingComponent } from './Core/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ClubsModule } from './Components/Clubs/clubs.module';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,7 @@ import { ClubListComponent } from './Components/Clubs/club-list/club-list.compon
         DefaultCompComponent,
         PageLinkComponent,
         SigninComponent,
-        ClubListComponent,
+        LoadingComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -41,8 +43,11 @@ import { ClubListComponent } from './Components/Clubs/club-list/club-list.compon
         MatSidenavModule,
         MatIconModule,
         MatListModule,
+        MatTableModule,
         AngularFireModule,
         AngularFireAuthModule,
+        HttpClientModule,
+        ClubsModule,
     ],
     providers: [AuthGuard, SecureInnerPagesGuard],
     bootstrap: [AppComponent],

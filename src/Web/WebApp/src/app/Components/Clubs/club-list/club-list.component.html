@@ -1,1 +1,138 @@
-<p>club-list works!</p>
+<h2>Club Listings!</h2>
+<!-- Grid Filter Control -->
+<div class="filter">
+    <input
+        matInput
+        type="text"
+        (keyup)="doFilter($event.target.value)"
+        placeholder="Filter"
+    />
+</div>
+
+<div class="mat-elevation-z8">
+    <div class="table-container">
+        <table
+            id="clubListTable"
+            mat-table
+            [dataSource]="dataSource"
+            multiTemplateDataRows
+        >
+            <!-- Number Column -->
+            <ng-container matColumnDef="clubId">
+                <th
+                    id="idHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-20"
+                >
+                    Id
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{ row.number }}
+                </td>
+            </ng-container>
+
+            <!-- Arrival Date Column -->
+            <!-- <ng-container matColumnDef="arrivalDate">
+                <th
+                    id="arrivalDateHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="column-20"
+                >
+                    Arrival Date
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{
+                        row.arrivalDate !== null
+                            ? (row.arrivalDate | date: 'dd-MMM-yyyy HH:mm')
+                            : 'Not Arrived'
+                    }}
+                </td>
+            </ng-container> -->
+
+            <!-- Void Column -->
+            <!-- <ng-container matColumnDef="void">
+                <th mat-header-cell *matHeaderCellDef class="column-20">
+                    Void
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    <mat-checkbox
+                        [checked]="row.void"
+                        [disabled]="true"
+                    ></mat-checkbox>
+                </td>
+            </ng-container> -->
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="clubName">
+                <th
+                    id="clubNameHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="column-20"
+                >
+                    Club Name
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{
+                        row.combinedResult !== null
+                            ? row.combinedResult
+                            : 'Not Provided'
+                    }}
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <!-- <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="column-5">View</th>
+                <td mat-cell *matCellDef="let row" class="column-5">
+                    <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="viewMoreDetails($event, row)"
+                    >
+                        <button mat-icon-button color="primary">
+                        <mat-icon aria-label="View">chevron_right</mat-icon>
+                    </button>
+                </td>
+            </ng-container> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+            <!-- <tr
+                mat-row
+                *matRowDef="let row; columns: displayedColumns"
+                class="example-element-row"
+                [class.example-expanded-row]="isExpanded(row)"
+                (click)="clickRow(row)"
+            ></tr>
+            <tr
+                mat-row
+                *matRowDef="let row; columns: ['expandedDetail']"
+                class="example-detail-row"
+            ></tr> -->
+
+            <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr> -->
+        </table>
+
+        <!-- <app-loading *ngIf="isLoading"></app-loading> -->
+
+        <!-- If the data source is empty the table will display 'No Results' -->
+        <div
+            class="no-results"
+            [style.display]="dataSource.data.length == 0 ? '' : 'none'"
+        >
+            No Records Found!
+        </div>
+    </div>
+
+    <!-- <mat-paginator
+        id="clubListPaginator"
+        (page)="pageChangeEvent($event)"
+        [pageSize]="itemsPerPage"
+        [length]="paginatorTotalItems"
+        [pageSizeOptions]="pageSizeOptions"
+    ></mat-paginator> -->
+</div>

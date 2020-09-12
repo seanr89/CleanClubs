@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from 'src/app/Services/auth.service';
+import { isNullOrUndefined } from 'util';
 
 @Component({
     selector: 'app-page-link',
@@ -20,9 +22,14 @@ export class PageLinkComponent implements OnInit {
     opened: boolean;
     showMenu = false;
 
-    constructor() {}
+    constructor(private authService: AuthService) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.authService.signedIn.subscribe((res) => {
+            if (isNullOrUndefined(res)) this.isAuthorized = false;
+            else this.isAuthorized = true;
+        });
+    }
 
     /**
      * Handle the updating of the page title state when the navigation link is clicked
