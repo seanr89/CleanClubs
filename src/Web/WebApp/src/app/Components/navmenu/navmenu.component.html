@@ -15,22 +15,14 @@
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
             </a>
-            <a
-                mat-list-item
-                *ngIf="!isAuthenticated"
-                routerLink="/clubs/list"
-                routerLinkActive="active"
-            >
-                Clubs
-            </a>
-            <!-- <app-page-link
+            <app-page-link
                 *ngIf="isAuthenticated"
                 id="clubsNavLink"
                 class="sidenav-option"
                 pageName="Clubs"
-                pageLink="/clubs"
+                pageLink="/clubs/list"
                 pageIcon="done_outline"
-            ></app-page-link> -->
+            ></app-page-link>
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -43,7 +35,7 @@
             >
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            <span>Club Creator</span>
+            <span>Club Creator : {{ pageTitle }}</span>
         </mat-toolbar>
         <!-- Add Content Here -->
         <router-outlet></router-outlet>

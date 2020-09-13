@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
+import { DataStateService } from 'src/app/Services/datastate.service';
 import { isNullOrUndefined } from 'util';
 
 @Component({
@@ -14,19 +15,19 @@ export class PageLinkComponent implements OnInit {
     pageLink: string;
     @Input()
     pageIcon: string;
-    @Input()
-    isDropdown: boolean = false;
+    // @Input()
+    // isDropdown: boolean = false;
 
     isAuthorized: boolean = true;
 
-    opened: boolean;
-    showMenu = false;
-
-    constructor(private authService: AuthService) {}
+    constructor(
+        private authService: AuthService,
+        private dataStateService: DataStateService
+    ) {}
 
     ngOnInit() {
         this.authService.signedIn.subscribe((res) => {
-            if (isNullOrUndefined(res)) this.isAuthorized = false;
+            if (res === null) this.isAuthorized = false;
             else this.isAuthorized = true;
         });
     }
@@ -35,10 +36,6 @@ export class PageLinkComponent implements OnInit {
      * Handle the updating of the page title state when the navigation link is clicked
      */
     onClickUpdatePageTitle(): void {
-        //this.dataStateService.updatePageTitle(this.pageName);
-    }
-
-    toggleMenu() {
-        this.showMenu = !this.showMenu;
+        this.dataStateService.updatePageTitle(this.pageName);
     }
 }

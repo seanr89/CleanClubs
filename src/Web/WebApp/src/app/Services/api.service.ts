@@ -3,20 +3,25 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { timeout } from 'rxjs/operators';
 import { Data } from '@angular/router';
 import { SettingsProvider } from './settingsprovider';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ApiService {
-    protected apiServer = SettingsProvider.appConfig.apiServer.url;
+    protected settings = environment.ApiConfig;
+    //protected apiServer = SettingsProvider.appConfig.apiServer.url;
     //protected apiServer = SettingsProvider.appConfig.apiServer.url;
     constructor(private http: HttpClient) {}
 
-    async post<T>(url: string, body: Object = {}): Promise<HttpResponse<T>> {
+    async post<T>(
+        endPoint: string,
+        body: Object = {}
+    ): Promise<HttpResponse<T>> {
         //console.log(`post url ${this.apiServer}${url} with panel: ${body}`);
         //this.appInsights.logTrace(`API Post : ${url}`);
         return this.http
-            .post<T>(`${this.apiServer}${url}`, JSON.stringify(body), {
+            .post<T>(`${this.settings.url}${endPoint}`, JSON.stringify(body), {
                 headers: new HttpHeaders().set(
                     'Content-Type',
                     'application/json'
@@ -34,7 +39,7 @@ export class ApiService {
     ): Promise<HttpResponse<T>> {
         if (responseType !== null) {
             return this.http
-                .get<T>(`${this.apiServer}${url}`, {
+                .get<T>(`${this.settings.url}${url}`, {
                     responseType: responseType as 'json',
                     headers: new HttpHeaders(),
                     observe: 'response',
@@ -43,7 +48,7 @@ export class ApiService {
                 .toPromise();
         } else {
             return this.http
-                .get<T>(`${this.apiServer}${url}`, {
+                .get<T>(`${this.settings.url}${url}`, {
                     headers: new HttpHeaders(),
                     observe: 'response',
                 })

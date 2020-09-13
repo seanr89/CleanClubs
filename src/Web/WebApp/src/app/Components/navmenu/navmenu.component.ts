@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AuthService } from 'src/app/Services/auth.service';
 import { isNullOrUndefined } from 'util';
+import { User } from 'src/app/Models/user';
+import { DataStateService } from 'src/app/Services/datastate.service';
 
 @Component({
     selector: 'app-navmenu',
@@ -11,6 +13,7 @@ import { isNullOrUndefined } from 'util';
     styleUrls: ['./navmenu.component.scss'],
 })
 export class NavmenuComponent {
+    pageTitle: string = "Unknown";
     isAuthenticated: boolean = false;
     isHandset$: Observable<boolean> = this.breakpointObserver
         .observe(Breakpoints.Handset)
@@ -21,11 +24,20 @@ export class NavmenuComponent {
 
     constructor(
         private breakpointObserver: BreakpointObserver,
-        public auth: AuthService
+        public auth: AuthService,
+        private dataState: DataStateService
     ) {
-        this.auth.signedIn.subscribe((user) => {
-            if (isNullOrUndefined(user)) this.isAuthenticated = false;
-            else this.isAuthenticated = true;
+        this.auth.signedIn.subscribe((user: User) => {
+            if (user === null) {
+                this.isAuthenticated = false;
+            } else {
+                this.isAuthenticated = true;
+            }
+        });
+
+        //Update the current title
+        this.dataState.getPageTitle().subscribe((res) => {
+            this.pageTitle = res;
         });
     }
 }

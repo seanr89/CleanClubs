@@ -1,24 +1,21 @@
 <div *ngIf="isAuthorized">
-    <a
+    <!-- <a
         mat-list-item
         *ngIf="isDropdown"
         class="text-decoration-none"
         [routerLink]="pageLink"
         (click)="onClickUpdatePageTitle()"
-        (click)="toggleMenu()"
     >
         <i class="material-icons customIcons">{{ pageIcon }}</i> {{ pageName }}
         <mat-icon *ngIf="!showMenu">chevron_right</mat-icon>
         <mat-icon *ngIf="showMenu">expand_more</mat-icon>
-    </a>
+    </a> -->
     <a
         mat-list-item
-        *ngIf="!isDropdown"
         class="text-decoration-none"
         [routerLink]="pageLink"
         [routerLinkActive]="['active']"
         (click)="onClickUpdatePageTitle()"
-        (click)="toggleMenu()"
     >
         <i class="material-icons customIcons">{{ pageIcon }}</i> {{ pageName }}
     </a>

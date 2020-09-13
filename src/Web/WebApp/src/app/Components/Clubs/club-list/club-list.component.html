@@ -101,19 +101,6 @@
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
 
-            <!-- <tr
-                mat-row
-                *matRowDef="let row; columns: displayedColumns"
-                class="example-element-row"
-                [class.example-expanded-row]="isExpanded(row)"
-                (click)="clickRow(row)"
-            ></tr>
-            <tr
-                mat-row
-                *matRowDef="let row; columns: ['expandedDetail']"
-                class="example-detail-row"
-            ></tr> -->
-
             <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr> -->
         </table>
 
@@ -128,11 +115,9 @@
         </div>
     </div>
 
-    <!-- <mat-paginator
+    <mat-paginator
         id="clubListPaginator"
-        (page)="pageChangeEvent($event)"
-        [pageSize]="itemsPerPage"
-        [length]="paginatorTotalItems"
-        [pageSizeOptions]="pageSizeOptions"
-    ></mat-paginator> -->
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 50]"
+    ></mat-paginator>
 </div>

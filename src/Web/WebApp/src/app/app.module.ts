@@ -22,6 +22,7 @@ import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
 import { LoadingComponent } from './Core/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClubsModule } from './Components/Clubs/clubs.module';
+import { HomeComponent } from './Components/home/home.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +32,7 @@ import { ClubsModule } from './Components/Clubs/clubs.module';
         PageLinkComponent,
         SigninComponent,
         LoadingComponent,
+        HomeComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),

@@ -10,7 +10,7 @@ export class ClubsService {
     public api_url_tag: string;
 
     constructor(private apiService: ApiService) {
-        this.api_url_tag = 'clubs';
+        this.api_url_tag = '/clubs';
     }
 
     /**
