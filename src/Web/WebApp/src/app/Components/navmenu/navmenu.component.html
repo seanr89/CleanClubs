@@ -9,7 +9,12 @@
     >
         <mat-toolbar>App Menu</mat-toolbar>
         <mat-nav-list>
-            <a mat-list-item routerLink="/sign-in" routerLinkActive="active">
+            <a
+                mat-list-item
+                *ngIf="!isAuthenticated"
+                routerLink="/sign-in"
+                routerLinkActive="active"
+            >
                 Sign In
             </a>
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
@@ -21,7 +26,7 @@
                 class="sidenav-option"
                 pageName="Clubs"
                 pageLink="/clubs/list"
-                pageIcon="done_outline"
+                pageIcon="user-friends"
             ></app-page-link>
         </mat-nav-list>
     </mat-sidenav>
