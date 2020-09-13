@@ -17,7 +17,7 @@ export class ClubsService {
      * Query and return all club information
      */
     GetAllClubs(): Promise<HttpResponse<Club[]>> {
-        return this.apiService.get<Club[]>(`${this.api_url_tag}/GetAllClubs`);
+        return this.apiService.get<Club[]>(`${this.api_url_tag}/Get`);
     }
 
     /**
