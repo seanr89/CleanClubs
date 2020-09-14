@@ -11,6 +11,6 @@ export const environment = {
         measurementId: 'G-SG30S31C4T',
     },
     ApiConfig: {
-        url: 'https://devclubsapi.azurewebsites.net',
+        url: 'https://devclubsapi.azurewebsites.net/api',
     },
 };
