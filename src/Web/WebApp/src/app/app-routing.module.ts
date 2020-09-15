@@ -22,7 +22,6 @@ const routes: Routes = [
         loadChildren: './Components/Clubs/clubs.module#ClubsModule',
     },
     { path: 'home', component: HomeComponent },
-    { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

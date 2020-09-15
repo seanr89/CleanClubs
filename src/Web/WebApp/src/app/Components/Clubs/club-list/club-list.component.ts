@@ -37,6 +37,7 @@ export class ClubListComponent implements OnInit {
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
                 this.isLoading = false;
+                this.dataSource = new MatTableDataSource(res.body);
             }
         });
     }
