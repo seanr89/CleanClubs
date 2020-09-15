@@ -15,7 +15,7 @@ export const environment = {
         measurementId: 'G-SG30S31C4T',
     },
     ApiConfig: {
-        url: 'https://localhost:5001',
+        url: 'https://localhost:5001/api',
     },
 };
 

@@ -15,13 +15,14 @@ import { Router } from '@angular/router';
 export class ClubListComponent implements OnInit {
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = ['id', 'name'];
+    displayedColumns: string[] = ['id'];
     isLoading: boolean = false;
     itemsPerPage: number = 100;
     pageSizeOptions: number[] = [100, 200, 300];
     paginatorTotalItems: number = 0;
 
     constructor(private clubService: ClubsService, private router: Router) {
+        this.dataSource = new MatTableDataSource();
         this.gridPageOptions = new GridPaginatorOption();
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
     }
@@ -36,6 +37,10 @@ export class ClubListComponent implements OnInit {
     populateTable(): void {
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
+                console.log('populate Clubs 200');
+                res.body.forEach((element) => {
+                    console.log(element.id);
+                });
                 this.isLoading = false;
                 this.dataSource = new MatTableDataSource(res.body);
             }
