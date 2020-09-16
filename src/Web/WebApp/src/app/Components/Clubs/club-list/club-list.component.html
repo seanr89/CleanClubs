@@ -42,11 +42,49 @@
                     mat-sort-header
                     class="column-20"
                 >
-                    Id
+                    Name
                 </th>
                 <td mat-cell *matCellDef="let row" class="column-20">
                     {{ row.name }}
                 </td>
+            </ng-container>
+
+            <!-- Club Active -->
+            <ng-container matColumnDef="active">
+                <th
+                    id="activeHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-10"
+                >
+                    Active
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-10">
+                    <mat-checkbox
+                        [checked]="row.active"
+                        [disabled]="true"
+                    ></mat-checkbox>
+                </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="column-5">
+                    <button mat-icon-button color="primary" (click)="addNew()">
+                        <mat-icon aria-label="Add">Add</mat-icon>
+                    </button>
+                </th>
+
+                <!-- <td mat-cell *matCellDef="let row" class="column-5">
+                    <button
+                        mat-icon-button
+                        color="primary"
+                        (click)="startEditTest(row)"
+                    >
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                </td> -->
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

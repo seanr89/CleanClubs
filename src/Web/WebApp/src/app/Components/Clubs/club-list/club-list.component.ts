@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class ClubListComponent implements OnInit {
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = ['id', 'name'];
+    displayedColumns: string[] = ['id', 'name', 'active', 'actions'];
     isLoading: boolean = false;
     itemsPerPage: number = 100;
     pageSizeOptions: number[] = [100, 200, 300];
@@ -51,5 +51,7 @@ export class ClubListComponent implements OnInit {
     public doFilter = (value: string) => {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
     };
+
+    public addNew() {}
     //#endregion
 }
