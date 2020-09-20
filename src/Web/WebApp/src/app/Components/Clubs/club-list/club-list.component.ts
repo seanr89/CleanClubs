@@ -12,6 +12,7 @@ import { DataStateService } from 'src/app/Services/datastate.service';
 import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
 import { HttpResponse } from '@angular/common/http';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
     selector: 'app-club-list',
@@ -22,27 +23,30 @@ export class ClubListComponent implements OnInit {
     private pageName: string = 'Clubs';
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = ['id', 'name', 'active', 'actions'];
+    displayedColumns: string[] = ['id', 'name', 'actions'];
     isLoading: boolean = false;
-    itemsPerPage: number = 100;
+    //itemsPerPage: number = 100;
     pageSizeOptions: number[] = [100, 200, 300];
-    paginatorTotalItems: number = 0;
+    //paginatorTotalItems: number = 0;
 
     constructor(
         private clubService: ClubsService,
         private router: Router,
         public dialog: MatDialog,
         private dataService: DataStateService,
-        private notifications: NotificationsService
+        private notifications: NotificationsService,
+        private authService: AuthService
     ) {
-        this.dataSource = new MatTableDataSource();
+        this.dataSource = new MatTableDataSource<Club>();
         this.gridPageOptions = new GridPaginatorOption();
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
     }
 
     ngOnInit(): void {
-        this.dataService.updatePageTitle(this.pageName);
+        //this.dataService.updatePageTitle(this.pageName);
         this.populateTable();
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     }
     //Paginator needs to be setup like this as the grid is hidden initially.
     @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
@@ -51,12 +55,10 @@ export class ClubListComponent implements OnInit {
     populateTable(): void {
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
-                console.log('populate Clubs 200');
-                res.body.forEach((element) => {
-                    console.log(element.id);
-                });
+                //console.log('populate Clubs 200');
                 this.isLoading = false;
-                this.dataSource = new MatTableDataSource(res.body);
+                this.dataSource.data = res.body;
+                debugger;
             }
         });
     }
@@ -70,19 +72,32 @@ export class ClubListComponent implements OnInit {
         //Opens the add dialog box
         let club: CreateClubModel;
         const dialogRef = this.dialog.open(ClubAddComponent, {
-            data: club});
+            data: club,
+        });
 
         //Handles the close of the dialog box
-        dialogRef.afterClosed().subscribe((result) => {
+        dialogRef.afterClosed().subscribe((result: CreateClubModel) => {
             //If the save button is clicked then add test
-            if (result !== -1 && result !== undefined) {
-                this.clubService.CreateClub(result).then((resp: HttpResponse<CreateClubModel>) => {
-                    //we may need to refresh the datasource!
-                    let club = <Club>resp.body;
-                    this.dataSource.data.push(club);
-                  });
+            if (result !== null) {
+                result.creator = this.authService.userData.email;
+                this.clubService
+                    .CreateClub(result)
+                    .then((resp: HttpResponse<CreateClubModel>) => {
+                        //we may need to refresh the datasource!
+                        if(resp.status !== 200){
+                            this.notifications.success("Club Created", true);
+                            this.dataSource.data.push(resp.body as Club);
+                        }
+                        else{
+                            this.notifications.error("Failed to save club", true);
+                        }
+                    });
             }
         });
+    }
+
+    public onEditClub(row: any): void{
+        console.log('onEditClub');
     }
     //#endregion
 }

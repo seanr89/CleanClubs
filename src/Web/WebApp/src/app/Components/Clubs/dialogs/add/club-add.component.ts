@@ -22,11 +22,7 @@ export class ClubAddComponent {
         //Add validation to make sure fields have been added correctly
         this.form = new FormGroup({
             name: new FormControl('', [Validators.required]),
-            glossary: new FormControl(''),
-            description: new FormControl(''),
-            outOfRangeDescription: new FormControl(''),
         });
-        //this.validationHandler = new ValidationHandler(this.form);
     }
 
     get name() {

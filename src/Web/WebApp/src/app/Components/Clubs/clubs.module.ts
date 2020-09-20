@@ -13,9 +13,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ClubEditComponent } from './dialogs/edit/club-edit.component';
 
 @NgModule({
-    declarations: [ClubListComponent, ClubAddComponent],
+    declarations: [ClubListComponent, ClubAddComponent, ClubEditComponent],
     imports: [
         CommonModule,
         MatTableModule,
@@ -31,6 +32,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
         ReactiveFormsModule,
     ],
     exports: [ClubListComponent],
-    entryComponents: [ClubAddComponent],
+    entryComponents: [ClubAddComponent, ClubEditComponent],
 })
 export class ClubsModule {}

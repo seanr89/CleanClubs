@@ -1,11 +1,10 @@
-//import { NotificationType } from '../../enums/notificationtype';
+import { NotificationType } from './Notifitications/notificationtype';
 
 export class Notification {
-    //type: NotificationType;
+    type: NotificationType;
     typeName: string;
     message: string;
     notificationId: string;
-    //keepAfterRouteChange: boolean;
     hasBeenRead: boolean = false;
     eventTime: Date;
 
