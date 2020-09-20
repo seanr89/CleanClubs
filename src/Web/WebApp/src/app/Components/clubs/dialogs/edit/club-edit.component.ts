@@ -5,9 +5,9 @@ import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
 import { Club } from 'src/app/Models/Clubs/club';
 
 @Component({
-    selector: 'app-club-add',
-    templateUrl: './club-add.component.html',
-    styleUrls: ['./club-add.component.scss'],
+    selector: 'app-edit-add',
+    templateUrl: './club-edit.component.html',
+    styleUrls: ['./club-edit.component.scss'],
 })
 export class ClubEditComponent {
     constructor(
