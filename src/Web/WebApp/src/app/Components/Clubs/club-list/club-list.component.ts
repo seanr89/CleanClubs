@@ -1,11 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Club } from 'src/app/Models/club';
+import { Club } from 'src/app/Models/Clubs/club';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClubsService } from 'src/app/Services/API/clubs.service';
 import { Sort, MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { GridPaginatorOption } from 'src/app/Core/grid-paginator-option';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ClubAddComponent } from '../dialogs/add/club-add.component';
+import { DataStateService } from 'src/app/Services/datastate.service';
+import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
+import { HttpResponse } from '@angular/common/http';
+import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
 
 @Component({
     selector: 'app-club-list',
@@ -13,6 +19,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./club-list.component.scss'],
 })
 export class ClubListComponent implements OnInit {
+    private pageName: string = 'Clubs';
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
     displayedColumns: string[] = ['id', 'name', 'active', 'actions'];
@@ -21,13 +28,20 @@ export class ClubListComponent implements OnInit {
     pageSizeOptions: number[] = [100, 200, 300];
     paginatorTotalItems: number = 0;
 
-    constructor(private clubService: ClubsService, private router: Router) {
+    constructor(
+        private clubService: ClubsService,
+        private router: Router,
+        public dialog: MatDialog,
+        private dataService: DataStateService,
+        private notifications: NotificationsService
+    ) {
         this.dataSource = new MatTableDataSource();
         this.gridPageOptions = new GridPaginatorOption();
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
     }
 
     ngOnInit(): void {
+        this.dataService.updatePageTitle(this.pageName);
         this.populateTable();
     }
     //Paginator needs to be setup like this as the grid is hidden initially.
@@ -52,6 +66,23 @@ export class ClubListComponent implements OnInit {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
     };
 
-    public addNew() {}
+    public addNew() {
+        //Opens the add dialog box
+        let club: CreateClubModel;
+        const dialogRef = this.dialog.open(ClubAddComponent, {
+            data: club});
+
+        //Handles the close of the dialog box
+        dialogRef.afterClosed().subscribe((result) => {
+            //If the save button is clicked then add test
+            if (result !== -1 && result !== undefined) {
+                this.clubService.CreateClub(result).then((resp: HttpResponse<CreateClubModel>) => {
+                    //we may need to refresh the datasource!
+                    let club = <Club>resp.body;
+                    this.dataSource.data.push(club);
+                  });
+            }
+        });
+    }
     //#endregion
 }

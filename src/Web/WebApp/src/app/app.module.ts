@@ -11,7 +11,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
-import { DefaultCompComponent } from './Components/default-comp/default-comp.component';
 import { PageLinkComponent } from './Core/page-link/page-link.component';
 import { SigninComponent } from './Core/signin/signin.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -23,12 +22,13 @@ import { LoadingComponent } from './Core/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ClubsModule } from './Components/Clubs/clubs.module';
 import { HomeComponent } from './Components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavmenuComponent,
-        DefaultCompComponent,
         PageLinkComponent,
         SigninComponent,
         LoadingComponent,
@@ -46,6 +46,8 @@ import { HomeComponent } from './Components/home/home.component';
         MatIconModule,
         MatListModule,
         MatTableModule,
+        MatDialogModule,
+        MatSnackBarModule,
         AngularFireModule,
         AngularFireAuthModule,
         HttpClientModule,

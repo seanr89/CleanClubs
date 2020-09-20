@@ -63,43 +63,7 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(RandoxEng);
                 context.Clubs.Add(RandoxEng);
 
-                var Club2 = new Club() { Name = "Club 2" };
-                CreateMemberList(Club2);
-                context.Clubs.Add(Club2);
-
-                var Club3 = new Club() { Name = "Club 3" };
-                CreateMemberList(Club3);
-                context.Clubs.Add(Club3);
-
-                var Club4 = new Club() { Name = "Club 4" };
-                CreateMemberList(Club4);
-                context.Clubs.Add(Club4);
-
-                var Club5 = new Club() { Name = "Club 5" };
-                CreateMemberList(Club5);
-                context.Clubs.Add(Club5);
-
-                var Club6 = new Club() { Name = "Club 6" };
-                CreateMemberList(Club6);
-                context.Clubs.Add(Club6);
-
-                var Club7 = new Club() { Name = "Club 7" };
-                CreateMemberList(Club7);
-                context.Clubs.Add(Club7);
-
-                var Club8 = new Club() { Name = "Club 8" };
-                CreateMemberList(Club8);
-                context.Clubs.Add(Club8);
-
-                var Club9 = new Club() { Name = "Club 9" };
-                CreateMemberList(Club9);
-                context.Clubs.Add(Club9);
-
-                var Club10 = new Club() { Name = "Club 10" };
-                CreateMemberList(Club10);
-                context.Clubs.Add(Club10);
-
-                for (int i = 11; i <= 25; i++)
+                for (int i = 2; i <= 55; i++)
                 {
                     var club = new Club() { Name = $"Club {i}" };
                     CreateMemberList(club);
@@ -134,7 +98,7 @@ namespace Clubs.Infrastructure.Persistence
         {
             RandomNameGenerator gen = new RandomNameGenerator();
 
-            int randomNumber = gen.GenerateRandomNumber(11, 35);
+            int randomNumber = gen.GenerateRandomNumber(12, 46);
 
             club.Members = new List<Member>();
 

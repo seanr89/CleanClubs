@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Club } from 'src/app/Models/club';
+import { Club } from 'src/app/Models/Clubs/club';
 import { HttpResponse } from '@angular/common/http';
+import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
 
 @Injectable({
     providedIn: 'root',
@@ -30,5 +31,11 @@ export class ClubsService {
         );
     }
 
-    CreateClub(club: Club) {}
+    /**
+     * Process to support saving a new club
+     * @param club 
+     */
+    CreateClub(club: CreateClubModel): Promise<HttpResponse<CreateClubModel>> {
+        return this.apiService.post<CreateClubModel>(`${this.api_url_tag}/post`, club);
+    }
 }
