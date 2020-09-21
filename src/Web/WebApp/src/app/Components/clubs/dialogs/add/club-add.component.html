@@ -1,0 +1,62 @@
+<div class="container">
+    <h3 mat-dialog-title>New Club</h3>
+
+    <form class="mat-dialog-content" [formGroup]="form">
+        <div class="form">
+            <mat-form-field color="accent">
+                <input
+                    matInput
+                    #input
+                    class="form-control"
+                    placeholder="Club Name"
+                    [(ngModel)]="data.name"
+                    name="name"
+                    autocomplete="off"
+                    formControlName="name"
+                />
+                <button
+                    mat-button
+                    *ngIf="data.name"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="data.name = ''"
+                >
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+        <div class="form">
+            <mat-slide-toggle
+                [checked]="data.active"
+                (change)="onChange($event)"
+                color="primary"
+                >Active</mat-slide-toggle
+            >
+        </div>
+
+        <div class="form">
+            <mat-slide-toggle
+                [checked]="data.private"
+                (change)="onPrivateChange($event)"
+                color="primary"
+                >Private</mat-slide-toggle
+            >
+        </div>
+
+        <div mat-dialog-actions>
+            <button
+                mat-button
+                [disabled]="!form.valid"
+                [mat-dialog-close]="data"
+                class="actionButton"
+            >
+                Save
+            </button>
+            <button mat-button [matDialogClose]="null" class="actionButton">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

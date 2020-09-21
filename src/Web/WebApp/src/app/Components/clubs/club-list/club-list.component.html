@@ -1,0 +1,110 @@
+<h2>Club Listings!</h2>
+<!-- Grid Filter Control -->
+<div class="filter">
+    <input
+        matInput
+        type="text"
+        (keyup)="doFilter($event.target.value)"
+        placeholder="Filter"
+    />
+</div>
+
+<div class="mat-elevation-z8">
+    <div class="table-container">
+        <table
+            id="clubListTable"
+            mat-table
+            [dataSource]="dataSource"
+            multiTemplateDataRows
+        >
+            <!-- Club Id -->
+            <ng-container matColumnDef="id">
+                <th
+                    id="idHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-20"
+                >
+                    Id
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{ row.id }}
+                </td>
+            </ng-container>
+
+            <!-- Club Name -->
+            <ng-container matColumnDef="name">
+                <th
+                    id="nameHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-20"
+                >
+                    Name
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{ row.name }}
+                </td>
+            </ng-container>
+
+            <!-- Club Active -->
+            <!-- <ng-container matColumnDef="active">
+                <th
+                    id="activeHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-10"
+                >
+                    Active
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-10">
+                    <mat-checkbox
+                        [checked]="row.active"
+                        [disabled]="true"
+                    ></mat-checkbox>
+                </td>
+            </ng-container> -->
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th
+                    id="actionHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    class="column-5"
+                >
+                    <button mat-icon-button color="primary" (click)="addNew()">
+                        <mat-icon aria-label="Add">Add</mat-icon>
+                    </button>
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-5">
+                    <button mat-icon-button color="primary" (click)="onEditClub(row)">
+                      <mat-icon aria-label="Edit">Edit</mat-icon>
+                    </button>
+                  </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <!-- <app-loading *ngIf="isLoading"></app-loading> -->
+
+        <!-- If the data source is empty the table will display 'No Results' -->
+        <div
+            class="no-results"
+            [style.display]="dataSource.data.length == 0 ? '' : 'none'"
+        >
+            No Records Found!
+        </div>
+    </div>
+
+    <mat-paginator
+        id="clubListPaginator"
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 20, 50]"
+    ></mat-paginator>
+</div>
