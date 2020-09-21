@@ -20,40 +20,40 @@ import { AuthGuard } from './Services/Guards/authguard';
 import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
 import { LoadingComponent } from './Core/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ClubsModule } from './Components/Clubs/clubs.module';
+import { ClubsModule } from './Components/clubs/clubs.module';
 import { HomeComponent } from './Components/home/home.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavmenuComponent,
-        PageLinkComponent,
-        SigninComponent,
-        LoadingComponent,
-        HomeComponent,
-    ],
-    imports: [
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        LayoutModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatListModule,
-        MatTableModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        AngularFireModule,
-        AngularFireAuthModule,
-        HttpClientModule,
-        ClubsModule,
-    ],
-    providers: [AuthGuard, SecureInnerPagesGuard],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    NavmenuComponent,
+    PageLinkComponent,
+    SigninComponent,
+    LoadingComponent,
+    HomeComponent,
+  ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatTableModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    AngularFireModule,
+    AngularFireAuthModule,
+    HttpClientModule,
+    ClubsModule,
+  ],
+  providers: [AuthGuard, SecureInnerPagesGuard],
+  bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
