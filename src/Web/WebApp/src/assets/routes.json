@@ -1,6 +1,9 @@
 {
   "routes": [
     {
+      "route": "/clubs/list"
+    },
+    {
       "route": "/*",
       "serve": "/index.html",
       "statusCode": 200
