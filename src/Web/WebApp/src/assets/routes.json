@@ -1,7 +1,8 @@
 {
   "routes": [
     {
-      "route": "/clubs/list"
+      "route": "/clubs/list",
+      "serve": "/clubs"
     },
     {
       "route": "/*",
