@@ -19,12 +19,20 @@
             </a>
             <a
                 mat-list-item
+                routerLink="/home"
+                routerLinkActive="active"
+            >
+                Home
+            </a>
+            <a
+                mat-list-item
                 *ngIf="isAuthenticated"
                 routerLink="/clubs/list"
                 routerLinkActive="active"
             >
                 Clubs
             </a>
+            
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
             </a>

@@ -13,7 +13,7 @@ const routes: Routes = [
     },
     {
         path: 'clubs',
-        loadChildren: './Components/Clubs/clubs.module#ClubsModule',
+        loadChildren: './Components/clubs/clubs.module#ClubsModule',
     },
     { path: 'home', component: HomeComponent },
 ];
