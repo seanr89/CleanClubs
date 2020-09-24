@@ -14,6 +14,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClubEditComponent } from './dialogs/edit/club-edit.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [ClubListComponent, ClubAddComponent, ClubEditComponent],
@@ -30,6 +31,7 @@ import { ClubEditComponent } from './dialogs/edit/club-edit.component';
         FormsModule,
         MatFormFieldModule,
         ReactiveFormsModule,
+        FontAwesomeModule,
     ],
     exports: [ClubListComponent],
     entryComponents: [ClubAddComponent, ClubEditComponent],
