@@ -13,7 +13,7 @@ import { DataStateService } from 'src/app/Services/datastate.service';
     styleUrls: ['./navmenu.component.scss'],
 })
 export class NavmenuComponent {
-    pageTitle: string = "Unknown";
+    pageTitle: string = 'Unknown';
     isAuthenticated: boolean = false;
     isHandset$: Observable<boolean> = this.breakpointObserver
         .observe(Breakpoints.Handset)

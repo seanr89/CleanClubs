@@ -79,66 +79,85 @@ export class NotificationsService {
     }
 
     /**
-   * Handle notification for errors events, such as Authorisation API errors
-   * @param message[string] : the message to be output to the notification record to the user
-   * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
-   * @param notificationId[string] : defaulted to a uniquely generated UUID
-   */
-  error(message: string, showSnackBar: boolean = true, notificationId: string = Utilities.generateUUID()) {
-    this.notify(
-      new Notification({
-        message: message,
-        type: NotificationType.Error,
-        notificationId,
-        typeName: NotificationType[NotificationType.Error],
-      })
-    );
-    if (showSnackBar) {
-      //enforce current snack bar dismissal for errors!
-      this.snackBar.dismiss();
-      this.snackBar.open(message, 'Error', { duration: 5000, panelClass: 'error-dialog' });
+     * Handle notification for errors events, such as Authorisation API errors
+     * @param message[string] : the message to be output to the notification record to the user
+     * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
+     * @param notificationId[string] : defaulted to a uniquely generated UUID
+     */
+    error(
+        message: string,
+        showSnackBar: boolean = true,
+        notificationId: string = Utilities.generateUUID()
+    ) {
+        this.notify(
+            new Notification({
+                message: message,
+                type: NotificationType.Error,
+                notificationId,
+                typeName: NotificationType[NotificationType.Error],
+            })
+        );
+        if (showSnackBar) {
+            //enforce current snack bar dismissal for errors!
+            this.snackBar.dismiss();
+            this.snackBar.open(message, 'Error', {
+                duration: 5000,
+                panelClass: 'error-dialog',
+            });
+        }
     }
-  }
 
-  /**
-   * Handle notifications for informational events
-   * @param message[string] : the message to be output to the notification record to the user
-   * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
-   * @param notificationId[string] : defaulted to a uniquely generated UUID
-   */
-  info(message: string, showSnackBar: boolean = false, notificationId: string = Utilities.generateUUID()) {
-    this.notify(
-      new Notification({
-        message: message,
-        type: NotificationType.Info,
-        notificationId,
-        typeName: NotificationType[NotificationType.Info],
-      })
-    );
-    if (showSnackBar) {
-      this.snackBar.open(message, 'Info', { panelClass: 'success-dialog' });
+    /**
+     * Handle notifications for informational events
+     * @param message[string] : the message to be output to the notification record to the user
+     * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
+     * @param notificationId[string] : defaulted to a uniquely generated UUID
+     */
+    info(
+        message: string,
+        showSnackBar: boolean = false,
+        notificationId: string = Utilities.generateUUID()
+    ) {
+        this.notify(
+            new Notification({
+                message: message,
+                type: NotificationType.Info,
+                notificationId,
+                typeName: NotificationType[NotificationType.Info],
+            })
+        );
+        if (showSnackBar) {
+            this.snackBar.open(message, 'Info', {
+                panelClass: 'success-dialog',
+            });
+        }
     }
-  }
 
-  /**
-   * Handle notification for events that have perhaps not completed or have timed out!
-   * @param message[string] : the message to be output to the notification record to the user
-   * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
-   * @param notificationId[string] : defaulted to a uniquely generated UUID
-   */
-  warn(message: string, showSnackBar: boolean = false, notificationId: string = Utilities.generateUUID()) {
-    this.notify(
-      new Notification({
-        message: message,
-        type: NotificationType.Warning,
-        notificationId,
-        typeName: NotificationType[NotificationType.Warning],
-      })
-    );
-    if (showSnackBar) {
-      this.snackBar.open(message, 'Warning', { panelClass: 'success-dialog' });
+    /**
+     * Handle notification for events that have perhaps not completed or have timed out!
+     * @param message[string] : the message to be output to the notification record to the user
+     * @param showSnackBar[boolean] : controls if an on screen message is to be displayed (defaulted to false)
+     * @param notificationId[string] : defaulted to a uniquely generated UUID
+     */
+    warn(
+        message: string,
+        showSnackBar: boolean = false,
+        notificationId: string = Utilities.generateUUID()
+    ) {
+        this.notify(
+            new Notification({
+                message: message,
+                type: NotificationType.Warning,
+                notificationId,
+                typeName: NotificationType[NotificationType.Warning],
+            })
+        );
+        if (showSnackBar) {
+            this.snackBar.open(message, 'Warning', {
+                panelClass: 'success-dialog',
+            });
+        }
     }
-  }
 
     /**
      * main alert method to log an alert/notification

@@ -33,15 +33,18 @@ export class ClubsService {
 
     /**
      * Process to support saving a new club
-     * @param club 
+     * @param club
      */
     CreateClub(club: CreateClubModel): Promise<HttpResponse<CreateClubModel>> {
-        return this.apiService.post<CreateClubModel>(`${this.api_url_tag}/post`, club);
+        return this.apiService.post<CreateClubModel>(
+            `${this.api_url_tag}/post`,
+            club
+        );
     }
 
     /**
      * Supports on club details being updated! (initially not players as well!)
-     * @param club 
+     * @param club
      */
     UpdateClubDetails(club: Club): Promise<HttpResponse<Club>> {
         return this.apiService.post<Club>(`${this.api_url_tag}/update`, club);

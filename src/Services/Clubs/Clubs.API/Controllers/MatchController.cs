@@ -106,6 +106,12 @@ namespace Clubs.API.Controllers
             return BadRequest("Save failed");
         }
 
+        // [HttpPost]
+        // public async Task<IActionResult> CreateMatchWithTeams()
+        // {
+        //     throw new NotImplementedException();
+        // }
+
         #endregion
 
         #region PUT/Update

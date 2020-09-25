@@ -17,6 +17,9 @@
             >
                 Sign In
             </a>
+            <a mat-list-item routerLink="/home" routerLinkActive="active">
+                Home
+            </a>
             <a
                 mat-list-item
                 routerLink="/home"
@@ -36,14 +39,6 @@
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
             </a>
-            <!-- <app-page-link
-                *ngIf="isAuthenticated"
-                id="clubsNavLink"
-                class="sidenav-option"
-                pageName="Clubs"
-                pageLink="/clubs/list"
-                pageIcon="user-friends"
-            ></app-page-link> -->
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

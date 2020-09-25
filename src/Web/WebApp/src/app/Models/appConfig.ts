@@ -1,8 +1,8 @@
 export interface IAppConfig {
-  env: {
-    name: string;
-  };
-  apiServer: {
-    url: string;
-  };
+    env: {
+        name: string;
+    };
+    apiServer: {
+        url: string;
+    };
 }
