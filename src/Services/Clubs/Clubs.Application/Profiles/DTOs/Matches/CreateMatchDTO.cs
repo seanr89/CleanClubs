@@ -14,6 +14,7 @@ namespace Clubs.Application.DTOs
         public MatchStatus Status { get; set; } = MatchStatus.Created;
         public bool InviteActiveMembers { get; set; } = true;
         public List<MemberDto> SelectedMembers { get; set; } = new List<MemberDto>();
+        public List<CreateTeamDto> Teams { get; set; } = new List<CreateTeamDto>();
         public bool SendInvites { get; set; } = false;
         public string Location { get; set; }
     }

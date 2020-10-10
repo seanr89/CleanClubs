@@ -18,7 +18,7 @@ namespace Clubs.Application.Profiles.Dto
         /// The players that have been assigned to the team
         /// </summary>
         /// <value></value>
-        public List<PlayerDto> Players { get; set; } = new List<PlayerDto>();
+        public List<CreatePlayerDto> Players { get; set; } = new List<CreatePlayerDto>();
 
         public Guid MatchId { get; set; }
     }

@@ -24,6 +24,21 @@ import { ClubsModule } from './Components/clubs/clubs.module';
 import { HomeComponent } from './Components/home/home.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatchListComponent } from './Components/matches/match-list/match-list.component';
+import { MatchTeamCreateComponent } from './Components/matches/match-team-create/match-team-create.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatchCreateDialogComponent } from './Components/matches/match-create-dialog/match-create-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatchesModule } from './Components/matches/matches.module';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
 
 @NgModule({
     declarations: [
@@ -33,9 +48,13 @@ import { MatDialogModule } from '@angular/material/dialog';
         SigninComponent,
         LoadingComponent,
         HomeComponent,
+        MatchListComponent,
+        MatchTeamCreateComponent,
+        MatchCreateDialogComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),
+        NgxMaterialTimepickerModule.setLocale('en-GB'),
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -48,12 +67,25 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatTableModule,
         MatDialogModule,
         MatSnackBarModule,
+        MatDatepickerModule,
         AngularFireModule,
         AngularFireAuthModule,
         HttpClientModule,
         ClubsModule,
+        MatchesModule,
+        FlexLayoutModule,
+        MatCardModule,
+        DragDropModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatNativeDateModule,
+        MatStepperModule,
+        MatInputModule,
+
     ],
     providers: [AuthGuard, SecureInnerPagesGuard],
     bootstrap: [AppComponent],
+    entryComponents: [MatchCreateDialogComponent]
 })
 export class AppModule {}

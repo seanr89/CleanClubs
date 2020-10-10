@@ -23,7 +23,7 @@ export class ClubListComponent implements OnInit {
     private pageName: string = 'Clubs';
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = ['id', 'name', 'active', 'actions'];
+    displayedColumns: string[] = ['name', 'active', 'actions'];
     isLoading: boolean = false;
     pageSizeOptions: number[] = [100, 200, 300];
 
@@ -57,7 +57,6 @@ export class ClubListComponent implements OnInit {
     populateTable(): void {
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
-                //console.log('populate Clubs 200');
                 this.isLoading = false;
                 this.dataSource.data = res.body;
             }
@@ -67,6 +66,15 @@ export class ClubListComponent implements OnInit {
     //#region Grid Controls
     public doFilter = (value: string) => {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
+    };
+
+    /**
+     * support re-direction to the clubs screen!
+     * @param id : unique club ID
+     */
+    public redirectToDetails = (id: string) => {
+        let url: string = `/club/details/${id}`;
+        this.router.navigate([url]);
     };
 
     public addNew() {
@@ -97,10 +105,6 @@ export class ClubListComponent implements OnInit {
                     });
             }
         });
-    }
-
-    public onEditClub(row: any): void {
-        console.log('onEditClub');
     }
     //#endregion
 }

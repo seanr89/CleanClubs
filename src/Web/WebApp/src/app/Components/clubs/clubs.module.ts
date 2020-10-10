@@ -14,10 +14,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ClubEditComponent } from './dialogs/edit/club-edit.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ClubDetailsComponent } from './club-details/club-details.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MemberListComponent } from './member-list/member-list.component';
 
 @NgModule({
-    declarations: [ClubListComponent, ClubAddComponent, ClubEditComponent],
+    declarations: [
+        ClubListComponent,
+        ClubAddComponent,
+        ClubEditComponent,
+        ClubDetailsComponent,
+        MemberListComponent,
+    ],
     imports: [
         CommonModule,
         MatTableModule,
@@ -31,9 +40,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
         FormsModule,
         MatFormFieldModule,
         ReactiveFormsModule,
-        FontAwesomeModule,
+        FlexLayoutModule,
+        MatCardModule,
     ],
-    exports: [ClubListComponent],
+    exports: [ClubListComponent, MemberListComponent],
     entryComponents: [ClubAddComponent, ClubEditComponent],
 })
 export class ClubsModule {}

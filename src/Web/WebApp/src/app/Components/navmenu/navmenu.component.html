@@ -17,16 +17,9 @@
             >
                 Sign In
             </a>
-            <a mat-list-item routerLink="/home" routerLinkActive="active">
+            <!-- <a mat-list-item routerLink="/home" routerLinkActive="active">
                 Home
-            </a>
-            <a
-                mat-list-item
-                routerLink="/home"
-                routerLinkActive="active"
-            >
-                Home
-            </a>
+            </a> -->
             <a
                 mat-list-item
                 *ngIf="isAuthenticated"
@@ -35,7 +28,21 @@
             >
                 Clubs
             </a>
-            
+            <a
+                mat-list-item
+                *ngIf="isAuthenticated"
+                routerLink="/clubs/details/fce76cd3-eda5-44f4-da6d-08d85d56b10e"
+                routerLinkActive="active"
+                >Club Details</a
+            >
+            <a
+                mat-list-item
+                *ngIf="isAuthenticated"
+                routerLink="/creatematch/fce76cd3-eda5-44f4-da6d-08d85d56b10e"
+                routerLinkActive="active"
+                >Matches</a
+            >
+
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
             </a>

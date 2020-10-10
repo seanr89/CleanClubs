@@ -1,0 +1,22 @@
+<p>match-list - TODO: add a table, etc...</p>
+
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+        matInput
+        (keyup)="doFilter($event)"
+        placeholder="enter match"
+        #input
+    />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <div class="table-container">
+        <table
+            id="matchListTable"
+            mat-table
+            [dataSource]="dataSource"
+            multiTemplateDataRows
+        ></table>
+    </div>
+</div>

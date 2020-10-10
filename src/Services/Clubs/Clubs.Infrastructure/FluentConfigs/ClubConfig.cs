@@ -9,9 +9,10 @@ namespace Clubs.Infrastructure.FluentConfig
         public void Configure(EntityTypeBuilder<Club> entity)
         {
             entity.HasKey(a => a.Id);
-            // entity.Property(p => p.ID).HasDefaultValueSql("NEWID()");
-            // entity.Property(p => p.Name).IsRequired();
-            // entity.Property(p => p.Active).IsRequired().HasDefaultValue(false);
+            entity.Property(p => p.Id).HasDefaultValueSql("NEWID()");
+            entity.Property(p => p.Name).IsRequired();
+            entity.Property(p => p.Active).IsRequired().HasDefaultValue(true);
+            entity.Property(p => p.Private).IsRequired().HasDefaultValue(false);
         }
     }
 }
