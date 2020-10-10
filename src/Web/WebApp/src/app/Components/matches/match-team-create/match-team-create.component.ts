@@ -211,7 +211,6 @@ export class MatchTeamCreateComponent implements OnInit {
         dateDay = dayjs(dateDay).add(hours, 'hour');
         dateDay = dayjs(dateDay).add(minutes, 'minute');
 
-        //console.log(`combineDateAndTime two ${dateDay.toDate()}`);
         return dateDay.toDate()
     }
 
