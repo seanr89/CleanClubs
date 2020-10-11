@@ -20,7 +20,6 @@ namespace Clubs.API
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            //Configuration = configuration;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -29,7 +28,6 @@ namespace Clubs.API
 
             Configuration = builder.Build();
         }
-
         private string MyAllowSpecificOrigins = "CorsPolicy";
         public IConfiguration Configuration { get; }
 
@@ -51,9 +49,9 @@ namespace Clubs.API
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-
             services.AddHealthChecks().AddDbContextCheck<ClubsContext>();
-            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" }));
+
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clubs API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +66,7 @@ namespace Clubs.API
 #endif
             }
 
+            app.UseHsts();
             app.UseHttpsRedirection();
 
             app.UseRouting();

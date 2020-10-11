@@ -11,13 +11,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
+import { MemberListComponent } from './member-list/member-list.component';
+import { MembersRoutingModule } from './members-routing.module';
 
 @NgModule({
     declarations: [
-    ],
+    MemberListComponent],
     imports: [
+      CommonModule,
+        MatTableModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSlideToggleModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        MatCardModule,
+        MembersRoutingModule
     ],
-    exports: [],
+    exports: [MemberListComponent],
     entryComponents: [],
 })
 export class MembersModule {}

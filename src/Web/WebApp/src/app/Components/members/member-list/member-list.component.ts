@@ -5,10 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GridPaginatorOption } from 'src/app/Core/grid-paginator-option';
-import { Member } from 'src/app/Models/Members/member';
 import { AuthService } from 'src/app/Services/auth.service';
 import { DataStateService } from 'src/app/Services/datastate.service';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
+import { Member } from '../../../Models/Members/member';
 
 @Component({
     selector: 'app-member-list',
@@ -18,6 +18,7 @@ import { NotificationsService } from 'src/app/Services/notifications/notificatio
 export class MemberListComponent implements OnInit {
     @Input()
     members: Member[];
+
     dataSource: MatTableDataSource<Member>;
     selection = new SelectionModel<Member>(true, []);
     public gridPageOptions: GridPaginatorOption;
@@ -47,7 +48,6 @@ export class MemberListComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     ngOnInit(): void {
-        //this.populateTable();
     }
 
     ngAfterViewInit(): void {

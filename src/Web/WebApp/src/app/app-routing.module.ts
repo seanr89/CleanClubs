@@ -17,9 +17,17 @@ const routes: Routes = [
         loadChildren: './Components/clubs/clubs.module#ClubsModule',
     },
     {
-        path: 'creatematch/:id',
-        component: MatchTeamCreateComponent
+        path: 'matches',
+        loadChildren: './Components/matches/matches.module#MatchesModule',
     },
+    {
+        path: 'members',
+        loadChildren: './Components/members/members.module#MembersModule',
+    },
+    // {
+    //     path: 'creatematch/:id',
+    //     component: MatchTeamCreateComponent
+    // },
     { path: 'home', component: HomeComponent },
 ];
 

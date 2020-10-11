@@ -13,6 +13,7 @@ import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
 import { HttpResponse } from '@angular/common/http';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-club-list',
@@ -23,9 +24,10 @@ export class ClubListComponent implements OnInit {
     private pageName: string = 'Clubs';
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = ['name', 'active', 'actions'];
+    displayedColumns: string[] = ['name', 'active', 'private', 'actions'];
     isLoading: boolean = false;
     pageSizeOptions: number[] = [100, 200, 300];
+    filterForm: FormGroup;
 
     constructor(
         private clubService: ClubsService,
@@ -33,11 +35,15 @@ export class ClubListComponent implements OnInit {
         public dialog: MatDialog,
         private dataService: DataStateService,
         private notifications: NotificationsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private _formBuilder: FormBuilder
     ) {
         this.dataSource = new MatTableDataSource<Club>();
         this.gridPageOptions = new GridPaginatorOption();
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
+
+        this.filterForm = this._formBuilder.group({
+          });
     }
 
     ngOnInit(): void {
@@ -55,8 +61,10 @@ export class ClubListComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     populateTable(): void {
+        console.log("populateTable");
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
+                // console.log(`Found clubs ${res.body.length}`);
                 this.isLoading = false;
                 this.dataSource.data = res.body;
             }
@@ -77,6 +85,12 @@ export class ClubListComponent implements OnInit {
         this.router.navigate([url]);
     };
 
+    onRowDoubleClick(row)
+    {
+        let url: string = `/club/details/${row.id}`;
+        this.router.navigate([url]);
+    }
+
     public addNew() {
         //Opens the add dialog box
         let club: CreateClubModel;
@@ -93,7 +107,7 @@ export class ClubListComponent implements OnInit {
                     .CreateClub(result)
                     .then((resp: HttpResponse<CreateClubModel>) => {
                         //we may need to refresh the datasource!
-                        if (resp.status !== 200) {
+                        if (resp.status === 200) {
                             this.notifications.success('Club Created', true);
                             this.dataSource.data.push(resp.body as Club);
                         } else {

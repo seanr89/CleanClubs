@@ -27,10 +27,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatchListComponent } from './Components/matches/match-list/match-list.component';
-import { MatchTeamCreateComponent } from './Components/matches/match-team-create/match-team-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatchCreateDialogComponent } from './Components/matches/match-create-dialog/match-create-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -48,9 +46,6 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
         SigninComponent,
         LoadingComponent,
         HomeComponent,
-        MatchListComponent,
-        MatchTeamCreateComponent,
-        MatchCreateDialogComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -86,6 +81,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     ],
     providers: [AuthGuard, SecureInnerPagesGuard],
     bootstrap: [AppComponent],
-    entryComponents: [MatchCreateDialogComponent]
+    exports: [LoadingComponent],
+    entryComponents: []
 })
 export class AppModule {}

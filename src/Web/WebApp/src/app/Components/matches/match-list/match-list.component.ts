@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GridPaginatorOption } from 'src/app/Core/grid-paginator-option';
 import { Match } from 'src/app/Models/match/match';
+import { MatchService } from 'src/app/Services/API/match.service';
 import { DataStateService } from 'src/app/Services/datastate.service';
 
 @Component({
@@ -15,13 +17,30 @@ export class MatchListComponent implements OnInit {
     dataSource: MatTableDataSource<Match>;
     public gridPageOptions: GridPaginatorOption;
     displayedColumns: string[] = ['date', 'status'];
-    isLoading: boolean = false;
 
-    constructor(private router: Router, private dataService: DataStateService) {
+    @Input()
+    clubId: string;
+
+    constructor(private router: Router,
+      private dataService: DataStateService,
+      private matchService: MatchService,
+      private activeRoute: ActivatedRoute) {
         this.dataService.updatePageTitle(this.pageName);
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+      //handle query to get all matches you can query!
+      this.matchService.GetMatchesForClub(this.clubId).then((resp: HttpResponse<Match[]>) => {
+        //TODO: comment and handle errors!
+        if(resp.status === 200)
+        {
+          this.dataSource.data = resp.body as Match[];
+        }
+        else{
+          alert("No matches found!");
+        }
+      });
+    }
 
     //#region Grid Controls
     public doFilter = (value: string) => {

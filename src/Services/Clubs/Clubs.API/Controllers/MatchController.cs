@@ -42,6 +42,11 @@ namespace Clubs.API.Controllers
             return StatusCode(204);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchById")]
         [ProducesResponseType(typeof(MatchDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -56,22 +61,32 @@ namespace Clubs.API.Controllers
             return StatusCode(204, "No Record Found");
         }
 
-        // [HttpGet("{id}", Name = "GetMatchesByClubId")]
-        // [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
-        // [ProducesResponseType(StatusCodes.Status204NoContent)]
-        // public async Task<IActionResult> GetMatchesByClubId(Guid id)
-        // {
-        //     _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
-        //     var result = await Mediator.Send(new GetClubMatchesQuery() { ClubId = id });
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}", Name = "GetMatchesByClubId")]
+        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetMatchesByClubId(Guid id)
+        {
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
+            var result = await Mediator.Send(new GetClubMatchesQuery() { ClubId = id });
 
-        //     if (result.Any())
-        //         return Ok(result);
+            if (result.Any())
+                return Ok(result);
 
-        //     return StatusCode(204, "No Records Found");
-        // }
+            return StatusCode(204, "No Records Found");
+        }
 
         #region POST
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -89,6 +104,11 @@ namespace Clubs.API.Controllers
             return BadRequest("Save failed");
         }
 
+        /// <summary>
+        /// Manual Match Generation
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -42,7 +42,7 @@ export class ClubDetailsComponent implements OnInit {
     //Button Click Events
 
     public redirectToMatchCreate = () => {
-        let url: string = `/creatematch/${this.club.id}`;
+        let url: string = `/matches/creatematch/${this.club.id}`;
         this.router.navigate([url]);
     };
 }

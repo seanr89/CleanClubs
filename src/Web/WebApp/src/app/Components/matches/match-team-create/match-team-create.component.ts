@@ -10,16 +10,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DataStateService } from 'src/app/Services/datastate.service';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
 import { Team } from 'src/app/Models/team/team';
-import { MemberListComponent } from '../../clubs/member-list/member-list.component';
 import { Member } from 'src/app/Models/Members/member';
 import { Player } from 'src/app/Models/player/player';
 import { Utilities } from 'src/app/Core/shared/utilities';
 import { MatDialog } from '@angular/material/dialog';
-import { MatchCreateDialogComponent } from '../match-create-dialog/match-create-dialog.component';
 import { Match } from 'src/app/Models/match/match';
 import { MatchService } from '../../../Services/API/match.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as dayjs from 'dayjs';
+import { MemberListComponent } from '../../members/member-list/member-list.component';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
     selector: 'app-match-team-create',
@@ -49,11 +49,12 @@ export class MatchTeamCreateComponent implements OnInit {
         private matchService: MatchService,
         private dataService: DataStateService,
         private activeRoute: ActivatedRoute,
+        private notifications: NotificationsService,
         public dialog: MatDialog,
         private _formBuilder: FormBuilder
     ) {
         this.dataService.updatePageTitle(this.pageName);
-        
+
 
     }
 
@@ -82,11 +83,8 @@ export class MatchTeamCreateComponent implements OnInit {
             timeInput: ['', Validators.required]
           });
           this.secondFormGroup = this._formBuilder.group({
-          });
-
-          
+        });
     }
-
 
     //#region Drag&Drop
 
@@ -126,7 +124,7 @@ export class MatchTeamCreateComponent implements OnInit {
         console.log('onSaveMatchClick');
 
         this.matchDetails.date = this.combineDateAndTime();
-        
+
         //TODO: create and populate the match
         //let record: Match = {} as Match;
         this.matchDetails.teams = [];
@@ -141,7 +139,15 @@ export class MatchTeamCreateComponent implements OnInit {
         this.matchDetails.teams.push(teamOne);
         this.matchDetails.teams.push(teamTwo);
 
-        this.matchService.CreateMatchWithTeams(this.matchDetails).then(() => {});
+        this.matchService.CreateMatchWithTeams(this.matchDetails).then((resp: HttpResponse<Match>) => {
+            if (resp.status === 200) {
+                this.notifications.success('Club Created', true);
+            }
+            else
+            {
+                alert("match create failed");
+            }
+        });
 
         // const dialogRef = this.dialog.open(MatchCreateDialogComponent, {
         //     data: record,

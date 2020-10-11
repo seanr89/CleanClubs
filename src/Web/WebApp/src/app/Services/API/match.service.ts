@@ -22,6 +22,11 @@ export class MatchService {
         return this.apiService.get<Match[]>(`${this.api_url_tag}/Get`);
     }
 
+    GetMatchesForClub(id: string): Promise<HttpResponse<Match[]>> {
+      return this.apiService.get<Match[]>(`${this.api_url_tag}/GetMatchesByClubId/${id}`);
+    }
+
+
     /**
      * Not yet fully implemented
      * @param match

@@ -17,7 +17,8 @@ import { ClubEditComponent } from './dialogs/edit/club-edit.component';
 import { ClubDetailsComponent } from './club-details/club-details.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
-import { MemberListComponent } from './member-list/member-list.component';
+import { MembersModule } from '../members/members.module';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,6 @@ import { MemberListComponent } from './member-list/member-list.component';
         ClubAddComponent,
         ClubEditComponent,
         ClubDetailsComponent,
-        MemberListComponent,
     ],
     imports: [
         CommonModule,
@@ -42,8 +42,10 @@ import { MemberListComponent } from './member-list/member-list.component';
         ReactiveFormsModule,
         FlexLayoutModule,
         MatCardModule,
+        MembersModule,
+        MatInputModule,
     ],
-    exports: [ClubListComponent, MemberListComponent],
+    exports: [ClubListComponent],
     entryComponents: [ClubAddComponent, ClubEditComponent],
 })
 export class ClubsModule {}

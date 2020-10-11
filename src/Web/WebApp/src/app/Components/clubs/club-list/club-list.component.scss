@@ -88,6 +88,16 @@ tr.example-detail-row {
     }
 }
 
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
 @media (max-width: 1350px) {
     .searchField {
         width: 47.5%;
@@ -129,4 +139,6 @@ tr.example-detail-row {
             width: 100%;
         }
     }
+
+    
 }

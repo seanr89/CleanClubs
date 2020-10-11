@@ -18,5 +18,18 @@
             [dataSource]="dataSource"
             multiTemplateDataRows
         ></table>
+
+        <!-- If the data source is empty the table will display 'No Results' -->
+          <div
+                class="no-results"
+                [style.display]="dataSource.data.length == 0 ? '' : 'none'"
+          >
+            No Records Found!
+          </div>
     </div>
+    <mat-paginator
+    id="matchesListPaginator"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 20, 50]"
+></mat-paginator>
 </div>
