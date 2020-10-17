@@ -24,10 +24,6 @@ const routes: Routes = [
         path: 'members',
         loadChildren: './Components/members/members.module#MembersModule',
     },
-    // {
-    //     path: 'creatematch/:id',
-    //     component: MatchTeamCreateComponent
-    // },
     { path: 'home', component: HomeComponent },
 ];
 

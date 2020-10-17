@@ -1,9 +1,9 @@
 using System;
 
 //https://exceptionnotfound.net/entity-framework-and-wcf-mapping-entities-to-dtos-with-automapper/
-namespace Clubs.Application.Profiles.Dto
+namespace Clubs.Application.Profiles.DTO
 {
-    public class MemberDto
+    public class MemberDTO
     {
         public Guid Id { get; set; }
 

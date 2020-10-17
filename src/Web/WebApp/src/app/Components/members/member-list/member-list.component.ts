@@ -5,10 +5,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { GridPaginatorOption } from 'src/app/Core/grid-paginator-option';
+import { Member } from 'src/app/Models/interfaces/members/member';
 import { AuthService } from 'src/app/Services/auth.service';
 import { DataStateService } from 'src/app/Services/datastate.service';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
-import { Member } from '../../../Models/Members/member';
 
 @Component({
     selector: 'app-member-list',
@@ -55,7 +55,6 @@ export class MemberListComponent implements OnInit {
         this.dataSource.sort = this.sort;
 
         if (this.members !== null) {
-            console.log(`members = ${this.members.length}`);
             this.isLoading = false;
             this.dataSource.data = this.members;
         }

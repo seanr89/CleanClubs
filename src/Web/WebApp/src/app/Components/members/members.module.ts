@@ -13,10 +13,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MemberListComponent } from './member-list/member-list.component';
 import { MembersRoutingModule } from './members-routing.module';
+import { CoreModule } from 'src/app/Core/core.module';
 
 @NgModule({
     declarations: [
-    MemberListComponent],
+      MemberListComponent],
     imports: [
       CommonModule,
         MatTableModule,
@@ -31,7 +32,8 @@ import { MembersRoutingModule } from './members-routing.module';
         ReactiveFormsModule,
         FlexLayoutModule,
         MatCardModule,
-        MembersRoutingModule
+        MembersRoutingModule,
+        CoreModule
     ],
     exports: [MemberListComponent],
     entryComponents: [],

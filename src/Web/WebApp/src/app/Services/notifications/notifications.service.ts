@@ -3,9 +3,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, NavigationStart } from '@angular/router';
 import { Subject, Observable, throwError } from 'rxjs';
 import { Utilities } from 'src/app/Core/shared/utilities';
+import { NotificationType } from 'src/app/Models/interfaces/notifications/notificationtype';
 import { Notification } from 'src/app/Models/notification';
-// import { Utilities } from 'src/app/core/shared/Utilities';
-import { NotificationType } from 'src/app/Models/Notifitications/notificationtype';
 
 //following sample: https://jasonwatmore.com/post/2019/07/05/angular-8-alert-toaster-notifications
 @Injectable({

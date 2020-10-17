@@ -7,9 +7,8 @@ using System.Linq;
 using MediatR;
 using System;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
-using Clubs.Application.Profiles;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Invite.Commands
 {
@@ -17,7 +16,7 @@ namespace Clubs.Application.Requests.Invite.Commands
 
     public class UpdateInviteCommand : IRequest<bool>
     {
-        public InviteDto Invite { get; set; }
+        public InviteDTO Invite { get; set; }
     }
 
     public class UpdateInviteCommandHandler : IRequestHandler<UpdateInviteCommand, bool>

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GridPaginatorOption } from 'src/app/Core/grid-paginator-option';
-import { Match } from 'src/app/Models/match/match';
+import { Match } from 'src/app/Models/interfaces/match/match';
 import { MatchService } from 'src/app/Services/API/match.service';
 import { DataStateService } from 'src/app/Services/datastate.service';
 

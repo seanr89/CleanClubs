@@ -9,8 +9,7 @@ using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
-using Clubs.Application.Profiles.DTOs.Clubs;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Club.Commands
 {
@@ -18,7 +17,7 @@ namespace Clubs.Application.Requests.Club.Commands
 
     public class CreateTeamCommand : IRequest<Guid>
     {
-        public CreateTeamDto Team { get; set; }
+        public CreateTeamDTO Team { get; set; }
     }
 
     public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, Guid>

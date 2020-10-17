@@ -4,9 +4,9 @@ using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
 //https://exceptionnotfound.net/entity-framework-and-wcf-mapping-entities-to-dtos-with-automapper/
-namespace Clubs.Application.Profiles.Dto
+namespace Clubs.Application.Profiles.DTO
 {
-    public class CreatePlayerDto
+    public class CreatePlayerDTO
     {
         public string FirstName { get; set; }
 

@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application;
 using Clubs.Application.Business;
-using Clubs.Application.DTOs;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Queries;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +29,7 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<MatchListDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MatchListDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
@@ -48,7 +47,7 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchById")]
-        [ProducesResponseType(typeof(MatchDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MatchDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
@@ -67,7 +66,7 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchesByClubId")]
-        [ProducesResponseType(typeof(IEnumerable<MatchDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MatchDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {

@@ -9,18 +9,18 @@ using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Matches.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class GetMatchQuery : IRequest<MatchDto>
+    public class GetMatchQuery : IRequest<MatchDTO>
     {
         public Guid MatchId { get; set; }
     }
 
-    public class GetMatchQueryHandler : IRequestHandler<GetMatchQuery, MatchDto>
+    public class GetMatchQueryHandler : IRequestHandler<GetMatchQuery, MatchDTO>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
@@ -31,11 +31,11 @@ namespace Clubs.Application.Requests.Matches.Queries
             _Mapper = mapper;
         }
 
-        public async Task<MatchDto> Handle(GetMatchQuery request, CancellationToken cancellationToken)
+        public async Task<MatchDTO> Handle(GetMatchQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Matches
                 .Include(m => m.Teams)
-                .ProjectTo<MatchDto>(_Mapper.ConfigurationProvider)
+                .ProjectTo<MatchDTO>(_Mapper.ConfigurationProvider)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(c => c.Id == request.MatchId);
         }

@@ -19,6 +19,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MembersModule } from '../members/members.module';
 import { MatInputModule } from '@angular/material/input';
+import { MatchesModule } from '../matches/matches.module';
+import { CoreModule } from 'src/app/Core/core.module';
 
 @NgModule({
     declarations: [
@@ -43,6 +45,8 @@ import { MatInputModule } from '@angular/material/input';
         FlexLayoutModule,
         MatCardModule,
         MembersModule,
+        MatchesModule,
+        CoreModule,
         MatInputModule,
     ],
     exports: [ClubListComponent],

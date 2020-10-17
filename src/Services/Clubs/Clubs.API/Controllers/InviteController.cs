@@ -3,7 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
-using Clubs.Application.Profiles;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Invite.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +28,7 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");
 
-            var invite = new InviteDto() { Id = id, Accepted = true };
+            var invite = new InviteDTO() { Id = id, Accepted = true };
             var record = await Mediator.Send(new UpdateInviteCommand() { Invite = invite });
             if (record)
                 return Ok("Record Updated!");
@@ -43,7 +43,7 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Invite: {HelperMethods.GetCallerMemberName()}");
 
-            var invite = new InviteDto() { Id = id, Accepted = false };
+            var invite = new InviteDTO() { Id = id, Accepted = false };
             var record = await Mediator.Send(new UpdateInviteCommand() { Invite = invite });
             if (record)
                 return Ok("Record Updated!");

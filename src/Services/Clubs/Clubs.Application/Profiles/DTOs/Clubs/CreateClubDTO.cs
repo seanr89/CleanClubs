@@ -1,5 +1,5 @@
 
-namespace Clubs.Application.Profiles.DTOs.Clubs
+namespace Clubs.Application.Profiles.DTO
 {
     public class CreateClubDTO
     {

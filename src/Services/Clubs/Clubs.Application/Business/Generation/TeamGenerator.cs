@@ -3,9 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Clubs.Application.Profiles;
-using Clubs.Application.Profiles.Dto;
-using Clubs.Domain.Entities;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Domain.Enums;
 using Microsoft.Extensions.Logging;
 using Utilities;
@@ -27,9 +25,9 @@ namespace Clubs.Application.Business
         /// Supports the default random shuffle fo players into teams
         /// </summary>
         /// <param name="info"></param>
-        /// <returns>Returns the matchDTO with teams!</returns>
+        /// <returns>Returns the MatchDTO with teams!</returns>
         /*
-        public async Task<MatchDto> Generate(GenerationInfo info)
+        public async Task<MatchDTO> Generate(GenerationInfo info)
         {
             _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
             if (info.Match.Invites.Any())
@@ -44,7 +42,7 @@ namespace Clubs.Application.Business
                 var teamList = InitialiseTeams(info.Match);
 
                 //Ok shuffle the players with a utility call
-                HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
+                HelperMethods.Shuffle<InviteDTO>(acceptedInvites.ToList());
 
                 await ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
                 //complete - need to save these details now!
@@ -53,15 +51,15 @@ namespace Clubs.Application.Business
             return info.Match;
         }*/
 
-        async Task ShufflePlayersIntoTeams(List<TeamDto> teams, MatchDto match, List<InviteDto> invites)
+        async Task ShufflePlayersIntoTeams(List<TeamDTO> teams, MatchDTO match, List<InviteDTO> invites)
         {
             await Task.Run(() =>
             {
-                PlayerDto player = null;
+                PlayerDTO player = null;
                 bool AddedToTeamOne = false;
                 foreach (var inv in invites)
                 {
-                    player = new PlayerDto()
+                    player = new PlayerDTO()
                     {
                         Email = inv.Member.Email,
                         FirstName = inv.Member.FirstName,
@@ -89,11 +87,11 @@ namespace Clubs.Application.Business
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        protected List<TeamDto> InitialiseTeams(MatchDto match)
+        protected List<TeamDTO> InitialiseTeams(MatchDTO match)
         {
-            var modelList = new List<TeamDto>();
-            modelList.Add(new TeamDto() { Number = TeamNumber.ONE, MatchId = match.Id });
-            modelList.Add(new TeamDto() { Number = TeamNumber.TWO, MatchId = match.Id });
+            var modelList = new List<TeamDTO>();
+            modelList.Add(new TeamDTO() { Number = TeamNumber.ONE, MatchId = match.Id });
+            modelList.Add(new TeamDTO() { Number = TeamNumber.TWO, MatchId = match.Id });
             return modelList;
         }
 
@@ -102,7 +100,7 @@ namespace Clubs.Application.Business
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        public async Task<MatchDto> Generate(MatchDto match)
+        public async Task<MatchDTO> Generate(MatchDTO match)
         {
             _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {match.Id}");
             if (match.Invites.Any())
@@ -117,7 +115,7 @@ namespace Clubs.Application.Business
                 var teamList = InitialiseTeams(match);
 
                 //Ok shuffle the players with a utility call
-                HelperMethods.Shuffle<InviteDto>(acceptedInvites.ToList());
+                HelperMethods.Shuffle<InviteDTO>(acceptedInvites.ToList());
 
                 await ShufflePlayersIntoTeams(teamList, match, acceptedInvites);
                 //complete - need to save these details now!

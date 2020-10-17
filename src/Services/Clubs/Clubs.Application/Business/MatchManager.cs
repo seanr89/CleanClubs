@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Clubs.Application.Business;
-using Clubs.Application.DTOs;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
 using Clubs.Domain.Entities;

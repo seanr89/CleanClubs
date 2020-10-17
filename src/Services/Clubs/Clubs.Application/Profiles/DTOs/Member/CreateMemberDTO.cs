@@ -1,7 +1,7 @@
 
 using System;
 
-namespace Clubs.Application.Profiles.DTOs
+namespace Clubs.Application.Profiles.DTO
 {
     public class CreateMemberDTO
     {

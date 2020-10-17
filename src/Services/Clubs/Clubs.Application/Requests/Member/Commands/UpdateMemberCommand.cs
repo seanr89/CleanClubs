@@ -10,7 +10,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
 using Microsoft.Extensions.Logging;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Member.Commands
 {
@@ -18,7 +18,7 @@ namespace Clubs.Application.Requests.Member.Commands
     //https://medium.com/@ducmeit/net-core-using-cqrs-pattern-with-mediatr-part-1-55557e90931b
     public class UpdateMemberCommand : IRequest<bool>
     {
-        public MemberDto Member { get; set; }
+        public MemberDTO Member { get; set; }
     }
 
     public class UpdateMemberCommandHandler : IRequestHandler<UpdateMemberCommand, bool>

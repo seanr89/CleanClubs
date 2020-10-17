@@ -2,10 +2,9 @@
 
 using System;
 using System.Collections.Generic;
-
-namespace Clubs.Application.Profiles.DTOs.Clubs
+namespace Clubs.Application.Profiles.DTO
 {
-    public class ClubListDto
+    public class ClubListDTO
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -1,8 +1,8 @@
 using System;
 
-namespace Clubs.Application.Profiles.Dto
+namespace Clubs.Application.Profiles.DTO
 {
-    public class PlayerListDto
+    public class PlayerListDTO
     {
         public Guid Id { get; set; }
 

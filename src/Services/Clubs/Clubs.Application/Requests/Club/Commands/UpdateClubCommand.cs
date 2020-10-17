@@ -9,7 +9,7 @@ using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
-using Clubs.Application.Profiles.DTOs.Clubs;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Club.Commands
 {
@@ -17,7 +17,7 @@ namespace Clubs.Application.Requests.Club.Commands
 
     public class UpdateClubCommand : IRequest<bool>
     {
-        public ClubUpdateDto Club { get; set; }
+        public ClubUpdateDTO Club { get; set; }
     }
 
     public class UpdateClubCommandHandler : IRequestHandler<UpdateClubCommand, bool>

@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Club } from 'src/app/Models/Clubs/club';
 import { MatTableDataSource } from '@angular/material/table';
 import { ClubsService } from 'src/app/Services/API/clubs.service';
 import { Sort, MatSort } from '@angular/material/sort';
@@ -9,11 +8,12 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ClubAddComponent } from '../dialogs/add/club-add.component';
 import { DataStateService } from 'src/app/Services/datastate.service';
-import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
 import { HttpResponse } from '@angular/common/http';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Club } from 'src/app/Models/interfaces/clubs/club';
+import { CreateClubModel } from 'src/app/Models/interfaces/clubs/createclubmodel';
 
 @Component({
     selector: 'app-club-list',

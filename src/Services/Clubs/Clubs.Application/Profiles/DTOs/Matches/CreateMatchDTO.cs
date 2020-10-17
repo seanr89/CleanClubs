@@ -1,20 +1,22 @@
 
 using System;
 using System.Collections.Generic;
-using Clubs.Application.Profiles.Dto;
 using Clubs.Domain.Entities;
 using Clubs.Domain.Enums;
 
-namespace Clubs.Application.DTOs
+namespace Clubs.Application.Profiles.DTO
 {
+    /// <summary>
+    /// Match Create Model when teams have not been created!
+    /// </summary>
     public class CreateMatchDTO
     {
         public Guid ClubId { get; set; }
         public DateTime Date { get; set; }
         public MatchStatus Status { get; set; } = MatchStatus.Created;
         public bool InviteActiveMembers { get; set; } = true;
-        public List<MemberDto> SelectedMembers { get; set; } = new List<MemberDto>();
-        public List<CreateTeamDto> Teams { get; set; } = new List<CreateTeamDto>();
+        public List<CreateMemberDTO> SelectedMembers { get; set; } = new List<CreateMemberDTO>();
+        public List<CreateTeamDTO> Teams { get; set; } = new List<CreateTeamDTO>();
         public bool SendInvites { get; set; } = false;
         public string Location { get; set; }
     }

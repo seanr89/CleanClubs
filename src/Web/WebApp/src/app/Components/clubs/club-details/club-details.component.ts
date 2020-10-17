@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Club } from 'src/app/Models/Clubs/club';
+import { Club } from 'src/app/Models/interfaces/clubs/club';
 import { ClubsService } from 'src/app/Services/API/clubs.service';
 import { DataStateService } from 'src/app/Services/datastate.service';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
@@ -33,7 +33,9 @@ export class ClubDetailsComponent implements OnInit {
         this.clubService.GetClubById(id).then((res) => {
             if (res.status === 200) {
                 this.club = res.body as Club;
-                //console.log(`members count ${this.club.members.length}`);
+            }
+            else{
+              this.notifications.error("Unable to find any clubs", true);
             }
         });
     };

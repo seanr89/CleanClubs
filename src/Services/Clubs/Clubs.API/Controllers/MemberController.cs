@@ -4,8 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Club.API.Controllers;
-using Clubs.Application.Profiles.Dto;
-using Clubs.Application.Profiles.DTOs;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Member.Commands;
 using Clubs.Application.Requests.Member.Queries;
 using Microsoft.AspNetCore.Http;
@@ -30,9 +29,9 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MemberDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IEnumerable<MemberDto>> Get()
+        public async Task<IEnumerable<MemberDTO>> Get()
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
             return await Mediator.Send(new GetAllMembersQuery());
@@ -44,7 +43,7 @@ namespace Clubs.API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMemberById")]
-        [ProducesResponseType(typeof(MemberDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MemberDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMemberById(Guid id)
         {
@@ -64,7 +63,7 @@ namespace Clubs.API.Controllers
         /// <param name="id">Club ID</param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMembersByClubId")]
-        [ProducesResponseType(typeof(IEnumerable<MemberDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MemberDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMembersByClubId(Guid id)
         {
@@ -111,7 +110,7 @@ namespace Clubs.API.Controllers
         // [HttpPut("{id}")]
         // [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // public async Task<IActionResult> UpdateMember(Guid id, [FromBody] MemberDto update)
+        // public async Task<IActionResult> UpdateMember(Guid id, [FromBody] MemberDTO update)
         // {
         //     _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
         //     if (!ModelState.IsValid)

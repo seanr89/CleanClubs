@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Club.API.Controllers;
-using Clubs.Application.Profiles.DTOs.Clubs;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Club.Commands;
 using Clubs.Application.Requests.Club.Queries;
 using Microsoft.AspNetCore.Http;
@@ -32,7 +32,7 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns>Collection of ClubDTO records</returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<ClubListDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ClubListDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Get()
         {
@@ -102,7 +102,7 @@ namespace Clubs.API.Controllers
         // [HttpPut("{id}")]
         // [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         // [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        // public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody] ClubUpdateDto club)
+        // public async Task<IActionResult> UpdateClubDetails(Guid id, [FromBody] ClubUpdateDTO club)
         // {
         //     _Logger.LogInformation($"Club: {HelperMethods.GetCallerMemberName()}");
         //     if (!ModelState.IsValid)

@@ -1,5 +1,5 @@
 using AutoMapper;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Domain.Entities;
 
 namespace Clubs.Application.Profiles
@@ -9,9 +9,9 @@ namespace Clubs.Application.Profiles
         public TeamProfile()
         {
             // Default mapping when property names are same
-            CreateMap<Team, TeamDto>();
-            CreateMap<TeamDto, Team>();
-            CreateMap<CreateTeamDto, Team>();
+            CreateMap<Team, TeamDTO>();
+            CreateMap<TeamDTO, Team>();
+            CreateMap<CreateTeamDTO, Team>();
         }
     }
 }

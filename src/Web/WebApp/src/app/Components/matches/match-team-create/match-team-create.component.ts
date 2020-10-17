@@ -4,22 +4,22 @@ import {
     moveItemInArray,
     transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { Club } from 'src/app/Models/Clubs/club';
 import { ClubsService } from 'src/app/Services/API/clubs.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataStateService } from 'src/app/Services/datastate.service';
 import { NotificationsService } from 'src/app/Services/notifications/notifications.service';
-import { Team } from 'src/app/Models/team/team';
-import { Member } from 'src/app/Models/Members/member';
-import { Player } from 'src/app/Models/player/player';
 import { Utilities } from 'src/app/Core/shared/utilities';
-import { MatDialog } from '@angular/material/dialog';
-import { Match } from 'src/app/Models/match/match';
 import { MatchService } from '../../../Services/API/match.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as dayjs from 'dayjs';
 import { MemberListComponent } from '../../members/member-list/member-list.component';
 import { HttpResponse } from '@angular/common/http';
+import { MatchStatus } from 'src/app/Models/enums/matchstatus.enum';
+import { Club } from 'src/app/Models/interfaces/clubs/club';
+import { Match } from 'src/app/Models/interfaces/match/match';
+import { Member } from 'src/app/Models/interfaces/members/member';
+import { Player } from 'src/app/Models/interfaces/player/player';
+import { Team } from 'src/app/Models/interfaces/team/team';
 
 @Component({
     selector: 'app-match-team-create',
@@ -50,12 +50,9 @@ export class MatchTeamCreateComponent implements OnInit {
         private dataService: DataStateService,
         private activeRoute: ActivatedRoute,
         private notifications: NotificationsService,
-        public dialog: MatDialog,
         private _formBuilder: FormBuilder
     ) {
         this.dataService.updatePageTitle(this.pageName);
-
-
     }
 
     ngOnInit(): void {
@@ -68,11 +65,12 @@ export class MatchTeamCreateComponent implements OnInit {
                 this.matchDetails = {
                     id: '',
                     teams: [],
-                    status: 0,
+                    status: MatchStatus.SCHEDULED,
                     date: new Date(),
                     invites: [],
                     location: '',
-                    clubId: this.club.id
+                    clubId: this.club.id,
+                    invitesSent: false
                 };
             }
         });
@@ -120,15 +118,16 @@ export class MatchTeamCreateComponent implements OnInit {
         }
     }
 
+    /**
+     * Handles the save process being triggered
+     */
     onSaveMatchClick() {
         console.log('onSaveMatchClick');
 
         this.matchDetails.date = this.combineDateAndTime();
-
-        //TODO: create and populate the match
-        //let record: Match = {} as Match;
         this.matchDetails.teams = [];
 
+        //TODO: This is all really messy and needs re-worked!!
         let teamOne: Team = {} as Team;
         let teamTwo: Team = {} as Team;
         teamOne.players = [];
@@ -139,27 +138,17 @@ export class MatchTeamCreateComponent implements OnInit {
         this.matchDetails.teams.push(teamOne);
         this.matchDetails.teams.push(teamTwo);
 
+        //Support the saving attempt!
         this.matchService.CreateMatchWithTeams(this.matchDetails).then((resp: HttpResponse<Match>) => {
+            //Also need to check if this is a 200 or 201 returned!
             if (resp.status === 200) {
                 this.notifications.success('Club Created', true);
+                //we may want to re-direct here!
             }
-            else
-            {
-                alert("match create failed");
+            else{
+                this.notifications.error("save failed", true);
             }
         });
-
-        // const dialogRef = this.dialog.open(MatchCreateDialogComponent, {
-        //     data: record,
-        // });
-
-        // //Handles the close of the dialog box
-        // dialogRef.afterClosed().subscribe((res: Match | number) => {
-        //     //If the save button is clicked then add test
-        //     //alert('create match closed!');
-        //     if (res !== -1 && res !== undefined)
-        //         this.matchService.CreateMatchWithTeams(res as Match).then(() => {});
-        // });
     }
 
     //#endregion
@@ -169,17 +158,25 @@ export class MatchTeamCreateComponent implements OnInit {
      * @param members : selected member list
      */
     createRandomMemberSplit(members: Member[]) {
-        console.log('createRandomMemberSplit');
+        //utility process to randomize the list
         Utilities.shuffle(members);
 
+        //calculate array length then split it
         let arrayLength: number = members.length;
         let members1 = members.slice(0, arrayLength / 2);
         let members2 = members.slice(arrayLength / 2 + 1);
 
+        //This a side-affect and needs to be removed/moved somewhere else
+        //OR needs to be re-named
         this.teamOne = this.createPlayersFromMembers(members1);
         this.teamTwo = this.createPlayersFromMembers(members2);
     }
 
+    /**
+     * parse a list of members and re-work into the players
+     * @param members : array of members to be re-formatted
+     * @returns an array of players
+     */
     createPlayersFromMembers(members: Member[]) : Player[]
     {
         let players = [];
@@ -198,11 +195,11 @@ export class MatchTeamCreateComponent implements OnInit {
     }
 
     /**
-     * Support the merging of date and time picker element content into a single date/moment record!
+     * Merges the date and time picker element content into a single date/moment record!
+     * @returns : a combined Date object with the Date and Time combined
      */
     combineDateAndTime() : Date
     {
-        console.log("combineDateAndTime");
         let hours: number;
         let minutes: number;
 
@@ -212,11 +209,9 @@ export class MatchTeamCreateComponent implements OnInit {
         }
 
         let date = this.selectedDate;
-
         let dateDay = dayjs(date);
-        dateDay = dayjs(dateDay).add(hours, 'hour');
-        dateDay = dayjs(dateDay).add(minutes, 'minute');
-
+        dateDay = dayjs(dateDay).add(hours, 'hour')
+        dateDay = dayjs(dateDay).add(minutes, 'minute')
         return dateDay.toDate()
     }
 

@@ -4,7 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Club.API.Controllers;
 using Clubs.Application.Business;
-using Clubs.Application.Profiles.Dto;
+using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
 using Clubs.Domain.Enums;

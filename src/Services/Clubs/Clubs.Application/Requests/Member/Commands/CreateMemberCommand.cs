@@ -9,7 +9,7 @@ using System;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
-using Clubs.Application.Profiles.DTOs;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Member.Commands
 {

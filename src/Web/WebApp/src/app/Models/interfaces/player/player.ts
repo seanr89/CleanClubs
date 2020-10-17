@@ -1,4 +1,4 @@
-import { Member } from '../Members/member';
+import { Member } from '../members/member';
 
 export interface Player {
     id: string;

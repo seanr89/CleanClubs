@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
-import { Club } from 'src/app/Models/Clubs/club';
 import { HttpResponse } from '@angular/common/http';
-import { CreateClubModel } from 'src/app/Models/Clubs/createclubmodel';
+import { Club } from 'src/app/Models/interfaces/clubs/club';
+import { CreateClubModel } from 'src/app/Models/interfaces/clubs/createclubmodel';
 
 @Injectable({
     providedIn: 'root',
