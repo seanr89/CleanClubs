@@ -13,5 +13,7 @@ namespace Clubs.Application.Profiles.DTO
         public bool Private { get; set; }
         public string Creator { get; set; }
         public List<MemberDTO> Members { get; set; } = new List<MemberDTO>();
+        
+        //TODO: matches to be included!
     }
 }

@@ -15,9 +15,8 @@ namespace Clubs.Domain.Entities
         [Required]
         public Guid MatchId { get; set; }
         public Match Match { get; set; }
-
         /// <summary>
-        /// Defines if this is the first or second team
+        /// Defines if this is the first or second team for easier defining!
         /// </summary>
         /// <value></value>
         public TeamNumber Number { get; set; }

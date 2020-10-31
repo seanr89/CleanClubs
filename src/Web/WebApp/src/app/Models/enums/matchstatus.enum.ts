@@ -2,7 +2,7 @@
  * Enum to define the current status of a match!
  */
 export enum MatchStatus {
-    SCHEDULED,
+    SCHEDULED = 0,
     INPROGRESS,
     CANCELLED,
     COMPLETE,

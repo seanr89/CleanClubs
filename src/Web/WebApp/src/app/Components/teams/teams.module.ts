@@ -10,32 +10,25 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule } from '@angular/material/card';
-import { MemberListComponent } from './member-list/member-list.component';
-import { MembersRoutingModule } from './members-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { TeamsPlayerlistComponent } from './teams-playerlist/teams-playerlist.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     declarations: [
-      MemberListComponent],
+        TeamsPlayerlistComponent],
     imports: [
-      CommonModule,
+        CommonModule,
         MatTableModule,
-        MatDialogModule,
-        MatPaginatorModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSlideToggleModule,
-        MatCheckboxModule,
-        FormsModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        FlexLayoutModule,
-        MatCardModule,
-        MembersRoutingModule,
-        SharedModule
+        MatListModule,
+        MatStepperModule,
+        MatSnackBarModule,
+        MatDatepickerModule,
+
     ],
-    exports: [MemberListComponent],
+    exports: [TeamsPlayerlistComponent],
     entryComponents: [],
 })
-export class MembersModule {}
+export class TeamsModule {}

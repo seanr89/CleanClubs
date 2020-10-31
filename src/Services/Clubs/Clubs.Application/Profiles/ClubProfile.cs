@@ -11,7 +11,6 @@ namespace Clubs.Application.Profiles
             CreateMap<Clubs.Domain.Entities.Club, ClubDTO>();
             CreateMap<Clubs.Domain.Entities.Club, ClubListDTO>();
             CreateMap<CreateClubDTO, Clubs.Domain.Entities.Club>();
-            CreateMap<ClubUpdateDTO, Clubs.Domain.Entities.Club>();
         }
     }
 }

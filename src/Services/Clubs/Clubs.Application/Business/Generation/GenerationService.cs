@@ -36,7 +36,7 @@ namespace Clubs.Application.Business
             var generator = SelectGeneratorByGeneratorType(option);
             var generatedMatch = await generator.Generate(match);
 
-            result =  await _mediator.Send(new UpdateMatchCommand() { Match = generatedMatch });
+            result =  await _mediator.Send(new UpdateMatchTeamsCommand() { Match = generatedMatch });
             return result;
         }
 

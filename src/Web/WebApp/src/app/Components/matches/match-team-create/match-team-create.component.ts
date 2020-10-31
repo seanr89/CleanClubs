@@ -79,8 +79,8 @@ export class MatchTeamCreateComponent implements OnInit {
             locationInput: ['', Validators.required],
             dateInput: ['', Validators.required],
             timeInput: ['', Validators.required]
-          });
-          this.secondFormGroup = this._formBuilder.group({
+        });
+        this.secondFormGroup = this._formBuilder.group({
         });
     }
 
@@ -106,7 +106,6 @@ export class MatchTeamCreateComponent implements OnInit {
     //#endregion
 
     //#region Click Events
-
     onGenerateClick() {
         let selectedMembers = this.memberList.getAllSelected();
         if (selectedMembers !== null) {
@@ -145,7 +144,7 @@ export class MatchTeamCreateComponent implements OnInit {
                 this.notifications.success('Club Created', true);
                 //we may want to re-direct here!
             }
-            else{
+            else {
                 this.notifications.error("save failed", true);
             }
         });
@@ -177,17 +176,16 @@ export class MatchTeamCreateComponent implements OnInit {
      * @param members : array of members to be re-formatted
      * @returns an array of players
      */
-    createPlayersFromMembers(members: Member[]) : Player[]
-    {
+    createPlayersFromMembers(members: Member[]): Player[] {
         let players = [];
         members.forEach(element => {
-            let player :Player = {
+            let player: Player = {
                 id: null,
                 firstName: element.firstName,
                 lastName: element.lastName,
                 email: element.email,
                 rating: element.rating,
-                memberId : element.id
+                memberId: element.id
             }
             players.push(player);
         });
@@ -198,8 +196,7 @@ export class MatchTeamCreateComponent implements OnInit {
      * Merges the date and time picker element content into a single date/moment record!
      * @returns : a combined Date object with the Date and Time combined
      */
-    combineDateAndTime() : Date
-    {
+    combineDateAndTime(): Date {
         let hours: number;
         let minutes: number;
 

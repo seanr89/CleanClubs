@@ -11,6 +11,7 @@ namespace Clubs.Application.Profiles
             // Default mapping when property names are same
             CreateMap<Member, MemberDTO>();
             CreateMap<MemberDTO, Member>();
+            CreateMap<MemberListDTO, Member>();
             CreateMap<CreateMemberDTO, Member>();
         }
     }

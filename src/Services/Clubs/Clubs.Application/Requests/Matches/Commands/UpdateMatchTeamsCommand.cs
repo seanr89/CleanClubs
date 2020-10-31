@@ -12,26 +12,26 @@ namespace Clubs.Application.Requests.Matches.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class UpdateMatchCommand : IRequest<bool>
+    public class UpdateMatchTeamsCommand : IRequest<bool>
     {
         public MatchDTO Match { get; set; }
     }
 
-    public class UpdateMatchCommandHandler : IRequestHandler<UpdateMatchCommand, bool>
+    public class UpdateMatchTeamsCommandHandler : IRequestHandler<UpdateMatchTeamsCommand, bool>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
-        private readonly ILogger<UpdateMatchCommandHandler> _Logger;
+        private readonly ILogger<UpdateMatchTeamsCommandHandler> _Logger;
 
-        public UpdateMatchCommandHandler(ClubsContext context, IMapper mapper
-        , ILogger<UpdateMatchCommandHandler> logger)
+        public UpdateMatchTeamsCommandHandler(ClubsContext context, IMapper mapper
+        , ILogger<UpdateMatchTeamsCommandHandler> logger)
         {
             _Context = context;
             _Mapper = mapper;
             _Logger = logger;
         }
 
-        public async Task<bool> Handle(UpdateMatchCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdateMatchTeamsCommand request, CancellationToken cancellationToken)
         {
             var convertedMatch = _Mapper.Map<Match>(request.Match);
             var existingRecord = await _Context.Matches

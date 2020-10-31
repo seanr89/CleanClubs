@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Edit Match</h2>
+
+<mat-dialog-content [formGroup]="form"style="width: 15vw;">
+
+    <!-- Date and Time picker -->
+    <mat-form-field >
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="dateControl"
+         [disabled]="false">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #picker [showSpinners]="true" [showSeconds]="false"
+          [stepHour]="1" [stepMinute]="1" [stepSecond]="1" [touchUi]="false">
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+
+    <!-- Location -->
+    <mat-form-field appearance="fill">
+        <mat-label>Location</mat-label>
+        <input matInput
+                placeholder="Location"
+               formControlName="location" value="match.location">
+    </mat-form-field>
+
+    <!-- State/Status -->
+    <mat-form-field>
+        <mat-select placeholder="Select category"
+        formControlName="status" (value)="match.status">
+            <mat-option *ngFor="let key of keys" [value]="key">{{getMatchStatus(key)}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" [mat-dialog-close]="-1" (click)="close()">Close</button>
+    <button class="mat-raised-button" color="primary" [disabled]="!form.valid" (click)="save()">Save</button>
+</mat-dialog-actions>

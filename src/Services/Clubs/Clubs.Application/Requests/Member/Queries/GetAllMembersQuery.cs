@@ -15,11 +15,11 @@ namespace Clubs.Application.Requests.Member.Queries
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class GetAllMembersQuery : IRequest<IEnumerable<MemberDTO>>
+    public class GetAllMembersQuery : IRequest<IEnumerable<MemberListDTO>>
     {
     }
 
-    public class GetAllMembersQueryHandler : IRequestHandler<GetAllMembersQuery, IEnumerable<MemberDTO>>
+    public class GetAllMembersQueryHandler : IRequestHandler<GetAllMembersQuery, IEnumerable<MemberListDTO>>
     {
         private readonly ClubsContext _Context;
         private readonly IMapper _Mapper;
@@ -30,10 +30,10 @@ namespace Clubs.Application.Requests.Member.Queries
             _Mapper = mapper;
         }
 
-        public async Task<IEnumerable<MemberDTO>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MemberListDTO>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
         {
             return await _Context.Members
-                .ProjectTo<MemberDTO>(_Mapper.ConfigurationProvider)
+                .ProjectTo<MemberListDTO>(_Mapper.ConfigurationProvider)
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }

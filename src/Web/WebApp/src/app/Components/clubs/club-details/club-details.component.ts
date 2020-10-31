@@ -28,6 +28,7 @@ export class ClubDetailsComponent implements OnInit {
     }
 
     private getClubDetails = () => {
+        console.log("getClubDetails");
         let id: string = this.activeRoute.snapshot.params['id'];
 
         this.clubService.GetClubById(id).then((res) => {

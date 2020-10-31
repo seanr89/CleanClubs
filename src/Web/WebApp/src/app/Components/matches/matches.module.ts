@@ -16,17 +16,25 @@ import { MatchTeamCreateComponent } from './match-team-create/match-team-create.
 import { MatchesRoutingModule } from './matches-routing.module';
 import { MembersModule } from '../members/members.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatchDetailsComponent } from './match-details/match-details.component';
+import { TeamsModule } from '../teams/teams.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { MatchEditDialogComponent } from './match-edit-dialog/match-edit-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
     declarations: [
         MatchListComponent,
         MatchTeamCreateComponent,
+        MatchDetailsComponent,
+        MatchEditDialogComponent,
     ],
     imports: [
         CommonModule,
@@ -43,21 +51,26 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         FlexLayoutModule,
         MatCardModule,
         MatchesRoutingModule,
-        MembersModule,
         FlexLayoutModule,
         MatCardModule,
         DragDropModule,
         MatFormFieldModule,
-        FormsModule,
         ReactiveFormsModule,
         MatNativeDateModule,
         MatStepperModule,
         MatInputModule,
+        MatSelectModule,
+        MatOptionModule,
         MatSnackBarModule,
         MatDatepickerModule,
+        NgxMatNativeDateModule,
+        NgxMatDatetimePickerModule,
         NgxMaterialTimepickerModule.setLocale('en-GB'),
+        MembersModule,
+        TeamsModule,
+        SharedModule
     ],
     exports: [MatchListComponent, MatchTeamCreateComponent],
-    entryComponents: [],
+    entryComponents: [MatchEditDialogComponent],
 })
 export class MatchesModule {}

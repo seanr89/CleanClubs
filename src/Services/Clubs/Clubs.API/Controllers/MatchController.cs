@@ -7,6 +7,7 @@ using Clubs.Application;
 using Clubs.Application.Business;
 using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Queries;
+using Clubs.Application.Requests.Matches.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -42,13 +43,13 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Query a single, detailed, match record by its Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchById")]
         [ProducesResponseType(typeof(MatchDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
@@ -57,17 +58,17 @@ namespace Clubs.API.Controllers
             if (result != null)
                 return Ok(result);
 
-            return StatusCode(204, "No Record Found");
+            return NotFound("No result found for provided id");
         }
 
         /// <summary>
-        /// 
+        /// Query all exisiting matches for an individual club!
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">the Unique club record</param>
+        /// <returns>A collection of MatchList records</returns>
         [HttpGet("{id}", Name = "GetMatchesByClubId")]
         [ProducesResponseType(typeof(IEnumerable<MatchDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
@@ -76,13 +77,13 @@ namespace Clubs.API.Controllers
             if (result.Any())
                 return Ok(result);
 
-            return StatusCode(204, "No Records Found");
+            return NotFound("No result found for provided id");
         }
 
         #region POST
 
         /// <summary>
-        /// 
+        /// Support the creation of a match record and handle invitations
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
@@ -135,17 +136,36 @@ namespace Clubs.API.Controllers
 
         #region PUT/Update
 
-        // [HttpPut]
-        // public IActionResult Update(Guid id)
-        // {
-        //     throw new NotImplementedException();
-        // }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateMatchDetails(Guid id, [FromBody] UpdateMatchDetailsDTO match)
+        {
+            if (match == null)
+            {
+                _Logger.LogError("match object sent from client is null.");
+                return BadRequest("Match object is null");
+            }
+            if (!ModelState.IsValid)
+            {
+                _Logger.LogError("Invalid match update object sent from client.");
+                return BadRequest("Invalid model object");
+            }
 
-        //[HttpPut]
-        // public IActionResult UpdateMatchCancelled()
-        // {
+            //ok now lets try and update the details only
+            try
+            {
+                var result = await Mediator.Send(new UpdateMatchDetailsCommand() { Match = match });
+                if (result)
+                    return NoContent();
 
-        // }
+                return BadRequest("Unable to update record");
+            }
+            catch (Exception ex)
+            {
+                _Logger.LogError($"Something went wrong inside UpdateMatchDetails action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+
+        }
 
         #endregion
 

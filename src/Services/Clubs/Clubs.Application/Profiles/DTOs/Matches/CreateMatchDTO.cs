@@ -7,7 +7,8 @@ using Clubs.Domain.Enums;
 namespace Clubs.Application.Profiles.DTO
 {
     /// <summary>
-    /// Match Create Model when teams have not been created!
+    /// Match Create Model when teams have not been created
+    /// This supports invitation records to be sent!
     /// </summary>
     public class CreateMatchDTO
     {

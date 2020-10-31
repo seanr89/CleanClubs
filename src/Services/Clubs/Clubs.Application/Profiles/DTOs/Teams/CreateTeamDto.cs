@@ -19,7 +19,10 @@ namespace Clubs.Application.Profiles.DTO
         /// </summary>
         /// <value></value>
         public List<CreatePlayerDTO> Players { get; set; } = new List<CreatePlayerDTO>();
-
+        /// <summary>
+        /// MatchId appended to ensure it can be saved properly!
+        /// </summary>
+        /// <value></value>
         public Guid MatchId { get; set; }
     }
 }

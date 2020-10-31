@@ -29,9 +29,9 @@ namespace Clubs.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<MemberDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<MemberListDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IEnumerable<MemberDTO>> Get()
+        public async Task<IEnumerable<MemberListDTO>> Get()
         {
             _Logger.LogInformation($"Members: {HelperMethods.GetCallerMemberName()}");
             return await Mediator.Send(new GetAllMembersQuery());

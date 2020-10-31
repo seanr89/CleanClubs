@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoadingComponent } from './loading/loading.component';
 import { MatCardModule } from '@angular/material/card';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
     declarations: [
-      LoadingComponent,
+        LoadingComponent
     ],
     imports: [
         CommonModule,
@@ -14,4 +14,4 @@ import { MatCardModule } from '@angular/material/card';
     exports: [LoadingComponent],
     entryComponents: [],
 })
-export class CoreModule {}
+export class SharedModule {}

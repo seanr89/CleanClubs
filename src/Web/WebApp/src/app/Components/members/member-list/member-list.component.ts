@@ -18,7 +18,6 @@ import { NotificationsService } from 'src/app/Services/notifications/notificatio
 export class MemberListComponent implements OnInit {
     @Input()
     members: Member[];
-
     dataSource: MatTableDataSource<Member>;
     selection = new SelectionModel<Member>(true, []);
     public gridPageOptions: GridPaginatorOption;
@@ -29,8 +28,7 @@ export class MemberListComponent implements OnInit {
         'email',
         'rating',
     ];
-    isLoading: boolean = false;
-    pageSizeOptions: number[] = [100, 200, 300];
+    isLoading: boolean = true;
 
     constructor(
         private router: Router,
@@ -51,6 +49,7 @@ export class MemberListComponent implements OnInit {
     }
 
     ngAfterViewInit(): void {
+        //Initially configure pagination and sorting!
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -84,8 +83,10 @@ export class MemberListComponent implements OnInit {
             : this.dataSource.data.forEach((row) => this.selection.select(row));
     }
 
+    /**
+     * supports the select all requested to check all items!
+     */
     public getAllSelected(): Member[] {
-        console.log('getAllSelected');
         return this.selection.selected;
     }
 }

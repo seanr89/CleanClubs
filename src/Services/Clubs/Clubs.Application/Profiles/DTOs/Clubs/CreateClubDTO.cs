@@ -8,5 +8,7 @@ namespace Clubs.Application.Profiles.DTO
         public string Creator { get; set; }
 
         public bool Private { get; set; }
+
+        //By Default the club is active!
     }
 }

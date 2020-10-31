@@ -12,15 +12,6 @@ namespace Clubs.Application.Profiles
             CreateMap<Player, PlayerDTO>();
             CreateMap<PlayerDTO, Player>();
             CreateMap<CreatePlayerDTO, Player>();
-
-            // Mapping when property names are different
-            //CreateMap<User, UserViewModel>()
-            //    .ForMember(dest =>
-            //    dest.FName,
-            //    opt => opt.MapFrom(src => src.FirstName))
-            //    .ForMember(dest =>
-            //    dest.LName,
-            //    opt => opt.MapFrom(src => src.LastName));
         }
     }
 }

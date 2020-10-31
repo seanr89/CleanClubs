@@ -1,0 +1,33 @@
+<section fxLayout="row wrap" class="sectionContent">
+    <mat-card fxFlex="100%" fxFlex.xs="100%">
+        <mat-card-title>Match Details</mat-card-title>
+        <hr />
+        <br />
+        <mat-card-content>
+            <div fxLayout="column wrap" fxLayoutGap="20px">
+                <div fxLayout="row wrap" fxFlex>
+                    <div fxFlex><strong>Date:</strong></div>
+                    <div fxFlex class="contentText">{{ match?.date | date:'short'  }}</div>
+                </div>
+                <div fxLayout="row wrap" fxFlex>
+                    <div fxFlex><strong>Location:</strong></div>
+                    <div fxFlex class="contentText">{{ match?.location }}</div>
+                </div>
+                <div fxLayout="row wrap" fxFlex>
+                    <div fxFlex><strong>Status:</strong></div>
+                    <div fxFlex class="contentText">
+                        {{ getMatchStatus(match.status) }}
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="center">
+          <!-- No actions required at this time -->
+          <button mat-raised-button color="primary" (click)="onEditMatchClick()">Edit Match</button>
+        </mat-card-actions>
+    </mat-card>
+</section>
+
+<!-- Display the player list for each team in the match  -->
+<app-teams-playerlist [teamOnePlayers]="match.teams[0].players" [teamTwoPlayers]="match.teams[1].players">
+</app-teams-playerlist>

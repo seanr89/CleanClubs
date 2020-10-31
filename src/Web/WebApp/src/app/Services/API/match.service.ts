@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '../api.service';
 import { HttpResponse } from '@angular/common/http';
 import { Match } from 'src/app/Models/interfaces/match/match';
+import { MatchDetailsUpdateModel } from 'src/app/Models/interfaces/match/matchdetailsupdatemodel';
 
 @Injectable({
     providedIn: 'root',
@@ -17,12 +18,20 @@ export class MatchService {
      * Query and return all club information
      */
     GetAllMatches(): Promise<HttpResponse<Match[]>> {
-        return this.apiService.get<Match[]>(`${this.api_url_tag}/Get`);
+      return this.apiService.get<Match[]>(`${this.api_url_tag}/Get`);
     }
 
     /**
-     *
-     * @param id
+     * query a single match record based on its unique Id
+     * @param id : string/Guid record to query
+     */
+    GetMatchById(id: string): Promise<HttpResponse<Match>> {
+      return this.apiService.get<Match>(`${this.api_url_tag}/GetMatchById/${id}`);
+    }
+
+    /**
+     * Support the quering of all matches created and recorded for a club!
+     * @param id : unique ClubId
      */
     GetMatchesForClub(id: string): Promise<HttpResponse<Match[]>> {
       return this.apiService.get<Match[]>(`${this.api_url_tag}/GetMatchesByClubId/${id}`);
@@ -35,5 +44,13 @@ export class MatchService {
      */
     CreateMatchWithTeams(match: Match): Promise<HttpResponse<Match>> {
         return this.apiService.post<Match>(`${this.api_url_tag}/CreateMatch`, match);
+    }
+
+    /**
+     * TODO: not yet currently enabled/processing!
+     * @param mach 
+     */
+    UpdateScheduledMatchDetails(match: MatchDetailsUpdateModel){
+        return this.apiService.put<MatchDetailsUpdateModel>(`${this.api_url_tag}/UpdateMatchDetails/${match.id}`, match);
     }
 }

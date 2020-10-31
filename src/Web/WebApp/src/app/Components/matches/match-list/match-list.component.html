@@ -1,4 +1,3 @@
-<p>match-list - TODO: add a table, etc...</p>
 
 <mat-form-field>
     <mat-label>Filter</mat-label>
@@ -17,7 +16,62 @@
             mat-table
             [dataSource]="dataSource"
             multiTemplateDataRows
-        ></table>
+        >
+            <!-- date -->
+            <ng-container matColumnDef="date">
+              <th
+                  id="dateHeader"
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  class="column-30"
+              >
+                  Match Date
+              </th>
+              <td mat-cell *matCellDef="let row" class="column-20">
+                  {{ row.date | date:'short' }}
+              </td>
+            </ng-container>
+
+            <!-- Match Status -->
+            <ng-container matColumnDef="status">
+                <th
+                    id="statusHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-10"
+                >
+                    Status
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{ getMatchStatusString(row.status) }}
+                </td>
+            </ng-container>
+
+
+            <!-- Match Location -->
+            <ng-container matColumnDef="location">
+                <th
+                    id="locationHeader"
+                    mat-header-cell
+                    *matHeaderCellDef
+                    mat-sort-header
+                    class="column-10"
+                >
+                    Location
+                </th>
+                <td mat-cell *matCellDef="let row" class="column-20">
+                    {{ row.location }}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="onRowDoubleClick(row)"></tr>
+
+        </table>
+
+        <app-loading *ngIf="isLoading"></app-loading>
 
         <!-- If the data source is empty the table will display 'No Results' -->
           <div

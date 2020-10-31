@@ -57,8 +57,15 @@
         </mat-card>
     </section>
 </section>
+<br/>
+<hr />
 
 <section fxLayout="row wrap" class="sectionContent">
     <app-match-list [clubId]="club.id" fxFlex="90%"></app-match-list>
-    <!-- <app-member-list [members]="club.members" fxFlex="90%"></app-member-list> -->
+</section>
+<br/>
+<hr />
+<section fxLayout="row wrap" class="sectionContent">
+    <br/>
+    <app-member-list [members]="club.members" fxFlex="90%"></app-member-list>
 </section>

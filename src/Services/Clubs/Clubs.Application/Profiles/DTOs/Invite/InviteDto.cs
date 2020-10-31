@@ -10,7 +10,7 @@ namespace Clubs.Application.Profiles.DTO
     {
         public Guid Id { get; set; }
         /// <summary>
-        /// Flag to say if accepted or not
+        /// Flag to say if invitation has been accepted or not
         /// </summary>
         /// <value></value>
         public bool Accepted { get; set; }

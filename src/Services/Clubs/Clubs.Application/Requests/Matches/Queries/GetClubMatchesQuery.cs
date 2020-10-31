@@ -36,7 +36,7 @@ namespace Clubs.Application.Requests.Matches.Queries
             return await _Context.Matches
                 .ProjectTo<MatchDTO>(_Mapper.ConfigurationProvider)
                 .AsNoTracking()
-                .Where(c => c.Id == request.ClubId)
+                .Where(c => c.ClubId == request.ClubId)
                 .ToListAsync();
         }
     }

@@ -6,12 +6,12 @@
           <input matInput type="text"
           (keyup)="doFilter($event.target.value)"
           placeholder="Filter"
-          value="Enter Record">
+          value="">
         </mat-form-field>
     </form>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 tableDiv" >
     <div class="table-container">
         <table
             id="clubListTable"
@@ -63,7 +63,7 @@
                     mat-sort-header
                     class="column-10"
                 >
-                    Active
+                    Private
                 </th>
                 <td mat-cell *matCellDef="let row" class="column-10">
                     <mat-checkbox
@@ -100,7 +100,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns" (dblclick)="onRowDoubleClick(row)"></tr>
         </table>
 
-        <!-- <app-loading *ngIf="isLoading"></app-loading> -->
+        <app-loading *ngIf="isLoading"></app-loading>
 
         <!-- If the data source is empty the table will display 'No Results' -->
         <div

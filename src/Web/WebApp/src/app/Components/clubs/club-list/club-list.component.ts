@@ -21,11 +21,11 @@ import { CreateClubModel } from 'src/app/Models/interfaces/clubs/createclubmodel
     styleUrls: ['./club-list.component.scss'],
 })
 export class ClubListComponent implements OnInit {
-    private pageName: string = 'Clubs';
+    private pageName: string = 'Club List';
     dataSource: MatTableDataSource<Club>;
     public gridPageOptions: GridPaginatorOption;
     displayedColumns: string[] = ['name', 'active', 'private', 'actions'];
-    isLoading: boolean = false;
+    isLoading: boolean = true;
     pageSizeOptions: number[] = [100, 200, 300];
     filterForm: FormGroup;
 
@@ -43,11 +43,11 @@ export class ClubListComponent implements OnInit {
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
 
         this.filterForm = this._formBuilder.group({
-          });
+        });
     }
 
     ngOnInit(): void {
-        //this.dataService.updatePageTitle(this.pageName);
+        this.dataService.updatePageTitle(this.pageName);
         this.populateTable();
     }
 
@@ -81,13 +81,13 @@ export class ClubListComponent implements OnInit {
      * @param id : unique club ID
      */
     public redirectToDetails = (id: string) => {
-        let url: string = `/club/details/${id}`;
+        let url: string = `/clubs/details/${id}`;
         this.router.navigate([url]);
     };
 
     onRowDoubleClick(row)
     {
-        let url: string = `/club/details/${row.id}`;
+        let url: string = `/clubs/details/${row.id}`;
         this.router.navigate([url]);
     }
 

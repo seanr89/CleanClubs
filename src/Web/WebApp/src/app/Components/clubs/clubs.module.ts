@@ -20,7 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MembersModule } from '../members/members.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatchesModule } from '../matches/matches.module';
-import { CoreModule } from 'src/app/Core/core.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -46,8 +46,8 @@ import { CoreModule } from 'src/app/Core/core.module';
         MatCardModule,
         MembersModule,
         MatchesModule,
-        CoreModule,
         MatInputModule,
+        SharedModule,
     ],
     exports: [ClubListComponent],
     entryComponents: [ClubAddComponent, ClubEditComponent],

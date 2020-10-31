@@ -10,6 +10,7 @@ import { User } from '../Models/user';
 })
 export class AuthService {
     userData: User;
+    //subscribibe event to listen for sign in events!
     public signedIn: Observable<User>;
 
     constructor(
@@ -32,7 +33,9 @@ export class AuthService {
         });
     }
 
-    // Sign in with Google
+    /**
+     * Sign in with Google
+     * */
     GoogleAuth() {
         return this.AuthLogin(new auth.GoogleAuthProvider());
     }
@@ -49,6 +52,10 @@ export class AuthService {
             });
     }
 
+    /**
+     * handles the sign out event to the auth provider!
+     * and navigation home!
+     */
     async signOut() {
         localStorage.removeItem('user');
         await this.afAuth.signOut();

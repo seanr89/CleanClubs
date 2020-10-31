@@ -56,4 +56,18 @@ export class ApiService {
                 .toPromise();
         }
     }
+
+    //Used to pass data to the API to be inserted into the database. Replace used on json to from _ when handling private variables.
+  async put<T>(url: string, body: Object = {}): Promise<any> {
+    return this.http
+      .put(`${this.settings.url}${url}`, JSON.stringify(body), {
+        headers: new HttpHeaders().set(
+            'Content-Type',
+            'application/json'
+        ),
+        observe: 'response',
+    })
+    .pipe()
+    .toPromise();
+  }
 }

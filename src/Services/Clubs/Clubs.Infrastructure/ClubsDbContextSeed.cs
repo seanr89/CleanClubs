@@ -18,7 +18,7 @@ namespace Clubs.Infrastructure.Persistence
             {
                 var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };
                 var Members = new List<Member>();
-                var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 50.2 };
+                var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 50.2 };
                 Members.Add(Sean);
                 var Sean2 = new Member() { FirstName = "Sean", LastName = "Personal", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 45.1 };
                 Members.Add(Sean2);
@@ -28,7 +28,7 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Francy);
                 var Andy = new Member() { FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72 };
                 Members.Add(Andy);
-                var Ross = new Member() { FirstName = "Ross", LastName = "Bratton", Email = "ross@randox.com", Club = RandoxIT, Rating = 65 };
+                var Ross = new Member() { FirstName = "Ross", LastName = "Bratton", Email = "ross.bratton@randox.com", Club = RandoxIT, Rating = 65 };
                 Members.Add(Ross);
                 var Conor = new Member() { FirstName = "Conor", LastName = "Devlin", Email = "conor@randox.com", Club = RandoxIT, Rating = 65 };
                 Members.Add(Conor);
@@ -79,7 +79,7 @@ namespace Clubs.Infrastructure.Persistence
                 CreateMemberList(RandoxEng);
                 context.Clubs.Add(RandoxEng);
 
-                for (int i = 2; i <= 55; i++)
+                for (int i = 2; i <= 105; i++)
                 {
                     var club = new Club() { Name = $"Club {i}" };
                     CreateMemberList(club);
@@ -114,7 +114,7 @@ namespace Clubs.Infrastructure.Persistence
         {
             RandomNameGenerator gen = new RandomNameGenerator();
 
-            int randomNumber = gen.GenerateRandomNumber(12, 46);
+            int randomNumber = gen.GenerateRandomNumber(12, 56);
 
             club.Members = new List<Member>();
 

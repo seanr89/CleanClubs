@@ -31,6 +31,7 @@ import { MatchesModule } from './Components/matches/matches.module';
 import { MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({
@@ -68,7 +69,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
         ReactiveFormsModule,
         MatStepperModule,
         MatInputModule,
-
+        MatCardModule,
     ],
     providers: [AuthGuard, SecureInnerPagesGuard],
     bootstrap: [AppComponent],

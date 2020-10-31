@@ -1,0 +1,22 @@
+<div>
+    <section
+            fxFlex="65%"
+            fxLayoutAlign="center"
+            style="padding-right: 1vw; padding-left: 1vw;"
+            class="scrollable">
+
+            <div class="example-container">
+              <h2>Team One</h2>
+              <mat-nav-list>
+                <a mat-list-item href="..." *ngFor="let player of teamOnePlayers"> {{ player.email }} </a>
+              </mat-nav-list>
+            </div>
+            <div class="example-container">
+              <h2>Team Two</h2>
+              <mat-nav-list>
+                <a mat-list-item href="..." *ngFor="let player of teamTwoPlayers"> {{ player.email }} </a>
+              </mat-nav-list>
+            </div>
+    </section>
+
+</div>
