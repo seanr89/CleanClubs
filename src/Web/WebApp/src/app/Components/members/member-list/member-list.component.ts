@@ -18,16 +18,20 @@ import { NotificationsService } from 'src/app/Services/notifications/notificatio
 export class MemberListComponent implements OnInit {
     @Input()
     members: Member[];
+    @Input()
+    showSelector: boolean = false;
+
     dataSource: MatTableDataSource<Member>;
     selection = new SelectionModel<Member>(true, []);
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[] = [
+    displayedColumns: string[]= [];
+    /* = [
         'select',
         'fname',
         'lname',
         'email',
         'rating',
-    ];
+    ];*/
     isLoading: boolean = true;
 
     constructor(
@@ -46,6 +50,13 @@ export class MemberListComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     ngOnInit(): void {
+        if(this.showSelector)
+        {
+            this.setColumnsWithSelection();
+        }
+        else{
+            this.setColumns();
+        }
     }
 
     ngAfterViewInit(): void {
@@ -63,6 +74,31 @@ export class MemberListComponent implements OnInit {
     public doFilter = (value: string) => {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
     };
+
+    //#region ColumnSelection
+
+    setColumns()
+    {
+        this.displayedColumns = [
+            'fname',
+            'lname',
+            'email',
+            'rating',
+        ];
+    }
+
+    setColumnsWithSelection()
+    {
+        this.displayedColumns = [
+            'select',
+            'fname',
+            'lname',
+            'email',
+            'rating',
+        ];
+    }
+
+    //#region 
 
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////

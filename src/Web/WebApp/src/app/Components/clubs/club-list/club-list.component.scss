@@ -4,9 +4,9 @@
     overflow-x: hidden;
 }
 
-table {
-    width: 100%;
-}
+// table {
+//     width: 100%;
+// }
 
 .column-5 {
     width: 5%;
@@ -76,15 +76,6 @@ tr.example-detail-row {
     }
 }
 
-.filter{
-    margin: 0.5vw;
-}
-
-.tableDiv
-{
-    margin: 0.5vw;
-}
-
 .filterInput {
     width: 92%;
     padding-right: 3%;
@@ -101,11 +92,11 @@ tr.example-detail-row {
     min-width: 150px;
     max-width: 500px;
     width: 100%;
-  }
-  
-  .example-full-width {
+}
+
+.example-full-width {
     width: 100%;
-  }
+}
 
 @media (max-width: 1350px) {
     .searchField {
@@ -148,6 +139,4 @@ tr.example-detail-row {
             width: 100%;
         }
     }
-
-    
 }

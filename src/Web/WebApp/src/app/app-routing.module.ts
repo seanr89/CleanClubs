@@ -24,7 +24,12 @@ const routes: Routes = [
         path: 'members',
         loadChildren: './Components/members/members.module#MembersModule',
     },
+    {
+        path: 'locations',
+        loadChildren: './Components/locations/locations.module#LocationsModule',
+    },
     { path: 'home', component: HomeComponent },
+    { path: "**", redirectTo: "home" }
 ];
 
 @NgModule({

@@ -32,6 +32,7 @@ export class MatchTeamCreateComponent implements OnInit {
     club: Club;
     //The match record to go on and be saved!
     matchDetails: Match;
+    checked = false;
 
     //Stepper forms
     firstFormGroup: FormGroup;
@@ -68,7 +69,7 @@ export class MatchTeamCreateComponent implements OnInit {
                     status: MatchStatus.SCHEDULED,
                     date: new Date(),
                     invites: [],
-                    location: '',
+                    location: "Unknown",
                     clubId: this.club.id,
                     invitesSent: false
                 };
@@ -78,7 +79,8 @@ export class MatchTeamCreateComponent implements OnInit {
         this.firstFormGroup = this._formBuilder.group({
             locationInput: ['', Validators.required],
             dateInput: ['', Validators.required],
-            timeInput: ['', Validators.required]
+            timeInput: ['', Validators.required],
+            invitesInput: [false, Validators.required]
         });
         this.secondFormGroup = this._formBuilder.group({
         });

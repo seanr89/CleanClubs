@@ -5,4 +5,5 @@ export interface Team {
     id: string;
     players: Player[];
     number: TeamNumber;
+    score: number;
 }

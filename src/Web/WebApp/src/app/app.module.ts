@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +18,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from './../environments/environment';
 import { AuthGuard } from './Services/Guards/authguard';
 import { SecureInnerPagesGuard } from './Services/Guards/secureinnerpagesguard';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ClubsModule } from './Components/clubs/clubs.module';
 import { HomeComponent } from './Components/home/home.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -32,6 +32,10 @@ import { MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatCardModule } from '@angular/material/card';
+import { httpInterceptorProviders } from './Services/Interceptors/Index';
+import { GlobalErrorHandler } from './Services/globalerrorhandler';
+import { LocationsModule } from './Components/locations/locations.module';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 @NgModule({
@@ -61,6 +65,7 @@ import { MatCardModule } from '@angular/material/card';
         AngularFireAuthModule,
         HttpClientModule,
         ClubsModule,
+        LocationsModule,
         MatchesModule,
         FlexLayoutModule,
         DragDropModule,
@@ -70,8 +75,15 @@ import { MatCardModule } from '@angular/material/card';
         MatStepperModule,
         MatInputModule,
         MatCardModule,
+        MatMenuModule,
     ],
-    providers: [AuthGuard, SecureInnerPagesGuard],
+    providers: [AuthGuard, SecureInnerPagesGuard, { 
+        // processes all errors
+        provide: ErrorHandler, 
+        useClass: GlobalErrorHandler 
+      },
+      httpInterceptorProviders,
+    ],
     bootstrap: [AppComponent],
     exports: [],
     entryComponents: []

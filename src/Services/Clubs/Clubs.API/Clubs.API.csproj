@@ -12,25 +12,26 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4"/>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0"/>
-    <PackageReference Include="AutoMapper" Version="10.0.0"/>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0"/>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0"/>
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.5"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1"/>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.1"/>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0"/>
-    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.14.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.4.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="2.14.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Clubs.Application/Clubs.Application.csproj"/>
-    <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj"/>
-    <ProjectReference Include="../Clubs.Infrastructure/Clubs.Infrastructure.csproj"/>
-    <ProjectReference Include="../../Utilities/Utilities.csproj"/>
+    <ProjectReference Include="../Clubs.Application/Clubs.Application.csproj" />
+    <ProjectReference Include="../Clubs.Domain/Clubs.Domain.csproj" />
+    <ProjectReference Include="../Clubs.Infrastructure/Clubs.Infrastructure.csproj" />
+    <ProjectReference Include="../../Utilities/Utilities.csproj" />
   </ItemGroup>
     <ItemGroup>
     <Content Update="appsettings.json">

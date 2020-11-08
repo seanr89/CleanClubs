@@ -29,13 +29,15 @@ namespace Clubs.API.Extensions
             {
                 options.UseSqlServer(configuration["ConnectionSettings:Default"],
                 sqlServerOptionsAction: sqlOptions =>
-               {
-                   sqlOptions.CommandTimeout((int)TimeSpan.FromMinutes(1).TotalSeconds);
-                   sqlOptions.EnableRetryOnFailure(
-                   maxRetryCount: 10,
-                   maxRetryDelay: TimeSpan.FromSeconds(5),
-                   errorNumbersToAdd: null);
-               });
+                {
+                    
+                    sqlOptions.CommandTimeout((int)TimeSpan.FromMinutes(1).TotalSeconds);
+                    sqlOptions.EnableRetryOnFailure(
+                    maxRetryCount: 10,
+                    maxRetryDelay: TimeSpan.FromSeconds(5),
+                    errorNumbersToAdd: null);
+                    sqlOptions.UseNetTopologySuite();
+                });
             });
         }
     }

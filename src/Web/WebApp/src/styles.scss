@@ -8,3 +8,15 @@ body {
     margin: 0;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
+
+// Default tables to fill the full width
+table {
+    width: 100%;
+}
+
+// New base body content to wrap all contents into each base template!
+.contentBody
+{
+    margin: 10px;
+}
+

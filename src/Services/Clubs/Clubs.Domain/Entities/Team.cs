@@ -25,5 +25,10 @@ namespace Clubs.Domain.Entities
         /// </summary>
         /// <value></value>
         public ICollection<Player> Players { get; set; }
+        /// <summary>
+        /// The number of goals scored by this team
+        /// </summary>
+        /// <value></value>
+        public int Score { get; set; }  = 0;
     }
 }

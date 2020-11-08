@@ -10,7 +10,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { isNullOrUndefined } from 'util';
-import { MatSnackBar } from '@angular/material';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Injectable()
 export class APIInterceptor implements HttpInterceptor {
@@ -18,7 +18,7 @@ export class APIInterceptor implements HttpInterceptor {
      *
      * @param notificationsService : injection of a notification layer allow for informational and error messages notified to the user
      */
-    constructor(private snackBar: MatSnackBar) {}
+    constructor(private notifications: NotificationsService) {}
 
     intercept(
         req: HttpRequest<any>,
@@ -31,21 +31,17 @@ export class APIInterceptor implements HttpInterceptor {
         //Handle all http responses that have been intercepted
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                console.log(
-                    `APIHttpInterceptor - handleError :${error.message}`
-                );
-                let errorMessage = '';
+                debugger;
+                console.error("Error from error interceptor", error);
+
+                let errorMessage = 'intercept: ';
                 if (error.error instanceof ErrorEvent) {
                     // client-side error
-                    errorMessage = `Error: ${error.error.message}`;
+                    errorMessage += `Error: ${error.error.message}`;
                 } else {
-                    errorMessage = this.handleServerSideError(error);
+                    errorMessage += this.handleServerSideError(error);
                 }
-                this.snackBar.dismiss();
-                this.snackBar.open(errorMessage, 'Error', {
-                    duration: 5000,
-                    panelClass: 'error-dialog',
-                });
+                this.notifications.error(errorMessage, true);
                 return throwError(errorMessage);
             })
         );
@@ -61,8 +57,8 @@ export class APIInterceptor implements HttpInterceptor {
         let message: string = '';
 
         // server-side error
-        if (isNullOrUndefined(error.status) || error.status === 0) {
-            message = 'Unable to Send Registration';
+        if (error.status === null || error.status === 0) {
+            message = 'Unable to Connect to API';
         } else {
             debugger;
             //BadRequest

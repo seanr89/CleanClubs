@@ -11,9 +11,15 @@ namespace Clubs.Infrastructure.Persistence
 {
     public static class ApplicationDbContextSeed
     {
-
         public static async Task SeedAsync(ClubsContext context)
         {
+            await SeedClubsAndMembers(context);
+            await SeedLocations(context);
+        }
+
+        private async static Task SeedClubsAndMembers(ClubsContext context)
+        {
+
             if (!context.Clubs.Any())
             {
                 var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };
@@ -85,6 +91,26 @@ namespace Clubs.Infrastructure.Persistence
                     CreateMemberList(club);
                     context.Clubs.Add(club);
                 }
+
+                await context.SaveChangesAsync();
+            }
+        }
+
+        private async static Task SeedLocations(ClubsContext context)
+        {
+            if (!context.Locations.Any())
+            {
+                var allenPark = new Location("Allen Park", "45 Castle Rd", "Antrim", "BT41 4NA", true,
+                    "https://www.tobermore.co.uk/professional/project/allen-park-leisure-centre/");
+                context.Locations.Add(allenPark);
+
+                var armaghL = new Location("Orchard Leisure Centre", "37-39 Folly Ln", "Armagh", "BT60 1AT", true,
+                    "https://getactiveabc.com/facility/orchard-leisure-centre/");
+                context.Locations.Add(armaghL);
+
+                var antrimForum = new Location("Antrim Forum", "50 Stiles Way", "Antrim", "BT41 2UB", true,
+                    "https://antrimandnewtownabbey.gov.uk/reopening-of-our-leisure-centres/");
+                context.Locations.Add(antrimForum);
 
                 await context.SaveChangesAsync();
             }

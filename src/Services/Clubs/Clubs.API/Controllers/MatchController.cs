@@ -39,7 +39,7 @@ namespace Clubs.API.Controllers
             if (result.Any())
                 return Ok(result);
 
-            return StatusCode(204);
+            return NoContent();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Clubs.API.Controllers
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchById")]
         [ProducesResponseType(typeof(MatchDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchById(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
@@ -58,7 +58,7 @@ namespace Clubs.API.Controllers
             if (result != null)
                 return Ok(result);
 
-            return NotFound("No result found for provided id");
+            return NoContent();
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Clubs.API.Controllers
         /// <returns>A collection of MatchList records</returns>
         [HttpGet("{id}", Name = "GetMatchesByClubId")]
         [ProducesResponseType(typeof(IEnumerable<MatchDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetMatchesByClubId(Guid id)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
@@ -77,7 +77,7 @@ namespace Clubs.API.Controllers
             if (result.Any())
                 return Ok(result);
 
-            return NotFound("No result found for provided id");
+            return NoContent();
         }
 
         #region POST
@@ -126,19 +126,22 @@ namespace Clubs.API.Controllers
             return BadRequest("Save failed");
         }
 
-        // [HttpPost]
-        // public async Task<IActionResult> CreateMatchWithTeams()
-        // {
-        //     throw new NotImplementedException();
-        // }
-
         #endregion
 
         #region PUT/Update
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="match"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateMatchDetails(Guid id, [FromBody] UpdateMatchDetailsDTO match)
         {
+            _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             if (match == null)
             {
                 _Logger.LogError("match object sent from client is null.");

@@ -15,7 +15,7 @@ using Utilities;
 
 namespace Clubs.API.Controllers
 {
-    [ApiController]
+    //[ApiController]
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;

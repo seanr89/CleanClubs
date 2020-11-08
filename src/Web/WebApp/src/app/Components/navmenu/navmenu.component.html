@@ -13,36 +13,26 @@
                 mat-list-item
                 *ngIf="!isAuthenticated"
                 routerLink="/sign-in"
-                routerLinkActive="active"
-            >
+                routerLinkActive="active">
                 Sign In
             </a>
-            <!-- <a mat-list-item routerLink="/home" routerLinkActive="active">
+            <a mat-list-item routerLink="/home" routerLinkActive="active">
                 Home
-            </a> -->
+            </a>
             <a
                 mat-list-item
                 *ngIf="isAuthenticated"
                 routerLink="/clubs/list"
-                routerLinkActive="active"
-            >
+                routerLinkActive="active">
                 Clubs
             </a>
-            <!-- <a
+            <a
                 mat-list-item
                 *ngIf="isAuthenticated"
-                routerLink="/clubs/details/fce76cd3-eda5-44f4-da6d-08d85d56b10e"
-                routerLinkActive="active"
-                >Club Details</a
-            > -->
-            <!-- <a
-                mat-list-item
-                *ngIf="isAuthenticated"
-                routerLink="/creatematch/fce76cd3-eda5-44f4-da6d-08d85d56b10e"
-                routerLinkActive="active"
-                >Matches</a
-            > -->
-
+                routerLink="/locations/list"
+                routerLinkActive="active">
+                Locations
+            </a>
             <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
             </a>
@@ -59,6 +49,17 @@
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <span>Club Creator : {{ pageTitle }}</span>
+            <!-- Spacer for far right toolbar items -->
+            <span class="example-spacer"></span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item disabled>
+                  <mat-icon>exit_to_app</mat-icon>
+                  <span>Sign Out</span>
+                </button>
+              </mat-menu>
         </mat-toolbar>
         <!-- Add Content Here -->
         <router-outlet></router-outlet>

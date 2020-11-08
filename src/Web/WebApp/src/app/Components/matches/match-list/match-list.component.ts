@@ -34,8 +34,10 @@ export class MatchListComponent implements OnInit {
 
     ngOnInit(): void {
       this.dataSource = new MatTableDataSource<Match>();
+      debugger;
       //handle query to get all matches you can query!
       this.matchService.GetMatchesForClub(this.clubId).then((res: HttpResponse<Match[]> | HttpResponse<string>) => {
+        debugger;
         if(res.status === 200)
         {
           let arrayData: Match[] = res.body as Match[];
@@ -43,7 +45,7 @@ export class MatchListComponent implements OnInit {
           this.isLoading = false;
         }
         else{
-          this.notifications.error(res.body as string, true);
+          //this.notifications.error(res.body as string, true);
           this.isLoading = false;
         }
       });

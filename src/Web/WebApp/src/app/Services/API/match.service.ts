@@ -48,7 +48,7 @@ export class MatchService {
 
     /**
      * TODO: not yet currently enabled/processing!
-     * @param mach 
+     * @param match 
      */
     UpdateScheduledMatchDetails(match: MatchDetailsUpdateModel){
         return this.apiService.put<MatchDetailsUpdateModel>(`${this.api_url_tag}/UpdateMatchDetails/${match.id}`, match);

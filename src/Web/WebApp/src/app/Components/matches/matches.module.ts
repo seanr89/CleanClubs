@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -28,6 +27,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MatchEditDialogComponent } from './match-edit-dialog/match-edit-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
     declarations: [
@@ -44,7 +44,6 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-mat
         MatIconModule,
         MatButtonModule,
         MatSlideToggleModule,
-        MatCheckboxModule,
         FormsModule,
         MatFormFieldModule,
         ReactiveFormsModule,
@@ -62,6 +61,7 @@ import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-mat
         MatSelectModule,
         MatOptionModule,
         MatSnackBarModule,
+        MatRadioModule,
         MatDatepickerModule,
         NgxMatNativeDateModule,
         NgxMatDatetimePickerModule,

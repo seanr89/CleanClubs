@@ -1,71 +1,78 @@
-<section fxLayout="row wrap" class="sectionContent">
-    <section
-        fxFlex="50%"
-        fxLayoutAlign="left center"
-        style="padding-right: 5px"
-    >
-        <mat-card fxFlex="100%" fxFlex.xs="100%">
-            <mat-card-title>Club Details</mat-card-title>
-            <hr />
-            <br />
-            <mat-card-content>
-                <div fxLayout="column wrap" fxLayoutGap="20px">
-                    <div fxLayout="row wrap" fxFlex>
-                        <div fxFlex><strong>Name:</strong></div>
-                        <div fxFlex class="contentText">{{ club?.name }}</div>
-                    </div>
-                    <div fxLayout="row wrap" fxFlex>
-                        <div fxFlex><strong>Active:</strong></div>
-                        <div fxFlex class="contentText">{{ club?.active }}</div>
-                    </div>
-                    <div fxLayout="row wrap" fxFlex>
-                        <div fxFlex><strong>Private:</strong></div>
-                        <div fxFlex class="contentText">
-                            {{ club?.private }}
+<div class="contentBody">
+    <section fxLayout="row wrap" class="sectionContent">
+        <section
+            fxFlex="40%"
+            fxLayoutAlign="left center"
+            style="padding-right: 5px"
+        >
+            <mat-card fxFlex="100%" fxFlex.xs="100%">
+                <mat-card-title>Club Details</mat-card-title>
+                <hr />
+                <br />
+                <mat-card-content>
+                    <div fxLayout="column wrap" fxLayoutGap="20px">
+                        <div fxLayout="row wrap" fxFlex>
+                            <div fxFlex><strong>Name:</strong></div>
+                            <div fxFlex class="contentText">{{ club?.name }}</div>
+                        </div>
+                        <div fxLayout="row wrap" fxFlex>
+                            <div fxFlex><strong>Active:</strong></div>
+                            <div fxFlex class="contentText">{{ club?.active }}</div>
+                        </div>
+                        <div fxLayout="row wrap" fxFlex>
+                            <div fxFlex><strong>Private:</strong></div>
+                            <div fxFlex class="contentText">
+                                {{ club?.private }}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </mat-card-content>
-            <mat-card-actions align="center">
-                <!-- <button mat-raised-button color="primary">Edit</button> -->
-                <button mat-raised-button color="primary" (click)="redirectToMatchCreate()">Create Match</button>
-            </mat-card-actions>
-        </mat-card>
-    </section>
-    <section
-        fxFlex="48%"
-        fxLayoutAlign="left center"
-        style="padding-right: 5px"
-    >
-        <mat-card fxFlex="100%" fxFlex.xs="100%">
-            <mat-card-title>Club Stats</mat-card-title>
-            <hr />
-            <br />
-            <mat-card-content>
-                <div fxLayout="column wrap" fxLayoutGap="20px">
-                    <div fxLayout="row wrap" fxFlex>
-                        <div fxFlex><strong>Member Count:</strong></div>
-                        <div fxFlex class="contentText">TODO</div>
+                </mat-card-content>
+                <mat-card-actions align="center">
+                    <!-- <button mat-raised-button color="primary">Edit</button> -->
+                    <button mat-raised-button color="primary" (click)="redirectToMatchCreate()">Create Match</button>
+                </mat-card-actions>
+            </mat-card>
+        </section>
+        <!-- Club Stats - Currently not available -->
+        <!-- <section
+            fxFlex="48%"
+            fxLayoutAlign="left center"
+            style="padding-right: 5px"
+        >
+            <mat-card fxFlex="100%" fxFlex.xs="100%">
+                <mat-card-title>Club Stats</mat-card-title>
+                <hr />
+                <br />
+                <mat-card-content>
+                    <div fxLayout="column wrap" fxLayoutGap="20px">
+                        <div fxLayout="row wrap" fxFlex>
+                            <div fxFlex><strong>Member Count:</strong></div>
+                            <div fxFlex class="contentText">TODO</div>
+                        </div>
+                        <div fxLayout="row wrap" fxFlex>
+                            <div fxFlex><strong>Match Count:</strong></div>
+                            <div fxFlex class="contentText">TODO</div>
+                        </div>
                     </div>
-                    <div fxLayout="row wrap" fxFlex>
-                        <div fxFlex><strong>Match Count:</strong></div>
-                        <div fxFlex class="contentText">TODO</div>
-                    </div>
-                </div>
-            </mat-card-content>
-            <mat-card-actions align="center"></mat-card-actions>
-        </mat-card>
+                </mat-card-content>
+                <mat-card-actions align="center"></mat-card-actions>
+            </mat-card>
+        </section> -->
     </section>
-</section>
-<br/>
-<hr />
-
-<section fxLayout="row wrap" class="sectionContent">
-    <app-match-list [clubId]="club.id" fxFlex="90%"></app-match-list>
-</section>
-<br/>
-<hr />
-<section fxLayout="row wrap" class="sectionContent">
-    <br/>
-    <app-member-list [members]="club.members" fxFlex="90%"></app-member-list>
-</section>
+    <hr />
+    <section fxLayout="row wrap" class="sectionContent">
+        <section  fxFlex="45%"
+        fxLayoutAlign="center center"
+        style="padding-right: 5px">
+            <app-match-list [clubId]="club.id" fxFlex="92%"></app-match-list>
+        </section>
+        <!-- <hr /> -->
+        <section  fxFlex="45%"
+        fxLayoutAlign="center center"
+        style="padding-right: 5px">
+            <app-member-list [members]="club.members" fxFlex="92%"></app-member-list>
+        </section>
+        
+    </section>
+    
+</div>

@@ -19,6 +19,9 @@ using Utilities;
 
 namespace Clubs.Application.Business
 {
+    /// <summary>
+    /// TODO: this needs to be interfaced long term and re-named at least!
+    /// </summary>
     public class MatchManager
     {
         private readonly ILogger<MatchManager> _Logger;
