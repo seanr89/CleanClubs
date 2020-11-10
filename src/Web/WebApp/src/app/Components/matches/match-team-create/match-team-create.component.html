@@ -50,10 +50,12 @@
             </div>
         </form>
     </mat-step>
+    <!--  -->
+    <!--  -->
     <mat-step [stepControl]="secondFormGroup" label="Pick your players">
         <div>
             <section fxLayout="row wrap" class="sectionContent">
-                <app-member-list [members]="club.members" fxFlex="75%"></app-member-list>
+                <app-member-list [members]="club.members" [showSelector]="true" fxFlex="75%"></app-member-list>
             </section>
         </div>
         <div>
@@ -61,6 +63,8 @@
             <button mat-button matStepperNext color="primary" (click)="onGenerateClick()">Next</button>
         </div>
     </mat-step>
+    <!--  -->
+    <!--  -->
     <mat-step label="Review">
         <!-- Review and Confirm -->
         <div>
