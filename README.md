@@ -15,7 +15,7 @@ Angular web app using npm/yarn and the angular cli
   - `ng serve`
 
 ### API
-These steps are only required currently for the
+These steps are only required currently for the Clubs API but further API's will be similar
 
 - navigate to the following `cd src/Services/Clubs/Clubs.API`
   - ensure that you have the latest version of netcore3 installed, preferrably netcore3.1.4+
