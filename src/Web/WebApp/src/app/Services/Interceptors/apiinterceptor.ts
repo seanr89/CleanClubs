@@ -31,7 +31,6 @@ export class APIInterceptor implements HttpInterceptor {
         //Handle all http responses that have been intercepted
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                debugger;
                 console.error("Error from error interceptor", error);
 
                 let errorMessage = 'intercept: ';
@@ -60,7 +59,7 @@ export class APIInterceptor implements HttpInterceptor {
         if (error.status === null || error.status === 0) {
             message = 'Unable to Connect to API';
         } else {
-            debugger;
+            //debugger;
             //BadRequest
             if (error.status === 400) {
                 message = error.error;

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/Services/auth.service';
 import { isNullOrUndefined } from 'util';
-import { User } from 'src/app/Models/user';
+import { auth } from 'firebase/app';
+import { User } from 'firebase';
 
 @Component({
     selector: 'app-signin',

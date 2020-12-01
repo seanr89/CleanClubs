@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
-import { auth } from 'firebase/app';
+import { auth, User } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../Models/user';
+import { HttpHeaders } from '@angular/common/http';
+import { isNullOrUndefined } from 'util';
+import { UserChecker } from './UserChecker';
 
 @Injectable({
     providedIn: 'root',
 })
+
 export class AuthService {
     userData: User;
     //subscribibe event to listen for sign in events!
@@ -22,6 +25,7 @@ export class AuthService {
                 this.userData = user;
                 localStorage.setItem('user', JSON.stringify(this.userData));
                 JSON.parse(localStorage.getItem('user'));
+
             } else {
                 localStorage.setItem('user', null);
                 JSON.parse(localStorage.getItem('user'));
@@ -46,6 +50,8 @@ export class AuthService {
             .signInWithPopup(provider)
             .then((result) => {
                 console.log('You have been successfully logged in!');
+                //this.credentialData = result.credential;
+                //console.log(`auth: ${this.credentialData.accessToken}`);
             })
             .catch((error) => {
                 console.log(error);
@@ -68,5 +74,29 @@ export class AuthService {
     get isLoggedIn(): boolean {
         const user = JSON.parse(localStorage.getItem('user'));
         return user !== null ? true : false;
+    }
+
+    //Gets the headers that are used to make requests to the api.
+    public async getAPIHeaders(useContextType: boolean = true): Promise<HttpHeaders> {
+      return new Promise<HttpHeaders>((resolve) => {
+        this.afAuth.idToken.subscribe(async () => {
+          let headers = new HttpHeaders();
+          if (useContextType)
+            headers = headers
+              .set('Content-Type', 'application/json')
+              .set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+          headers = await this.getAuthorizationHeaderValues(headers);
+          resolve(headers);
+        });
+      });
+    }
+
+    //Sets the bearer token to be used for authorization.
+    private async getAuthorizationHeaderValues(headers: HttpHeaders): Promise<HttpHeaders> {
+      return new Promise(async (resolve) => {
+        this.afAuth.idToken.subscribe(res =>{
+          resolve(headers.set('Authorization', `Bearer ${!isNullOrUndefined(res) ? res : ''}`));
+        });
+      });
     }
 }

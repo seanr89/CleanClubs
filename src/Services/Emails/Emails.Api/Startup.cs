@@ -32,7 +32,7 @@ namespace Emails.Api
 
             services.AddEmailApplication(Configuration);
 
-            //services.AddHealthChecks();
+            services.AddHealthChecks();
 
             services.AddHealthEndpoints();
         }
@@ -45,7 +45,7 @@ namespace Emails.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

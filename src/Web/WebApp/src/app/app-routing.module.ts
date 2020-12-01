@@ -28,6 +28,10 @@ const routes: Routes = [
         path: 'locations',
         loadChildren: './Components/locations/locations.module#LocationsModule',
     },
+    {
+      path: 'users',
+      loadChildren: './Components/users/users.module#UsersModule',
+  },
     { path: 'home', component: HomeComponent },
     { path: "**", redirectTo: "home" }
 ];

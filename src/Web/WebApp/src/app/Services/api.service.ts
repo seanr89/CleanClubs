@@ -1,33 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { timeout } from 'rxjs/operators';
+import { take, timeout } from 'rxjs/operators';
 import { Data } from '@angular/router';
 import { SettingsProvider } from './settingsprovider';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
+import { User } from 'firebase';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
+
+//https://medium.com/@lucian.cbn/using-firebase-authentication-token-to-make-api-calls-for-the-respective-user-with-angular-7-a1b577d9eb3d
 export class ApiService {
     protected settings = environment.ApiConfig;
-    //protected apiServer = SettingsProvider.appConfig.apiServer.url;
-    //protected apiServer = SettingsProvider.appConfig.apiServer.url;
-    constructor(private http: HttpClient) {}
+    private accessToken : any;
+    constructor(private http: HttpClient, private authService: AuthService) {
+    }
 
     async post<T>(
         endPoint: string,
         body: Object = {}
     ): Promise<HttpResponse<T>> {
-        //console.log(`post url ${this.apiServer}${url} with panel: ${body}`);
         //this.appInsights.logTrace(`API Post : ${url}`);
         return this.http
             .post<T>(`${this.settings.url}${endPoint}`, JSON.stringify(body), {
-                headers: new HttpHeaders().set(
-                    'Content-Type',
-                    'application/json'
-                ),
+                headers: await this.authService.getAPIHeaders(),
                 observe: 'response',
-            })
+              })
             .pipe()
             .toPromise();
     }
@@ -37,21 +38,20 @@ export class ApiService {
         url: string,
         responseType: any = null
     ): Promise<HttpResponse<T>> {
+        
         if (responseType !== null) {
             return this.http
-                .get<T>(`${this.settings.url}${url}`, {
-                    responseType: responseType as 'json',
-                    headers: new HttpHeaders(),
-                    observe: 'response',
-                })
+                .get<T>(`${this.settings.url}${url}`, { 
+                    responseType: responseType as'json',
+                    headers: await this.authService.getAPIHeaders(),
+                    observe: 'response'})
                 .pipe()
                 .toPromise();
         } else {
             return this.http
-                .get<T>(`${this.settings.url}${url}`, {
-                    headers: new HttpHeaders(),
-                    observe: 'response',
-                })
+                .get<T>(`${this.settings.url}${url}`,  { 
+                    headers: await this.authService.getAPIHeaders(),
+                    observe: 'response'})
                 .pipe()
                 .toPromise();
         }
@@ -61,12 +61,9 @@ export class ApiService {
   async put<T>(url: string, body: Object = {}): Promise<any> {
     return this.http
       .put(`${this.settings.url}${url}`, JSON.stringify(body), {
-        headers: new HttpHeaders().set(
-            'Content-Type',
-            'application/json'
-        ),
+        headers: await this.authService.getAPIHeaders(),
         observe: 'response',
-    })
+      })
     .pipe()
     .toPromise();
   }

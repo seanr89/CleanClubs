@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { HttpResponse } from '@angular/common/http';
 import { Club } from 'src/app/Models/interfaces/clubs/club';
 import { CreateClubModel } from 'src/app/Models/interfaces/clubs/createclubmodel';
+import { AuthApiService } from '../authapi.service';
 
 @Injectable({
     providedIn: 'root',
@@ -36,7 +37,7 @@ export class ClubsService {
      * @param club
      */
     CreateClub(club: CreateClubModel): Promise<HttpResponse<CreateClubModel>> {
-        return this.apiService.post<CreateClubModel>(
+        return this.apiService.post(
             `${this.api_url_tag}/post`,
             club
         );
@@ -47,6 +48,6 @@ export class ClubsService {
      * @param club
      */
     UpdateClubDetails(club: Club): Promise<HttpResponse<Club>> {
-        return this.apiService.post<Club>(`${this.api_url_tag}/update`, club);
+        return this.apiService.post(`${this.api_url_tag}/update`, club);
     }
 }

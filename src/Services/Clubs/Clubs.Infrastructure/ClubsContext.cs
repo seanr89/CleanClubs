@@ -16,6 +16,7 @@ namespace Clubs.Infrastructure
         public DbSet<Player> Players { get; set; }
         public DbSet<Invite> Invites { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public ClubsContext()
         {

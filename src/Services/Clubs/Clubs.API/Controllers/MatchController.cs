@@ -97,11 +97,26 @@ namespace Clubs.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var record = await _MatchManager.CreateMatchWithInvites(match);
 
-            if (record != null)
-                return CreatedAtRoute("GetMatchById", new { id = record }, match);
-            return BadRequest("Save failed");
+            try
+            {
+                var result = await Mediator.Send(new CreateMatchWithInvitesCommand() { Match = match });
+                if (result != null)
+                    return CreatedAtRoute("GetMatchById", new { id = result }, match);
+
+                return BadRequest("Save failed");
+            }
+            catch (Exception ex)
+            {
+                _Logger.LogError($"Something went wrong at CreateMatchWithInvites action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
+            //CreateMatchWithInvitesCommand
+            // var record = await _MatchManager.CreateMatchWithInvites(match);
+
+            // if (record != null)
+            //     return CreatedAtRoute("GetMatchById", new { id = record }, match);
+            // return BadRequest("Save failed");
         }
 
         /// <summary>

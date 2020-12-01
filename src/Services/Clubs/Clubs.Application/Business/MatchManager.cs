@@ -10,6 +10,7 @@ using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
 using Clubs.Domain.Entities;
+using Clubs.Infrastructure;
 using Clubs.Messages;
 using Clubs.Messages.Contracts;
 using MediatR;
@@ -28,15 +29,18 @@ namespace Clubs.Application.Business
         protected IMediator _Mediator;
         private readonly IMapper _Mapper;
         private readonly IMessagePublisher _MessagePublisher;
+        private readonly ClubsContext _DbContext;
 
         public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
             IMapper mapper,
-            IMessagePublisher messagePublisher)
+            IMessagePublisher messagePublisher,
+            ClubsContext context)
         {
             _Logger = logger;
             _Mediator = mediator;
             _Mapper = mapper;
             _MessagePublisher = messagePublisher;
+            _DbContext = context;
         }
 
         /// <summary>
@@ -48,12 +52,10 @@ namespace Clubs.Application.Business
         {
             _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
 
-            Guid? matchId;
             var mappedMatch = _Mapper.Map<Match>(match);
             //Save the match!
-            matchId = await _Mediator.Send(new CreateMatchCommand() { Match = mappedMatch });
-
-            return matchId;
+            var newId = await this.SaveNewMatch(mappedMatch);
+            return newId;
         }
 
 
@@ -82,7 +84,7 @@ namespace Clubs.Application.Business
                     match.InvitesSent = true;
                 }
                 //StepX. Save the match! (N.B. here we might want to return the object!)
-                matchId = await _Mediator.Send(new CreateMatchCommand() { Match = match });
+                matchId = await this.SaveNewMatch(match);
 
                 //Not awaited to speed up performance!
                 monitor.CreatePerformanceMetricAndLogEvent("CreateMatch");
@@ -92,6 +94,24 @@ namespace Clubs.Application.Business
 
         #region private
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        private async Task<Guid?> SaveNewMatch(Match match)
+        {
+            _DbContext.Matches.Add(match);
+            await _DbContext.SaveChangesAsync();
+            return match.Id;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="invites"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
         private async Task CreateInvitationRequestAndPublish(List<Invite> invites, DateTime date)
         {
             foreach (var inv in invites)

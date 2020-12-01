@@ -13,6 +13,10 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Clubs.Application;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace Clubs.API
 {
@@ -45,7 +49,30 @@ namespace Clubs.API
             //services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.ConfigureDbContext(Configuration);
-            services.AddControllers().AddNewtonsoftJson(options =>
+
+            services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.Authority = "https://securetoken.google.com/cleanclubs-da2bc";
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://securetoken.google.com/cleanclubs-da2bc",
+                    ValidateAudience = true,
+                    ValidAudience = "cleanclubs-da2bc",
+                    ValidateLifetime = true
+                };
+            });
+
+
+            services.AddControllers(o =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                o.Filters.Add(new AuthorizeFilter(policy));
+            }).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
@@ -84,6 +111,9 @@ namespace Clubs.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Clubs API V1");
                 c.RoutePrefix = string.Empty;
             });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

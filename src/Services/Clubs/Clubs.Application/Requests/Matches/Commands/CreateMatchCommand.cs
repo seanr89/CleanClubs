@@ -10,6 +10,8 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Clubs.Infrastructure;
 using Microsoft.Extensions.Logging;
+using Clubs.Application.Business;
+using Clubs.Application.Profiles.DTO;
 
 namespace Clubs.Application.Requests.Matches.Commands
 {
@@ -17,20 +19,18 @@ namespace Clubs.Application.Requests.Matches.Commands
 
     public class CreateMatchCommand : IRequest<Guid?>
     {
-        public Match Match { get; set; }
+        public CreateMatchDTO Match { get; set; }
     }
 
     public class CreateMatchCommandHandler : IRequestHandler<CreateMatchCommand, Guid?>
     {
-        private readonly ClubsContext _Context;
-        private readonly IMapper _Mapper;
+        private readonly MatchManager _MatchManager;
         private readonly ILogger<CreateMatchCommandHandler> _Logger;
 
-        public CreateMatchCommandHandler(ClubsContext context, IMapper mapper,
+        public CreateMatchCommandHandler(MatchManager manager,
             ILogger<CreateMatchCommandHandler> logger)
         {
-            _Context = context;
-            _Mapper = mapper;
+            _MatchManager = manager;
             _Logger = logger;
 
         }
@@ -39,9 +39,8 @@ namespace Clubs.Application.Requests.Matches.Commands
         {
             try
             {
-                _Context.Matches.Add(request.Match);
-                await _Context.SaveChangesAsync();
-                return request.Match.Id;
+                var result = await _MatchManager.CreateMatch(request.Match);
+                return result;
             }
             catch (DbUpdateException e)
             {

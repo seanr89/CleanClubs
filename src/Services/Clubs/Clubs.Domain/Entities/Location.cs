@@ -38,6 +38,9 @@ namespace Clubs.Domain.Entities
         /// <param name="url"></param>
         public Location(string name, string addressOne, string addressTwo, string postcode, bool active, string url)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+
             Name = name;
             AddressOne = addressOne;
             AddressTwo = addressTwo;
@@ -49,6 +52,20 @@ namespace Clubs.Domain.Entities
 
         #region Setter Methods
 
+        /// <summary>
+        /// Public Setter for updating the name
+        /// </summary>
+        /// <param name="name">The new location name</param>
+        /// <exception cref="System.ArgumentNullException">Thrown when the name is null or whitespace</exception>
+        public void UpdateName(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException(nameof(name));
+            Name = name;
+        }
+
+        public void ActivateLocation() => Active = true;
+        public void DeActivateLocation() => Active = false;
 
         #endregion
     }

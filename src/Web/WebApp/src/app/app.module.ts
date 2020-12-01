@@ -36,6 +36,7 @@ import { httpInterceptorProviders } from './Services/Interceptors/Index';
 import { GlobalErrorHandler } from './Services/globalerrorhandler';
 import { LocationsModule } from './Components/locations/locations.module';
 import {MatMenuModule} from '@angular/material/menu';
+import { AuthService } from './Services/auth.service';
 
 
 @NgModule({
