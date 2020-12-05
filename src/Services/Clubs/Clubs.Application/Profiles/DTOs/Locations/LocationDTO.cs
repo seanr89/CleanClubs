@@ -11,6 +11,6 @@ namespace Clubs.Application.Profiles.DTO
         public string AddressTwo { get; private set; }
         public string PostCode { get; private set; }
         public bool Active { get; set; }
-        public Point GeoLocation { get; private set; }
+        //public Point GeoLocation { get; private set; }
     }
 }

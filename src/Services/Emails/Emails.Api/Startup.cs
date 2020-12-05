@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Emails.Api.Extensions;
 using Emails.App;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Emails.Api
 {
@@ -27,6 +28,9 @@ namespace Emails.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // The following line enables Application Insights telemetry collection.
+            services.AddApplicationInsightsTelemetry();
+
             services.AddControllers();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 

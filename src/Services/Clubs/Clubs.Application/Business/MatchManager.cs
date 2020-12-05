@@ -44,7 +44,7 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// TODO: lightweight process to handle the creation of a match and sending of invites out at a later date!
+        /// Lightweight process to handle the creation of a match and sending of invites out at a later date!
         /// </summary>
         /// <param name="match">MatchDTO: a partial match!</param>
         /// <returns>the unique of the match : or null!</returns>
@@ -53,7 +53,7 @@ namespace Clubs.Application.Business
             _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
 
             var mappedMatch = _Mapper.Map<Match>(match);
-            //Save the match!
+            //Now execute the save process!
             var newId = await this.SaveNewMatch(mappedMatch);
             return newId;
         }
@@ -68,6 +68,7 @@ namespace Clubs.Application.Business
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
             Guid? matchId = null;
+            //TODO: remove this execution monitoring!
             using (ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
             {
                 var match = _Mapper.Map<Match>(matchView);
@@ -86,7 +87,7 @@ namespace Clubs.Application.Business
                 //StepX. Save the match! (N.B. here we might want to return the object!)
                 matchId = await this.SaveNewMatch(match);
 
-                //Not awaited to speed up performance!
+                //Not awaited to speed up performance i hope!
                 monitor.CreatePerformanceMetricAndLogEvent("CreateMatch");
             }
             return matchId;
@@ -95,10 +96,10 @@ namespace Clubs.Application.Business
         #region private
 
         /// <summary>
-        /// 
+        /// DB operation event to save a new match record
         /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
+        /// <param name="match">match to be saved</param>
+        /// <returns>a new GUID parameter to denote the match!</returns>
         private async Task<Guid?> SaveNewMatch(Match match)
         {
             _DbContext.Matches.Add(match);
@@ -107,7 +108,7 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// 
+        /// Create a new invitation request and publish to queue for a collection of invites!
         /// </summary>
         /// <param name="invites"></param>
         /// <param name="date"></param>
@@ -122,14 +123,14 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// 
+        /// Get all active members of a club and create an invite event!
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
         private async Task GetAllMembersAndAddToInvites(Match match)
         {
             var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
-            //Get only active members as no point sending to others
+            //Get only active members as no point sending to others!
             var activeMembers = members.Where(m => m.Active == true).ToList();
 
             //Convert members to invites!

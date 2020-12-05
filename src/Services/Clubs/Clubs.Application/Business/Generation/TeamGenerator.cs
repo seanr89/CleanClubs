@@ -22,35 +22,12 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// Supports the default random shuffle fo players into teams
+        /// 
         /// </summary>
-        /// <param name="info"></param>
-        /// <returns>Returns the MatchDTO with teams!</returns>
-        /*
-        public async Task<MatchDTO> Generate(GenerationInfo info)
-        {
-            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {info.Match.Id}");
-            if (info.Match.Invites.Any())
-            {
-                var acceptedInvites = info.Match.Invites.Where(i => i.Accepted == true).ToList();
-                //Check if the player count is even
-                if (HelperMethods.IsEven(acceptedInvites.Count) == false)
-                {
-                    _Logger.LogInformation($"Uneven Invite count");
-                }
-
-                var teamList = InitialiseTeams(info.Match);
-
-                //Ok shuffle the players with a utility call
-                HelperMethods.Shuffle<InviteDTO>(acceptedInvites.ToList());
-
-                await ShufflePlayersIntoTeams(teamList, info.Match, acceptedInvites);
-                //complete - need to save these details now!
-                info.Match.Status = MatchStatus.Scheduled;
-            }
-            return info.Match;
-        }*/
-
+        /// <param name="teams"></param>
+        /// <param name="match"></param>
+        /// <param name="invites"></param>
+        /// <returns></returns>
         async Task ShufflePlayersIntoTeams(List<TeamDTO> teams, MatchDTO match, List<InviteDTO> invites)
         {
             await Task.Run(() =>
