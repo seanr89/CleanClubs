@@ -33,9 +33,9 @@
                 routerLinkActive="active">
                 Locations
             </a>
-            <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
+            <!-- <a mat-list-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                 Sign Out
-            </a>
+            </a> -->
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -55,7 +55,7 @@
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button mat-menu-item disabled>
+                <button mat-menu-item *ngIf="isAuthenticated" (click)="auth.signOut()">
                   <mat-icon>exit_to_app</mat-icon>
                   <span>Sign Out</span>
                 </button>

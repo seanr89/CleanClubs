@@ -32,5 +32,13 @@ namespace Clubs.Domain.Entities
         /// <value></value>
         public Guid TeamId { get; set; }
         public Team Team { get; set; }
+
+        /// <summary>
+        /// TODO: parameterless, private constructor disabled!
+        /// </summary>
+        public Player()
+        {
+            
+        }
     }
 }

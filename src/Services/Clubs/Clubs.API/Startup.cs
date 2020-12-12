@@ -17,6 +17,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Clubs.API.Extensions.HealthChecks;
+using Microsoft.AspNetCore.Http;
 
 namespace Clubs.API
 {
@@ -76,6 +79,7 @@ namespace Clubs.API
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
             services.AddHealthChecks().AddDbContextCheck<ClubsContext>();
 
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clubs API", Version = "v1" }));
@@ -118,7 +122,25 @@ namespace Clubs.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecks("/quickHealth", new HealthCheckOptions(){
+                    Predicate = _ => false
+                });
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions{
+                    ResponseWriter = async (context, report) =>
+                    {
+                        context.Response.ContentType = "application/json";
+                        var response = new HealthCheckResponse{
+                            Status = report.Status.ToString(),
+                            Checks = report.Entries.Select(x => new HealthCheck{
+                                Component = x.Key,
+                                Status = x.Value.Status.ToString(),
+                                Description = x.Value.Description
+                            }),
+                            Duration = report.TotalDuration
+                        };
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
+                    }
+                });
             });
         }
     }

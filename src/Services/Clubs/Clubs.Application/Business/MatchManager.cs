@@ -137,7 +137,7 @@ namespace Clubs.Application.Business
             foreach (var a in activeMembers)
             {
                 //create a new object for each invite
-                var invite = new Invite() { Email = a.Email, MemberId = a.Id, MatchId = match.Id };
+                var invite = new Invite(a.Email, a.Id, match.Id);
                 match.Invites.Add(invite);
             }
         }

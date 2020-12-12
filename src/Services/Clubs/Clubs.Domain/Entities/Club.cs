@@ -18,7 +18,16 @@ namespace Clubs.Domain.Entities
         [DefaultValue(true)]
         public bool Active { get; set; } = true;
 
+        /// <summary>
+        /// TODO: to be removed!
+        /// </summary>
+        /// <value></value>
         public string Creator { get; set; } = "Unknown";
+        /// <summary>
+        /// User based Creator
+        /// </summary>
+        /// <value></value>
+        public User Founder { get; set; }
 
         public ICollection<Member> Members { get; set; }
 
@@ -35,10 +44,17 @@ namespace Clubs.Domain.Entities
         public bool Private { get; set; } = false;
 
         /// <summary>
-        /// private, parameterless constructor used by EF Core
+        /// TODO: private, parameterless constructor used by EF Core
         /// </summary>
         public Club() { }
 
+        /// <summary>
+        /// new parameter based constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="active"></param>
+        /// <param name="privateClub"></param>
+        /// <param name="creator"></param>
         public Club(string name, bool active, bool privateClub, string creator)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -54,8 +70,14 @@ namespace Clubs.Domain.Entities
 
         public void AddMember(Member member)
         {
+            if (member == null)
+                throw new ArgumentNullException(nameof(member));
 
+            this.Members.Add(member);
         }
+
+        public void Activate() => Active = true;
+        public void DeActivate() => Active = false;
 
         #endregion
     }

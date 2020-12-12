@@ -19,5 +19,26 @@ namespace Clubs.Domain.Entities
         [JsonIgnore]
         public Match Match { get; set; }
         public Guid MatchId { get; set; }
+
+        /// <summary>
+        /// parameterless, private constructor disabled
+        /// </summary>
+        private Invite()
+        {
+
+        }
+
+        /// <summary>
+        /// new parameter based constructor
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="memberId"></param>
+        /// <param name="matchId"></param>
+        public Invite(string email, Guid memberId, Guid matchId)
+        {
+            Email = email;
+            MemberId = memberId;
+            MatchId = matchId;
+        }
     }
 }

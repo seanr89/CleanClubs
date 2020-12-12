@@ -2,24 +2,6 @@
   <p>More information will be presented here shortly!!</p>
 
   <div class="content" fxLayout="row wrap" fxLayoutGap="16px grid">
-    <!-- <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let num of [1,2,3]">
-      <mat-card class="mat-elevation-z4" >
-        <mat-card-header>
-          <mat-card-title>Mountains {{num}}</mat-card-title>
-        </mat-card-header>
-        <!-- <img mat-card-image src="./../assets/images/mountains.jpg">
-        <mat-card-content>
-          <p>
-            The Himalayas is a mountain range in Asia.
-          </p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>SHARE</button>
-        </mat-card-actions>
-      </mat-card>
-    </div> -->
-
     <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
       <mat-card class="mat-elevation-z4" >
         <mat-card-header>
@@ -37,5 +19,35 @@
     </div>
   </div>
 
-</div>
+  <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
+    <mat-card class="mat-elevation-z4" >
+      <mat-card-header>
+        <mat-card-title>Users</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Show all users!
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <a routerLink="/users/list"><button mat-button>Navigate</button></a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
+  <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
+  <mat-card class="mat-elevation-z4" >
+    <mat-card-header>
+      <mat-card-title>Locations</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        Show all Locations!
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <a routerLink="/locations/list"><button mat-button>Navigate</button></a>
+    </mat-card-actions>
+  </mat-card>
+  </div>
+</div>

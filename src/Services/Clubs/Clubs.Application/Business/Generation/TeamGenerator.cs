@@ -22,6 +22,39 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
+        /// Process accepted invites and create teams and attach to a match
+        /// </summary>
+        /// <param name="match"></param>
+        /// <returns></returns>
+        public async Task<MatchDTO> Generate(MatchDTO match)
+        {
+            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {match.Id}");
+            if (match.Invites.Any())
+            {
+                var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
+                //Check if the player count is even
+                if (HelperMethods.IsEven(acceptedInvites.Count) == false)
+                {
+                    _Logger.LogInformation($"Uneven Invite count");
+                }
+
+                var teamList = InitialiseTeams(match);
+
+                //Ok shuffle the players with a utility call
+                HelperMethods.Shuffle<InviteDTO>(acceptedInvites.ToList());
+
+                await ShufflePlayersIntoTeams(teamList, match, acceptedInvites);
+                //complete - need to save these details now!
+                match.Status = MatchStatus.Scheduled;
+            }
+            else
+            {
+                //No invitations - we may need to alert this!
+            }
+            return match;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="teams"></param>
@@ -70,39 +103,6 @@ namespace Clubs.Application.Business
             modelList.Add(new TeamDTO() { Number = TeamNumber.ONE, MatchId = match.Id });
             modelList.Add(new TeamDTO() { Number = TeamNumber.TWO, MatchId = match.Id });
             return modelList;
-        }
-
-        /// <summary>
-        /// Process accepted invites and create teams and attach to a match
-        /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
-        public async Task<MatchDTO> Generate(MatchDTO match)
-        {
-            _Logger.LogInformation($"TeamGenerator: {HelperMethods.GetCallerMemberName()} for {match.Id}");
-            if (match.Invites.Any())
-            {
-                var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
-                //Check if the player count is even
-                if (HelperMethods.IsEven(acceptedInvites.Count) == false)
-                {
-                    _Logger.LogInformation($"Uneven Invite count");
-                }
-
-                var teamList = InitialiseTeams(match);
-
-                //Ok shuffle the players with a utility call
-                HelperMethods.Shuffle<InviteDTO>(acceptedInvites.ToList());
-
-                await ShufflePlayersIntoTeams(teamList, match, acceptedInvites);
-                //complete - need to save these details now!
-                match.Status = MatchStatus.Scheduled;
-            }
-            else
-            {
-                //No invitations - we may need to alert this!
-            }
-            return match;
         }
     }
 }
