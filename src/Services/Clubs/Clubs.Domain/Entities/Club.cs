@@ -24,7 +24,7 @@ namespace Clubs.Domain.Entities
         /// <value></value>
         public string Creator { get; set; } = "Unknown";
         /// <summary>
-        /// User based Creator
+        /// User based Creator - TODO Included
         /// </summary>
         /// <value></value>
         public User Founder { get; set; }

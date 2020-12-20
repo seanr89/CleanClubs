@@ -28,6 +28,8 @@ import { MatchEditDialogComponent } from './match-edit-dialog/match-edit-dialog.
 import { MatSelectModule } from '@angular/material/select';
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 import {MatRadioModule} from '@angular/material/radio';
+import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -35,6 +37,7 @@ import {MatRadioModule} from '@angular/material/radio';
         MatchTeamCreateComponent,
         MatchDetailsComponent,
         MatchEditDialogComponent,
+        MatchScheduleComponent,
     ],
     imports: [
         CommonModule,
@@ -49,6 +52,7 @@ import {MatRadioModule} from '@angular/material/radio';
         ReactiveFormsModule,
         FlexLayoutModule,
         MatCardModule,
+        MatCheckboxModule,
         MatchesRoutingModule,
         FlexLayoutModule,
         MatCardModule,

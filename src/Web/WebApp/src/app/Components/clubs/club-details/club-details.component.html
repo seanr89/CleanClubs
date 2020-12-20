@@ -30,6 +30,7 @@
                 <mat-card-actions align="center">
                     <!-- <button mat-raised-button color="primary">Edit</button> -->
                     <button mat-raised-button color="primary" (click)="redirectToMatchCreate()">Create Match</button>
+                    <button mat-raised-button color="primary" (click)="redirectToMatchSchedule()">Schedule Match</button>
                 </mat-card-actions>
             </mat-card>
         </section>
@@ -61,7 +62,7 @@
     </section>
     <hr />
     <section fxLayout="row wrap" class="sectionContent">
-        <section  fxFlex="45%"
+        <section fxFlex="45%"
         fxLayoutAlign="center center"
         style="padding-right: 5px">
             <app-match-list [clubId]="club.id" fxFlex="92%"></app-match-list>

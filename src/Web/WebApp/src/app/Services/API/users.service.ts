@@ -30,7 +30,7 @@ export class UsersService {
      */
     CreateUser(user: AppUser): Promise<HttpResponse<any>> {
         return this.apiService.post(
-            `${this.api_url_tag}/post`,
+            `${this.api_url_tag}/NewUser`,
             user
         );
     }

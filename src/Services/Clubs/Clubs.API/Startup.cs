@@ -68,6 +68,8 @@ namespace Clubs.API
                 };
             });
 
+            services.AddHttpContextAccessor();
+
 
             services.AddControllers(o =>
             {

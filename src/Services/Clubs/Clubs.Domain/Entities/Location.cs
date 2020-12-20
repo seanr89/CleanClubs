@@ -18,7 +18,7 @@ namespace Clubs.Domain.Entities
         public string AddressTwo { get; private set; }
         [Required]  
         public string PostCode { get; private set; }
-        public bool Active { get; set; }
+        public bool Active { get; set; } = true;
         public Point GeoLocation { get; private set; }
         public string SiteURL { get; private set; } 
 

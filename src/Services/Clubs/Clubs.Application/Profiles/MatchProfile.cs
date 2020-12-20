@@ -13,15 +13,7 @@ namespace Clubs.Application.Profiles
             CreateMap<MatchDTO, Match>();
             CreateMap<Match, MatchListDTO>();
             CreateMap<CreateMatchDTO, Match>();
-
-            // Mapping when property names are different
-            //CreateMap<User, UserViewModel>()
-            //    .ForMember(dest =>
-            //    dest.FName,
-            //    opt => opt.MapFrom(src => src.FirstName))
-            //    .ForMember(dest =>
-            //    dest.LName,
-            //    opt => opt.MapFrom(src => src.LastName));
+            CreateMap<CreateInviteMatchDTO, Match>();
         }
     }
 }

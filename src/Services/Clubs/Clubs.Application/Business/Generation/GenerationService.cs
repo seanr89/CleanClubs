@@ -19,19 +19,21 @@ namespace Clubs.Application.Business
             _mediator = mediator;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matchId"></param>
+        /// <param name="option"></param>
+        /// <returns></returns>
         public async Task<bool> ExecuteTeamGenerationForMatchAndUpdate(Guid matchId, GeneratorType option)
         {
             _logger.LogInformation($"GenerationService: {HelperMethods.GetCallerMemberName()}");
 
             bool result = false;
-
             var match = await _mediator.Send(new GetMatchQuery() { MatchId = matchId });
 
-            if(match == null){return result;}
+            if(match == null || match.Status != MatchStatus.Created){return result;}
                 //TODO: add error here!
-
-            if(match.Status != MatchStatus.Created){return result;}
-                //TODO: error has we are in the wrong state!
 
             var generator = SelectGeneratorByGeneratorType(option);
             var generatedMatch = await generator.Generate(match);
@@ -40,9 +42,14 @@ namespace Clubs.Application.Business
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private ITeamGenerator SelectGeneratorByGeneratorType(GeneratorType type)
         {
-            ITeamGenerator generator = null;
+            ITeamGenerator generator = new TeamGenerator();
 
             switch(type)
             {
@@ -52,7 +59,6 @@ namespace Clubs.Application.Business
                 case GeneratorType.Manual:
                 case GeneratorType.None:
                     break;
-
             }
             return generator;
         }

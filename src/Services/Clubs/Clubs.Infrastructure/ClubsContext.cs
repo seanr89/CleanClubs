@@ -4,11 +4,15 @@ using System.Threading;
 using Clubs.Domain.Common;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Clubs.Infrastructure
 {
     public class ClubsContext : DbContext
     {
+        protected IHttpContextAccessor HttpContextAccessor { get; }
+
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Match> Matches { get; set; }
@@ -24,8 +28,9 @@ namespace Clubs.Infrastructure
         }
 
 
-        public ClubsContext(DbContextOptions<ClubsContext> options) : base(options)
+        public ClubsContext(DbContextOptions<ClubsContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
+            this.HttpContextAccessor = httpContextAccessor;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,15 +58,19 @@ namespace Clubs.Infrastructure
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
+            var httpContext = this.HttpContextAccessor.HttpContext;
+            string email = httpContext.User.FindFirstValue("Emails") ?? "";
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
                         entry.Entity.Created = DateTime.UtcNow;
+                        entry.Entity.CreatedBy = email;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModified = DateTime.UtcNow;
+                        entry.Entity.LastModifiedBy = email;
                         break;
                 }
             }

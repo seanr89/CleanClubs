@@ -46,6 +46,10 @@ export class MatchService {
         return this.apiService.post<Match>(`${this.api_url_tag}/CreateMatch`, match);
     }
 
+    ScheduleMatch(match: Match): Promise<HttpResponse<Match>> {
+      return this.apiService.post<Match>(`${this.api_url_tag}/CreateMatchWithInvites`, match);
+    }
+
     /**
      * TODO: not yet currently enabled/processing!
      * @param match 

@@ -61,7 +61,6 @@ export class ClubListComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     populateTable(): void {
-        debugger;
         this.clubService.GetAllClubs().then((res) => {
             if (res.status === 200) {
                 this.isLoading = false;

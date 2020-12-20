@@ -4,11 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/Services/Guards/authguard';
 import { MatchTeamCreateComponent } from './match-team-create/match-team-create.component';
 import { MatchDetailsComponent } from './match-details/match-details.component';
+import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
 
 const routes: Routes = [
     {
         path: 'creatematch/:id',
-        component: MatchTeamCreateComponent
+        component: MatchTeamCreateComponent,
+        canActivate: [AuthGuard],
+    },
+    {
+        path: 'schedulematch/:id',
+        component: MatchScheduleComponent,
+        canActivate: [AuthGuard],
     },
     {
         path: 'details/:id',

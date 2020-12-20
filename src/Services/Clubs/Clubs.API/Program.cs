@@ -28,11 +28,10 @@ namespace Clubs.API
                     var env = services.GetService<IWebHostEnvironment>();
                     var context = services.GetRequiredService<ClubsContext>();
 
-                    // if (context.Database.IsSqlServer())
-                    // {
-                    //     context.Database.Migrate();
-                    // }
-
+                    if (context.Database.IsSqlServer())
+                    {
+                        context.Database.Migrate();
+                    }
                     await ApplicationDbContextSeed.SeedAsync(context);
                 }
                 catch (Exception ex)

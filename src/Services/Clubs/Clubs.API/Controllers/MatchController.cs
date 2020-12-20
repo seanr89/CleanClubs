@@ -2,15 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Club.API.Controllers;
-using Clubs.Application;
-using Clubs.Application.Business;
-using Clubs.Application.Profiles.DTO;
-using Clubs.Application.Requests.Matches.Queries;
-using Clubs.Application.Requests.Matches.Commands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Club.API.Controllers;
+using Clubs.Application.Profiles.DTO;
+using Clubs.Application.Requests.Matches.Commands;
+using Clubs.Application.Requests.Matches.Queries;
 using Utilities;
 
 namespace Clubs.API.Controllers
@@ -18,15 +16,13 @@ namespace Clubs.API.Controllers
     public class MatchController : ApiController
     {
         private readonly ILogger<MatchController> _Logger;
-        private readonly MatchManager _MatchManager;
-        public MatchController(ILogger<MatchController> logger, MatchManager manager)
+        public MatchController(ILogger<MatchController> logger)
         {
             _Logger = logger;
-            _MatchManager = manager;
         }
 
         /// <summary>
-        /// 
+        /// ASYNC : Query all match records
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -38,7 +34,6 @@ namespace Clubs.API.Controllers
             var result = await Mediator.Send(new GetMatchesQuery());
             if (result.Any())
                 return Ok(result);
-
             return NoContent();
         }
 
@@ -57,12 +52,11 @@ namespace Clubs.API.Controllers
 
             if (result != null)
                 return Ok(result);
-
             return NoContent();
         }
 
         /// <summary>
-        /// Query all exisiting matches for an individual club!
+        /// Query all existing matches for an individual club!
         /// </summary>
         /// <param name="id">the Unique club record</param>
         /// <returns>A collection of MatchList records</returns>
@@ -76,7 +70,6 @@ namespace Clubs.API.Controllers
 
             if (result.Any())
                 return Ok(result);
-
             return NoContent();
         }
 
@@ -90,13 +83,11 @@ namespace Clubs.API.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(CreateMatchDTO), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateMatchWithInvites([FromBody] CreateMatchDTO match)
+        public async Task<IActionResult> CreateMatchWithInvites([FromBody] CreateInviteMatchDTO match)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             try
             {
@@ -111,16 +102,11 @@ namespace Clubs.API.Controllers
                 _Logger.LogError($"Something went wrong at CreateMatchWithInvites action: {ex.Message}");
                 return StatusCode(500, "Internal server error");
             }
-            //CreateMatchWithInvitesCommand
-            // var record = await _MatchManager.CreateMatchWithInvites(match);
-
-            // if (record != null)
-            //     return CreatedAtRoute("GetMatchById", new { id = record }, match);
-            // return BadRequest("Save failed");
         }
 
         /// <summary>
-        /// Manual Match Generation
+        /// Manual Match Generation - teams should already be created
+        /// NO INVITES
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
@@ -131,14 +117,21 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
-            var record = await _MatchManager.CreateMatch(match);
 
-            if (record != null)
-                return CreatedAtRoute("GetMatchById", new { id = record }, match);
-            return BadRequest("Save failed");
+            try
+            {
+                var result = await Mediator.Send(new CreateMatchCommand() { Match = match });
+                if (result != null)
+                    return CreatedAtRoute("GetMatchById", new { id = result }, match);
+
+                return BadRequest("Save failed");
+            }
+            catch (Exception ex)
+            {
+                _Logger.LogError($"Something went wrong at CreateMatchWithInvites action: {ex.Message}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         #endregion
@@ -146,7 +139,7 @@ namespace Clubs.API.Controllers
         #region PUT/Update
 
         /// <summary>
-        /// 
+        /// Support updating the details for a single match
         /// </summary>
         /// <param name="id"></param>
         /// <param name="match"></param>
@@ -157,15 +150,10 @@ namespace Clubs.API.Controllers
         public async Task<IActionResult> UpdateMatchDetails(Guid id, [FromBody] UpdateMatchDetailsDTO match)
         {
             _Logger.LogInformation($"Matches: {HelperMethods.GetCallerMemberName()}");
-            if (match == null)
+            if (match == null || !ModelState.IsValid)
             {
-                _Logger.LogError("match object sent from client is null.");
-                return BadRequest("Match object is null");
-            }
-            if (!ModelState.IsValid)
-            {
-                _Logger.LogError("Invalid match update object sent from client.");
-                return BadRequest("Invalid model object");
+                _Logger.LogWarning("Match object sent from client is null or invalid.");
+                return BadRequest("Match object is null or invalid!");
             }
 
             //ok now lets try and update the details only
@@ -188,12 +176,6 @@ namespace Clubs.API.Controllers
         #endregion
 
         #region Delete
-
-        // [HttpDelete]
-        // public IActionResult Delete(Guid id)
-        // {
-        //     throw new NotImplementedException();
-        // }
 
         #endregion
     }

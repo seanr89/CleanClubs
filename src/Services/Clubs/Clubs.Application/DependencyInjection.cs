@@ -10,6 +10,10 @@ using FluentValidation;
 using Microsoft.Azure.ServiceBus;
 using Clubs.Messages;
 using Microsoft.Extensions.Configuration;
+using Clubs.Application.Services.Interfaces;
+using Clubs.Application.Services;
+using Clubs.Application.Profiles.DTO;
+using Clubs.Application.Services.Factories;
 
 namespace Clubs.Application
 {
@@ -35,6 +39,11 @@ namespace Clubs.Application
             services.AddSingleton<ITopicClient>(x => new TopicClient(configuration.GetValue<string>("ServiceBus:ConnectionString")
             , configuration.GetValue<string>("ServiceBus:TopicName")));
             services.AddSingleton<IMessagePublisher, InvitationPublisher>();
+
+            services.AddTransient<IMatchCreator, SimpleMatchCreator>();
+            services.AddTransient<IMatchCreator, InvitationMatchCreator>();
+
+            services.AddTransient<MatchCreationFactory>();
 
             return services;
         }

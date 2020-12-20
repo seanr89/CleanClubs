@@ -1,30 +1,21 @@
-
-
 using System;
 using System.Threading.Tasks;
-using Club.API.Controllers;
-using Clubs.Application.Business;
-using Clubs.Application.Profiles.DTO;
-using Clubs.Application.Requests.Matches.Commands;
-using Clubs.Application.Requests.Matches.Queries;
-using Clubs.Domain.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Club.API.Controllers;
+using Clubs.Application.Requests.Club.Commands;
 using Utilities;
 
 namespace Clubs.API.Controllers
 {
-    //[ApiController]
     public class TeamController : ApiController
     {
         private readonly ILogger<TeamController> _Logger;
-        private readonly GenerationService _generationService;
 
-        public TeamController(ILogger<TeamController> logger, GenerationService generationService)
+        public TeamController(ILogger<TeamController> logger)
         {
             _Logger = logger;
-            _generationService = generationService;
         }
 
         [HttpGet("{id}", Name = "CreateRandomTeamsForMatch")]
@@ -34,7 +25,7 @@ namespace Clubs.API.Controllers
         {
             _Logger.LogInformation($"Teams: {HelperMethods.GetCallerMemberName()}");
 
-            var update = await _generationService.ExecuteTeamGenerationForMatchAndUpdate(id, GeneratorType.Random);
+            var update = await Mediator.Send(new RandomTeamCreateCommand() { MatchId = id });
             if (update)
                 return Ok();
             return BadRequest("Team Generation Failed");

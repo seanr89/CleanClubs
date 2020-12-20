@@ -23,6 +23,8 @@ namespace Clubs.Domain.Entities
         public bool InvitesSent { get; set; } = false;
         public GeneratorType Generator { get; set; } = GeneratorType.None;
         public string Location { get; set; } = "Unknown";
+        //public Guid LocationId { get; set; }
+        //public Location Location { get; set; }
 
     }
 }

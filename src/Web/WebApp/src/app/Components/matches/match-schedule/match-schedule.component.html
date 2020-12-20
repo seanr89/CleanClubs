@@ -1,0 +1,82 @@
+<mat-horizontal-stepper #stepper>
+    <!-- First Stepper Item -->
+      <mat-step [stepControl]="firstFormGroup" label="Enter Date and Location">
+          <br />
+          <!-- Supports date, time and location entry -->
+          <form [formGroup]="firstFormGroup">
+              <div>
+                  <mat-form-field appearance="fill" class="formInput">
+                      <mat-label>Select Date</mat-label>
+                      <input matInput [matDatepicker]="dp3"
+                          id="dateId"
+                          placeholder="dd-MMM-yyyy"
+                          name="inputDate"
+                          formControlName="dateInput"
+                          [(ngModel)]="selectedDate"
+                          disabled />
+                      <mat-datepicker-toggle
+                          matSuffix
+                          [for]="dp3"
+                      ></mat-datepicker-toggle>
+                      <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="halfWidth">
+                      <mat-label>Select Time</mat-label>
+                        <input
+                            matInput
+                            placeholder="Time of Match"
+                            [ngxTimepicker]="toggleTimepicker"
+                            [(ngModel)]="selectedTime"
+                            name="inputTime"
+                            [format]="24"
+                            formControlName="timeInput"
+                            readonly
+                        />
+                        <!-- <ngx-material-timepicker-toggle [for]="toggleTimepicker"></ngx-material-timepicker-toggle> -->
+                        <ngx-material-timepicker #toggleTimepicker></ngx-material-timepicker>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="formInput">
+                      <mat-label>Location</mat-label>
+                      <input matInput placeholder="Enter location" [(ngModel)]="matchDetails.location" formControlName="locationInput">
+                  </mat-form-field>
+                  <mat-label>Send Invites</mat-label>
+                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Yes</mat-checkbox>
+              </div>
+              <div>
+                  <!-- <button mat-raised-button color="primary" (click)="combineDateAndTime()">Date Merge</button> -->
+                  <button mat-button matStepperNext color="primary">Next</button>
+              </div>
+          </form>
+      </mat-step>
+      <!--  -->
+      <!--  -->
+      <mat-step [stepControl]="secondFormGroup" label="Pick your players">
+        <div>
+            <section fxLayout="row wrap" class="sectionContent">
+                <app-member-list [members]="club.members" [showSelector]="true" fxFlex="75%"></app-member-list>
+            </section>
+        </div>
+        <!-- <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext color="primary" (click)="onGenerateClick()">Next</button>
+        </div> -->
+    </mat-step>
+      <!--  -->
+      <!--  -->
+      <mat-step label="Review">
+          <!-- Review and Confirm -->
+          <div>
+              <!-- Button controls -->
+              <section fxLayout="row wrap" class="sectionContent">
+  
+                  <button mat-raised-button color="primary" (click)="onSaveMatchClick()"> Save Match </button>
+              </section>
+          </div>
+      </mat-step>
+  </mat-horizontal-stepper>
+  
+  
+  
+  
+  
+  

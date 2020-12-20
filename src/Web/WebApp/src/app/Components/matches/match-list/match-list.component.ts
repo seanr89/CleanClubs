@@ -34,10 +34,8 @@ export class MatchListComponent implements OnInit {
 
     ngOnInit(): void {
       this.dataSource = new MatTableDataSource<Match>();
-      debugger;
       //handle query to get all matches you can query!
       this.matchService.GetMatchesForClub(this.clubId).then((res: HttpResponse<Match[]> | HttpResponse<string>) => {
-        debugger;
         if(res.status === 200)
         {
           let arrayData: Match[] = res.body as Match[];

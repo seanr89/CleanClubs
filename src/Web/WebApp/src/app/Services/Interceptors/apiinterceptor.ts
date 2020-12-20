@@ -40,7 +40,7 @@ export class APIInterceptor implements HttpInterceptor {
                 } else {
                     errorMessage += this.handleServerSideError(error);
                 }
-                this.notifications.error(errorMessage, true);
+                //this.notifications.error(errorMessage, true);
                 return throwError(errorMessage);
             })
         );
@@ -59,7 +59,6 @@ export class APIInterceptor implements HttpInterceptor {
         if (error.status === null || error.status === 0) {
             message = 'Unable to Connect to API';
         } else {
-            //debugger;
             //BadRequest
             if (error.status === 400) {
                 message = error.error;

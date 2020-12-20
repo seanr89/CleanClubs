@@ -10,6 +10,9 @@ using Utilities;
 
 namespace Clubs.Application.Business
 {
+    /// <summary>
+    /// Base/Generic class to support random shuffling of team invites for a match
+    /// </summary>
     public class TeamGenerator : ITeamGenerator
     {
         private readonly ILogger<TeamGenerator> _Logger;
@@ -34,9 +37,7 @@ namespace Clubs.Application.Business
                 var acceptedInvites = match.Invites.Where(i => i.Accepted == true).ToList();
                 //Check if the player count is even
                 if (HelperMethods.IsEven(acceptedInvites.Count) == false)
-                {
                     _Logger.LogInformation($"Uneven Invite count");
-                }
 
                 var teamList = InitialiseTeams(match);
 
@@ -50,12 +51,14 @@ namespace Clubs.Application.Business
             else
             {
                 //No invitations - we may need to alert this!
+                _Logger.LogWarning($"No Invites for the match: {match.Id}");
             }
             return match;
         }
 
         /// <summary>
-        /// 
+        /// Supports player addition into specific teams
+        /// executes a loop and 1 to 1 process!
         /// </summary>
         /// <param name="teams"></param>
         /// <param name="match"></param>
@@ -69,13 +72,7 @@ namespace Clubs.Application.Business
                 bool AddedToTeamOne = false;
                 foreach (var inv in invites)
                 {
-                    player = new PlayerDTO()
-                    {
-                        Email = inv.Member.Email,
-                        FirstName = inv.Member.FirstName,
-                        LastName = inv.Member.LastName,
-                        MemberId = inv.Member.Id
-                    };
+                    player = CreatePlayerFromInvite(inv);
 
                     if (!AddedToTeamOne)
                     {
@@ -86,7 +83,6 @@ namespace Clubs.Application.Business
 
                     AddedToTeamOne = false;
                     teams[1].Players.Add(player);
-                    continue;
                 }
                 match.Teams = teams;
             });
@@ -94,6 +90,7 @@ namespace Clubs.Application.Business
 
         /// <summary>
         /// Support the default initialisation of two teams
+        /// with basic Ids and tags added!
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
@@ -103,6 +100,17 @@ namespace Clubs.Application.Business
             modelList.Add(new TeamDTO() { Number = TeamNumber.ONE, MatchId = match.Id });
             modelList.Add(new TeamDTO() { Number = TeamNumber.TWO, MatchId = match.Id });
             return modelList;
+        }
+
+        private PlayerDTO CreatePlayerFromInvite(InviteDTO inv)
+        {
+            return new PlayerDTO()
+            {
+                Email = inv.Member.Email,
+                FirstName = inv.Member.FirstName,
+                LastName = inv.Member.LastName,
+                MemberId = inv.Member.Id
+            };
         }
     }
 }

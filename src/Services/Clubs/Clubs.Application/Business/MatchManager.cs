@@ -9,6 +9,7 @@ using Clubs.Application.Business;
 using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Member.Queries;
+using Clubs.Application.Services.Factories;
 using Clubs.Domain.Entities;
 using Clubs.Infrastructure;
 using Clubs.Messages;
@@ -30,13 +31,14 @@ namespace Clubs.Application.Business
         private readonly IMapper _Mapper;
         private readonly IMessagePublisher _MessagePublisher;
         private readonly ClubsContext _DbContext;
+        private readonly MatchCreationFactory _MatchCreateFactory;
 
         public MatchManager(ILogger<MatchManager> logger, IMediator mediator,
             IMapper mapper,
             IMessagePublisher messagePublisher,
             ClubsContext context)
         {
-            _Logger = logger;
+            _Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _Mediator = mediator;
             _Mapper = mapper;
             _MessagePublisher = messagePublisher;
@@ -51,6 +53,7 @@ namespace Clubs.Application.Business
         public async Task<Guid?> CreateMatch(CreateMatchDTO match)
         {
             _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
+            var generator = _MatchCreateFactory.GetBaseMatchCreator();
 
             var mappedMatch = _Mapper.Map<Match>(match);
             //Now execute the save process!
@@ -63,7 +66,7 @@ namespace Clubs.Application.Business
         /// Support the creation of a Match Record and trigger the invitation for all club members
         /// </summary>
         /// <param name="matchView"></param>
-        public async Task<Guid?> CreateMatchWithInvites(CreateMatchDTO matchView)
+        public async Task<Guid?> CreateMatchWithInvites(CreateInviteMatchDTO matchView)
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
@@ -73,13 +76,11 @@ namespace Clubs.Application.Business
             {
                 var match = _Mapper.Map<Match>(matchView);
                 //Step1. Check if invites are needed to be added/created
-                if (matchView.InviteActiveMembers)
-                {
-                    await GetAllMembersAndAddToInvites(match);
-                }
-                //StepX. Check if we need to email and then message it!
                 if (matchView.SendInvites)
                 {
+                    if (!matchView.SelectedMembers.Any())
+                        await GetAllMembersAndAddToInvites(match);
+
                     //Now we need to send the invites then!
                     await CreateInvitationRequestAndPublish(match.Invites.ToList(), matchView.Date);
                     match.InvitesSent = true;

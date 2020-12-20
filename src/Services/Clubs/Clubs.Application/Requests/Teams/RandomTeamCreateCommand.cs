@@ -1,36 +1,31 @@
-using Clubs.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Linq;
-using MediatR;
-using System;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Clubs.Infrastructure;
-using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Business;
+using MediatR;
 
 namespace Clubs.Application.Requests.Club.Commands
 {
     //Following this concept: https://github.com/jasontaylordev/CleanArchitecture/blob/a731538e35d5ff21cd2ba937bef60a41993970dd/src/Application/TodoLists/Queries/GetTodos/GetTodosQuery.cs
 
-    public class RandomTeamCreateCommand : IRequest<Guid>
+    public class RandomTeamCreateCommand : IRequest<bool>
     {
-        public CreateTeamDTO Team { get; set; }
+        //public CreateTeamDTO Team { get; set; }
+        public Guid MatchId { get; set; }
     }
 
-    public class RandomTeamCreateCommandHandler : IRequestHandler<CreateTeamCommand, Guid>
+    public class RandomTeamCreateCommandHandler : IRequestHandler<RandomTeamCreateCommand, bool>
     {
         private readonly GenerationService _GenerationService;
-        public RandomTeamCreateCommandHandler()
+        public RandomTeamCreateCommandHandler(GenerationService genService)
         {
+            _GenerationService = genService;
         }
 
-        public async Task<Guid> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(RandomTeamCreateCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return await _GenerationService.ExecuteTeamGenerationForMatchAndUpdate(request.MatchId
+                                                            , Domain.Enums.GeneratorType.Random);
         }
     }
 }

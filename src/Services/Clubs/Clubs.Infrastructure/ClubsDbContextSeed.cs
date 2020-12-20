@@ -30,13 +30,13 @@ namespace Clubs.Infrastructure.Persistence
                 Members.Add(Sean2);
                 var SeanWork = new Member() { FirstName = "Sean", LastName = "Rdx", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 99.9 };
                 Members.Add(SeanWork);
-                var Francy = new Member() { FirstName = "Francy", LastName = "Donald", Email = "francy.donald@randox.com", Club = RandoxIT, Rating = 85 };
+                var Francy = new Member() { FirstName = "Francy", LastName = "Donald", Email = "francis.donald@randox.com", Club = RandoxIT, Rating = 85 };
                 Members.Add(Francy);
-                var Andy = new Member() { FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72 };
+                var Andy = new Member() { FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72.1 };
                 Members.Add(Andy);
                 var Ross = new Member() { FirstName = "Ross", LastName = "Bratton", Email = "ross.bratton@randox.com", Club = RandoxIT, Rating = 65 };
                 Members.Add(Ross);
-                var Conor = new Member() { FirstName = "Conor", LastName = "Devlin", Email = "conor@randox.com", Club = RandoxIT, Rating = 65 };
+                var Conor = new Member() { FirstName = "Conor", LastName = "Devlin", Email = "conor.devlin@randox.com", Club = RandoxIT, Rating = 65 };
                 Members.Add(Conor);
                 var David = new Member() { FirstName = "David", LastName = "McCrory", Email = "david@randox.com", Club = RandoxIT, Rating = 70 };
                 Members.Add(David);
@@ -116,25 +116,7 @@ namespace Clubs.Infrastructure.Persistence
             }
         }
 
-        /// <summary>
-        /// https://github.com/dotnet-architecture/eShopOnContainers/blob/43fe719e98bb7e004c697d5724a975f5ecb2191b/src/Services/Identity/Identity.API/Data/ApplicationDbContextSeed.cs
-        /// </summary>
-        /// <param name="context"></param>
-        /// <param name="env"></param>
-        /// <returns></returns>
-        // public async static Task SeedAsyncFromFile(ClubsContext context, IWebHostEnvironment env)
-        // {
-        //     try
-        //     {
-
-        //     }
-        //     catch (Exception ex)
-        //     {
-
-        //     }
-        // }
-
-        #region Members
+        #region Private Methods
 
         private static void CreateMemberList(Club club)
         {
