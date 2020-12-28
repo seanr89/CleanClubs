@@ -24,7 +24,7 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// ASYNC : Query all match records
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A Collection of a match list records</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<MatchListDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -40,7 +40,7 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// Query a single, detailed, match record by its Id
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Specific/Unique Id to query details</param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetMatchById")]
         [ProducesResponseType(typeof(MatchDTO), StatusCodes.Status200OK)]
@@ -106,7 +106,7 @@ namespace Clubs.API.Controllers
 
         /// <summary>
         /// Manual Match Generation - teams should already be created
-        /// NO INVITES
+        /// NO INVITES CREATED
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>

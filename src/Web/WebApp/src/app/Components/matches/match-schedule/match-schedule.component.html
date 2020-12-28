@@ -41,6 +41,8 @@
                   </mat-form-field>
                   <mat-label>Send Invites</mat-label>
                   <mat-checkbox class="example-margin" [(ngModel)]="checked">Yes</mat-checkbox>
+                  <mat-label>Auto Invite</mat-label>
+                  <mat-checkbox class="example-margin" [(ngModel)]="autoInvite">Yes</mat-checkbox>
               </div>
               <div>
                   <!-- <button mat-raised-button color="primary" (click)="combineDateAndTime()">Date Merge</button> -->
@@ -68,15 +70,8 @@
           <div>
               <!-- Button controls -->
               <section fxLayout="row wrap" class="sectionContent">
-  
                   <button mat-raised-button color="primary" (click)="onSaveMatchClick()"> Save Match </button>
               </section>
           </div>
       </mat-step>
   </mat-horizontal-stepper>
-  
-  
-  
-  
-  
-  

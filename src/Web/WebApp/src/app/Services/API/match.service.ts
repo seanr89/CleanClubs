@@ -3,6 +3,7 @@ import { ApiService } from '../api.service';
 import { HttpResponse } from '@angular/common/http';
 import { Match } from 'src/app/Models/interfaces/match/match';
 import { MatchDetailsUpdateModel } from 'src/app/Models/interfaces/match/matchdetailsupdatemodel';
+import { ScheduleMatchModel } from 'src/app/Models/interfaces/match/schedulematchmodel';
 
 @Injectable({
     providedIn: 'root',
@@ -46,13 +47,13 @@ export class MatchService {
         return this.apiService.post<Match>(`${this.api_url_tag}/CreateMatch`, match);
     }
 
-    ScheduleMatch(match: Match): Promise<HttpResponse<Match>> {
+    ScheduleMatch(match: ScheduleMatchModel): Promise<HttpResponse<Match>> {
       return this.apiService.post<Match>(`${this.api_url_tag}/CreateMatchWithInvites`, match);
     }
 
     /**
      * TODO: not yet currently enabled/processing!
-     * @param match 
+     * @param match
      */
     UpdateScheduledMatchDetails(match: MatchDetailsUpdateModel){
         return this.apiService.put<MatchDetailsUpdateModel>(`${this.api_url_tag}/UpdateMatchDetails/${match.id}`, match);

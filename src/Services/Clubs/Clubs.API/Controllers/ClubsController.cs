@@ -90,9 +90,5 @@ namespace Clubs.API.Controllers
         }
 
         #endregion
-
-        #region PUT/UPDATE
-
-        #endregion
     }
 }

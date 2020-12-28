@@ -19,7 +19,6 @@ namespace Clubs.Infrastructure.Persistence
 
         private async static Task SeedClubsAndMembers(ClubsContext context)
         {
-
             if (!context.Clubs.Any())
             {
                 var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };

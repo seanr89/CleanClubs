@@ -26,7 +26,7 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// Query all Users
         /// </summary>
-        /// <returns>Collection of TODO records</returns>
+        /// <returns>Collection of all User records</returns>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -43,7 +43,7 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Query a single User by the stored User Id
         /// </summary>
         /// <param name="id">unique Guid for a user</param>
         /// <returns>A single user record</returns>

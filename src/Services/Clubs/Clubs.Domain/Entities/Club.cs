@@ -68,6 +68,11 @@ namespace Clubs.Domain.Entities
 
         #region Public Setters
 
+        /// <summary>
+        /// Provides addition of member to the club member list
+        /// BUT DOES NOT SAVE!
+        /// </summary>
+        /// <param name="member"></param>
         public void AddMember(Member member)
         {
             if (member == null)

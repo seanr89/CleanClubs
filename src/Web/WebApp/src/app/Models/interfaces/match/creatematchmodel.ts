@@ -1,5 +1,5 @@
-import { MatchStatus } from '../enums/matchstatus.enum';
-import { Invite } from '../invite/invite';
+
+import { MatchStatus } from '../../enums/matchstatus.enum';
 import { Team } from '../team/team';
 
 export interface CreateMatchModel {

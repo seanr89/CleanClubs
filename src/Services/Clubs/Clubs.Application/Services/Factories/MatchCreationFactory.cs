@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Clubs.Application.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 
@@ -10,21 +11,35 @@ namespace Clubs.Application.Services.Factories
     {
         private readonly ILogger _Logger;
         private readonly IEnumerable<IMatchCreator> _Creators;
-        
         public MatchCreationFactory(IEnumerable<IMatchCreator> availableCreators)
         {
             _Creators = availableCreators;
         }
 
-
-        public IMatchCreator GetMatchCreator()
+        public IMatchCreator GetInvitationMatchCreator()
         {
-            throw new NotImplementedException();
+            var item = GetMatchCreatorByType(typeof(InvitationMatchCreator));
+            return this._Creators.ToList()[1];
         }
 
         public IMatchCreator GetBaseMatchCreator()
         {
-            throw new NotImplementedException();
+            var item = GetMatchCreatorByType(typeof(SimpleMatchCreator));
+            return this._Creators.ToList()[0];
+        }
+
+        /// <summary>
+        /// Test method to attempt to query records based on an object type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        IMatchCreator GetMatchCreatorByType(object type)
+        {
+            List<IMatchCreator> records = _Creators.ToList();
+
+            var item = records.Find(i => i.GetType() == type.GetType());
+
+            return item;
         }
     }
 }

@@ -55,9 +55,11 @@ namespace Clubs.Application.Business
             _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
             var generator = _MatchCreateFactory.GetBaseMatchCreator();
 
-            var mappedMatch = _Mapper.Map<Match>(match);
-            //Now execute the save process!
-            var newId = await this.SaveNewMatch(mappedMatch);
+            var newId = await generator.Create(match);
+
+            // var mappedMatch = _Mapper.Map<Match>(match);
+            // //Now execute the save process!
+            // var newId = await this.SaveNewMatch(mappedMatch);
             return newId;
         }
 
@@ -70,7 +72,11 @@ namespace Clubs.Application.Business
         {
             _Logger.LogInformation($"MatchManager method: {HelperMethods.GetCallerMemberName()}");
 
-            Guid? matchId = null;
+            //Guid? matchId = null;
+            var generator = _MatchCreateFactory.GetInvitationMatchCreator();
+
+            var matchId = await generator.Create(matchView);
+            /*
             //TODO: remove this execution monitoring!
             using (ExecutionPerformanceMonitor monitor = new ExecutionPerformanceMonitor(_Logger, "MatchManager"))
             {
@@ -91,6 +97,7 @@ namespace Clubs.Application.Business
                 //Not awaited to speed up performance i hope!
                 monitor.CreatePerformanceMetricAndLogEvent("CreateMatch");
             }
+            */
             return matchId;
         }
 

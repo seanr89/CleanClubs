@@ -3,7 +3,7 @@ using System;
 
 namespace Clubs.Infrastructure
 {
-     public class RandomNameGenerator
+    public class RandomNameGenerator
     {
         string[] _lastName = new string[] { "Anderson", "Ashwoon", "Aikin", "Bateman", "Bongard", "Bowers", "Boyd", "Cannon", "Cast", "Deitz", "Dewalt", "Ebner", "Frick", "Hancock", "Haworth", "Hesch", "Hoffman", "Kassing", "Knutson", "Lawless", "Lawicki",
         "Mccord", "McCormack", "Miller", "Myers", "Nugent", "Ortiz", "Orwig", "Ory", "Paiser", "Pettigrew", "Quinn", "Quizoz", "Ramachandran", "Resnick", "Sagar", "Schickowski", "Schiebel", "Sellon", "Severson", "Shaffer", "Solberg", "Soloman", "Sonderling",
@@ -13,7 +13,7 @@ namespace Clubs.Infrastructure
            "Martin", "McGinnis", "Mills", "Moody", "Moore", "Napier", "Nelson", "Norquist", "Nuttle", "Olson", "Ostrander", "Reardon", "Reyes", "Rice", "Ripka", "Roberts", "Rogers", "Root", "Sandstrom", "Sawyer", "Schmitt", "Schutz", "Schuster", "Tapia", "Thompson", "Tiernan", "Tisler" };
         string[] _firstnames = new string[] {"Aaran", "Aaron", "Aarron", "Abraham", "Abu", "Adam", "Adrian",
                 "Alastair", "Albert", "Albie", "Alex", "Alexander", "Alfred", "Alistair", "Alistar", "Alister", "Allesandro", "Allister", "Ally", "Andrei", "Andrew", "Andy", "Anthony", "Anthony-John", "Antoine",
-                "Aodhan", "Aonghus", "Arann", "Archibald", "Archie", "Arnold", "Arthur", "Artur", "Arya", "Ashtyn", "Ashwin", "Aslam", "Asrar", "Austin", 
+                "Aodhan", "Aonghus", "Arann", "Archibald", "Archie", "Arnold", "Arthur", "Artur", "Arya", "Ashtyn", "Ashwin", "Aslam", "Asrar", "Austin",
                 "Bailey", "Bailie", "Benedict", "Benjamin", "Benjamyn", "Benji", "Bennett", "Benny", "Bernard", "Bertie", "Bevin", "Bill", "Billy","Blaine", "Blair", "Blake", "Bob", "Bobby", "Brad", "Bradan", "Braden", "Bradley",
                  "Brady", "Bradyn", "Braeden", "Braiden", "Brajan", "Brandan", "Branden", "Brandon", "Brannan", "Brayden", "Braydon","Brendan", "Brendon", "Brett", "Brian", "Brodi", "Brody",
                  "Brogan", "Broghan", "Brooke", "Brooklyn", "Bruce", "Bruin", "Bruno", "Bryan", "Bryce", "Cahlum", "Cailin",
@@ -47,22 +47,30 @@ namespace Clubs.Infrastructure
                   "Lennon", "Lennox", "Lenny", "Leno", "Lenon", "Leo", "Leon", "Leonard", "Leroy", "Leven", "Levi", "Levy", "Lewis", "Lex", "Leydon", "Leyland", "Leylann", "Leyton", "Liam", "Lincoln", "Lincoln-John", "Lincon", "Linden", "Linton", "Lionel", "Lloyd", "Lloyde", "Loche", "Lochlan", "Lochlann", "Logan", "Loudon", "Loui", "Louie", "Louis", "Loukas", "Lovell", "Luc", "Luca", "Lucais", "Lucas", "Lucca", "Lucian", "Luciano", "Luis", "Luka", "Lukas", "Luke", "Mac", "Macallum", "Macaulay", "Mack", "Mackenzie", "Maddison", "Maddox", "Madison", "Magnus", "Malachy", "Malcolm", "Marcel",
                   "Markus", "Marley", "Marlin", "Marlon", "Maros", "Marshall", "Martin", "Marty", "Martyn", "Marvellous", "Marvin", "Mason", "Mason-Jay", "Mathew", "Mathias", "Mathuyan", "Matt", "Matteo", "Matthew", "Matthias", "Max", "Micah", "Michael", "Mickey", "Miguel", "Miles", "Mitch", "Mitchel", "Mitchell", "Moad", "Moayd", "Morris", "Murray", "Nader", "Nate", "Nathan", "Neil", "Nelson", "Nial", "Niall", "Nicholas", "Nick", "Nicolas",
                   "Odhran", "Odin", "Odynn", "Ogheneochuko", "Ogheneruno", "Ohran", "Oilibhear", "Oisin", "Olaf", "Ola-Oluwa", "Ole", "Olie", "Oliver", "Olivier", "Ollie", "Oran", "Orin", "Orlando", "Orley", "Orran",
-                  "Orrick", "Orrin", "Orson", "Oryn", "Oscar", "Oswald", "Owen", "Owyn", "Oz", "Ozzy", "Pablo", "Pacey", "Padraig", "Paolo", "Pardeepraj", "Parkash", "Parker", "Patrick", "Patrick-John", "Paul", "Pavit", "Pawel", "Pawlo", "Pearce", "Pearse", 
+                  "Orrick", "Orrin", "Orson", "Oryn", "Oscar", "Oswald", "Owen", "Owyn", "Oz", "Ozzy", "Pablo", "Pacey", "Padraig", "Paolo", "Pardeepraj", "Parkash", "Parker", "Patrick", "Patrick-John", "Paul", "Pavit", "Pawel", "Pawlo", "Pearce", "Pearse",
                   "Pele", "Peter", "Phani", "Philip", "Pierce", "Porter", "Preston", "Quinn", "Rafael", "Ralph", "Raphael", "Ray", "Raymond", "Rayne", "Reace", "Reagan", "Reece", "Reed", "Reegan", "Reese", "Reeve", "Regan", "Regean", "Reggie", "Rehaan","Reice", "Reid", "Reigan", "Reilly", "Remy", "Riccardo", "Ricco", "Rice", "Richard", "Richey", "Richie", "Ricky", "Rico", "Ridley", "Rikki", "Riley", "Rob", "Robbi", "Robbie", "Robby", "Robert", "Robin", "Roddy", "Roderick", "Rodrigo", "Rogan", "Roger", "Ronan", "Ronin", "Ronnie", "Rory", "Roshan", "Ross", "Ruari", "Ruaridh", "Rubin",
                   "Ryden", "Ryder", "Ryese", "Ryhs", "Rylan", "Ryleigh", "Ryley", "Rylie", "Ryo", "Ryszard", "Saad", "Sabeen", "Sachkirat", "Saffi", "Salvador", "Sam", "Samual", "Samuel",
                   "Samuela", "Samy", "Sanaullah", "Sandro", "Sandy", "Sanfur", "Sanjay", "Santiago", "Santino", "Satveer", "Saul", "Saunders", "Savin", "Sayad", "Sayeed", "Sayf", "Scot", "Scott", "Scott-Alexander", "Seaan", "Seamas", "Seamus", "Sean", "Seane", "Sean-James", "Sean-Paul", "Sean-Ray", "Seb", "Sebastian", "Sebastien",
                   "Sergei", "Sergio", "Seth", "Sethu", "Seumas", "Shaarvin", "Shadow", "Shae", "Shahmir", "Shai", "Shane", "Shannon", "Sharland", "Sharoz", "Shaun", "Shaunpaul", "Shaun-Paul", "Shaun-Thomas", "Shaurya", "Shaw",
                   "Shawn", "Shea", "Simon", "Stefan", "Stephen", "Stephenjunior", "Steve", "Steven", "Steven-lee", "Stevie", "Stewart", "Stuart", "Surien", "Sweyn", "Syed", "Symon", "Tadhg", "Taegan", "Taegen",  "Tanay", "Tane", "Tanner", "Tanvir", "Tanzeel", "Taonga", "Taylor", "Teagan", "Tee", "Teejay", "Tee-jay", "Tegan", "Teighen", "Terry", "Teydren", "Theo", "Theodore", "Thomas", "Tiernan", "Timothy", "Tom", "Tomas", "Tomasz", "Tommy", "Tony",
-                   "Victor", "Victory", "Vince", "Vincent", "Vincenzo", "Vinnie", "Vladimir", 
-                   "Warren", "Warrick", "Wayde", "Wayne", "Will", "William", "Wilson", "Windsor", "Wojciech", "Wyatt", "Wylie", "Wynn", 
+                   "Victor", "Victory", "Vince", "Vincent", "Vincenzo", "Vinnie", "Vladimir",
+                   "Warren", "Warrick", "Wayde", "Wayne", "Will", "William", "Wilson", "Windsor", "Wojciech", "Wyatt", "Wylie", "Wynn",
                    "Xander", "Xavier", "Yanick", "Zach", "Zachariah", "Zacharias", "Zacharie", "Zacharius", "Zachariya", "Zachary", "Zack", "Zackary", "Zane"};
 
+        /// <summary>
+        /// Create a name based on a random first and last name
+        /// </summary>
+        /// <returns></returns>
         public string GenerateRandomName()
         {
             string combinedName = $"{getRandomFirstName()} {getRandomLastName()}";
             return combinedName;
         }
 
+        /// <summary>
+        /// Create a random number based between 0 and 2
+        /// </summary>
+        /// <returns></returns>
         public bool GenerateRandomPrivate()
         {
             Random rng = new Random();
@@ -90,6 +98,12 @@ namespace Clubs.Infrastructure
             return _lastName[index];
         }
 
+        /// <summary>
+        /// Simple random number generator between 1 and 100
+        /// </summary>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns></returns>
         public int GenerateRandomNumber(int min = 1, int max = 100)
         {
             Random random = new Random(); return random.Next(min, max);

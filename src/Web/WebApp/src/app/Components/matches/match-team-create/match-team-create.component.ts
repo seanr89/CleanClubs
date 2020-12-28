@@ -143,7 +143,7 @@ export class MatchTeamCreateComponent implements OnInit {
         this.matchService.CreateMatchWithTeams(this.matchDetails).then((resp: HttpResponse<Match>) => {
             //Also need to check if this is a 200 or 201 returned!
             if (resp.status === 200) {
-                this.notifications.success('Club Created', true);
+                this.notifications.success('Match Created', true);
                 //we may want to re-direct here!
             }
             else {
