@@ -4,11 +4,11 @@ on:
   push:
     branches: [master]
     paths:
-      - "src/Services/Clubs/**"
+      - 'src/Services/Clubs/**'
   pull_request:
     branches: [master]
     paths:
-      - "src/Services/Clubs/**"
+      - 'src/Services/Clubs/**'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.x
+          dotnet-version: 5.0.x
 
       # dotnet build and publish
       - name: Build with dotnet
@@ -29,9 +29,9 @@ jobs:
         working-directory: ./src/Services/Clubs/Clubs.API
         run: |
           dotnet publish -o dotnetcorewebapp
-      - name: "Run Azure webapp deploy action using publish profile credentials"
+      - name: 'Run Azure webapp deploy action using publish profile credentials'
         uses: azure/webapps-deploy@v2
         with:
           app-name: DevClubsAPI # Replace with your app name
           publish-profile: ${{secrets.publish_profile}}
-          package: "./src/Services/Clubs/Clubs.API/dotnetcorewebapp"
+          package: './src/Services/Clubs/Clubs.API/dotnetcorewebapp'
