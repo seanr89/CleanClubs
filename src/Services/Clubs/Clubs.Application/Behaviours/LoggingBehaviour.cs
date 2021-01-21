@@ -22,8 +22,8 @@ namespace Clubs.Application.Behaviours
             var log = _logger.CreateLogger<TRequest>();
             log.LogInformation($"Handling {typeof(TRequest).Name}");
             var response = await next();
-            log.LogInformation($"Handled {typeof(TResponse).Name}");
-
+            //Probably not required!
+            //log.LogInformation($"Handled {typeof(TResponse).Name}");
         return response;
         }
     }

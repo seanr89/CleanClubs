@@ -9,37 +9,60 @@ namespace Clubs.Application.Services.Factories
 {
     public class MatchCreationFactory
     {
-        private readonly ILogger _Logger;
         private readonly IEnumerable<IMatchCreator> _Creators;
         public MatchCreationFactory(IEnumerable<IMatchCreator> availableCreators)
         {
             _Creators = availableCreators;
         }
 
+        #region Public Accessors
+
+        /// <summary>
+        /// Returh a match creator that supports invitation creation etc
+        /// </summary>
+        /// <returns>IMatchCreator</returns>
         public IMatchCreator GetInvitationMatchCreator()
         {
-            var item = GetMatchCreatorByType(typeof(InvitationMatchCreator));
-            return this._Creators.ToList()[1];
-        }
-
-        public IMatchCreator GetBaseMatchCreator()
-        {
-            var item = GetMatchCreatorByType(typeof(SimpleMatchCreator));
-            return this._Creators.ToList()[0];
+            return GetMatchCreatorByType(typeof(InvitationMatchCreator));
         }
 
         /// <summary>
-        /// Test method to attempt to query records based on an object type
+        /// Query the default/simple match creator
+        /// No invitations or alerts are producted through this!
         /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        IMatchCreator GetMatchCreatorByType(object type)
+        /// <returns>IMatchCreator</returns>
+        public IMatchCreator GetBaseMatchCreator()
         {
-            List<IMatchCreator> records = _Creators.ToList();
+            return GetMatchCreatorByType(typeof(SimpleMatchCreator));
+        }
+        
+        /// <summary>
+        /// Base operation to attempt to query for a match creator by a provided type
+        /// </summary>
+        /// <param name="type">Object Type</param>
+        /// <returns>IMatchCreator</returns>
+        public IMatchCreator TryFindMatchCreatorByType(Type type)
+        {
+            IMatchCreator res = GetMatchCreatorByType(type);
+            return res;
+        }
 
-            var item = records.Find(i => i.GetType() == type.GetType());
+        #endregion
 
-            return item;
+        /// <summary>
+        /// Query records based on an object type
+        /// </summary>
+        /// <param name="type">Type paramter of expected class!</param>
+        /// <returns>IMatchCreator or null</returns>
+        IMatchCreator GetMatchCreatorByType(Type type)
+        {
+            try{  
+                List<IMatchCreator> records = _Creators.ToList();
+                return records.FirstOrDefault(i => i.GetType() == type);
+            }
+            catch{
+                return null;
+            }
         }
     }
 }

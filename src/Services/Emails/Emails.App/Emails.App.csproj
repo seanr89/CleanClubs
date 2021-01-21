@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SendGrid" Version="9.19.0"/>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.7"/>
-    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="4.1.4"/>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="5.0.0"/>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.7"/>
   </ItemGroup>
   <ItemGroup>
     <!-- <ProjectReference Include="../../Clubs/Clubs.Domain/Clubs.Domain.csproj"/> -->
     <ProjectReference Include="../Emails.Domain/Emails.Domain.csproj"/>
-    <!-- <ProjectReference Include="../../Utilities/Utilities.csproj"/> -->
+    <ProjectReference Include="../../Utilities/Utilities.csproj"/>
+    
   </ItemGroup>
 </Project>

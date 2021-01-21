@@ -20,8 +20,11 @@ namespace Clubs.Application.Services
         private readonly IMessagePublisher _MessagePublisher;
         protected IMediator _Mediator;
 
-        public InvitationMatchCreator(ILogger<IMatchCreator> logger, ClubsContext context, IMapper mapper) : base(logger, context, mapper)
+        public InvitationMatchCreator(ILogger<IMatchCreator> logger, ClubsContext context, IMapper mapper
+            , IMediator mediator, IMessagePublisher messagePublisher) : base(logger, context, mapper)
         {
+            _Mediator = mediator;
+            _MessagePublisher = messagePublisher;
         }
 
         /// <summary>
@@ -39,13 +42,16 @@ namespace Clubs.Application.Services
             {
                 if (!castMatch.SelectedMembers.Any())
                     await GetAllMembersAndAddToInvites(mappedMapped);
+            }
+            //StepX. Save the match! (N.B. here we might want to return the object!)
+            matchId = await this.SaveNewMatch(mappedMapped);
 
+            if(matchId != null)
+            {
                 //Now we need to send the invites then!
                 await CreateInvitationRequestAndPublish(mappedMapped.Invites.ToList(), castMatch.Date);
                 mappedMapped.InvitesSent = true;
             }
-            //StepX. Save the match! (N.B. here we might want to return the object!)
-            matchId = await this.SaveNewMatch(mappedMapped);
 
             return matchId;
         }
@@ -60,25 +66,39 @@ namespace Clubs.Application.Services
         /// <returns></returns>
         private async Task CreateInvitationRequestAndPublish(List<Invite> invites, DateTime date)
         {
-            foreach (var inv in invites)
+            try
             {
-                var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = date };
-                await _MessagePublisher.Publish<InvitationRequest>(contract);
+                foreach (var inv in invites)
+                {
+                    var contract = new InvitationRequest() { Id = inv.Id, Email = inv.Email, Date = date };
+                    await _MessagePublisher.Publish<InvitationRequest>(contract);
+                }
+                return;
+            }
+            catch(System.InvalidOperationException e)
+            {
+                _Logger.LogError($"Exception Caught: {e.Message}");
             }
         }
 
         /// <summary>
         /// Get all active members of a club and create an invite event!
         /// </summary>
-        /// <param name="match"></param>
-        /// <returns></returns>
+        /// <param name="match">The match to update</param>
         private async Task GetAllMembersAndAddToInvites(Match match)
         {
             var members = await _Mediator.Send(new GetClubMembersQuery() { ClubId = (Guid)match.ClubId });
+
+            if(members.Any() == false)
+                return;
+
             //Get only active members as no point sending to others!
             var activeMembers = members.Where(m => m.Active == true).ToList();
 
-            //Convert members to invites!
+            if(activeMembers.Any() == false)
+                return;
+
+            //Convert members to invites and map to match invites
             foreach (var a in activeMembers)
             {
                 //create a new object for each invite

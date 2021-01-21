@@ -64,15 +64,15 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="id">unique Guid for a user</param>
+        /// <param name="objectId">unique Guid for a user</param>
         /// <returns>A single user record</returns>
-        [HttpGet("{id}", Name = "GetUserByObjectId")]
+        [HttpGet("{objectId}", Name = "GetUserByObjectId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetUserByObjectId(string id)
+        public async Task<IActionResult> GetUserByObjectId(string objectId)
         {
             _Logger.LogInformation($"User: {HelperMethods.GetCallerMemberName()}");
-            var result = await Mediator.Send(new GetUserByObjectQuery() { ObjectId = id });
+            var result = await Mediator.Send(new GetUserByObjectQuery() { ObjectId = objectId });
 
             if (result != null)
                 return Ok(result);
@@ -98,8 +98,8 @@ namespace Clubs.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var record = await Mediator.Send(new CreateUserCommand() { User = user });
-            if (record != null)
+            Guid record = await Mediator.Send(new CreateUserCommand() { User = user });
+            if (record != Guid.Empty)
                 return CreatedAtRoute("GetUserById", new { id = record }, user);
 
             return BadRequest("Save failed");

@@ -1,9 +1,7 @@
-
-
 using System.Threading.Tasks;
 using Clubs.Application.Profiles.DTO;
 
-namespace Clubs.Application.Business
+namespace Clubs.Application.Services.Interfaces
 {
     public interface ITeamGenerator
     {

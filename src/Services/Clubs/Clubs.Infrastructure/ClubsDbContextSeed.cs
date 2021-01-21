@@ -23,59 +23,59 @@ namespace Clubs.Infrastructure.Persistence
             {
                 var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };
                 var Members = new List<Member>();
-                var Sean = new Member() { FirstName = "Sean", LastName = "Rafferty", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 50.2 };
+                var Sean = new Member( "Sean", "Rafferty", "sean.rafferty@randox.com", 50.2){ Club = RandoxIT };
                 Members.Add(Sean);
-                var Sean2 = new Member() { FirstName = "Sean", LastName = "Personal", Email = "srafferty89@gmail.com", Club = RandoxIT, Rating = 45.1 };
+                var Sean2 = new Member( "Sean", "Personal", "srafferty89@gmail.com", 45.1){ Club = RandoxIT };
                 Members.Add(Sean2);
-                var SeanWork = new Member() { FirstName = "Sean", LastName = "Rdx", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 99.9 };
+                var SeanWork = new Member( "Sean", "Rdx", "sean.rafferty@randox.com", 99.9 ){ Club = RandoxIT };
                 Members.Add(SeanWork);
-                var Francy = new Member() { FirstName = "Francy", LastName = "Donald", Email = "francis.donald@randox.com", Club = RandoxIT, Rating = 85 };
+                var Francy = new Member( "Francy", "Donald", "francis.donald@randox.com", 85){ Club = RandoxIT };
                 Members.Add(Francy);
-                var Andy = new Member() { FirstName = "Andy", LastName = "Williamson", Email = "andy@randox.com", Club = RandoxIT, Rating = 72.1 };
+                var Andy = new Member( "Andy", "Williamson", "andy@randox.com", 72.1 ){ Club = RandoxIT };
                 Members.Add(Andy);
-                var Ross = new Member() { FirstName = "Ross", LastName = "Bratton", Email = "ross.bratton@randox.com", Club = RandoxIT, Rating = 65 };
+                var Ross = new Member(  "Ross", "Bratton", "ross.bratton@randox.com", 65){ Club = RandoxIT };
                 Members.Add(Ross);
-                var Conor = new Member() { FirstName = "Conor", LastName = "Devlin", Email = "conor.devlin@randox.com", Club = RandoxIT, Rating = 65 };
+                var Conor = new Member(  "Conor", "Devlin", "conor.devlin@randox.com", 65) { Club = RandoxIT };
                 Members.Add(Conor);
-                var David = new Member() { FirstName = "David", LastName = "McCrory", Email = "david@randox.com", Club = RandoxIT, Rating = 70 };
+                var David = new Member(  "David", "McCrory", "david@randox.com", 70 ){ Club = RandoxIT };
                 Members.Add(David);
-                var Steve = new Member() { FirstName = "Steve", LastName = "Kennedy", Email = "steve@randox.com", Club = RandoxIT, Rating = 70 };
+                var Steve = new Member(  "Steve", "Kennedy", "steve@randox.com", 70){ Club = RandoxIT };
                 Members.Add(Steve);
-                var Mike = new Member() { FirstName = "Mike", LastName = "Hayes", Email = "mike@randox.com", Club = RandoxIT, Rating = 78 };
+                var Mike = new Member( "Mike", "Hayes", "mike@randox.com", 78){ Club = RandoxIT };
                 Members.Add(Mike);
-                var Oran = new Member() { FirstName = "Oran", LastName = "McMenamin", Email = "Oran@randox.com", Club = RandoxIT, Rating = 70 };
+                var Oran = new Member( "Oran", "McMenamin", "Oran@randox.com", 70){ Club = RandoxIT };
                 Members.Add(Oran);
-                var Darren = new Member() { FirstName = "Darren", LastName = "Tweed", Email = "Darren@hotmail.com", Club = RandoxIT, Rating = 63 };
+                var Darren = new Member( "Darren", "Tweed", "Darren@hotmail.com", 63 ){ Club = RandoxIT };
                 Members.Add(Darren);
-                var Mark = new Member() { FirstName = "Mark", LastName = "Latten", Email = "mark@randox.com", Club = RandoxIT, Rating = 64 };
+                var Mark = new Member("Mark", "Latten", "mark@randox.com", 64){ Club = RandoxIT };
                 Members.Add(Mark);
-                var MarkTwo = new Member() { FirstName = "Mark", LastName = "Lutton", Email = "marklutton@randox.com", Club = RandoxIT, Rating = 64 };
+                var MarkTwo = new Member( "Mark", "Lutton", "marklutton@randox.com", 64){ Club = RandoxIT };
                 Members.Add(MarkTwo);
-                var Ivan = new Member() { FirstName = "Ivan", LastName = "Mc", Email = "ivan@randox.com", Club = RandoxIT, Rating = 68 };
+                var Ivan = new Member( "Ivan", "Mc", "ivan@randox.com", 68){ Club = RandoxIT };
                 Members.Add(Ivan);
-                var Kelso = new Member() { FirstName = "Steven", LastName = "Kelso", Email = "kelso@randox.com", Club = RandoxIT, Rating = 71 };
+                var Kelso = new Member( "Steven", "Kelso", "kelso@randox.com", 71){ Club = RandoxIT };
                 Members.Add(Kelso);
-                var Frazer = new Member() { FirstName = "Andrew", LastName = "Frazer", Email = "Frazer@randox.com", Club = RandoxIT, Rating = 72 };
+                var Frazer = new Member( "Andrew", "Frazer", "Frazer@randox.com", 72){ Club = RandoxIT };
                 Members.Add(Frazer);
-                var Cormac = new Member() { FirstName = "Cormac", LastName = "Byrne", Email = "Cormac@randox.com", Club = RandoxIT, Rating = 66 };
+                var Cormac = new Member( "Cormac", "Byrne", "Cormac@randox.com", 66){ Club = RandoxIT };
                 Members.Add(Cormac);
-                var JJ = new Member() { FirstName = "JJ", LastName = "Eng", Email = "JJ@randox.com", Club = RandoxIT, Rating = 61 };
+                var JJ = new Member("JJ", "Eng", "JJ@randox.com", 61){ Club = RandoxIT };
                 Members.Add(JJ);
-                var Dean = new Member() { FirstName = "Dean", LastName = "Mc", Email = "sean.rafferty@randox.com", Club = RandoxIT, Rating = 45.6, Active = false };
+                var Dean = new Member( "Dean", "Mc", "sean.rafferty@randox.com", 45.6){ Club = RandoxIT };
                 Members.Add(Dean);
-                var Ryan = new Member() { FirstName = "Ryan", LastName = "Gavin", Email = "ryang@randox.com", Club = RandoxIT, Rating = 86.1, Active = false };
+                var Ryan = new Member( "Ryan", "Gavin", "ryang@randox.com", 86.1){ Club = RandoxIT };
                 Members.Add(Ryan);
-                var Iniaki = new Member() { FirstName = "Iniaki", LastName = "McKearny", Email = "Iniaki@randox.com", Club = RandoxIT, Rating = 75.0, Active = false };
+                var Iniaki = new Member("Iniaki", "McKearny", "Iniaki@randox.com", 75.0){ Club = RandoxIT };
                 Members.Add(Iniaki);
-                var JamesD = new Member() { FirstName = "James", LastName = "Davidson", Email = "JamesD@randox.com", Club = RandoxIT, Rating = 59.0, Active = false };
+                var JamesD = new Member("James", "Davidson", "JamesD@randox.com", 59.0){ Club = RandoxIT};
                 Members.Add(JamesD);
-                var StuartG = new Member() { FirstName = "Stuart", LastName = "Gray", Email = "Stuartg@randox.com", Club = RandoxIT, Rating = 87.0, Active = false };
+                var StuartG = new Member( "Stuart", "Gray", "Stuartg@randox.com", 87.0){ Club = RandoxIT };
                 Members.Add(StuartG);
-                var William = new Member() { FirstName = "William", LastName = "Lawrence", Email = "William@randox.com", Club = RandoxIT, Rating = 79.0, Active = false };
+                var William = new Member( "William", "Lawrence", "William@randox.com", 79.0){ Club = RandoxIT };
                 Members.Add(William);
-                var Pierce = new Member() { FirstName = "Pierce", LastName = "Slaney", Email = "pierces@randox.com", Club = RandoxIT, Rating = 62.0, Active = false };
+                var Pierce = new Member("Pierce", "Slaney", "pierces@randox.com", 62.0){ Club = RandoxIT };
                 Members.Add(Pierce);
-                var Michael = new Member() { FirstName = "Michael", LastName = "Crampsey", Email = "mciahelc@randox.com", Club = RandoxIT, Rating = 50.0, Active = false };
+                var Michael = new Member("Michael", "Crampsey", "mciahelc@randox.com", 50.0){ Club = RandoxIT };
                 Members.Add(Michael);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
@@ -127,13 +127,9 @@ namespace Clubs.Infrastructure.Persistence
 
             for (int i = 0; i < randomNumber; ++i)
             {
-                club.Members.Add(new Member
+                club.Members.Add(new Member(gen.getRandomFirstName(), gen.getRandomLastName(), "Unknown",gen.GenerateRandomNumber())
                 {
-                    FirstName = gen.getRandomFirstName(),
-                    LastName = gen.getRandomLastName(),
-                    Rating = gen.GenerateRandomNumber(),
-                    Club = club,
-                    Email = "Unknown"
+                    Club = club
                 });
             }
         }

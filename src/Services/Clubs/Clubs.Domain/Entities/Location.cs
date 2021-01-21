@@ -64,8 +64,8 @@ namespace Clubs.Domain.Entities
             Name = name;
         }
 
-        public void ActivateLocation() => Active = true;
-        public void DeActivateLocation() => Active = false;
+        public void Activate() => Active = true;
+        public void DeActivate() => Active = false;
 
         #endregion
     }

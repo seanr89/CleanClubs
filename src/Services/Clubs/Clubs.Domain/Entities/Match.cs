@@ -26,5 +26,16 @@ namespace Clubs.Domain.Entities
         //public Guid LocationId { get; set; }
         //public Location Location { get; set; }
 
+
+        public Match()
+        {
+            
+        }
+
+
+        #region Public Setters
+
+
+        #endregion
     }
 }

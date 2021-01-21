@@ -6,9 +6,13 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
 using Emails.Domain;
+using Utilities;
 
 namespace Emails.App
 {
+    /// <summary>
+    /// Backround running service to support invitation creation for email support!
+    /// </summary>
     public class InvitationReceieverService : BackgroundService
     {
         private readonly ISubscriptionClient _SubscriptionClient;
@@ -25,9 +29,10 @@ namespace Emails.App
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //return Task.CompletedTask;
+            //Wite up message handler!
             _SubscriptionClient.RegisterMessageHandler((message, token) =>
             {
+                _Logger.LogInformation($"InviteReceiever: {HelperMethods.GetCallerMemberName()}");
                 var invite = JsonConvert.DeserializeObject<Invitation>(Encoding.UTF8.GetString(message.Body));
 
                 _EmailHandler.GenerateAndSendInviteEmail(invite);

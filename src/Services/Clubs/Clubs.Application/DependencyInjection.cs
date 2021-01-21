@@ -25,7 +25,7 @@ namespace Clubs.Application
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(DBUpdateExceptionBehaviour<,>));
@@ -42,8 +42,9 @@ namespace Clubs.Application
 
             services.AddTransient<IMatchCreator, SimpleMatchCreator>();
             services.AddTransient<IMatchCreator, InvitationMatchCreator>();
-
             services.AddTransient<MatchCreationFactory>();
+
+            services.AddTransient<IUserService, UserService>();
 
             return services;
         }

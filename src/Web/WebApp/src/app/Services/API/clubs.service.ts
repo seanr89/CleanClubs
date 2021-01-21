@@ -10,7 +10,6 @@ import { AuthApiService } from '../authapi.service';
 })
 export class ClubsService {
     public api_url_tag: string;
-
     constructor(private apiService: ApiService) {
         this.api_url_tag = '/clubs';
     }
@@ -33,8 +32,8 @@ export class ClubsService {
     }
 
     /**
-     * Process to support saving a new club
-     * @param club
+     * Create and save a new club to the API
+     * @param club : Club data model
      */
     CreateClub(club: CreateClubModel): Promise<HttpResponse<CreateClubModel>> {
         return this.apiService.post(

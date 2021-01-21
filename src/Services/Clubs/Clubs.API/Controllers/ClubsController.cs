@@ -82,8 +82,8 @@ namespace Clubs.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var record = await Mediator.Send(new CreateClubCommand() { Club = club });
-            if (record != null)
+            Guid record = await Mediator.Send(new CreateClubCommand() { Club = club });
+            if (record != Guid.Empty)
                 return CreatedAtRoute("GetClubById", new { id = record }, club);
 
             return BadRequest("Save failed");

@@ -172,11 +172,6 @@ namespace Clubs.API.Controllers
             }
 
         }
-
-        #endregion
-
-        #region Delete
-
         #endregion
     }
 }

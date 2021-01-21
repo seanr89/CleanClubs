@@ -40,9 +40,8 @@
                       <input matInput placeholder="Enter location" [(ngModel)]="matchDetails.location" formControlName="locationInput">
                   </mat-form-field>
                   <mat-label>Send Invites</mat-label>
-                  <mat-checkbox class="example-margin" [(ngModel)]="checked">Yes</mat-checkbox>
-                  <mat-label>Auto Invite</mat-label>
-                  <mat-checkbox class="example-margin" [(ngModel)]="autoInvite">Yes</mat-checkbox>
+                  <br/>
+                  <mat-checkbox class="example-margin" (change)="onChecked(checkbox.checked)" [(ngModel)]="checked" #checkbox formControlName="inviteInput">Yes</mat-checkbox>
               </div>
               <div>
                   <!-- <button mat-raised-button color="primary" (click)="combineDateAndTime()">Date Merge</button> -->
@@ -52,26 +51,17 @@
       </mat-step>
       <!--  -->
       <!--  -->
-      <mat-step [stepControl]="secondFormGroup" label="Pick your players">
+      <mat-step [stepControl]="secondFormGroup" label="Players and Submit">
         <div>
             <section fxLayout="row wrap" class="sectionContent">
                 <app-member-list [members]="club.members" [showSelector]="true" fxFlex="75%"></app-member-list>
             </section>
         </div>
-        <!-- <div>
+        <div>
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext color="primary" (click)="onGenerateClick()">Next</button>
-        </div> -->
+            <button mat-raised-button color="primary" (click)="onSaveMatchClick()"> Save Match </button>
+            <!-- <button mat-button matStepperNext color="primary">Next</button> -->
+        </div>
     </mat-step>
-      <!--  -->
-      <!--  -->
-      <mat-step label="Review">
-          <!-- Review and Confirm -->
-          <div>
-              <!-- Button controls -->
-              <section fxLayout="row wrap" class="sectionContent">
-                  <button mat-raised-button color="primary" (click)="onSaveMatchClick()"> Save Match </button>
-              </section>
-          </div>
-      </mat-step>
+
   </mat-horizontal-stepper>

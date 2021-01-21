@@ -5,6 +5,8 @@ using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Services.Interfaces;
 using Clubs.Domain.Entities;
 using Clubs.Infrastructure;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Utilities;
 
@@ -26,12 +28,9 @@ namespace Clubs.Application.Services
 
         public virtual async Task<Guid?> Create(object match)
         {
-            _Logger.LogInformation($"MatchManager: {HelperMethods.GetCallerMemberName()}");
-
-            var mappedMatch = _Mapper.Map<Match>(match);
+            _Logger.LogInformation($"BaseMatchCreator: {HelperMethods.GetCallerMemberName()}");
             //Now execute the save process!
-            var newId = await this.SaveNewMatch(mappedMatch);
-            return newId;
+            return await this.SaveNewMatch(_Mapper.Map<Match>(match));
         }
 
         #region Protected
@@ -43,9 +42,21 @@ namespace Clubs.Application.Services
         /// <returns>a new GUID parameter to denote the match!</returns>
         protected async Task<Guid?> SaveNewMatch(Match match)
         {
-            _DbContext.Matches.Add(match);
-            await _DbContext.SaveChangesAsync();
-            return match.Id;
+            try{
+                _DbContext.Matches.Add(match);
+                await _DbContext.SaveChangesAsync();
+                return match.Id;
+            }
+            catch(SqlException se)
+            {
+                _Logger.LogInformation($"{HelperMethods.GetCallerMemberName()} : Exception {se.Message}");
+                return null;
+            }
+            catch(DbUpdateException de)
+            {
+                _Logger.LogInformation($"{HelperMethods.GetCallerMemberName()} : Exception {de.Message}");
+                return null;
+            }
         }
 
         #endregion

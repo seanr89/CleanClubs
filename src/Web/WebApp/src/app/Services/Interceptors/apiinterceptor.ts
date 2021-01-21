@@ -31,7 +31,7 @@ export class APIInterceptor implements HttpInterceptor {
         //Handle all http responses that have been intercepted
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
-                console.error("Error from error interceptor", error);
+                //console.error("Error from error interceptor", error);
 
                 let errorMessage = 'intercept: ';
                 if (error.error instanceof ErrorEvent) {

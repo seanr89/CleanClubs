@@ -76,7 +76,6 @@ namespace Clubs.API.Controllers
 
             return StatusCode(204, "No Record Found");
         }
-
         #endregion
     }
 }

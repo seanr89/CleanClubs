@@ -5,6 +5,10 @@ namespace Clubs.Domain.Entities
 {
     public class User : AuditableEntity
     {
+        /// <summary>
+        /// Unique ID of a user recorded on the Db
+        /// </summary>
+        /// <value></value>
         public Guid Id { get; set; }
         /// <summary>
         /// External reference id from the authentication provider!
@@ -33,7 +37,7 @@ namespace Clubs.Domain.Entities
             LastLogin = lastLogin;
         }
 
-        #region Setter Methods
+        #region Public Setters
 
         public void Activate() => Active = true;
         public void DeActivate() => Active = false;

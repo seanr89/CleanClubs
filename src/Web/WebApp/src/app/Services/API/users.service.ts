@@ -10,7 +10,7 @@ export class UsersService {
     public api_url_tag: string;
 
     constructor(private apiService: ApiService) {
-        this.api_url_tag = '/users';
+        this.api_url_tag = '/user';
     }
 
     /**

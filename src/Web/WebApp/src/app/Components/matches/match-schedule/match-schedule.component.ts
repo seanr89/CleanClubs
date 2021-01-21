@@ -32,11 +32,11 @@ export class MatchScheduleComponent implements OnInit {
   //Stepper forms
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  //reviewFormGroup: FormGroup;
+
   selectedDate: Date;
   selectedTime: string;
 
-  checked : boolean = false;
+  checked = false;
   autoInvite : boolean = false;
 
   constructor(
@@ -49,9 +49,6 @@ export class MatchScheduleComponent implements OnInit {
 ) {
     this.dataService.updatePageTitle(this.pageName);
 
-}
-
-ngOnInit(): void {
     let id: string = this.activeRoute.snapshot.params['id'];
     this.clubService.GetClubById(id).then((res) => {
       if (res.status === 200) {
@@ -59,15 +56,24 @@ ngOnInit(): void {
 
         this.matchDetails = this.initialiseMatchDetails();
     }});
+
+}
+
+ngOnInit(): void {
+
     this.firstFormGroup = this._formBuilder.group({
       locationInput: ['', Validators.required],
       dateInput: ['', Validators.required],
       timeInput: ['', Validators.required],
-      invitesInput: [false, Validators.required]
+      inviteInput: ['', Validators.required]
     });
     this.secondFormGroup = this._formBuilder.group({
     });
   }
+
+  public onChecked(event: any) {
+    this.checked = event
+}
 
   /**
      * Handles the save process being triggered
@@ -77,6 +83,7 @@ ngOnInit(): void {
 
       //TODO: needs to be better handled!
       this.updateMatchDetailsForSaving();
+      debugger;
       //Support the saving attempt!
       this.matchService.ScheduleMatch(this.matchDetails).then((resp: HttpResponse<Match>) => {
           //Also need to check if this is a 200 or 201 returned!
@@ -92,6 +99,7 @@ ngOnInit(): void {
 
   updateMatchDetailsForSaving(){
     console.log('updateMatchDetailsForSaving');
+    debugger;
 
     this.matchDetails.date = this.combineDateAndTime();
     this.matchDetails.sendInvites = this.checked;
@@ -103,7 +111,7 @@ ngOnInit(): void {
   }
 
   initialiseMatchDetails() : ScheduleMatchModel{
-    console.log('initialiseMatchDetails');
+    //console.log('initialiseMatchDetails');
       let obj : ScheduleMatchModel = {
         status: MatchStatus.SCHEDULED,
         date: new Date(),

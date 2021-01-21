@@ -59,7 +59,7 @@ namespace Clubs.Infrastructure
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var httpContext = this.HttpContextAccessor.HttpContext;
-            string email = httpContext.User.FindFirstValue("Emails") ?? "";
+            string email = httpContext.User.FindFirstValue("Emails") ?? "Unknown";
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Emails.Api
 {
     [ApiController]
-    [Route("[controller]/")]
+    [Route("[controller]/action")]
     public class HomeController : ControllerBase
     {
         public HomeController()

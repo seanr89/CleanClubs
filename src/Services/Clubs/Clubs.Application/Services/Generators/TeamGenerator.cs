@@ -1,11 +1,10 @@
-
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Clubs.Application.Profiles.DTO;
-using Clubs.Domain.Enums;
 using Microsoft.Extensions.Logging;
+using Clubs.Application.Profiles.DTO;
+using Clubs.Application.Services.Interfaces;
+using Clubs.Domain.Enums;
 using Utilities;
 
 namespace Clubs.Application.Business

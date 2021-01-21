@@ -42,8 +42,15 @@ namespace Emails.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TelemetryConfiguration configuration)
         {
+            if (env.IsDevelopment())
+            {
+#if DEBUG
+                configuration.DisableTelemetry = true;
+#endif
+            }
+
             app.UseRouting();
             app.UseHealthEndpoint();
             app.UseEndpoints(endpoints =>

@@ -1,14 +1,19 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Clubs.Application.Business;
 using Clubs.Application.Requests.Matches.Commands;
 using Clubs.Application.Requests.Matches.Queries;
+using Clubs.Application.Services.Interfaces;
 using Clubs.Domain.Enums;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using Utilities;
 
-namespace Clubs.Application.Business
+namespace Clubs.Application.Services
 {
+    /// <summary>
+    /// Team Generation service, with support for initial player/invite randomisation
+    /// </summary>
     public class GenerationService
     {
         private readonly ILogger<GenerationService> _logger;
@@ -20,7 +25,7 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// 
+        /// Support the creation of teams and updating the databases
         /// </summary>
         /// <param name="matchId"></param>
         /// <param name="option"></param>
@@ -43,7 +48,7 @@ namespace Clubs.Application.Business
         }
 
         /// <summary>
-        /// 
+        /// Handle the selection of a specific team generator, defaulted to Random
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>

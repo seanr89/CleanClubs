@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Clubs.Application.Business;
+using Clubs.Application.Services;
 using MediatR;
 
 namespace Clubs.Application.Requests.Club.Commands
@@ -10,7 +10,6 @@ namespace Clubs.Application.Requests.Club.Commands
 
     public class RandomTeamCreateCommand : IRequest<bool>
     {
-        //public CreateTeamDTO Team { get; set; }
         public Guid MatchId { get; set; }
     }
 

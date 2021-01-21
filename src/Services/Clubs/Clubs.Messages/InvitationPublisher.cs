@@ -4,6 +4,7 @@ using Microsoft.Azure.ServiceBus;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Utilities;
+using System;
 
 namespace Clubs.Messages
 {
@@ -43,7 +44,7 @@ namespace Clubs.Messages
             }
             catch (JsonSerializationException e)
             {
-                _logger.LogError($"publish exception: {e.Message}");
+                _logger.LogError($"publish jsonexception: {e.Message}");
                 return null;
             }
         }
