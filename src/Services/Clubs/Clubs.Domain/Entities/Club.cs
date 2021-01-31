@@ -27,7 +27,7 @@ namespace Clubs.Domain.Entities
         /// User based Creator - TODO Included
         /// </summary>
         /// <value></value>
-        public User Founder { get; set; }
+        //public User Founder { get; set; }
 
         public ICollection<Member> Members { get; set; }
 

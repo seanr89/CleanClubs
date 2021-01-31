@@ -42,8 +42,7 @@ export class ClubListComponent implements OnInit {
         this.gridPageOptions = new GridPaginatorOption();
         this.gridPageOptions.pageSizeOptions = [10, 25, 100];
 
-        this.filterForm = this._formBuilder.group({
-        });
+        this.filterForm = this._formBuilder.group({});
     }
 
     ngOnInit(): void {
@@ -69,7 +68,7 @@ export class ClubListComponent implements OnInit {
         });
     }
 
-    //#region Grid Controls
+    //#region Grid Controls and Click Events
     public doFilter = (value: string) => {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
     };
@@ -83,15 +82,18 @@ export class ClubListComponent implements OnInit {
         this.router.navigate([url]);
     };
 
-    onRowDoubleClick(row)
-    {
+    onRowDoubleClick(row) {
         let url: string = `/clubs/details/${row.id}`;
         this.router.navigate([url]);
     }
 
     public addNew() {
-        //Opens the add dialog box
-        let club: CreateClubModel;
+        //Opens the add dialog box - with dummy data included
+        let club: CreateClubModel = {
+            name: '',
+            private: false,
+            creator: '',
+        };
         const dialogRef = this.dialog.open(ClubAddComponent, {
             data: club,
         });
@@ -99,15 +101,15 @@ export class ClubListComponent implements OnInit {
         //Handles the close of the dialog box
         dialogRef.afterClosed().subscribe((result: CreateClubModel) => {
             //If the save button is clicked then add test
-            if (result !== null) {
+            if (result != null) {
                 result.creator = this.authService.userData.email;
                 this.clubService
                     .CreateClub(result)
                     .then((resp: HttpResponse<CreateClubModel>) => {
                         //we may need to refresh the datasource!
-                        if (resp.status === 200) {
+                        if (resp.status === 201) {
                             this.notifications.success('Club Created', true);
-                            this.dataSource.data.push(resp.body as Club);
+                            this.populateTable();
                         } else {
                             this.notifications.error(
                                 'Failed to save club',
@@ -115,6 +117,8 @@ export class ClubListComponent implements OnInit {
                             );
                         }
                     });
+            } else {
+                //this has been closed!
             }
         });
     }

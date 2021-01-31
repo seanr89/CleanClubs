@@ -28,16 +28,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatchesModule } from './Components/matches/matches.module';
-import { MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatCardModule } from '@angular/material/card';
 import { httpInterceptorProviders } from './Services/Interceptors/Index';
 import { GlobalErrorHandler } from './Services/globalerrorhandler';
 import { LocationsModule } from './Components/locations/locations.module';
-import {MatMenuModule} from '@angular/material/menu';
-import { AuthService } from './Services/auth.service';
-
+import { MatMenuModule } from '@angular/material/menu';
+import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
     declarations: [
@@ -49,7 +47,7 @@ import { AuthService } from './Services/auth.service';
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),
-        NgxMaterialTimepickerModule.setLocale('en-GB'),
+        NgxMatDatetimePickerModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -78,15 +76,18 @@ import { AuthService } from './Services/auth.service';
         MatCardModule,
         MatMenuModule,
     ],
-    providers: [AuthGuard, SecureInnerPagesGuard, { 
-        // processes all errors
-        provide: ErrorHandler, 
-        useClass: GlobalErrorHandler 
-      },
-      httpInterceptorProviders,
+    providers: [
+        AuthGuard,
+        SecureInnerPagesGuard,
+        {
+            // processes all errors
+            provide: ErrorHandler,
+            useClass: GlobalErrorHandler,
+        },
+        httpInterceptorProviders,
     ],
     bootstrap: [AppComponent],
     exports: [],
-    entryComponents: []
+    entryComponents: [],
 })
 export class AppModule {}

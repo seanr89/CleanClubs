@@ -14,6 +14,7 @@ using Clubs.Application.Services.Interfaces;
 using Clubs.Application.Services;
 using Clubs.Application.Profiles.DTO;
 using Clubs.Application.Services.Factories;
+using Microsoft.AspNetCore.Http;
 
 namespace Clubs.Application
 {

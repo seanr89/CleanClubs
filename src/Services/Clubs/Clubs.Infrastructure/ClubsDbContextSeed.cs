@@ -23,59 +23,59 @@ namespace Clubs.Infrastructure.Persistence
             {
                 var RandoxIT = new Club() { Name = "Rdox IT", Creator = "Sean Rafferty" };
                 var Members = new List<Member>();
-                var Sean = new Member( "Sean", "Rafferty", "sean.rafferty@randox.com", 50.2){ Club = RandoxIT };
+                var Sean = new Member("Sean", "Rafferty", "sean.rafferty@randox.com", 50.2) { Club = RandoxIT };
                 Members.Add(Sean);
-                var Sean2 = new Member( "Sean", "Personal", "srafferty89@gmail.com", 45.1){ Club = RandoxIT };
+                var Sean2 = new Member("Sean", "Personal", "srafferty89@gmail.com", 45.1) { Club = RandoxIT };
                 Members.Add(Sean2);
-                var SeanWork = new Member( "Sean", "Rdx", "sean.rafferty@randox.com", 99.9 ){ Club = RandoxIT };
+                var SeanWork = new Member("Sean", "Rdx", "sean.rafferty@randox.com", 99.9) { Club = RandoxIT };
                 Members.Add(SeanWork);
-                var Francy = new Member( "Francy", "Donald", "francis.donald@randox.com", 85){ Club = RandoxIT };
+                var Francy = new Member("Francy", "Donald", "francis.donald@randox.com", 85) { Club = RandoxIT };
                 Members.Add(Francy);
-                var Andy = new Member( "Andy", "Williamson", "andy@randox.com", 72.1 ){ Club = RandoxIT };
+                var Andy = new Member("Andy", "Williamson", "andy@randox.com", 72.1) { Club = RandoxIT };
                 Members.Add(Andy);
-                var Ross = new Member(  "Ross", "Bratton", "ross.bratton@randox.com", 65){ Club = RandoxIT };
+                var Ross = new Member("Ross", "Bratton", "ross.bratton@randox.com", 65) { Club = RandoxIT };
                 Members.Add(Ross);
-                var Conor = new Member(  "Conor", "Devlin", "conor.devlin@randox.com", 65) { Club = RandoxIT };
+                var Conor = new Member("Conor", "Devlin", "conor.devlin@randox.com", 65) { Club = RandoxIT };
                 Members.Add(Conor);
-                var David = new Member(  "David", "McCrory", "david@randox.com", 70 ){ Club = RandoxIT };
+                var David = new Member("David", "McCrory", "david@randox.com", 70) { Club = RandoxIT };
                 Members.Add(David);
-                var Steve = new Member(  "Steve", "Kennedy", "steve@randox.com", 70){ Club = RandoxIT };
+                var Steve = new Member("Steve", "Kennedy", "steve@randox.com", 70) { Club = RandoxIT };
                 Members.Add(Steve);
-                var Mike = new Member( "Mike", "Hayes", "mike@randox.com", 78){ Club = RandoxIT };
+                var Mike = new Member("Mike", "Hayes", "mike@randox.com", 78) { Club = RandoxIT };
                 Members.Add(Mike);
-                var Oran = new Member( "Oran", "McMenamin", "Oran@randox.com", 70){ Club = RandoxIT };
+                var Oran = new Member("Oran", "McMenamin", "Oran@randox.com", 70) { Club = RandoxIT };
                 Members.Add(Oran);
-                var Darren = new Member( "Darren", "Tweed", "Darren@hotmail.com", 63 ){ Club = RandoxIT };
+                var Darren = new Member("Darren", "Tweed", "Darren@hotmail.com", 63) { Club = RandoxIT };
                 Members.Add(Darren);
-                var Mark = new Member("Mark", "Latten", "mark@randox.com", 64){ Club = RandoxIT };
+                var Mark = new Member("Mark", "Latten", "mark@randox.com", 64) { Club = RandoxIT };
                 Members.Add(Mark);
-                var MarkTwo = new Member( "Mark", "Lutton", "marklutton@randox.com", 64){ Club = RandoxIT };
+                var MarkTwo = new Member("Mark", "Lutton", "marklutton@randox.com", 64) { Club = RandoxIT };
                 Members.Add(MarkTwo);
-                var Ivan = new Member( "Ivan", "Mc", "ivan@randox.com", 68){ Club = RandoxIT };
+                var Ivan = new Member("Ivan", "Mc", "ivan@randox.com", 68) { Club = RandoxIT };
                 Members.Add(Ivan);
-                var Kelso = new Member( "Steven", "Kelso", "kelso@randox.com", 71){ Club = RandoxIT };
+                var Kelso = new Member("Steven", "Kelso", "kelso@randox.com", 71) { Club = RandoxIT };
                 Members.Add(Kelso);
-                var Frazer = new Member( "Andrew", "Frazer", "Frazer@randox.com", 72){ Club = RandoxIT };
+                var Frazer = new Member("Andrew", "Frazer", "Frazer@randox.com", 72) { Club = RandoxIT };
                 Members.Add(Frazer);
-                var Cormac = new Member( "Cormac", "Byrne", "Cormac@randox.com", 66){ Club = RandoxIT };
+                var Cormac = new Member("Cormac", "Byrne", "Cormac@randox.com", 66) { Club = RandoxIT };
                 Members.Add(Cormac);
-                var JJ = new Member("JJ", "Eng", "JJ@randox.com", 61){ Club = RandoxIT };
+                var JJ = new Member("JJ", "Eng", "JJ@randox.com", 61) { Club = RandoxIT };
                 Members.Add(JJ);
-                var Dean = new Member( "Dean", "Mc", "sean.rafferty@randox.com", 45.6){ Club = RandoxIT };
+                var Dean = new Member("Dean", "Mc", "sean.rafferty@randox.com", 45.6) { Club = RandoxIT };
                 Members.Add(Dean);
-                var Ryan = new Member( "Ryan", "Gavin", "ryang@randox.com", 86.1){ Club = RandoxIT };
+                var Ryan = new Member("Ryan", "Gavin", "ryang@randox.com", 86.1) { Club = RandoxIT };
                 Members.Add(Ryan);
-                var Iniaki = new Member("Iniaki", "McKearny", "Iniaki@randox.com", 75.0){ Club = RandoxIT };
+                var Iniaki = new Member("Iniaki", "McKearny", "Iniaki@randox.com", 75.0) { Club = RandoxIT };
                 Members.Add(Iniaki);
-                var JamesD = new Member("James", "Davidson", "JamesD@randox.com", 59.0){ Club = RandoxIT};
+                var JamesD = new Member("James", "Davidson", "JamesD@randox.com", 59.0) { Club = RandoxIT };
                 Members.Add(JamesD);
-                var StuartG = new Member( "Stuart", "Gray", "Stuartg@randox.com", 87.0){ Club = RandoxIT };
+                var StuartG = new Member("Stuart", "Gray", "Stuartg@randox.com", 87.0) { Club = RandoxIT };
                 Members.Add(StuartG);
-                var William = new Member( "William", "Lawrence", "William@randox.com", 79.0){ Club = RandoxIT };
+                var William = new Member("William", "Lawrence", "William@randox.com", 79.0) { Club = RandoxIT };
                 Members.Add(William);
-                var Pierce = new Member("Pierce", "Slaney", "pierces@randox.com", 62.0){ Club = RandoxIT };
+                var Pierce = new Member("Pierce", "Slaney", "pierces@randox.com", 62.0) { Club = RandoxIT };
                 Members.Add(Pierce);
-                var Michael = new Member("Michael", "Crampsey", "mciahelc@randox.com", 50.0){ Club = RandoxIT };
+                var Michael = new Member("Michael", "Crampsey", "mciahelc@randox.com", 50.0) { Club = RandoxIT };
                 Members.Add(Michael);
                 RandoxIT.Members = Members;
                 context.Clubs.Add(RandoxIT);
@@ -90,8 +90,14 @@ namespace Clubs.Infrastructure.Persistence
                     CreateMemberList(club);
                     context.Clubs.Add(club);
                 }
-
-                await context.SaveChangesAsync();
+                try
+                {
+                    await context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Exception: {e.Message}");
+                }
             }
         }
 
@@ -127,7 +133,7 @@ namespace Clubs.Infrastructure.Persistence
 
             for (int i = 0; i < randomNumber; ++i)
             {
-                club.Members.Add(new Member(gen.getRandomFirstName(), gen.getRandomLastName(), "Unknown",gen.GenerateRandomNumber())
+                club.Members.Add(new Member(gen.getRandomFirstName(), gen.getRandomLastName(), "Unknown", gen.GenerateRandomNumber())
                 {
                     Club = club
                 });

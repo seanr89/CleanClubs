@@ -13,6 +13,12 @@
       "args": [],
       "cwd": "${workspaceFolder}",
       "stopAtEntry": false,
+      "logging": {
+        "engineLogging": false,
+        "moduleLoad": false,
+        "exceptions": false,
+        "browserStdOut": false
+      },
       "serverReadyAction": {
         "action": "openExternally",
         "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"

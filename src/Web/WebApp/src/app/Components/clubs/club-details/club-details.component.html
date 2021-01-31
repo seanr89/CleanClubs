@@ -34,31 +34,6 @@
                 </mat-card-actions>
             </mat-card>
         </section>
-        <!-- Club Stats - Currently not available -->
-        <!-- <section
-            fxFlex="48%"
-            fxLayoutAlign="left center"
-            style="padding-right: 5px"
-        >
-            <mat-card fxFlex="100%" fxFlex.xs="100%">
-                <mat-card-title>Club Stats</mat-card-title>
-                <hr />
-                <br />
-                <mat-card-content>
-                    <div fxLayout="column wrap" fxLayoutGap="20px">
-                        <div fxLayout="row wrap" fxFlex>
-                            <div fxFlex><strong>Member Count:</strong></div>
-                            <div fxFlex class="contentText">TODO</div>
-                        </div>
-                        <div fxLayout="row wrap" fxFlex>
-                            <div fxFlex><strong>Match Count:</strong></div>
-                            <div fxFlex class="contentText">TODO</div>
-                        </div>
-                    </div>
-                </mat-card-content>
-                <mat-card-actions align="center"></mat-card-actions>
-            </mat-card>
-        </section> -->
     </section>
     <hr />
     <section fxLayout="row wrap" class="sectionContent">
@@ -67,13 +42,13 @@
         style="padding-right: 5px">
             <app-match-list [clubId]="club.id" fxFlex="92%"></app-match-list>
         </section>
+        <br />
         <!-- <hr /> -->
         <section  fxFlex="45%"
         fxLayoutAlign="center center"
         style="padding-right: 5px">
             <app-member-list [members]="club.members" fxFlex="92%"></app-member-list>
         </section>
-        
     </section>
-    
+
 </div>

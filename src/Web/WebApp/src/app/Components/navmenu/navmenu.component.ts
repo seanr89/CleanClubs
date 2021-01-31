@@ -27,14 +27,14 @@ export class NavmenuComponent {
         private breakpointObserver: BreakpointObserver,
         public auth: AuthService,
         private dataState: DataStateService,
-        private userChecker: UserChecker,
+        private userChecker: UserChecker
     ) {
         this.auth.signedIn.subscribe((user: User) => {
             if (user === null) {
                 this.isAuthenticated = false;
             } else {
                 this.isAuthenticated = true;
-                this.userChecker.tryReadOrCreateUserIfNotExits(user);
+                this.userChecker.tryReadOrCreateUserIfNotExists(user);
             }
         });
 

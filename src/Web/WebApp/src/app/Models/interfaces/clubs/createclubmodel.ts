@@ -3,7 +3,6 @@
  */
 export interface CreateClubModel {
     name: string;
-    active: boolean;
     private: boolean;
     creator: string;
 }

@@ -18,7 +18,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatStepperModule } from '@angular/material/stepper';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatchDetailsComponent } from './match-details/match-details.component';
@@ -26,10 +25,9 @@ import { TeamsModule } from '../teams/teams.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatchEditDialogComponent } from './match-edit-dialog/match-edit-dialog.component';
 import { MatSelectModule } from '@angular/material/select';
-import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
     declarations: [
@@ -67,12 +65,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         MatSnackBarModule,
         MatRadioModule,
         MatDatepickerModule,
-        NgxMatNativeDateModule,
-        NgxMatDatetimePickerModule,
-        NgxMaterialTimepickerModule.setLocale('en-GB'),
         MembersModule,
         TeamsModule,
-        SharedModule
+        SharedModule,
     ],
     exports: [MatchListComponent, MatchTeamCreateComponent],
     entryComponents: [MatchEditDialogComponent],

@@ -33,11 +33,19 @@ namespace Clubs.Application.Requests.Club.Commands
 
         public async Task<Guid> Handle(CreateClubCommand request, CancellationToken cancellationToken)
         {
-            var mappedRecord = _Mapper.Map<Clubs.Domain.Entities.Club>(request.Club);
-            _Context.Clubs.Add(mappedRecord);
-            await _Context.SaveChangesAsync();
+            try
+            {
+                var mappedRecord = _Mapper.Map<Clubs.Domain.Entities.Club>(request.Club);
+                _Context.Clubs.Add(mappedRecord);
+                await _Context.SaveChangesAsync();
 
-            return mappedRecord.Id;
+                return mappedRecord.Id;
+            }
+            catch (Exception e)
+            {
+                return Guid.Empty;
+            }
+
         }
     }
 }

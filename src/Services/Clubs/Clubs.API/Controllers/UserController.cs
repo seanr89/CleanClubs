@@ -13,6 +13,7 @@ using Utilities;
 
 namespace Clubs.API.Controllers
 {
+    [ApiController]
     public class UserController : ApiController
     {
         private readonly ILogger<UserController> _Logger;
@@ -38,7 +39,7 @@ namespace Clubs.API.Controllers
             if (result.Any())
                 return Ok(result);
 
-            return NotFound("No records found");
+            return NoContent();
 
         }
 
@@ -58,7 +59,7 @@ namespace Clubs.API.Controllers
             if (result != null)
                 return Ok(result);
 
-            return NotFound("No record found");
+            return NoContent();
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace Clubs.API.Controllers
             if (result != null)
                 return Ok(result);
 
-            return NotFound("No record found");
+            return NoContent();
         }
 
         #endregion

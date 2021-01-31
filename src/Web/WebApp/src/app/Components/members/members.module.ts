@@ -14,12 +14,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MemberListComponent } from './member-list/member-list.component';
 import { MembersRoutingModule } from './members-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MemberAddComponent } from './dialogs/add/member-add.component';
 
 @NgModule({
-    declarations: [
-      MemberListComponent],
+    declarations: [MemberListComponent, MemberAddComponent],
     imports: [
-      CommonModule,
+        CommonModule,
         MatTableModule,
         MatDialogModule,
         MatPaginatorModule,
@@ -33,9 +33,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
         FlexLayoutModule,
         MatCardModule,
         MembersRoutingModule,
-        SharedModule
+        SharedModule,
     ],
-    exports: [MemberListComponent],
-    entryComponents: [],
+    exports: [MemberListComponent, MemberAddComponent],
+    entryComponents: [MemberAddComponent],
 })
 export class MembersModule {}

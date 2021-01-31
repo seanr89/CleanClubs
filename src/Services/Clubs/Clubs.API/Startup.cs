@@ -47,9 +47,9 @@ namespace Clubs.API
             MyAllowSpecificOrigins = Configuration.GetValue<string>("Cors:PolicyName");
             services.ConfigureCors(Configuration);
 
-            services.AddApplication(Configuration);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            //services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddApplication(Configuration);
 
             services.ConfigureDbContext(Configuration);
 
@@ -72,10 +72,10 @@ namespace Clubs.API
 
             services.AddControllers(o =>
             {
-                // var policy = new AuthorizationPolicyBuilder()
-                //     .RequireAuthenticatedUser()
-                //     .Build();
-                // o.Filters.Add(new AuthorizeFilter(policy));
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                o.Filters.Add(new AuthorizeFilter(policy));
             }).AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -92,9 +92,9 @@ namespace Clubs.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-#if DEBUG
-                configuration.DisableTelemetry = true;
-#endif
+                #if DEBUG
+                    configuration.DisableTelemetry = true;
+                #endif
             }
 
             app.UseHsts();
@@ -116,22 +116,26 @@ namespace Clubs.API
                 c.RoutePrefix = string.Empty;
             });
 
-            //app.UseAuthentication();
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/quickHealth", new HealthCheckOptions(){
+                endpoints.MapHealthChecks("/quickHealth", new HealthCheckOptions()
+                {
                     Predicate = _ => false
                 });
-                endpoints.MapHealthChecks("/health", new HealthCheckOptions{
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
                     ResponseWriter = async (context, report) =>
                     {
                         context.Response.ContentType = "application/json";
-                        var response = new HealthCheckResponse{
+                        var response = new HealthCheckResponse
+                        {
                             Status = report.Status.ToString(),
-                            Checks = report.Entries.Select(x => new HealthCheck{
+                            Checks = report.Entries.Select(x => new HealthCheck
+                            {
                                 Component = x.Key,
                                 Status = x.Value.Status.ToString(),
                                 Description = x.Value.Description

@@ -1,21 +1,18 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CreateClubModel } from 'src/app/Models/interfaces/clubs/createclubmodel';
-import { Club } from 'src/app/Models/interfaces/clubs/club';
-
 @Component({
-    selector: 'app-club-add',
-    templateUrl: './club-add.component.html',
-    styleUrls: ['./club-add.component.scss'],
+    selector: 'app-member-add',
+    templateUrl: './member-add.component.html',
+    styleUrls: ['./member-add.component.scss'],
 })
-export class ClubAddComponent {
+export class MemberAddComponent {
     //FormGroup for validation of the create clinic form.
     form: FormGroup;
 
     constructor(
-        public dialogRef: MatDialogRef<ClubAddComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: CreateClubModel
+        public dialogRef: MatDialogRef<MemberAddComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
 
     ngOnInit(): void {

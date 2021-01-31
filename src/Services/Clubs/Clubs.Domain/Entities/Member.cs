@@ -24,12 +24,15 @@ namespace Clubs.Domain.Entities
         /// </summary>
         private Member()
         {
-            
+
         }
 
         public Member(string firstName, string lastName, string email, double rating)
         {
-            
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Rating = rating;
         }
 
         #region Public_Accessors

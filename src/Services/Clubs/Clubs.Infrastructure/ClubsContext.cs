@@ -11,7 +11,7 @@ namespace Clubs.Infrastructure
 {
     public class ClubsContext : DbContext
     {
-        protected IHttpContextAccessor HttpContextAccessor { get; }
+        protected IHttpContextAccessor HttpContextAccessor { get; private set; }
 
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Member> Members { get; set; }
@@ -59,7 +59,12 @@ namespace Clubs.Infrastructure
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             var httpContext = this.HttpContextAccessor.HttpContext;
-            string email = httpContext.User.FindFirstValue("Emails") ?? "Unknown";
+            string email = "TODO";
+            //included null check due to issues on data seeding with missing context!
+            if (httpContext != null)
+            {
+                email = httpContext.User.FindFirstValue("Emails") ?? "Unknown";
+            }
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)

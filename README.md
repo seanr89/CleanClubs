@@ -43,3 +43,9 @@ run command `docker build -t email-image -f Dockerfile .`
 
 go to directory /src
 run command `docker build -t clubs-image -f Dockerfile.Clubs .`
+
+### Git Clean Up
+
+Find all active branches: `git branch -a`
+Clean up branches: `git remote prune origin --dry-run`
+Remove a local branch: `git branch -d <item>`
