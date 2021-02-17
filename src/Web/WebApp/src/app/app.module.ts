@@ -36,6 +36,7 @@ import { GlobalErrorHandler } from './Services/globalerrorhandler';
 import { LocationsModule } from './Components/locations/locations.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { NgxMatDatetimePickerModule } from '@angular-material-components/datetime-picker';
+import { UsersModule } from './Components/users/users.module';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import { NgxMatDatetimePickerModule } from '@angular-material-components/datetim
         AngularFireAuthModule,
         HttpClientModule,
         ClubsModule,
+        UsersModule,
         LocationsModule,
         MatchesModule,
         FlexLayoutModule,
@@ -79,11 +81,11 @@ import { NgxMatDatetimePickerModule } from '@angular-material-components/datetim
     providers: [
         AuthGuard,
         SecureInnerPagesGuard,
-        {
-            // processes all errors
-            provide: ErrorHandler,
-            useClass: GlobalErrorHandler,
-        },
+        // {
+        //     // processes all errors
+        //     provide: ErrorHandler,
+        //     useClass: GlobalErrorHandler,
+        // },
         httpInterceptorProviders,
     ],
     bootstrap: [AppComponent],

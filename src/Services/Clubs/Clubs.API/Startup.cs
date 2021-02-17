@@ -70,16 +70,21 @@ namespace Clubs.API
 
             services.AddHttpContextAccessor();
 
-            services.AddControllers(o =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                    .RequireAuthenticatedUser()
-                    .Build();
-                o.Filters.Add(new AuthorizeFilter(policy));
-            }).AddNewtonsoftJson(options =>
+            services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+
+            // services.AddControllers(o =>
+            // {
+            //     var policy = new AuthorizationPolicyBuilder()
+            //         .RequireAuthenticatedUser()
+            //         .Build();
+            //     o.Filters.Add(new AuthorizeFilter(policy));
+            // }).AddNewtonsoftJson(options =>
+            // {
+            //     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            // });
 
             services.AddHealthChecks().AddDbContextCheck<ClubsContext>();
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Clubs API", Version = "v1" }));
@@ -92,9 +97,9 @@ namespace Clubs.API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                #if DEBUG
-                    configuration.DisableTelemetry = true;
-                #endif
+#if DEBUG
+                configuration.DisableTelemetry = true;
+#endif
             }
 
             app.UseHsts();
@@ -116,8 +121,8 @@ namespace Clubs.API
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            // app.UseAuthentication();
+            // app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

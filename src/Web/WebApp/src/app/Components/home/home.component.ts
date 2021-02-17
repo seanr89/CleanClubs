@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataStateService } from 'src/app/Services/datastate.service';
 
 @Component({
@@ -6,19 +7,16 @@ import { DataStateService } from 'src/app/Services/datastate.service';
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
     private title: string = 'Home';
-    
+
     gridColumns = 3;
 
-    constructor(private dataState: DataStateService) {
+    constructor(private dataState: DataStateService, private router: Router) {
         this.dataState.updatePageTitle(this.title);
     }
 
-    ngOnInit(): void {}
-
-
     toggleGridColumns() {
-      this.gridColumns = this.gridColumns === 3 ? 4 : 3;
+        this.gridColumns = this.gridColumns === 3 ? 4 : 3;
     }
 }

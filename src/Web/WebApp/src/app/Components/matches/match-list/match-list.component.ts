@@ -1,4 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,7 +15,7 @@ import { NotificationsService } from 'src/app/Services/notifications/notificatio
     templateUrl: './match-list.component.html',
     styleUrls: ['./match-list.component.scss'],
 })
-export class MatchListComponent implements OnInit {
+export class MatchListComponent implements OnInit, OnChanges {
     private pageName: string = 'Match List';
     dataSource: MatTableDataSource<Match>;
     public gridPageOptions: GridPaginatorOption;
@@ -24,33 +25,53 @@ export class MatchListComponent implements OnInit {
     @Input()
     clubId: string;
 
-    constructor(private router: Router,
-      private dataService: DataStateService,
-      private matchService: MatchService,
-      private activeRoute: ActivatedRoute,
-      private notifications: NotificationsService) {
+    constructor(
+        private router: Router,
+        private dataService: DataStateService,
+        private matchService: MatchService,
+        private activeRoute: ActivatedRoute,
+        private notifications: NotificationsService
+    ) {
         this.dataService.updatePageTitle(this.pageName);
     }
 
-    ngOnInit(): void {
-      this.dataSource = new MatTableDataSource<Match>();
-      //handle query to get all matches you can query!
-      this.matchService.GetMatchesForClub(this.clubId).then((res: HttpResponse<Match[]> | HttpResponse<string>) => {
-        if(res.status === 200)
-        {
-          let arrayData: Match[] = res.body as Match[];
-          this.dataSource.data = arrayData;
-          this.isLoading = false;
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const propName in changes) {
+            if (changes.hasOwnProperty(propName)) {
+                switch (propName) {
+                    case 'clubId': {
+                        this.getMatchesAndUpdateDataSource();
+                    }
+                }
+            }
         }
-        else{
-          //this.notifications.error(res.body as string, true);
-          this.isLoading = false;
-        }
-      });
     }
 
-    getMatchStatusString(status: MatchStatus): string{
-      return MatchStatus[status];
+    ngOnInit(): void {
+        this.dataSource = new MatTableDataSource<Match>();
+        //handle query to get all matches you can query!
+        if (this.clubId != null) {
+            this.getMatchesAndUpdateDataSource();
+        }
+    }
+
+    getMatchesAndUpdateDataSource() {
+        this.matchService
+            .GetMatchesForClub(this.clubId)
+            .then((res: HttpResponse<Match[]> | HttpResponse<string>) => {
+                if (res.status === 200) {
+                    let arrayData: Match[] = res.body as Match[];
+                    this.dataSource.data = arrayData;
+                    this.isLoading = false;
+                } else {
+                    //this.notifications.error(res.body as string, true);
+                    this.isLoading = false;
+                }
+            });
+    }
+
+    getMatchStatusString(status: MatchStatus): string {
+        return MatchStatus[status];
     }
 
     //#region Grid Controls
@@ -58,10 +79,9 @@ export class MatchListComponent implements OnInit {
         this.dataSource.filter = value.trim().toLocaleLowerCase();
     };
 
-    onRowDoubleClick(row)
-    {
-      let url: string = `/matches/details/${row.id}`;
-      this.router.navigate([url]);
+    onRowDoubleClick(row) {
+        let url: string = `/matches/details/${row.id}`;
+        this.router.navigate([url]);
     }
 
     ////#endregion

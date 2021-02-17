@@ -13,8 +13,12 @@
                     <div fxLayout="column wrap" fxLayoutGap="20px">
                         <div fxLayout="row wrap" fxFlex>
                             <div fxFlex><strong>Name:</strong></div>
-                            <div fxFlex class="contentText">{{ club?.name }}</div>
+                            <div fxFlex class="contentText">{{ (club?.name !== null ? club.name : "Not Provided")}}</div>
                         </div>
+                        <div fxLayout="row wrap" fxFlex>
+                          <div fxFlex><strong>Creator:</strong></div>
+                          <div fxFlex class="contentText">{{ (club?.creator !== null ? club.creator : "Not Provided")}}</div>
+                      </div>
                         <div fxLayout="row wrap" fxFlex>
                             <div fxFlex><strong>Active:</strong></div>
                             <div fxFlex class="contentText">{{ club?.active }}</div>
@@ -28,7 +32,6 @@
                     </div>
                 </mat-card-content>
                 <mat-card-actions align="center">
-                    <!-- <button mat-raised-button color="primary">Edit</button> -->
                     <button mat-raised-button color="primary" (click)="redirectToMatchCreate()">Create Match</button>
                     <button mat-raised-button color="primary" (click)="redirectToMatchSchedule()">Schedule Match</button>
                 </mat-card-actions>
@@ -36,6 +39,7 @@
         </section>
     </section>
     <hr />
+    <!-- TODO: styling review!! -->
     <section fxLayout="row wrap" class="sectionContent">
         <section fxFlex="45%"
         fxLayoutAlign="center center"

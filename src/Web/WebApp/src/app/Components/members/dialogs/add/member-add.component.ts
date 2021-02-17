@@ -1,6 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Member } from 'src/app/Models/interfaces/members/member';
 @Component({
     selector: 'app-member-add',
     templateUrl: './member-add.component.html',
@@ -12,34 +13,34 @@ export class MemberAddComponent {
 
     constructor(
         public dialogRef: MatDialogRef<MemberAddComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any
+        @Inject(MAT_DIALOG_DATA) public data: Member
     ) {}
 
     ngOnInit(): void {
         //Add validation to make sure fields have been added correctly
         this.form = new FormGroup({
-            name: new FormControl(this.data.name, [Validators.required]),
+            firstname: new FormControl(this.data.firstName, [
+                Validators.required,
+            ]),
+            lastname: new FormControl(this.data.lastName, [
+                Validators.required,
+            ]),
+            email: new FormControl(this.data.email, [Validators.required]),
         });
     }
 
-    get name() {
-        return this.form.get('name');
+    get firstname() {
+        return this.form.get('firstname');
     }
-    get creatorName() {
-        return this.form.get('creatorName');
+    get lastname() {
+        return this.form.get('lastname');
     }
-
-    //Updated the slider when changed
-    // onChange(event) {
-    //     this.data.active = event.checked;
-    // }
-    onPrivateChange(event) {
-        this.data.private = event.checked;
+    get email() {
+        return this.form.get('email');
     }
 
     onClose(): void {
-        this.data.name = this.form.value.name;
-        //this.data.creator = this.form.value.creatorName;
+        //TODO: update text
         this.dialogRef.close(this.data);
     }
 }

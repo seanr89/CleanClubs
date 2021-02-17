@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import {
     CdkDragDrop,
     moveItemInArray,
@@ -20,13 +20,14 @@ import { Match } from 'src/app/Models/interfaces/match/match';
 import { Member } from 'src/app/Models/interfaces/members/member';
 import { Player } from 'src/app/Models/interfaces/player/player';
 import { Team } from 'src/app/Models/interfaces/team/team';
+import { OnChanges } from '@angular/core';
 
 @Component({
     selector: 'app-match-team-create',
     templateUrl: './match-team-create.component.html',
     styleUrls: ['./match-team-create.component.scss'],
 })
-export class MatchTeamCreateComponent implements OnInit {
+export class MatchTeamCreateComponent implements OnInit, OnChanges {
     @ViewChild(MemberListComponent) memberList;
     private pageName: string = 'Create Match';
     club: Club;
@@ -39,11 +40,22 @@ export class MatchTeamCreateComponent implements OnInit {
     secondFormGroup: FormGroup;
     reviewFormGroup: FormGroup;
 
-    selectedDate: Date;
-    selectedTime: string;
+    // selectedDate: Date;
+    // selectedTime: string;
 
     teamOne: Player[] = [];
     teamTwo: Player[] = [];
+
+    public showSpinners = true;
+    public showSeconds = false;
+    public touchUi = false;
+    public enableMeridian = false;
+    public stepHour = 1;
+    public stepMinute = 1;
+    public stepSecond = 1;
+    public stepHours = [1, 2, 3, 4, 5];
+    public stepMinutes = [1, 5, 10, 15, 20, 25];
+    public stepSeconds = [1, 5, 10, 15, 20, 25];
 
     constructor(
         private clubService: ClubsService,
@@ -56,34 +68,45 @@ export class MatchTeamCreateComponent implements OnInit {
         this.dataService.updatePageTitle(this.pageName);
     }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        throw new Error('Method not implemented.');
+    }
+
     ngOnInit(): void {
         let id: string = this.activeRoute.snapshot.params['id'];
+        if (id == null) {
+            return;
+        }
+
+        this.matchDetails = {
+            id: '',
+            teams: [],
+            status: MatchStatus.SCHEDULED,
+            date: new Date(),
+            invites: [],
+            location: 'Unknown',
+            clubId: null,
+            invitesSent: false,
+        };
 
         this.clubService.GetClubById(id).then((res) => {
             if (res.status === 200) {
                 this.club = res.body as Club;
 
-                this.matchDetails = {
-                    id: '',
-                    teams: [],
-                    status: MatchStatus.SCHEDULED,
-                    date: new Date(),
-                    invites: [],
-                    location: "Unknown",
-                    clubId: this.club.id,
-                    invitesSent: false
-                };
+                this.matchDetails.clubId = this.club.id;
             }
         });
 
         this.firstFormGroup = this._formBuilder.group({
-            locationInput: ['', Validators.required],
-            dateInput: ['', Validators.required],
-            timeInput: ['', Validators.required],
-            invitesInput: [false, Validators.required]
+            dateControl: [this.matchDetails.date, Validators.required],
+            locationInput: [this.matchDetails.location, Validators.required],
         });
-        this.secondFormGroup = this._formBuilder.group({
-        });
+        //only is a review page and may not require a formgrp!
+        this.secondFormGroup = this._formBuilder.group({});
+    }
+
+    get dateControl() {
+        return this.firstFormGroup.get('dateControl');
     }
 
     //#region Drag&Drop
@@ -113,8 +136,6 @@ export class MatchTeamCreateComponent implements OnInit {
         if (selectedMembers !== null) {
             this.teamOne = [];
             this.teamTwo = [];
-
-            //alert('members selected!');
             this.createRandomMemberSplit(selectedMembers);
         }
     }
@@ -124,9 +145,7 @@ export class MatchTeamCreateComponent implements OnInit {
      */
     onSaveMatchClick() {
         console.log('onSaveMatchClick');
-
-        this.matchDetails.date = this.combineDateAndTime();
-        this.matchDetails.teams = [];
+        this.matchDetails.date = this.firstFormGroup.value.dateControl;
 
         //TODO: This is all really messy and needs re-worked!!
         let teamOne: Team = {} as Team;
@@ -140,16 +159,17 @@ export class MatchTeamCreateComponent implements OnInit {
         this.matchDetails.teams.push(teamTwo);
 
         //Support the saving attempt!
-        this.matchService.CreateMatchWithTeams(this.matchDetails).then((resp: HttpResponse<Match>) => {
-            //Also need to check if this is a 200 or 201 returned!
-            if (resp.status === 200) {
-                this.notifications.success('Match Created', true);
-                //we may want to re-direct here!
-            }
-            else {
-                this.notifications.error("save failed", true);
-            }
-        });
+        this.matchService
+            .CreateMatchWithTeams(this.matchDetails)
+            .then((resp: HttpResponse<Match>) => {
+                //Also need to check if this is a 200 or 201 returned!
+                if (resp.status === 200) {
+                    this.notifications.success('Match Created', true);
+                    //we may want to re-direct here!
+                } else {
+                    this.notifications.error('save failed', true);
+                }
+            });
     }
 
     //#endregion
@@ -180,39 +200,17 @@ export class MatchTeamCreateComponent implements OnInit {
      */
     createPlayersFromMembers(members: Member[]): Player[] {
         let players = [];
-        members.forEach(element => {
+        members.forEach((element) => {
             let player: Player = {
                 id: null,
                 firstName: element.firstName,
                 lastName: element.lastName,
                 email: element.email,
                 rating: element.rating,
-                memberId: element.id
-            }
+                memberId: element.id,
+            };
             players.push(player);
         });
         return players;
     }
-
-    /**
-     * Merges the date and time picker element content into a single date/moment record!
-     * @returns : a combined Date object with the Date and Time combined
-     */
-    combineDateAndTime(): Date {
-        let hours: number;
-        let minutes: number;
-
-        if (!Utilities.IsEmpty(this.selectedDate)) {
-            hours = parseInt(this.selectedTime.substring(0, 2));
-            minutes = parseInt(this.selectedTime.substring(3, 5));
-        }
-
-        let date = this.selectedDate;
-        let dateDay = dayjs(date);
-        dateDay = dayjs(dateDay).add(hours, 'hour')
-        dateDay = dayjs(dateDay).add(minutes, 'minute')
-        return dateDay.toDate()
-    }
-
-
 }

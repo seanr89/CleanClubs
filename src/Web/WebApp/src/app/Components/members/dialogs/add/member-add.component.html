@@ -4,28 +4,18 @@
     <form class="mat-dialog-content" [formGroup]="form">
         <div class="form">
             <mat-form-field color="accent">
-                <input id="clubName" matInput placeholder="Club Name" value="" name="name" formControlName="name" />
-                <mat-error *ngIf="name.errors"></mat-error>
-                <button
-                    mat-button
-                    *ngIf="data.name"
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="data.name = ''"
-                >
-                    <mat-icon>close</mat-icon>
-                </button>
+                <input id="memberFirstName" matInput placeholder="FirstName" value="" name="firstname" formControlName="firstname" />
+                <mat-error *ngIf="firstname.errors"></mat-error>
             </mat-form-field>
-        </div>
-
-        <div class="form">
-            <mat-slide-toggle
-                [checked]="data.private"
-                (change)="onPrivateChange($event)"
-                color="primary"
-                >Private</mat-slide-toggle
-            >
+            <mat-form-field color="accent">
+                <input id="memberLastName" matInput placeholder="LastName" value="" name="lastname"
+                    formControlName="lastname" />
+                <mat-error *ngIf="lastname.errors"></mat-error>
+            </mat-form-field>
+            <mat-form-field color="accent">
+                <input id="memberemail" matInput placeholder="Email" value="" name="email" formControlName="email" />
+                <mat-error *ngIf="email.errors"></mat-error>
+            </mat-form-field>
         </div>
 
         <div mat-dialog-actions class="actionButtons">

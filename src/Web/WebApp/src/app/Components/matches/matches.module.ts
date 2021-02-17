@@ -28,6 +28,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatchScheduleComponent } from './match-schedule/match-schedule.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import {
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+    NgxMatTimepickerModule,
+} from '@angular-material-components/datetime-picker';
 
 @NgModule({
     declarations: [
@@ -68,6 +73,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
         MembersModule,
         TeamsModule,
         SharedModule,
+        NgxMatDatetimePickerModule,
+        NgxMatTimepickerModule,
+        NgxMatNativeDateModule,
     ],
     exports: [MatchListComponent, MatchTeamCreateComponent],
     entryComponents: [MatchEditDialogComponent],

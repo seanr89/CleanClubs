@@ -63,7 +63,7 @@ namespace Clubs.API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get a user based on the a current IdentityID record
         /// </summary>
         /// <param name="objectId">unique Guid for a user</param>
         /// <returns>A single user record</returns>
@@ -88,7 +88,7 @@ namespace Clubs.API.Controllers
         /// <summary>
         /// Handle the creation of a new user
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">new user model for storage</param>
         /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]

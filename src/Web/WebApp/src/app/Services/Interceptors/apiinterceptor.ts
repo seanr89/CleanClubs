@@ -40,7 +40,7 @@ export class APIInterceptor implements HttpInterceptor {
                 } else {
                     errorMessage += this.handleServerSideError(error);
                 }
-                //this.notifications.error(errorMessage, true);
+                this.notifications.error(errorMessage, true);
                 return throwError(errorMessage);
             })
         );

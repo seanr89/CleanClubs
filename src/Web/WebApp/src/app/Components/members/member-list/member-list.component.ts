@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { OnChanges, SimpleChanges } from '@angular/core';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -15,7 +16,7 @@ import { NotificationsService } from 'src/app/Services/notifications/notificatio
     templateUrl: './member-list.component.html',
     styleUrls: ['./member-list.component.scss'],
 })
-export class MemberListComponent implements OnInit {
+export class MemberListComponent implements OnInit, OnChanges {
     @Input()
     members: Member[];
     @Input()
@@ -24,14 +25,7 @@ export class MemberListComponent implements OnInit {
     dataSource: MatTableDataSource<Member>;
     selection = new SelectionModel<Member>(true, []);
     public gridPageOptions: GridPaginatorOption;
-    displayedColumns: string[]= [];
-    /* = [
-        'select',
-        'fname',
-        'lname',
-        'email',
-        'rating',
-    ];*/
+    displayedColumns: string[] = [];
     isLoading: boolean = true;
 
     constructor(
@@ -50,12 +44,22 @@ export class MemberListComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) sort: MatSort;
 
     ngOnInit(): void {
-        if(this.showSelector)
-        {
+        if (this.showSelector) {
             this.setColumnsWithSelection();
-        }
-        else{
+        } else {
             this.setColumns();
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const propName in changes) {
+            if (changes.hasOwnProperty(propName)) {
+                switch (propName) {
+                    case 'members': {
+                        this.initialiseDataSource();
+                    }
+                }
+            }
         }
     }
 
@@ -64,6 +68,10 @@ export class MemberListComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
+        this.initialiseDataSource();
+    }
+
+    initialiseDataSource() {
         if (this.members !== null) {
             this.isLoading = false;
             this.dataSource.data = this.members;
@@ -77,28 +85,15 @@ export class MemberListComponent implements OnInit {
 
     //#region ColumnSelection
 
-    setColumns()
-    {
-        this.displayedColumns = [
-            'fname',
-            'lname',
-            'email',
-            'rating',
-        ];
+    setColumns() {
+        this.displayedColumns = ['fname', 'lname', 'email', 'rating'];
     }
 
-    setColumnsWithSelection()
-    {
-        this.displayedColumns = [
-            'select',
-            'fname',
-            'lname',
-            'email',
-            'rating',
-        ];
+    setColumnsWithSelection() {
+        this.displayedColumns = ['select', 'fname', 'lname', 'email', 'rating'];
     }
 
-    //#region 
+    //#region
 
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////

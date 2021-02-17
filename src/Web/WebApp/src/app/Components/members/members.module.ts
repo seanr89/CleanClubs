@@ -15,9 +15,10 @@ import { MemberListComponent } from './member-list/member-list.component';
 import { MembersRoutingModule } from './members-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MemberAddComponent } from './dialogs/add/member-add.component';
+import { MemberDetailsComponent } from './member-details/member-details.component';
 
 @NgModule({
-    declarations: [MemberListComponent, MemberAddComponent],
+    declarations: [MemberListComponent, MemberAddComponent, MemberDetailsComponent],
     imports: [
         CommonModule,
         MatTableModule,
